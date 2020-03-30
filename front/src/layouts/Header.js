@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { withRouter } from "react-router-dom";
+import { PrincipalContext } from "../context/PrincipalContext";
+import { doLogout } from "../services/authServices";
 import { Link } from "react-router-dom";
-import { useUser, useUserLogout } from "../../lib/auth.api";
 
-export const Header = () => {
-  const user = useUser();
-  const handleLogout = useUserLogout();
+export const Header = withRouter(({ history }) => {
+  const { user, setUser } = useContext(PrincipalContext);
+
+  const onClickLogout = async e => {
+    e.preventDefault();
+    await doLogout();
+    setUser(null);
+    history.push("/");
+  };
+
   return (
     <header>
       <ul>
@@ -14,10 +23,10 @@ export const Header = () => {
         {!user && (
           <>
             <li>
-              <Link to="/auth/login">Login</Link>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/auth/signup">Signup</Link>
+              <Link to="/signup">Signup</Link>
             </li>
           </>
         )}
@@ -27,7 +36,10 @@ export const Header = () => {
               <Link to="/private">Private Page</Link>
             </li>
             <li>
-              <Link to="/" onClick={handleLogout}>
+              <Link to="/profile">Private Page</Link>
+            </li>
+            <li>
+              <Link to="/" onClick={e => onClickLogout(e)}>
                 Logout
               </Link>
             </li>
@@ -36,4 +48,4 @@ export const Header = () => {
       </ul>
     </header>
   );
-};
+});

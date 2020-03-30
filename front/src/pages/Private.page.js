@@ -1,13 +1,20 @@
-import React from "react";
-import { withProtected } from "../../lib/protectRoute.hoc";
+import React, { useContext } from "react";
+import { withProtected } from "../lib/protectRoute.hoc";
+import { PrincipalContext } from "../context/PrincipalContext";
 
-const Page = () => (
-  <div>
-   <p>Contenido Pagina privada</p>
-  </div>
-);
+const Page = () => {
+  const { user } = useContext(PrincipalContext);
 
-
+  return (
+    <div>
+      {user && (
+        <p>
+          {user.name} {user.lastname}
+        </p>
+      )}
+    </div>
+  );
+};
 
 //PARA PAGINAS PROTEGIDAS
 

@@ -1,47 +1,54 @@
-import React, { useContext } from "react";
-import { useForm, FormContext } from "react-hook-form";
+import React, { useContext, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Col2 } from "../../public/styles/Common.styles";
+import { doLogout, doEdit } from "../services/authServices";
+import { PrincipalContext } from "../context/PrincipalContext";
+import { useForm, FormContext } from "react-hook-form";
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
-import { doSignup } from "../services/authServices";
-import { PrincipalContext } from "../context/PrincipalContext";
+import imgProfile from "../../public/images/lisa_face.png";
 
-export const SignUpPage = withRouter(({ history }) => {
+export const ProfilePage = withRouter(({ history }) => {
   const { user, setUser } = useContext(PrincipalContext);
+
+  const onClickLogout = async e => {
+    e.preventDefault();
+    await doLogout();
+    setUser(null);
+    history.push("/");
+  };
 
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
-      username: "",
-      password: "",
-      campus: "Madrid",
-      course: "WebDev"
+      username: user?.username,
+      campus: user?.campus,
+      course: user?.course
     }
   });
 
+  useEffect(() => {
+    methods.reset({
+      username: user?.username,
+      campus: user?.campus,
+      course: user?.course
+    });
+  }, [user]);
+
+  console.log(user);
   const { register, handleSubmit, errors } = methods;
 
-  const onSubmit = async data => {
+  const onEdit = async data => {
     console.log("data", data);
-
-    const responseServer = await doSignup(data);
-
-    if (responseServer.status) {
-      return history.push("/login");
-    }
-
+    await doEdit(data);
     setUser(data);
-    history.push("/profile");
   };
-
-  console.log("error", errors);
 
   return (
     <FormContext {...methods}>
-      <Col2 onSubmit={handleSubmit(onSubmit)}>
+      <Col2 onSubmit={handleSubmit(onEdit)}>
         <div className="left">
-          <h1>Registro</h1>
+          <h1>Profile</h1>
           <InputBox
             label="Usuario"
             name="username"
@@ -56,18 +63,24 @@ export const SignUpPage = withRouter(({ history }) => {
               }
             })}
           />
-          <InputBox
-            label="Contraseña"
-            type="password"
-            name="password"
+          <SelectBox
+            label="Ciudad del Campus"
+            name="campus"
+            value={[
+              "Madrid",
+              "Barcelona",
+              "Miami",
+              "Paris",
+              "Berlin",
+              "Amsterdam",
+              "México",
+              "Sao Paulo",
+              "Lisbon"
+            ]}
             ref={register({
               required: {
                 value: true,
                 message: "Este campo es requerido"
-              },
-              pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/,
-                message: "Debe ser más"
               }
             })}
           />
@@ -83,17 +96,17 @@ export const SignUpPage = withRouter(({ history }) => {
               }
             })}
           />
+          <button type="submit" className="button">
+            Editar Profile
+          </button>
         </div>
         <div className="right">
-          <h2>
-            ¡Hola! <span>Bienvenido a tu IronPerfil</span>
-          </h2>
-          <p>
-            Si realizas el registro, estás aceptando los términos y condiciones
-            donde nosotros podemos hacer lo que queramos con sus datos.
-          </p>
-          <button type="submit" className="button">
-            Crea tu cuenta
+          <div className="box-img">
+            <img src={imgProfile} />
+          </div>
+          <p>Si quieres editar tus campos da al siguiente botón</p>
+          <button className="button" onClick={e => onClickLogout(e)}>
+            Logout
           </button>
         </div>
       </Col2>
