@@ -3,101 +3,11 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    creatorUserid: String,
-    title: String,    
-    summary: String,    
+    creatorUserid: { type: Schema.Types.ObjectId, ref: "Users" },
+    title: String,
+    summary: String,
     content: String,
-    shoppinglist: {
-      pharmacy:[
-        {
-          name: String,    
-          quantity: String,    
-          image: String,
-          kind:{
-            type: String,
-            enum: [
-              "Farmacia",
-              "Supermercado",
-              "Lavandería",
-              "Ayuda con máscotas",
-              "Tareas de casa"
-            ]
-          },
-        }
-      ],
-      market:[
-        {
-          name: String,    
-          quantity: String,   
-          image: String, 
-          kind:{
-            type: String,
-            enum: [
-              "Farmacia",
-              "Supermercado",
-              "Lavandería",
-              "Ayuda con máscotas",
-              "Tareas de casa"
-            ]
-          },
-        }
-
-      ],
-      laundry:[
-        {
-          name: String,    
-          quantity: String,
-          image: String,
-          kind:{
-            type: String,
-            enum: [
-              "Farmacia",
-              "Supermercado",
-              "Lavandería",
-              "Ayuda con máscotas",
-              "Tareas de casa"
-            ]
-          },
-        }
-
-      ],
-      homeDuties:[
-        {
-          name: String,    
-          quantity: String,image: String,    
-          kind:{
-            type: String,
-            enum: [
-              "Farmacia",
-              "Supermercado",
-              "Lavandería",
-              "Ayuda con máscotas",
-              "Tareas de casa"
-            ]
-          },
-        }
-
-      ],
-      petTasks:[
-        {
-          name: String,    
-          quantity: String,
-          image: String,    
-          kind:{
-            type: String,
-            enum: [
-              "Farmacia",
-              "Supermercado",
-              "Lavandería",
-              "Ayuda con máscotas",
-              "Tareas de casa"
-            ]
-          },
-        }
-
-      ],
-
-    },
+    shoppinglist: [{ type: Schema.Types.ObjectId, ref: "ListItems" }]
   },
   {
     timestamps: true

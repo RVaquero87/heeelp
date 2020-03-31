@@ -6,7 +6,7 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { useForm, FormContext } from "react-hook-form";
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
-import imgProfile from "../../public/images/lisa_face.png";
+import imgProfile from "../../public/images/default-profile.jpg";
 
 export const ProfilePage = withRouter(({ history }) => {
   const { user, setUser } = useContext(PrincipalContext);
@@ -102,7 +102,7 @@ export const ProfilePage = withRouter(({ history }) => {
         </div>
         <div className="right">
           <div className="box-img">
-            <img src={imgProfile} />
+            <img src={user?.image || imgProfile} />
           </div>
           <p>Si quieres editar tus campos da al siguiente botón</p>
           <button className="button" onClick={e => onClickLogout(e)}>

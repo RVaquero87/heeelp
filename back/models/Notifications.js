@@ -3,18 +3,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    creatorUserid: String,
-    receptorUserid: String,
+    creatorUserid: { type: Schema.Types.ObjectId, ref: "Users" },
+    receptorUserid: { type: Schema.Types.ObjectId, ref: "Users" },
     title: String,
-    message: String,
-    rol: {
-      type: String,
-      enum: [
-        "Admin",
-        "Atudantes / Helpers",
-        "Ayudados / Helped"
-      ]
-    }
+    message: String
   },
   {
     timestamps: true
