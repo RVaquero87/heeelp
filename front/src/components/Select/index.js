@@ -8,11 +8,11 @@ const hasError = (errors, name) => {
 };
 
 export const SelectBox = React.forwardRef(
-  ({ className, label, name, value, options = value }, ref) => {
+  ({ className, classNameDiv, label, name, value, options = value }, ref) => {
     const { errors } = useFormContext();
 
     return (
-      <div className="box-input">
+      <div className={classNameDiv ? `box-input ${classNameDiv}` : `box-input`}>
         <LabelText>{label}</LabelText>
         <SelectText className={hasError(errors, name)} name={name} ref={ref}>
           {value.map((value, i) => {

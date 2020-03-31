@@ -5,6 +5,7 @@ const _ = require("lodash");
 const passport = require("passport");
 const { hashPassword, checkHashed } = require("../lib/hashing");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
+const uploader = require("../cloudinary/cloudinary.config");
 
 // SIGNUP
 router.post("/signup", async (req, res, next) => {
@@ -87,7 +88,8 @@ router.post("/signup", async (req, res, next) => {
       );
     });
   } else {
-    res.status(400).json({ message: "Usuario ya existente" });
+    console.log("hola");
+    return res.json({ status: 400, message: "Usuario ya existente" });
   }
 });
 
@@ -104,7 +106,7 @@ router.post("/login", (req, res, next) => {
 
     req.login(user, err => {
       if (err) {
-        return res.status(500).json({ message: "Sesion mal guardada" });
+        return res.json({ status: 500, message: "Sesion mal guardada" });
       }
 
       req.user.visits += 1;
@@ -142,11 +144,12 @@ router.post("/login", (req, res, next) => {
 router.post("/logout", isLoggedIn(), async (req, res, next) => {
   if (req.user) {
     req.logout();
-    return res.status(200).json({ message: "Log out realizado con exito" });
+    return res.json({ status: 200, message: "Log out realizado con exito" });
   } else {
-    return res
-      .status(401)
-      .json({ message: "No puedes realizar el logout sin estar login" });
+    return res.json({
+      status: 401,
+      message: "No puedes realizar el logout sin estar login"
+    });
   }
 });
 
@@ -192,11 +195,12 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       lat,
       lng
     });
-    return res
-      .status(200)
-      .json({ message: "Usuario editado satisfactoriamente" });
+    return res.json({
+      status: 200,
+      message: "Usuario editado satisfactoriamente"
+    });
   } catch (error) {
-    return res.status(401).json({ message: "Fallo al editar Usuario" });
+    return res.json({ status: 401, message: "Fallo al editar Usuario" });
   }
 });
 
@@ -228,37 +232,38 @@ router.post("/whoami", (req, res, next) => {
         "updatedAt"
       ])
     );
-  else return res.status(401).json({ message: "No existe ningun usuario" });
+  else return res.json({ status: 401, message: "No existe ningun usuario" });
 });
 
-// // PUT route -  upload = create user image
-// router.put('/upload', uploader.single('image'), async (req, res, next) => {
-//   const { file } = req;
-//   console.log('Uploading', file);
+// Post Upload Image
+router.put("/upload", uploader.single("image"), async (req, res, next) => {
+  const { file } = req;
+  console.log("file", file);
+  if (!file) {
+    return next(new Error("No imagen"));
+  }
 
-//   if (!file) {
-//     return next(new Error('No file uploaded!'));
-//   }
+  try {
+    await Users.findByIdAndUpdate(
+      req.user._id,
+      {
+        image: file.secure_url
+      },
+      { new: true }
+    );
+    console.log(req.user._id);
 
-//   try {
-//     const updatedUser = await User.findByIdAndUpdate(
-//       req.user._id,
-//       {
-//         image: file.secure_url
-//       },
-//       { new: true }
-//     );
-//     console.log('User image uploaded ', updatedUser);
-//     return res.status(200).json({
-//       message: 'File successfully uploaded',
-//       image: file.secure_url
-//     });
-//   } catch (error) {
-//     console.log('Error uploading file', error);
-//     return res.status(500).json({
-//       message: 'Image upload failed'
-//     });
-//   }
-// });
+    return res.json({
+      status: 200,
+      message: "Subida de imagen satisfactoria",
+      image: file.secure_url
+    });
+  } catch (error) {
+    return res.json({
+      status: 500,
+      message: "Subida de imagen fallo"
+    });
+  }
+});
 
 module.exports = router;

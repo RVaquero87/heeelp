@@ -62,13 +62,13 @@ export const Content = styled.div`
   }
 `;
 
-export const Col2 = styled.form`
+export const FormBox = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   > div {
-    width: 40%;
+    width: 100%;
     &.right p {
       padding: 25px 0 0px;
     }

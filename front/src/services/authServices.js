@@ -5,12 +5,45 @@ const authService = axios.create({
   withCredentials: true
 });
 
-export const doSignup = async ({ username, password, campus, course }) => {
+export const doSignup = async ({
+  username,
+  password,
+  rol,
+  image,
+  name,
+  lastname,
+  dni,
+  birtYear,
+  street,
+  number,
+  portal,
+  stairs,
+  floor,
+  letter,
+  postalCode,
+  city,
+  country,
+  legalCheck
+}) => {
   const res = await authService.post("/signup", {
     username,
     password,
-    campus,
-    course
+    rol,
+    image,
+    name,
+    lastname,
+    dni,
+    birtYear,
+    street,
+    number,
+    portal,
+    stairs,
+    floor,
+    letter,
+    postalCode,
+    city,
+    country,
+    legalCheck
   });
   return res.data;
 };
@@ -35,8 +68,12 @@ export const doLogout = async () => {
   const res = await authService.post("/logout");
 };
 
+export const uploadPhoto = async ({ image }) => {
+  const { data } = await authService.put("/upload", image);
+  return data.image;
+};
+
 export const whoUser = async () => {
   const res = await authService.post("/whoami");
-  console.log(res.data);
   return res.data;
 };

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { Col2 } from "../../public/styles/Common.styles";
+import { FormBox } from "../../public/styles/Common.styles";
 import { doLogout, doEdit } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
 import { useForm, FormContext } from "react-hook-form";
@@ -46,7 +46,7 @@ export const ProfilePage = withRouter(({ history }) => {
 
   return (
     <FormContext {...methods}>
-      <Col2 onSubmit={handleSubmit(onEdit)}>
+      <FormBox onSubmit={handleSubmit(onEdit)}>
         <div className="left">
           <h1>Profile</h1>
           <InputBox
@@ -109,7 +109,7 @@ export const ProfilePage = withRouter(({ history }) => {
             Logout
           </button>
         </div>
-      </Col2>
+      </FormBox>
     </FormContext>
   );
 });
