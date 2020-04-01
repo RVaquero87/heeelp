@@ -1,4 +1,6 @@
 import styled from "styled-components";
+
+//Images import
 import banner from "../images/lisa_face.png";
 
 export const Container = styled.div`

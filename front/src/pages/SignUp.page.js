@@ -99,7 +99,7 @@ export const SignUpPage = withRouter(({ history }) => {
         </LightBox>
       )}
       <FormContext {...methods}>
-        <FormBox onSubmit={handleSubmit(onSubmit)}>
+        <FormBox onSubmit={handleSubmit(onSubmit)} data-aos="fade-up">
           <div className="left">
             <h1>Registro</h1>
             <SelectBox
