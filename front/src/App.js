@@ -15,6 +15,7 @@ import { LoginPage } from "./pages/Login.page";
 import { SignUpPage } from "./pages/SignUp.page";
 import { PrivatePage } from "./pages/Private.page";
 import { ProfilePage } from "./pages/Profile.page";
+import { AdminUsers } from "./pages/Admin-users";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -28,6 +29,7 @@ export const App = withAuthentication(() => {
           <Route path="/login" exact component={LoginPage} />
           <Route path="/private" exact component={PrivatePage} />
           <Route path="/profile" exact component={ProfilePage} />
+          <Route path="/admin" exact component={AdminUsers} />
         </Switch>
       </Layout>
     </BrowserRouter>

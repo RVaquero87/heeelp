@@ -222,9 +222,8 @@ router.post("/whoami", (req, res, next) => {
       .json({ status: 401, message: "No existe ningun usuario" });
 });
 
+//Image Upload
 router.post("/upload", uploader.single("imageUrl"), async (req, res, next) => {
-  console.log("file is: ", req.file);
-
   const imageUpload = req.file.secure_url;
 
   if (!req.file) {
@@ -245,6 +244,46 @@ router.post("/upload", uploader.single("imageUrl"), async (req, res, next) => {
     status: 200,
     message: "Subida de imagen satisfactoria"
   });
+});
+
+//USERS LIST
+router.post("/users-list", isLoggedIn(), async (req, res) => {
+  try {
+    const usersList = await Users.find();
+    return res.json(usersList);
+  } catch (err) {
+    return res.json({ status: 400, message: "Fallo al recibir los datos" });
+  }
+});
+
+//DELETE USER LIST
+router.post("/users-delete", isLoggedIn(), async (req, res) => {
+  try {
+    const { _id } = req.body;
+    await Users.findByIdAndRemove(_id);
+    return res.json({
+      status: 200,
+      message: "Usuario eliminado satisfactoriamente"
+    });
+  } catch (err) {
+    return res.json({ status: 400, message: "No encontrado" });
+  }
+});
+
+//EDIT USERS LIST
+router.post("/users-edit", isLoggedIn(), async (req, res) => {
+  const { id, rol } = req.body;
+  try {
+    await Users.findByIdAndUpdate(id, {
+      rol
+    });
+    return res.json({
+      status: 200,
+      message: "Usuario editado satisfactoriamente"
+    });
+  } catch (err) {
+    return res.json({ status: 400, message: "No encontrado" });
+  }
 });
 
 module.exports = router;

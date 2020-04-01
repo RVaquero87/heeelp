@@ -1,7 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { FormBox } from "../../public/styles/Common.styles";
-import { doLogout, doEdit } from "../services/authServices";
+import {
+  doLogout,
+  doEdit,
+  doUnsubscribe,
+  uploadPhoto
+} from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
 import { useForm, FormContext } from "react-hook-form";
 import { InputBox } from "../components/Input/index";
@@ -11,6 +16,29 @@ import imgProfile from "../../public/images/default-profile.jpg";
 
 export const ProfilePage = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);
+
+  //lOGOUT
+  const onClickLogout = async e => {
+    e.preventDefault();
+    await doLogout();
+    await setUser(null);
+    history.push("/");
+  };
+
+  //UNSUBSCRIBE
+  const onClickUnsubscribe = async e => {
+    e.preventDefault();
+    const responseUnsubscribe = await doUnsubscribe(user);
+    setMessageError(responseUnsubscribe.data.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+    await setUser(null);
+    history.push("/");
+  };
+
+  //GET YEARS
+  const birthYearEdit = user?.birthYear.slice(0, 10);
 
   //Change tab DNI Passport
   const [dniPassportTabs, setDniPassportTabs] = useState(true);
@@ -23,20 +51,11 @@ export const ProfilePage = withRouter(({ history }) => {
   const [image, setImage] = useState({
     imageUrl: user?.image || imgProfile
   });
+  const [imagePreview, setImagePreview] = useState(image.imageUrl);
   const handleChangeFile = e => {
-    setImage({ imageUrl: URL.createObjectURL(e.target.files[0]) });
+    setImage({ imageUrl: e.target.files[0] });
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
-
-  //lOGOUT
-  const onClickLogout = async e => {
-    e.preventDefault();
-    await doLogout();
-    await setUser(null);
-    history.push("/");
-  };
-
-  //Form
-  const birthYearEdit = user?.birthYear.slice(0, 10);
 
   const methods = useForm({
     mode: "onBlur",
@@ -81,7 +100,7 @@ export const ProfilePage = withRouter(({ history }) => {
 
     const uploadData = new FormData();
     uploadData.append("imageUrl", image.imageUrl);
-    //await uploadPhoto(image);
+    const imageURL = await uploadPhoto(uploadData);
 
     setMessageError(responseServer?.message);
     setTimeout(() => {
@@ -89,7 +108,7 @@ export const ProfilePage = withRouter(({ history }) => {
     }, 5000);
 
     if (responseServer.status === 200) {
-      setUser(data);
+      setUser({ ...data, image: imageURL.secure_url });
     }
   };
 
@@ -99,11 +118,7 @@ export const ProfilePage = withRouter(({ history }) => {
         <FormBox onSubmit={handleSubmit(onEdit)}>
           <div>
             <div className="box-input">
-              <img
-                width="100px"
-                src={(image && image.imageUrl) || imagenDefaultProfile}
-                alt="imagen"
-              />
+              <img width="100px" src={imagePreview} alt="imagen" />
               <input type="file" onChange={handleChangeFile} />
             </div>
             <InputBox
@@ -297,6 +312,10 @@ export const ProfilePage = withRouter(({ history }) => {
 
       <button className="button" onClick={e => onClickLogout(e)}>
         Logout
+      </button>
+
+      <button className="button" onClick={e => onClickUnsubscribe(e)}>
+        Darse Baja
       </button>
     </>
   );

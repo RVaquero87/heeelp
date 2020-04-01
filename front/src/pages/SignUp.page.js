@@ -6,7 +6,7 @@ import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
 import { doSignup, uploadPhoto } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
-import imagenDefaultProfile from "../../public/images/default-profile.jpg";
+import imgProfile from "../../public/images/default-profile.jpg";
 
 export const SignUpPage = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);
@@ -19,9 +19,13 @@ export const SignUpPage = withRouter(({ history }) => {
   };
 
   //Image USER
-  const [image, setImage] = useState({ imageUrl: "" });
+  const [image, setImage] = useState({
+    imageUrl: user?.image || imgProfile
+  });
+  const [imagePreview, setImagePreview] = useState(image.imageUrl);
   const handleChangeFile = e => {
-    setImage({ imageUrl: URL.createObjectURL(e.target.files[0]) });
+    setImage({ imageUrl: e.target.files[0] });
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
   //Form
@@ -52,18 +56,13 @@ export const SignUpPage = withRouter(({ history }) => {
 
   //Regitrar los datos
   const onSubmit = async data => {
-    console.log("data", data);
-    //console.log("image", image);
-
     const responseServer = await doSignup(data);
 
     const uploadData = new FormData();
     uploadData.append("imageUrl", image.imageUrl);
-    console.log("uploadData", uploadData, "image", image);
-    //await uploadPhoto(image);
+    const imageURL = await uploadPhoto(uploadData);
 
     if (responseServer.status) {
-      console.log("responseServer", responseServer);
       setMessageError(responseServer.message);
       setTimeout(() => {
         setUser(null);
@@ -73,12 +72,10 @@ export const SignUpPage = withRouter(({ history }) => {
         setMessageError(null);
       }, 5000);
     } else {
-      setUser(data);
+      setUser({ ...data, image: imageURL.secure_url });
       history.push("/profile");
     }
   };
-
-  //console.log("error", errors);
 
   return (
     <FormContext {...methods}>
@@ -98,11 +95,7 @@ export const SignUpPage = withRouter(({ history }) => {
             })}
           />
           <div className="box-input">
-            <img
-              width="100px"
-              src={(image && image.imageUrl) || imagenDefaultProfile}
-              alt="imagen"
-            />
+            <img width="100px" src={imagePreview} alt="imagen" />
             <input type="file" onChange={handleChangeFile} />
           </div>
           <InputBox

@@ -96,9 +96,19 @@ export const whoUser = async () => {
   return res.data;
 };
 
-export const uploadPhoto = async ({ imageUrl }) => {
-  console.log("hola", imageUrl);
-  const data = await authService.post("/upload", imageUrl);
-  console.log("respuesta", data);
+export const uploadPhoto = async image => {
+  const res = await authService.post("/upload", image);
+  return res.data;
+};
+
+export const getListUsers = async () => {
+  const data = await authService.post("/users-list");
+  return data;
+};
+
+export const doUnsubscribe = async user => {
+  console.log("Userid", user);
+  const data = await authService.post("/users-delete", user);
+  console.log("data", data);
   return data;
 };
