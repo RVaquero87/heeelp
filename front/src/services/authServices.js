@@ -68,12 +68,14 @@ export const doLogout = async () => {
   const res = await authService.post("/logout");
 };
 
-export const uploadPhoto = async ({ image }) => {
-  const { data } = await authService.put("/upload", image);
-  return data.image;
-};
-
 export const whoUser = async () => {
   const res = await authService.post("/whoami");
   return res.data;
+};
+
+export const uploadPhoto = async ({ imageUrl }) => {
+  console.log("hola", imageUrl);
+  const data = await authService.post("/upload", imageUrl);
+  console.log("respuesta", data);
+  return data;
 };

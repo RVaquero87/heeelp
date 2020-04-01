@@ -28,11 +28,11 @@ export const SignUpPage = withRouter(({ history }) => {
   const { user, setUser } = useContext(PrincipalContext);
 
   const [dniPassportTabs, setDniPassportTabs] = useState(true);
-  const [image, setImage] = useState(imagenDefaultProfile);
+  const [image, setImage] = useState({ imageUrl: "" });
   const [messageError, setMessageError] = useState();
 
   const handleChangeFile = e => {
-    setImage(URL.createObjectURL(event.target.files[0]));
+    setImage({ imageUrl: URL.createObjectURL(e.target.files[0]) });
   };
 
   const onChangePassport = (e, value) => {
@@ -70,7 +70,11 @@ export const SignUpPage = withRouter(({ history }) => {
     //console.log("image", image);
 
     const responseServer = await doSignup(data);
-    //await uploadPhoto(image);
+
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", image.imageUrl);
+    console.log("uploadData", uploadData, "image", image);
+    await uploadPhoto(image);
 
     if (responseServer.status) {
       console.log("responseServer", responseServer);
@@ -111,7 +115,11 @@ export const SignUpPage = withRouter(({ history }) => {
               })}
             />
             <div className="box-input">
-              <img width="100px" src={image} alt="imagen" />
+              <img
+                width="100px"
+                src={(image && image.imageUrl) || imagenDefaultProfile}
+                alt="imagen"
+              />
               <input type="file" onChange={handleChangeFile} />
             </div>
             <InputBox
@@ -123,7 +131,7 @@ export const SignUpPage = withRouter(({ history }) => {
                   message: "Este campo es requerido"
                 },
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
                   message: "El email incluido no es válido"
                 }
               })}
@@ -133,6 +141,7 @@ export const SignUpPage = withRouter(({ history }) => {
               label="Contraseña"
               type="password"
               name="password"
+              autocomplete="on"
               ref={register({
                 required: {
                   value: true,

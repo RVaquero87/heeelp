@@ -20,7 +20,7 @@ export const Header = withRouter(({ history }) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {!user && (
+        {user && (
           <>
             <li>
               <Link to="/login">Login</Link>
@@ -30,7 +30,7 @@ export const Header = withRouter(({ history }) => {
             </li>
           </>
         )}
-        {user && (
+        {!user && (
           <>
             <li>
               <Link to="/private">Private Page</Link>

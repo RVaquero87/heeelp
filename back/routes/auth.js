@@ -235,35 +235,29 @@ router.post("/whoami", (req, res, next) => {
   else return res.json({ status: 401, message: "No existe ningun usuario" });
 });
 
-// Post Upload Image
-router.put("/upload", uploader.single("image"), async (req, res, next) => {
-  const { file } = req;
-  console.log("file", file);
-  if (!file) {
-    return next(new Error("No imagen"));
-  }
+router.post("/upload", uploader.single("imageUrl"), async (req, res, next) => {
+  console.log("file is: ", req.file);
 
-  try {
+  const imageUpload = req.file.secure_url;
+
+  if (!req.file) {
+    next(new Error("No existe ningún archivo para subir"));
+    return;
+  }
+  if (req.user) {
     await Users.findByIdAndUpdate(
       req.user._id,
       {
-        image: file.secure_url
+        image: imageUpload
       },
       { new: true }
     );
-    console.log(req.user._id);
-
-    return res.json({
-      status: 200,
-      message: "Subida de imagen satisfactoria",
-      image: file.secure_url
-    });
-  } catch (error) {
-    return res.json({
-      status: 500,
-      message: "Subida de imagen fallo"
-    });
   }
+  res.json({
+    secure_url: imageUpload,
+    status: 200,
+    message: "Subida de imagen satisfactoria"
+  });
 });
 
 module.exports = router;
