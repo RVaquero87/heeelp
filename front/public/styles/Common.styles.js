@@ -107,3 +107,16 @@ export const FormBox = styled.form`
     }
   }
 `;
+
+export const LightBox = styled.div`
+  z-index: 2;
+  background: yellow;
+  position: fixed;
+  width: 100vw;
+  p {
+    display: block;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+`;

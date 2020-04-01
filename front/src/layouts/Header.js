@@ -3,9 +3,10 @@ import { withRouter } from "react-router-dom";
 import { PrincipalContext } from "../context/PrincipalContext";
 import { doLogout } from "../services/authServices";
 import { Link } from "react-router-dom";
+import { LightBox } from "../../public/styles/Common.styles";
 
 export const Header = withRouter(({ history }) => {
-  const { user, setUser } = useContext(PrincipalContext);
+  const { user, setUser, messageError } = useContext(PrincipalContext);
 
   const onClickLogout = async e => {
     e.preventDefault();
@@ -20,7 +21,7 @@ export const Header = withRouter(({ history }) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {user && (
+        {!user && (
           <>
             <li>
               <Link to="/login">Login</Link>
@@ -30,13 +31,13 @@ export const Header = withRouter(({ history }) => {
             </li>
           </>
         )}
-        {!user && (
+        {user && (
           <>
             <li>
               <Link to="/private">Private Page</Link>
             </li>
             <li>
-              <Link to="/profile">Private Page</Link>
+              <Link to="/profile">Profile</Link>
             </li>
             <li>
               <Link to="/" onClick={e => onClickLogout(e)}>
@@ -46,6 +47,11 @@ export const Header = withRouter(({ history }) => {
           </>
         )}
       </ul>
+      {messageError && (
+        <LightBox data-aos="fade-down">
+          <p>{messageError}</p>
+        </LightBox>
+      )}
     </header>
   );
 });

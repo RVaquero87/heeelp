@@ -12,7 +12,7 @@ const userSchema = new Schema(
     name: String,
     lastname: String,
     dniPassport: String,
-    birthYear: String,
+    birthYear: Date,
     image: String,
     street: String,
     number: Number,

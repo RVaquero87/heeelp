@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { FormBox } from "../../public/styles/Common.styles";
 import { doLogout, doEdit } from "../services/authServices";
@@ -6,110 +6,298 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { useForm, FormContext } from "react-hook-form";
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
+import { getYearsOld } from "../lib/commonFunctional";
 import imgProfile from "../../public/images/default-profile.jpg";
 
 export const ProfilePage = withRouter(({ history }) => {
-  const { user, setUser } = useContext(PrincipalContext);
+  const { user, setUser, setMessageError } = useContext(PrincipalContext);
 
+  //Change tab DNI Passport
+  const [dniPassportTabs, setDniPassportTabs] = useState(true);
+  const onChangePassport = (e, value) => {
+    e.preventDefault();
+    setDniPassportTabs(value);
+  };
+
+  //Image USER
+  const [image, setImage] = useState({
+    imageUrl: user?.image || imgProfile
+  });
+  const handleChangeFile = e => {
+    setImage({ imageUrl: URL.createObjectURL(e.target.files[0]) });
+  };
+
+  //lOGOUT
   const onClickLogout = async e => {
     e.preventDefault();
     await doLogout();
-    setUser(null);
+    await setUser(null);
     history.push("/");
   };
+
+  //Form
+  const birthYearEdit = user?.birthYear.slice(0, 10);
 
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
-      username: user?.username,
-      campus: user?.campus,
-      course: user?.course
+      name: user?.name,
+      lastname: user?.lastname,
+      dniPassport: user?.dniPassport,
+      birthYear: birthYearEdit,
+      street: user?.street,
+      number: user?.number,
+      portal: user?.portal,
+      stairs: user?.stairs,
+      floor: user?.floor,
+      letter: user?.letter,
+      postalCode: user?.postalCode,
+      city: user?.city || "Madrid"
     }
   });
 
   useEffect(() => {
     methods.reset({
-      username: user?.username,
-      campus: user?.campus,
-      course: user?.course
+      name: user?.name,
+      lastname: user?.lastname,
+      dniPassport: user?.dniPassport,
+      birthYear: birthYearEdit,
+      street: user?.street,
+      number: user?.number,
+      portal: user?.portal,
+      stairs: user?.stairs,
+      floor: user?.floor,
+      letter: user?.letter,
+      postalCode: user?.postalCode,
+      city: user?.city
     });
   }, [user]);
 
-  console.log(user);
   const { register, handleSubmit, errors } = methods;
 
+  //Editar los datos
   const onEdit = async data => {
-    console.log("data", data);
-    await doEdit(data);
-    setUser(data);
+    const responseServer = await doEdit(data);
+
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", image.imageUrl);
+    //await uploadPhoto(image);
+
+    setMessageError(responseServer?.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+
+    if (responseServer.status === 200) {
+      setUser(data);
+    }
   };
 
   return (
-    <FormContext {...methods}>
-      <FormBox onSubmit={handleSubmit(onEdit)}>
-        <div className="left">
-          <h1>Profile</h1>
-          <InputBox
-            label="Usuario"
-            name="username"
-            ref={register({
-              required: {
-                value: true,
-                message: "Este campo es requerido"
-              },
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Este email no es valido"
-              }
-            })}
-          />
-          <SelectBox
-            label="Ciudad del Campus"
-            name="campus"
-            value={[
-              "Madrid",
-              "Barcelona",
-              "Miami",
-              "Paris",
-              "Berlin",
-              "Amsterdam",
-              "México",
-              "Sao Paulo",
-              "Lisbon"
-            ]}
-            ref={register({
-              required: {
-                value: true,
-                message: "Este campo es requerido"
-              }
-            })}
-          />
+    <>
+      <FormContext {...methods}>
+        <FormBox onSubmit={handleSubmit(onEdit)}>
+          <div>
+            <div className="box-input">
+              <img
+                width="100px"
+                src={(image && image.imageUrl) || imagenDefaultProfile}
+                alt="imagen"
+              />
+              <input type="file" onChange={handleChangeFile} />
+            </div>
+            <InputBox
+              label="Nombre"
+              name="name"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                }
+              })}
+            />
+            <InputBox
+              label="Apellidos"
+              name="lastname"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                }
+              })}
+            />
 
-          <SelectBox
-            label="Curso"
-            name="course"
-            value={["WebDev", "UX/UI", "Data Analytics"]}
-            ref={register({
-              required: {
-                value: true,
-                message: "Este campo es requerido"
-              }
-            })}
-          />
-          <button type="submit" className="button">
-            Editar Profile
-          </button>
-        </div>
-        <div className="right">
-          <div className="box-img">
-            <img src={user?.image || imgProfile} />
+            <InputBox
+              label="Fecha de nacimiento"
+              name="birthYear"
+              type="date"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                }
+              })}
+            />
+
+            {user && <p>{getYearsOld(user?.birthYear)}</p>}
+
+            <p>
+              <button onClick={e => onChangePassport(e, true)}>DNI</button>/
+              <button onClick={e => onChangePassport(e, false)}>
+                Passport
+              </button>
+            </p>
+
+            {(dniPassportTabs && (
+              <InputBox
+                label="Número de DNI"
+                name="dniPassport"
+                ref={register({
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido"
+                  },
+                  pattern: {
+                    value: /[0-9]{8}[A-Za-z]{1}/,
+                    message: "El DNI incluido no es válido"
+                  }
+                })}
+              />
+            )) || (
+              <InputBox
+                label="Número de Pasaporte"
+                name="dniPassport"
+                ref={register({
+                  required: {
+                    value: true,
+                    message: "Este campo es requerido"
+                  },
+                  pattern: {
+                    value: /[a-zA-Z]{2}[0-9]{7}/,
+                    message: "El número del Pasaporte es incorrecto"
+                  }
+                })}
+              />
+            )}
+            <InputBox
+              label="Dirección"
+              name="street"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                }
+              })}
+            />
+
+            <InputBox
+              label="Número"
+              name="number"
+              type="number"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                }
+              })}
+            />
+            <InputBox label="Portal" name="portal" ref={register()} />
+            <InputBox label="Escalera" name="stairs" ref={register()} />
+            <InputBox
+              label="Piso"
+              name="floor"
+              type="number"
+              ref={register()}
+            />
+            <InputBox label="Letra" name="letter" ref={register()} />
+            <InputBox
+              label="Código Postal"
+              name="postalCode"
+              type="number"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                },
+                pattern: {
+                  value: /((0[1-9]|5[0-2])|[1-4][0-9])[0-9]{3}/,
+                  message: "Código postal incorrecto"
+                }
+              })}
+            />
+            <SelectBox
+              label="Ciudad"
+              name="city"
+              value={[
+                "Alava",
+                "Albacete",
+                "Alicante",
+                "Almería",
+                "Asturias",
+                "Avila",
+                "Badajoz",
+                "Barcelona",
+                "Burgos",
+                "Cáceres",
+                "Cádiz",
+                "Cantabria",
+                "Castellón",
+                "Ciudad Real",
+                "Córdoba",
+                "La Coruña",
+                "Cuenca",
+                "Gerona",
+                "Granada",
+                "Guadalajara",
+                "Guipúzcoa",
+                "Huelva",
+                "Huesca",
+                "Islas Baleares",
+                "Jaén",
+                "León",
+                "Lérida",
+                "Lugo",
+                "Madrid",
+                "Málaga",
+                "Murcia",
+                "Navarra",
+                "Orense",
+                "Palencia",
+                "Las Palmas",
+                "Pontevedra",
+                "La Rioja",
+                "Salamanca",
+                "Segovia",
+                "Sevilla",
+                "Soria",
+                "Tarragona",
+                "Santa Cruz de Tenerife",
+                "Teruel",
+                "Toledo",
+                "Valencia",
+                "Valladolid",
+                "Vizcaya",
+                "Zamora",
+                "Zaragoza"
+              ]}
+              ref={register({
+                required: {
+                  value: true,
+                  message: "Este campo es requerido"
+                }
+              })}
+            />
           </div>
-          <p>Si quieres editar tus campos da al siguiente botón</p>
-          <button className="button" onClick={e => onClickLogout(e)}>
-            Logout
+
+          <button type="submit" className="button">
+            eDITAR
           </button>
-        </div>
-      </FormBox>
-    </FormContext>
+        </FormBox>
+      </FormContext>
+
+      <button className="button" onClick={e => onClickLogout(e)}>
+        Logout
+      </button>
+    </>
   );
 });

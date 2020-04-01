@@ -13,11 +13,10 @@ router.post("/signup", async (req, res, next) => {
     username,
     password,
     rol,
-    image,
     name,
     lastname,
-    dni,
-    birtYear,
+    dniPassport,
+    birthYear,
     street,
     number,
     portal,
@@ -27,8 +26,6 @@ router.post("/signup", async (req, res, next) => {
     postalCode,
     city,
     country,
-    lat,
-    lng,
     legalCheck
   } = req.body;
 
@@ -39,11 +36,10 @@ router.post("/signup", async (req, res, next) => {
       username,
       password: hashPassword(password),
       rol,
-      image,
       name,
       lastname,
-      dni,
-      birtYear,
+      dniPassport,
+      birthYear,
       street,
       number,
       portal,
@@ -53,8 +49,6 @@ router.post("/signup", async (req, res, next) => {
       postalCode,
       city,
       country,
-      lat,
-      lng,
       legalCheck
     });
     // Directly login user
@@ -69,8 +63,8 @@ router.post("/signup", async (req, res, next) => {
           "image",
           "name",
           "lastname",
-          "dni",
-          "birtYear",
+          "dniPassport",
+          "birthYear",
           "street",
           "number",
           "portal",
@@ -80,8 +74,6 @@ router.post("/signup", async (req, res, next) => {
           "postalCode",
           "city",
           "country",
-          "lat",
-          "lng",
           "createdAt",
           "updatedAt"
         ])
@@ -119,8 +111,8 @@ router.post("/login", (req, res, next) => {
           "image",
           "name",
           "lastname",
-          "dni",
-          "birtYear",
+          "dniPassport",
+          "birthYear",
           "street",
           "number",
           "portal",
@@ -158,12 +150,10 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
   try {
     const id = req.user._id;
     const {
-      username,
-      image,
       name,
       lastname,
-      dni,
-      birtYear,
+      dniPassport,
+      birthYear,
       street,
       number,
       portal,
@@ -172,17 +162,13 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       letter,
       postalCode,
       city,
-      country,
-      lat,
-      lng
+      country
     } = req.body;
     await Users.findByIdAndUpdate(id, {
-      username,
-      image,
       name,
       lastname,
-      dni,
-      birtYear,
+      dniPassport,
+      birthYear,
       street,
       number,
       portal,
@@ -191,9 +177,7 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       letter,
       postalCode,
       city,
-      country,
-      lat,
-      lng
+      country
     });
     return res.json({
       status: 200,
@@ -215,8 +199,8 @@ router.post("/whoami", (req, res, next) => {
         "image",
         "name",
         "lastname",
-        "dni",
-        "birtYear",
+        "dniPassport",
+        "birthYear",
         "street",
         "number",
         "portal",
@@ -232,7 +216,10 @@ router.post("/whoami", (req, res, next) => {
         "updatedAt"
       ])
     );
-  else return res.json({ status: 401, message: "No existe ningun usuario" });
+  else
+    return res
+      .status(401)
+      .json({ status: 401, message: "No existe ningun usuario" });
 });
 
 router.post("/upload", uploader.single("imageUrl"), async (req, res, next) => {

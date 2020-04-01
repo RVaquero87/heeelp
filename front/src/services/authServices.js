@@ -9,11 +9,10 @@ export const doSignup = async ({
   username,
   password,
   rol,
-  image,
   name,
   lastname,
-  dni,
-  birtYear,
+  dniPassport,
+  birthYear,
   street,
   number,
   portal,
@@ -29,11 +28,10 @@ export const doSignup = async ({
     username,
     password,
     rol,
-    image,
     name,
     lastname,
-    dni,
-    birtYear,
+    dniPassport,
+    birthYear,
     street,
     number,
     portal,
@@ -56,12 +54,37 @@ export const doLogin = async ({ username, password }) => {
   return res.data;
 };
 
-export const doEdit = async ({ username, campus, course }) => {
+export const doEdit = async ({
+  name,
+  lastname,
+  dniPassport,
+  birthYear,
+  street,
+  number,
+  portal,
+  stairs,
+  floor,
+  letter,
+  postalCode,
+  city,
+  country
+}) => {
   const res = await authService.post("/edit", {
-    username,
-    campus,
-    course
+    name,
+    lastname,
+    dniPassport,
+    birthYear,
+    street,
+    number,
+    portal,
+    stairs,
+    floor,
+    letter,
+    postalCode,
+    city,
+    country
   });
+  return res.data;
 };
 
 export const doLogout = async () => {

@@ -7,7 +7,7 @@ import { doLogin } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
 
 export const LoginPage = withRouter(({ history }) => {
-  const { user, setUser } = useContext(PrincipalContext);
+  const { user, setUser, setMessageError } = useContext(PrincipalContext);
 
   const methods = useForm({
     mode: "onBlur",
@@ -20,16 +20,20 @@ export const LoginPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   const onLogin = async data => {
-    console.log("Data is");
-    console.log("data", data);
     const responseServer = await doLogin(data);
 
-    if (!responseServer.status) {
-      setUser(data);
-      history.push("/profile");
+    if (responseServer.status) {
+      setMessageError(responseServer.message);
+      setTimeout(() => {
+        setUser(null);
+        history.push("/login");
+      }, 2500);
+      setTimeout(() => {
+        setMessageError(null);
+      }, 5000);
     } else {
-      console.log(`ESTE ES EL FALLO ${responseServer.message}`);
-      return history.push("/login");
+      setUser(responseServer);
+      history.push("/profile");
     }
   };
   return (
