@@ -1,16 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { withProtected } from "../lib/protectRoute.hoc";
 import { getListUsers } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
+import { Loading } from "../components/Loading/index";
 
-export const AdminUsersPage = () => {
+const AdminUsersPage = () => {
   const { user } = useContext(PrincipalContext);
+
+  const [listUsers, setListUsers] = useState();
 
   let usersList = getListUsers();
   usersList = usersList.then(lista => lista.data);
-  //set stado
-  console.log("usersList", usersList);
 
-  return <div data-aos="fade-up">hola</div>;
+  //set stado
+  return (
+    <>
+      {!listUsers ? (
+        <Loading />
+      ) : (
+        <div data-aos="fade-up">
+          {listUsers.map((user, i) => {
+            return (
+              <div key={i}>
+                <p>{user.username}</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
+  );
 };
 export const AdminUsers = withProtected(AdminUsersPage, { redirect: false });
