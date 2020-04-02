@@ -16,6 +16,8 @@ import { SignUpPage } from "./pages/SignUp.page";
 import { PrivatePage } from "./pages/Private.page";
 import { ProfilePage } from "./pages/Profile.page";
 import { AdminUsers } from "./pages/Admin-users";
+import { AdminReviews } from "./pages/Admin-reviews";
+import { CreateReview } from "./pages/create-reviews";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -30,6 +32,8 @@ export const App = withAuthentication(() => {
           <Route path="/private" exact component={PrivatePage} />
           <Route path="/profile" exact component={ProfilePage} />
           <Route path="/admin" exact component={AdminUsers} />
+          <Route path="/admin2" exact component={AdminReviews} />
+          <Route path="/create-review" exact component={CreateReview} />
         </Switch>
       </Layout>
     </BrowserRouter>

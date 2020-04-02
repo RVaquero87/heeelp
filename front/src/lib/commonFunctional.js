@@ -11,10 +11,14 @@ export const getAllLessOneByFilter = (arrayFilter, itemFilter) => {
 };
 
 export const getAverage = arrayFilter => {
-  return Math.round(
-    arrayFilter.reduce((itemA, itemB) => {
-      return itemA + itemB;
-    }) / arrayFilter.length
+  return (
+    Math.round(
+      (arrayFilter.reduce((itemA, itemB) => {
+        return itemA + itemB;
+      }) /
+        arrayFilter.length) *
+        100
+    ) / 100
   );
 };
 

@@ -40,6 +40,9 @@ export const Header = withRouter(({ history }) => {
               <Link to="/profile">Profile</Link>
             </li>
             <li>
+              <Link to="/create-review">Crear review</Link>
+            </li>
+            <li>
               <Link to="/" onClick={e => onClickLogout(e)}>
                 Logout
               </Link>
@@ -50,6 +53,9 @@ export const Header = withRouter(({ history }) => {
           <>
             <li>
               <Link to="/admin">Admin</Link>
+            </li>
+            <li>
+              <Link to="/admin2">Admin Reviews</Link>
             </li>
           </>
         )}

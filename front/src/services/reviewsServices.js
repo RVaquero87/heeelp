@@ -1,0 +1,31 @@
+import axios from "axios";
+
+const reviewsService = axios.create({
+  baseURL: "http://localhost:3000/reviews",
+  withCredentials: true
+});
+
+export const createReview = async ({ title, message, stars }) => {
+  const res = await reviewsService.post("/create", {
+    title,
+    message,
+    stars
+  });
+  console.log(res);
+  return res.data;
+};
+
+export const getAllReviews = async () => {
+  const res2 = await reviewsService.post("/alls");
+  return res2.data;
+};
+
+export const getIDReview = async ({ id }) => {
+  const res = await reviewsService.post("/alls", id);
+  return res.data;
+};
+
+export const deleteReviews = async value => {
+  const res = await reviewsService.post("/delete", value);
+  return res.data;
+};

@@ -16,6 +16,6 @@ const userSchema = new Schema(
   }
 );
 
-const Notifications = mongoose.model("Notifications", userSchema);
+const Reviews = mongoose.model("Reviews", userSchema);
 
-module.exports = Notifications;
+module.exports = Reviews;

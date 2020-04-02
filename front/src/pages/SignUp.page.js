@@ -71,8 +71,6 @@ export const SignUpPage = withRouter(({ history }) => {
   const onSubmit = async data => {
     const responseServer = await doSignup(data);
 
-    console.log(changeOneFile);
-
     if (changeOneFile === true) {
       const uploadData = new FormData();
       uploadData.append("imageUrl", image.imageUrl);

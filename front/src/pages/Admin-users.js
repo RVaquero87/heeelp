@@ -3,7 +3,7 @@ import { withProtected } from "../lib/protectRoute.hoc";
 import { getListUsers } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
 import { Loading } from "../components/Loading/index";
-import { UserBoxItem } from "../components/ListUser/index";
+import { UserBoxItem } from "../components/ListItemUser/index";
 
 const AdminUsersPage = () => {
   const { changeLisUsers } = useContext(PrincipalContext);
