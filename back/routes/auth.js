@@ -267,9 +267,9 @@ router.post("/users-delete", isLoggedIn(), async (req, res) => {
 
 //EDIT USERS LIST
 router.post("/users-edit", isLoggedIn(), async (req, res) => {
-  const { id, rol } = req.body;
+  const { _id, rol } = req.body;
   try {
-    await Users.findByIdAndUpdate(id, {
+    await Users.findByIdAndUpdate(_id, {
       rol
     });
     return res.json({

@@ -6,7 +6,7 @@ import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
 import { doSignup, uploadPhoto } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
-import imgProfile from "../../public/images/default-profile.jpg";
+import imgProfile from "../../public/images/default-profile.png";
 
 export const SignUpPage = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);
@@ -23,9 +23,11 @@ export const SignUpPage = withRouter(({ history }) => {
     imageUrl: user?.image || imgProfile
   });
   const [imagePreview, setImagePreview] = useState(image.imageUrl);
+  const [changeOneFile, setChangeOneFile] = useState(false);
   const handleChangeFile = e => {
     setImage({ imageUrl: e.target.files[0] });
     setImagePreview(URL.createObjectURL(e.target.files[0]));
+    setChangeOneFile(true);
   };
 
   //Form
@@ -55,25 +57,40 @@ export const SignUpPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   //Regitrar los datos
+  const messageRedirect = () => {
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setUser(null);
+      history.push("/login");
+    }, 2500);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
   const onSubmit = async data => {
     const responseServer = await doSignup(data);
 
-    const uploadData = new FormData();
-    uploadData.append("imageUrl", image.imageUrl);
-    const imageURL = await uploadPhoto(uploadData);
+    console.log(changeOneFile);
 
-    if (responseServer.status) {
-      setMessageError(responseServer.message);
-      setTimeout(() => {
-        setUser(null);
-        history.push("/login");
-      }, 2500);
-      setTimeout(() => {
-        setMessageError(null);
-      }, 5000);
+    if (changeOneFile === true) {
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", image.imageUrl);
+      const imageURL = await uploadPhoto(uploadData);
+
+      if (responseServer.status) {
+        messageRedirect();
+      } else {
+        setUser({ ...data, image: imageURL.secure_url });
+        history.push("/profile");
+      }
     } else {
-      setUser({ ...data, image: imageURL.secure_url });
-      history.push("/profile");
+      if (responseServer.status) {
+        messageRedirect();
+      } else {
+        setUser(data);
+        history.push("/profile");
+      }
     }
   };
 

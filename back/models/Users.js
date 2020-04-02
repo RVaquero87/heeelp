@@ -13,7 +13,11 @@ const userSchema = new Schema(
     lastname: String,
     dniPassport: String,
     birthYear: Date,
-    image: String,
+    image: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dbe3zwswv/image/upload/v1585834440/heeelp/default-profile_a6kktl.png"
+    },
     street: String,
     number: Number,
     portal: String,

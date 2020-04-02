@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PrincipalContext } from "../../context/PrincipalContext";
-import { doUnsubscribe } from "../../services/authServices";
+import { doUnsubscribe, doEditUserAdmin } from "../../services/authServices";
+import { useForm, FormContext } from "react-hook-form";
 import { SelectBox } from "../../components/Select/index";
 
 export const UserBoxItem = ({ user }) => {
@@ -10,7 +11,6 @@ export const UserBoxItem = ({ user }) => {
 
   const deleteUser = async (e, value) => {
     e.preventDefault();
-    console.log("valor", value);
     const responseServerDelete = await doUnsubscribe({ _id: value });
     setchangeLisUsers(!changeLisUsers);
     setMessageError(responseServerDelete.message);
@@ -18,6 +18,32 @@ export const UserBoxItem = ({ user }) => {
       setMessageError(null);
     }, 5000);
   };
+
+  const methods = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      rol: user?.rol
+    }
+  });
+
+  useEffect(() => {
+    methods.reset({
+      rol: user?.rol
+    });
+  }, [user]);
+
+  const { register, handleSubmit, errors } = methods;
+
+  //Change rol
+  const changeRol = async data => {
+    const userChange = { ...data, _id: user._id };
+    const responseServer = await doEditUserAdmin(userChange);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
   return (
     <div>
       <p>{user.name}</p>
@@ -25,7 +51,26 @@ export const UserBoxItem = ({ user }) => {
       <p>{user.country}</p>
       <p>{user._id}</p>
 
-      <form></form>
+      <FormContext {...methods}>
+        <form onSubmit={handleSubmit(changeRol)}>
+          <SelectBox
+            label="Rol"
+            name="rol"
+            classNameDiv="claseSpecial"
+            value={["Admin", "Helpers", "Helped"]}
+            ref={register({
+              required: {
+                value: true,
+                message: "Este campo es requerido"
+              }
+            })}
+          />
+
+          <button type="submit" className="button">
+            change
+          </button>
+        </form>
+      </FormContext>
 
       <button value={user._id} onClick={e => deleteUser(e, e.target.value)}>
         elimnar

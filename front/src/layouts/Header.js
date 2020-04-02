@@ -46,6 +46,13 @@ export const Header = withRouter(({ history }) => {
             </li>
           </>
         )}
+        {user?.rol === "Admin" && (
+          <>
+            <li>
+              <Link to="/admin">Admin</Link>
+            </li>
+          </>
+        )}
       </ul>
       {messageError && (
         <LightBox data-aos="fade-down">

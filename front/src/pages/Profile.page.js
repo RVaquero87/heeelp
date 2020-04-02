@@ -12,7 +12,7 @@ import { useForm, FormContext } from "react-hook-form";
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
 import { getYearsOld } from "../lib/commonFunctional";
-import imgProfile from "../../public/images/default-profile.jpg";
+import imgProfile from "../../public/images/default-profile.png";
 
 export const ProfilePage = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);

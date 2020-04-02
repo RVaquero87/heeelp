@@ -110,3 +110,8 @@ export const doUnsubscribe = async user => {
   const data = await authService.post("/users-delete", user);
   return data;
 };
+
+export const doEditUserAdmin = async user => {
+  const res = await authService.post("/users-edit", user);
+  return res.data;
+};

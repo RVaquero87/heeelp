@@ -10,6 +10,9 @@ const AdminUsersPage = () => {
 
   const [listUsers, setListUsers] = useState();
 
+  const filterNumberLenght = igualToValue =>
+    listUsers.filter(user => user.rol === igualToValue).length;
+
   useEffect(() => {
     getListUsers()
       .then(user => {
@@ -24,11 +27,17 @@ const AdminUsersPage = () => {
       {!listUsers ? (
         <Loading />
       ) : (
-        <div data-aos="fade-up">
-          {listUsers.map((user, i) => {
-            return <UserBoxItem user={user} key={i} />;
-          })}
-        </div>
+        <>
+          <p>NºTotal de uSUARIOS {listUsers.length} </p>
+          <p>NºTotal de Admin: {filterNumberLenght("Admin")}</p>
+          <p>NºTotal de Helpers: {filterNumberLenght("Helpers")}</p>
+          <p>NºTotal de Helped: {filterNumberLenght("Helped")}</p>
+          <div data-aos="fade-up">
+            {listUsers.map((user, i) => {
+              return <UserBoxItem user={user} key={i} />;
+            })}
+          </div>
+        </>
       )}
     </>
   );
