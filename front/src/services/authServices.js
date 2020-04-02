@@ -102,13 +102,11 @@ export const uploadPhoto = async image => {
 };
 
 export const getListUsers = async () => {
-  const data = await authService.post("/users-list");
-  return data;
+  const res = await authService.post("/users-list");
+  return res.data;
 };
 
 export const doUnsubscribe = async user => {
-  console.log("Userid", user);
   const data = await authService.post("/users-delete", user);
-  console.log("data", data);
   return data;
 };

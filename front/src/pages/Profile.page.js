@@ -29,7 +29,7 @@ export const ProfilePage = withRouter(({ history }) => {
   const onClickUnsubscribe = async e => {
     e.preventDefault();
     const responseUnsubscribe = await doUnsubscribe(user);
-    setMessageError(responseUnsubscribe.data.message);
+    setMessageError(responseUnsubscribe.message);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);

@@ -25,7 +25,6 @@ router.post("/signup", async (req, res, next) => {
     letter,
     postalCode,
     city,
-    country,
     legalCheck
   } = req.body;
 
@@ -48,7 +47,6 @@ router.post("/signup", async (req, res, next) => {
       letter,
       postalCode,
       city,
-      country,
       legalCheck
     });
     // Directly login user
@@ -80,7 +78,6 @@ router.post("/signup", async (req, res, next) => {
       );
     });
   } else {
-    console.log("hola");
     return res.json({ status: 400, message: "Usuario ya existente" });
   }
 });
@@ -161,8 +158,7 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       floor,
       letter,
       postalCode,
-      city,
-      country
+      city
     } = req.body;
     await Users.findByIdAndUpdate(id, {
       name,
@@ -176,8 +172,7 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       floor,
       letter,
       postalCode,
-      city,
-      country
+      city
     });
     return res.json({
       status: 200,

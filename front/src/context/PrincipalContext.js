@@ -11,6 +11,9 @@ export const PrincipalContextProvider = props => {
   //Message Error Global Form
   const [messageError, setMessageError] = useState();
 
+  //Users List CHange
+  const [changeLisUsers, setchangeLisUsers] = useState(false);
+
   return (
     <PrincipalContext.Provider
       value={{
@@ -19,7 +22,9 @@ export const PrincipalContextProvider = props => {
         user,
         setUser,
         messageError,
-        setMessageError
+        setMessageError,
+        changeLisUsers,
+        setchangeLisUsers
       }}
     >
       {props.children}
