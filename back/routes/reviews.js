@@ -37,11 +37,14 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
 //GET ALL REVIEWS OR BY ID USER
 router.post("/alls", async (req, res) => {
   try {
-    const { id } = req.body;
-    if (id) {
+    const { _id } = req.body;
+    if (_id) {
       const reviewsList = await Reviews.find({
-        creatorUserid: { _id: id }
-      }).populate("creatorUserid");
+        creatorUserid: { _id: _id }
+      })
+        .sort({ createdAt: -1 })
+        .populate("creatorUserid");
+
       return res.json(reviewsList);
     } else {
       const reviewsList = await Reviews.find().populate("creatorUserid");

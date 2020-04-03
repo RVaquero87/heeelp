@@ -15,7 +15,7 @@ export const PrincipalContextProvider = props => {
   const [changeLisUsers, setchangeLisUsers] = useState(false);
 
   //Reviews List CHange
-  const [changeLisReviews, setchangeLisReviews] = useState(false);
+  const [changeListReviews, setchangeListReviews] = useState(false);
 
   return (
     <PrincipalContext.Provider
@@ -28,8 +28,8 @@ export const PrincipalContextProvider = props => {
         setMessageError,
         changeLisUsers,
         setchangeLisUsers,
-        changeLisReviews,
-        setchangeLisReviews
+        changeListReviews,
+        setchangeListReviews
       }}
     >
       {props.children}

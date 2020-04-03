@@ -11,7 +11,6 @@ export const createReview = async ({ title, message, stars }) => {
     message,
     stars
   });
-  console.log(res);
   return res.data;
 };
 
@@ -20,8 +19,8 @@ export const getAllReviews = async () => {
   return res2.data;
 };
 
-export const getIDReview = async ({ id }) => {
-  const res = await reviewsService.post("/alls", id);
+export const getIDReview = async user => {
+  const res = await reviewsService.post("/alls", user);
   return res.data;
 };
 

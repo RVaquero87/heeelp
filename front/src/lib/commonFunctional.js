@@ -1,6 +1,7 @@
-export const getByFilter = (arrayFilter, itemFilter) => {
+export const getByFilter = (arrayFilter, itemFilter, itemProp) => {
+  console.log(arrayFilter, itemProp, itemFilter);
   return arrayFilter.filter(item => {
-    return item === itemFilter;
+    return item[itemProp] === itemFilter;
   });
 };
 

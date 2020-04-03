@@ -3,14 +3,17 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 import { deleteReviews } from "../../services/reviewsServices";
 
 export const ReviewsBoxItem = ({ review }) => {
-  const { setMessageError, changeLisReviews, setchangeLisReviews } = useContext(
-    PrincipalContext
-  );
+  const {
+    user,
+    setMessageError,
+    changeListReviews,
+    setchangeListReviews
+  } = useContext(PrincipalContext);
 
   const deleteThisReview = async (e, value) => {
     e.preventDefault();
     const responseServerDelete = await deleteReviews({ _id: value });
-    setchangeLisReviews(!changeLisReviews);
+    setchangeListReviews(!changeListReviews);
     setMessageError(responseServerDelete.message);
     setTimeout(() => {
       setMessageError(null);
@@ -26,12 +29,14 @@ export const ReviewsBoxItem = ({ review }) => {
         {review.creatorUserid.name} {review.creatorUserid.lastname}
       </p>
 
-      <button
-        value={review._id}
-        onClick={e => deleteThisReview(e, e.target.value)}
-      >
-        eliminar
-      </button>
+      {user?.rol === "Admin" && (
+        <button
+          value={review._id}
+          onClick={e => deleteThisReview(e, e.target.value)}
+        >
+          eliminar
+        </button>
+      )}
     </div>
   );
 };
