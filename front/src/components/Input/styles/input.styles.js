@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const InputText = styled.input`
+export const InputText = styled.input.attrs({
+  autoComplete: "on"
+})`
   display: block;
   margin-bottom: 30px;
   width: 100%;

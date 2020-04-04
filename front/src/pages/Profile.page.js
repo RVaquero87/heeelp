@@ -11,7 +11,6 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { useForm, FormContext } from "react-hook-form";
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
-import { getYearsOld } from "../lib/commonFunctional";
 import imgProfile from "../../public/images/default-profile.png";
 
 export const ProfilePage = withRouter(({ history }) => {
@@ -118,7 +117,11 @@ export const ProfilePage = withRouter(({ history }) => {
         <FormBox onSubmit={handleSubmit(onEdit)}>
           <div>
             <div className="box-input">
-              <img width="100px" src={imagePreview} alt="imagen" />
+              <img
+                width="100px"
+                src={user?.image || imagePreview}
+                alt="imagen"
+              />
               <input type="file" onChange={handleChangeFile} />
             </div>
             <InputBox
@@ -153,8 +156,6 @@ export const ProfilePage = withRouter(({ history }) => {
                 }
               })}
             />
-
-            {user && <p>{getYearsOld(user?.birthYear)}</p>}
 
             <p>
               <button onClick={e => onChangePassport(e, true)}>DNI</button>/

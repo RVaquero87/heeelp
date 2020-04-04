@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PrincipalContext } from "../../context/PrincipalContext";
 import { deleteReviews } from "../../services/reviewsServices";
+import { getYearsOld } from "../../lib/commonFunctional";
 
 export const ReviewsBoxItem = ({ review }) => {
   const {
@@ -28,6 +29,7 @@ export const ReviewsBoxItem = ({ review }) => {
       <p>
         {review.creatorUserid.name} {review.creatorUserid.lastname}
       </p>
+      <p>{getYearsOld(user?.birthYear)}</p>
 
       {user?.rol === "Admin" && (
         <button

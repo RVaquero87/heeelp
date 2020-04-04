@@ -57,8 +57,8 @@ export const SignUpPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   //Regitrar los datos
-  const messageRedirect = () => {
-    setMessageError(responseServer.message);
+  const messageRedirect = message => {
+    setMessageError(message);
     setTimeout(() => {
       setUser(null);
       history.push("/login");
@@ -77,14 +77,14 @@ export const SignUpPage = withRouter(({ history }) => {
       const imageURL = await uploadPhoto(uploadData);
 
       if (responseServer.status) {
-        messageRedirect();
+        messageRedirect(responseServer.message);
       } else {
         setUser({ ...data, image: imageURL.secure_url });
         history.push("/profile");
       }
     } else {
       if (responseServer.status) {
-        messageRedirect();
+        messageRedirect(responseServer.message);
       } else {
         setUser(data);
         history.push("/profile");
@@ -132,7 +132,6 @@ export const SignUpPage = withRouter(({ history }) => {
             label="Contraseña"
             type="password"
             name="password"
-            autocomplete="on"
             ref={register({
               required: {
                 value: true,
