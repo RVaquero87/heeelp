@@ -16,7 +16,7 @@ export const Header = withRouter(({ history }) => {
   };
 
   return (
-    <header>
+    <header style={{ position: "fixed" }}>
       <ul>
         <li>
           <Link to="/">Home</Link>

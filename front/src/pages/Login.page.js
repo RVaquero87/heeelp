@@ -38,7 +38,7 @@ export const LoginPage = withRouter(({ history }) => {
   };
   return (
     <FormContext {...methods}>
-      <FormBox onSubmit={handleSubmit(onLogin)}>
+      <form onSubmit={handleSubmit(onLogin)}>
         <div className="left">
           <h1>Iniciar Sesión</h1>
           <InputBox
@@ -75,7 +75,7 @@ export const LoginPage = withRouter(({ history }) => {
             Inciar Sesión
           </button>
         </div>
-      </FormBox>
+      </form>
     </FormContext>
   );
 });
