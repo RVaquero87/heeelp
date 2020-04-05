@@ -36,6 +36,16 @@ export const GlobalContent = styled.div`
     &.white:hover {
       background: #3e3874;
     }
+    @media (max-width: 480px) {
+      display: block;
+      font-size: 12px;
+      margin: 0 auto;
+      max-width: 290px;
+      width: 100%;
+      &.big {
+        font-size: 14px;
+      }
+    }
   }
 `;
 
@@ -99,13 +109,15 @@ export const SectionBox = styled.section`
     }};
     flex-direction: ${props => (props.column ? "column" : "row")};
     align-items: center;
+    max-width: 1200px;
+    width: 100%;
   }
 `;
 
 //Components Text
 export const H1 = styled.h1`
   color: ${props => {
-    switch (props.bgColor) {
+    switch (props.color) {
       case "blue-light":
         return "#8290ff";
       case "blue":
@@ -148,9 +160,9 @@ export const H1 = styled.h1`
   }
 `;
 
-export const H2 = styled.h1`
+export const H2 = styled.h2`
   color: ${props => {
-    switch (props.bgColor) {
+    switch (props.color) {
       case "blue-light":
         return "#8290ff";
       case "blue":
@@ -250,13 +262,26 @@ export const Button = styled.button`
     text-decoration: none;
     transition: all ease 1000ms;
   }
+  @media (max-width: 480px) {
+    display: block;
+    font-size: 12px;
+    margin: 0 auto;
+    max-width: 290px;
+    width: 100%;
+    &.big {
+      font-size: 14px;
+    }
+  }
 `;
 
 //Components DIV
 export const ContainDivDefault = styled.div`
-  padding: 100px 0 50px;
+  padding: 70px 0 50px;
   max-width: 1200px;
   width: 100%;
+  &.special-padding {
+    padding: 100px 0 50px;
+  }
 `;
 
 export const ContentText = styled.div`
@@ -270,80 +295,6 @@ export const BoxImg = styled.div`
     display:block;
     max-width:100%;
     width:100%:
-  }
-`;
-
-export const Col2Min = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: ${props => {
-    switch (props.justify) {
-      case "start":
-        return "flex-start";
-      case "between":
-        return "space-between";
-      case "around":
-        return "space-around";
-      case "evenly":
-        return "space-evenly";
-      case "end":
-        return "flex-end";
-      default:
-        return "center";
-    }
-  }};
-  margin-top: 70px;
-  margin-bottom: ${props => (props.latest ? "70px" : "0")};
-  width: 100%;
-  ${ContentText} {
-    width: 40%;
-  }
-  ${BoxImg} {
-    width: 35%;
-    margin: ${props => (props.inverse ? "0 5% 0 0" : "0 0 0 5%")};
-    order: ${props => (props.inverse ? "-1" : "0")};
-  }
-  @media (max-width: 1024px) {
-    ${ContentText} {
-      width: 50%;
-    }
-    ${BoxImg} {
-      width: 35%;
-    }
-  }
-  @media (max-width: 960px) {
-    ${ContentText} {
-      width: 50%;
-    }
-    ${BoxImg} {
-      width: 45%;
-    }
-  }
-  @media (max-width: 768px) {
-    margin-bottom: ${props => (props.latest ? "50px" : "0")};
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 50px;
-    ${ContentText} {
-      margin-top: 30px;
-      width: 100%;
-    }
-    ${BoxImg} {
-      width: 100%;
-      max-width: 300px;
-      margin: 0 auto;
-      order: -1;
-    }
-  }
-  @media (max-width: 480px) {
-    margin-bottom: ${props => (props.latest ? "40px" : "0")};
-    margin-top: 40px;
-    ${ContentText} {
-    }
-    ${BoxImg} {
-      width: 100%;
-      max-width: 250px;
-    }
   }
 `;
 
@@ -408,16 +359,87 @@ export const Col2Header = styled.div`
     }
   }
   @media (max-width: 480px) {
-    .button {
-      display: block;
-      margin: 0 auto;
-      max-width: 320px;
-      width: 100%;
-    }
     ${BoxImg} {
       img {
         top: 30px;
       }
+    }
+  }
+`;
+
+export const Col2Min = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: ${props => {
+    switch (props.justify) {
+      case "start":
+        return "flex-start";
+      case "between":
+        return "space-between";
+      case "around":
+        return "space-around";
+      case "evenly":
+        return "space-evenly";
+      case "end":
+        return "flex-end";
+      default:
+        return "center";
+    }
+  }};
+  margin-top: ${props => (props.marginTopNone ? "0" : "70px")};
+  margin-bottom: ${props => (props.latest ? "70px" : "0")};
+  width: 100%;
+  ${ContentText} {
+    width: 40%;
+  }
+  ${BoxImg} {
+    width: 35%;
+    margin: ${props => (props.inverse ? "0 5% 0 0" : "0 0 0 5%")};
+    order: ${props => (props.inverse ? "-1" : "0")};
+  }
+  ${H2} {
+    margin-bottom: 15px;
+  }
+  @media (max-width: 1024px) {
+    ${ContentText} {
+      width: 50%;
+    }
+    ${BoxImg} {
+      width: 35%;
+    }
+  }
+  @media (max-width: 960px) {
+    ${ContentText} {
+      width: 50%;
+    }
+    ${BoxImg} {
+      width: 45%;
+    }
+  }
+  @media (max-width: 768px) {
+    margin-bottom: ${props => (props.latest ? "50px" : "0")};
+    justify-content: center;
+    flex-direction: column;
+    margin-top: ${props => (props.marginTopNone ? "0" : "50px")};
+    ${ContentText} {
+      margin-top: 30px;
+      width: 100%;
+    }
+    ${BoxImg} {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      order: -1;
+    }
+  }
+  @media (max-width: 480px) {
+    margin-bottom: ${props => (props.latest ? "40px" : "0")};
+    margin-top: ${props => (props.marginTopNone ? "0" : "40px")};
+    ${ContentText} {
+    }
+    ${BoxImg} {
+      width: 100%;
+      max-width: 250px;
     }
   }
 `;
@@ -479,6 +501,9 @@ export const SectionServicesRates = styled.div`
     }
   }
 `;
+
+export const FaqsBox = styled.div``;
+
 export const FormBox = styled.form``;
 
 export const LightBox = styled.div``;

@@ -13,7 +13,8 @@ import {
   Paragraphs,
   Col2Header,
   Col2Min,
-  SectionServicesRates
+  SectionServicesRates,
+  FaqsBox
 } from "../../public/styles/Common.styles";
 
 //Images
@@ -25,6 +26,7 @@ import icon2 from "../../public/images/icon-2.svg";
 import icon3 from "../../public/images/icon-3.svg";
 import icon4 from "../../public/images/icon-4.svg";
 import icon5 from "../../public/images/icon-5.svg";
+import contact from "../../public/images/contact.svg";
 
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/Index";
@@ -53,8 +55,8 @@ export const HomePage = () => {
       </SectionBox>
 
       <SectionBox column>
-        <ContainDivDefault className="contain">
-          <H2 bgColor="blue-light">
+        <ContainDivDefault className="contain special-padding">
+          <H2 color="blue-light">
             Así funciona <span>h</span>eee<span>lp!</span>
           </H2>
           <Col2Min inverse justify="start">
@@ -135,6 +137,38 @@ export const HomePage = () => {
             Ver más info
           </ButtonLink>
         </SectionServicesRates>
+      </SectionBox>
+
+      <SectionBox bgColor="orange" column>
+        <FaqsBox className="contain">
+          <H2>
+            ¿Tienes dudas?{" "}
+            <span className="item-block">
+              Consulta nuestras preguntas frecuentes
+            </span>
+          </H2>
+        </FaqsBox>
+      </SectionBox>
+
+      <SectionBox column>
+        <ContainDivDefault className="contain">
+          <Col2Min inverse marginTopNone>
+            <ContentText>
+              <H2 color="blue">¿Quieres contactar con nosotros?</H2>
+              <Paragraphs blue>
+                Si tienes cualquier pregunta que hacernos, no dudes en
+                enviarnoslas. Clicka en contacta, rellena el formulario y te
+                responderemos lo antes posible.
+              </Paragraphs>
+              <ButtonLink whereTo="/registro" className="button big">
+                Comienza a Usarlo
+              </ButtonLink>
+            </ContentText>
+            <BoxImg>
+              <img src={contact} alt="Contacto" title="Contacto" />
+            </BoxImg>
+          </Col2Min>
+        </ContainDivDefault>
       </SectionBox>
     </>
   );
