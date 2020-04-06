@@ -8,8 +8,8 @@ export const LoadingBox = styled.div`
   height: 100vh;
   position: absolute;
   z-index: 10000;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.65);
   img {
-    width: 50px;
+    width: 80px;
   }
 `;

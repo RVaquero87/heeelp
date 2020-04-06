@@ -49,7 +49,7 @@ export const HomePage = () => {
       <SectionBox bgColor="blueLight" justify="between">
         <Col2Header className="contain">
           <ContentText>
-            <H1>Una nueva forma de ayudar</H1>
+            <H2>Una nueva forma de ayudar</H2>
             <ParagraphTop>
               Descubre el servicio que pone en contacto a personas que{" "}
               <span>necesitan ayuda</span> en tareas del día a día con personas
@@ -197,7 +197,7 @@ export const HomePage = () => {
           </H2>
           <AccordionFaqsBox />
           <ButtonLink whereTo="/faqs" className="button big">
-            VER MÁS FAQS
+            VER MÁS FAQ'S
           </ButtonLink>
         </FaqsBox>
       </SectionBox>

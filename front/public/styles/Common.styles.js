@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+//Images
+import logo from "../images/logo-blanco.png";
+import logoNegro from "../images/logo-negro.png";
+
 //Global Class
 export const GlobalContent = styled.div`
   .button {
@@ -16,7 +20,7 @@ export const GlobalContent = styled.div`
     letter-spacing: 1px;
     line-height: 1;
     outline: none;
-    padding: 8px 25px;
+    padding: 12px 25px;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -254,7 +258,7 @@ export const Button = styled.button`
   letter-spacing: 1px;
   line-height: 1;
   outline: none;
-  padding: ${props => (props.big ? "15px 35px" : "8px 25px")};
+  padding: ${props => (props.big ? "15px 35px" : "12px 25px")};
   text-align: center;
   text-transform: uppercase;
   &:hover {
@@ -298,12 +302,160 @@ export const BoxImg = styled.div`
   }
 `;
 
+//Components LAYOUT
+
+export const HeaderBox = styled.header`
+  display: block;
+  max-width: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 4;
+  > div {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 24px 2.5%;
+    width: 100%;
+    h1 {
+      display: block;
+      width: 150px;
+      cursor: pointer;
+      a {
+        text-indent: -99999999px;
+        overflow: hidden;
+        position: relative;
+        display: block;
+        width: 100%;
+        background: url(${logo}) center no-repeat;
+        background-size: contain;
+      }
+    }
+    nav {
+      margin: 0;
+      padding: 0;
+      width: 350px;
+      ul {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        li {
+          font-family: "Roboto", sans-serif;
+          line-height: 1%;
+          a {
+            color: #fff;
+            text-decoration: none;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    .button-box {
+      a {
+        &:last-child {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+  &.active {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.13);
+    background: #fff;
+    > div {
+      padding: 24px 2.5%;
+      h1 a {
+        background: url(${logoNegro}) center no-repeat;
+        background-size: contain;
+      }
+      nav ul li a {
+        color: #3e3874;
+      }
+      .button-box {
+        a {
+          &:last-child {
+            border: 2px solid #3e3874;
+            color: #3e3874;
+            &.white:hover {
+              background: rgba(62, 56, 116, 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const FooterBox = styled.footer`
+  width: 100%;
+  background: #3e3874;
+  > div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 22px;
+    .button-box {
+      display: flex;
+      justify-content: space-between;
+      width: 350px;
+      a {
+        color: #fff;
+        cursor: pointer;
+        font-family: "roboto", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    ${Paragraphs} {
+      font-size: 14px;
+      a {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    > div {
+      padding: 32px;
+      flex-direction: column;
+      .button-box {
+        margin-bottom: 30px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    > div 
+      .button-box {
+        flex-direction: column;
+        margin-bottom: 0px;
+        width:initial;
+        a{
+          margin-bottom:30px;
+        }
+      }
+    }
+  }
+`;
+
 //Components HOME PAGE
 export const Col2Header = styled.div`
   padding: 100px 0 0;
   ${ContentText} {
     width: 43%;
-    ${H1} {
+    ${H2} {
       padding-bottom: 16px;
     }
     ${ParagraphTop} {
