@@ -36,12 +36,12 @@ export const App = withAuthentication(() => {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/signup" exact component={SignUpPage} />
-            {/*<Route path="/login" exact component={LoginPage} />
-          <Route path="/private" exact component={PrivatePage} />
-          <Route path="/profile" exact component={ProfilePage} />
-          <Route path="/admin" exact component={AdminUsers} />
-          <Route path="/admin2" exact component={AdminReviews} />
-          <Route path="/create-review" exact component={CreateReview} /> */}
+            <Route path="/login" exact component={LoginPage} />
+            <Route path="/private" exact component={PrivatePage} />
+            <Route path="/profile" exact component={ProfilePage} />
+            <Route path="/admin" exact component={AdminUsers} />
+            <Route path="/admin2" exact component={AdminReviews} />
+            <Route path="/create-review" exact component={CreateReview} />
           </Switch>
         </Layout>
       </GlobalContent>

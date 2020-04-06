@@ -1,5 +1,22 @@
-import React, { useContext, useState, useEffect } from "react";
+//React
+import React, { useContext } from "react";
+
+//Styles & AOS animation
+import {
+  BoxImg,
+  ParagraphTop,
+  Paragraphs
+} from "../../../public/styles/Common.styles";
+
+//Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
+import { BoxReviews } from "./styles/ItemsReviews.style";
+
+//Images
+import startOn from "../../../public/images/star-on.svg";
+import startOff from "../../../public/images/star-off.svg";
+
+//Functional & Services
 import { deleteReviews } from "../../services/reviewsServices";
 import { getYearsOld } from "../../lib/commonFunctional";
 
@@ -22,23 +39,46 @@ export const ReviewsBoxItem = ({ review }) => {
   };
 
   return (
-    <div>
-      <p>{review.title}</p>
-      <p>{review.message}</p>
-      <p>{review.stars}</p>
-      <p>
-        {review.creatorUserid.name} {review.creatorUserid.lastname}
-      </p>
-      <p>{getYearsOld(user?.birthYear)}</p>
-
+    <BoxReviews>
+      <ParagraphTop blue className="title">
+        <span>{review.title}</span>
+      </ParagraphTop>
+      <Paragraphs className="message" blue>
+        {review.message}
+      </Paragraphs>
+      <div className="box-reviews-user">
+        <BoxImg className="box-user-image">
+          <img
+            src={review.creatorUserid.image}
+            title={review.creatorUserid.name}
+            alt={review.creatorUserid.name}
+          />
+        </BoxImg>
+        <div className="box-user-item">
+          <div className="box-top-user">
+            <ParagraphTop blue>
+              {review.creatorUserid.name} -
+              <span> {getYearsOld(review.creatorUserid.birthYear)}</span> años
+            </ParagraphTop>
+          </div>
+          <div className="starts">
+            <img src={review.stars >= 1 ? startOn : startOff} />
+            <img src={review.stars >= 2 ? startOn : startOff} />
+            <img src={review.stars >= 3 ? startOn : startOff} />
+            <img src={review.stars >= 4 ? startOn : startOff} />
+            <img src={review.stars >= 5 ? startOn : startOff} />
+          </div>
+        </div>
+      </div>
       {user?.rol === "Admin" && (
         <button
+          className="delete"
           value={review._id}
           onClick={e => deleteThisReview(e, e.target.value)}
         >
-          eliminar
+          X
         </button>
       )}
-    </div>
+    </BoxReviews>
   );
 };

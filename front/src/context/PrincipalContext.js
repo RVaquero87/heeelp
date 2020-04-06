@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { getAllReviews } from "../services/reviewsServices";
 
 export const PrincipalContext = createContext();
 export const PrincipalContextProvider = props => {
@@ -16,6 +17,17 @@ export const PrincipalContextProvider = props => {
 
   //Reviews List CHange
   const [changeListReviews, setchangeListReviews] = useState(false);
+  const [listReviews, setListReviews] = useState();
+  const [filterReviews, setFilterReviews] = useState();
+
+  useEffect(() => {
+    getAllReviews()
+      .then(review => {
+        setListReviews(review);
+        setFilterReviews(review);
+      })
+      .catch(e => {});
+  }, [changeListReviews]);
 
   return (
     <PrincipalContext.Provider
@@ -29,7 +41,11 @@ export const PrincipalContextProvider = props => {
         changeLisUsers,
         setchangeLisUsers,
         changeListReviews,
-        setchangeListReviews
+        setchangeListReviews,
+        listReviews,
+        setListReviews,
+        filterReviews,
+        setFilterReviews
       }}
     >
       {props.children}

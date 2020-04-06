@@ -1,27 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withProtected } from "../lib/protectRoute.hoc";
-import { getAllReviews } from "../services/reviewsServices";
-import { getAverage, getByFilter } from "../lib/commonFunctional";
+import { getAverage } from "../lib/commonFunctional";
 import { PrincipalContext } from "../context/PrincipalContext";
 import { Loading } from "../components/Loading/index";
 import { ReviewsBoxItem } from "../components/ListItemReviews/index";
 
 const AdminReviewsPage = () => {
-  const { changeListReviews, setchangeListReviews } = useContext(
-    PrincipalContext
-  );
-
-  const [listReviews, setListReviews] = useState();
-  const [filterReviews, setFilterReviews] = useState();
-
-  useEffect(() => {
-    getAllReviews()
-      .then(review => {
-        setListReviews(review);
-        setFilterReviews(review);
-      })
-      .catch(e => {});
-  }, [changeListReviews]);
+  const {
+    changeListReviews,
+    setchangeListReviews,
+    listReviews,
+    filterReviews,
+    setFilterReviews
+  } = useContext(PrincipalContext);
 
   //Filter stars
   const handleFilterReviews = async (e, value) => {

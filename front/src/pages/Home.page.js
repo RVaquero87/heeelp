@@ -1,5 +1,5 @@
 //React
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 //Styles & AOS animation
 import {
@@ -14,6 +14,7 @@ import {
   Col2Header,
   Col2Min,
   SectionServicesRates,
+  SectionReviewsHome,
   FaqsBox
 } from "../../public/styles/Common.styles";
 
@@ -28,11 +29,21 @@ import icon4 from "../../public/images/icon-4.svg";
 import icon5 from "../../public/images/icon-5.svg";
 import contact from "../../public/images/contact.svg";
 
+//Contexto
+import { PrincipalContext } from "../context/PrincipalContext";
+
+//Functional & Services
+import { getAverage } from "../lib/commonFunctional";
+
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/Index";
 import { ItemServicies } from "../components/ItemServices/Index";
+import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
+import { ReviewsBoxItem } from "../components/ListItemReviews/Index";
 
 export const HomePage = () => {
+  const { listReviews } = useContext(PrincipalContext);
+
   return (
     <>
       <SectionBox bgColor="blueLight" justify="between">
@@ -57,7 +68,8 @@ export const HomePage = () => {
       <SectionBox column>
         <ContainDivDefault className="contain special-padding">
           <H2 color="blue-light">
-            Así funciona <span>h</span>eee<span>lp!</span>
+            Así funciona <span className="item-light">h</span>eee
+            <span className="item-light">lp!</span>!
           </H2>
           <Col2Min inverse justify="start">
             <ContentText>
@@ -139,6 +151,42 @@ export const HomePage = () => {
         </SectionServicesRates>
       </SectionBox>
 
+      <SectionBox column>
+        <SectionReviewsHome className="contain">
+          <div className="box-faqs">
+            <div className="box-title">
+              <H2 color="orange">
+                La opinión de los usuarios de{" "}
+                <span className="item-light">h</span>eee
+                <span className="item-light">lp!</span>!
+              </H2>
+              <div className="average">
+                <ParagraphTop blue>
+                  <span>Nota media del servicio</span>
+                </ParagraphTop>
+                <ParagraphTop blue>
+                  {listReviews &&
+                    getAverage(listReviews.map(item => item.stars))}
+                  <span>/5</span>
+                </ParagraphTop>
+              </div>
+            </div>
+            <div className="box-reviews">
+              {listReviews &&
+                listReviews.map((review, i) => {
+                  if (i <= 1) {
+                    return <ReviewsBoxItem review={review} key={i} />;
+                  }
+                })}
+            </div>
+          </div>
+
+          <ButtonLink whereTo="/servicios-tarifas" className="button big">
+            Ver más opiniones
+          </ButtonLink>
+        </SectionReviewsHome>
+      </SectionBox>
+
       <SectionBox bgColor="orange" column>
         <FaqsBox className="contain">
           <H2>
@@ -147,6 +195,10 @@ export const HomePage = () => {
               Consulta nuestras preguntas frecuentes
             </span>
           </H2>
+          <AccordionFaqsBox />
+          <ButtonLink whereTo="/faqs" className="button big">
+            VER MÁS FAQS
+          </ButtonLink>
         </FaqsBox>
       </SectionBox>
 
@@ -160,8 +212,8 @@ export const HomePage = () => {
                 enviarnoslas. Clicka en contacta, rellena el formulario y te
                 responderemos lo antes posible.
               </Paragraphs>
-              <ButtonLink whereTo="/registro" className="button big">
-                Comienza a Usarlo
+              <ButtonLink whereTo="/contacto" className="button big">
+                Contactar
               </ButtonLink>
             </ContentText>
             <BoxImg>
