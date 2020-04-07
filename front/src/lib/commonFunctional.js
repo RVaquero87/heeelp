@@ -18,8 +18,8 @@ export const getAverage = arrayFilter => {
         return itemA + itemB;
       }) /
         arrayFilter.length) *
-        100
-    ) / 100
+        10
+    ) / 10
   );
 };
 
@@ -34,4 +34,8 @@ export const getYearsOld = fecha => {
   }
 
   return yearOld;
+};
+
+export const scrollInit = () => {
+  window.scrollTo(0, 0);
 };

@@ -33,7 +33,7 @@ import contact from "../../public/images/contact.svg";
 import { PrincipalContext } from "../context/PrincipalContext";
 
 //Functional & Services
-import { getAverage } from "../lib/commonFunctional";
+import { getAverage, scrollInit } from "../lib/commonFunctional";
 
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/Index";
@@ -44,12 +44,17 @@ import { ReviewsBoxItem } from "../components/ListItemReviews/Index";
 export const HomePage = () => {
   const { listReviews } = useContext(PrincipalContext);
 
+  //Reset Scroll
+  useEffect(() => {
+    scrollInit();
+  }, []);
+
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between">
+      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up">
         <Col2Header className="contain">
           <ContentText>
-            <H2>Una nueva forma de ayudar</H2>
+            <H1>Una nueva forma de ayudar</H1>
             <ParagraphTop>
               Descubre el servicio que pone en contacto a personas que{" "}
               <span>necesitan ayuda</span> en tareas del día a día con personas
@@ -67,11 +72,11 @@ export const HomePage = () => {
 
       <SectionBox column>
         <ContainDivDefault className="contain special-padding">
-          <H2 color="blue-light">
+          <H2 color="blue-light" data-aos="fade-up">
             Así funciona <span className="item-light">h</span>eee
             <span className="item-light">lp!</span>!
           </H2>
-          <Col2Min inverse justify="start">
+          <Col2Min inverse justify="start" data-aos="fade-up">
             <ContentText>
               <ParagraphTop blue>
                 <span>Si necesitas ayuda…</span>
@@ -93,7 +98,7 @@ export const HomePage = () => {
               <img src={helped} alt="helper" title="helper" />
             </BoxImg>
           </Col2Min>
-          <Col2Min latest justify="end">
+          <Col2Min latest justify="end" data-aos="fade-up">
             <ContentText>
               <ParagraphTop blue>
                 <span>Si estás dispuesto a ayudar…</span>
@@ -115,14 +120,18 @@ export const HomePage = () => {
               <img src={helper} alt="helped" title="helped" />
             </BoxImg>
           </Col2Min>
-          <ButtonLink whereTo="/registro" className="button big">
+          <ButtonLink
+            whereTo="/registro"
+            className="button big"
+            data-aos="fade-up"
+          >
             Comienza a Usarlo
           </ButtonLink>
         </ContainDivDefault>
       </SectionBox>
 
       <SectionBox bgColor="blueMaxLight" justify="center" column>
-        <SectionServicesRates className="contain">
+        <SectionServicesRates className="contain" data-aos="fade-up">
           <H2>Nuestros servicios y tarifas</H2>
           <Paragraphs>
             Estos son los posibles servicios en los que un <span>"helper"</span>{" "}
@@ -152,7 +161,7 @@ export const HomePage = () => {
       </SectionBox>
 
       <SectionBox column>
-        <SectionReviewsHome className="contain">
+        <SectionReviewsHome className="contain" data-aos="fade-up">
           <div className="box-faqs">
             <div className="box-title">
               <H2 color="orange">
@@ -173,22 +182,24 @@ export const HomePage = () => {
             </div>
             <div className="box-reviews">
               {listReviews &&
-                listReviews.map((review, i) => {
-                  if (i <= 1) {
-                    return <ReviewsBoxItem review={review} key={i} />;
-                  }
-                })}
+                listReviews
+                  .sort((a, b) => b.stars - a.stars)
+                  .map((review, i) => {
+                    if (i <= 1) {
+                      return <ReviewsBoxItem review={review} key={i} />;
+                    }
+                  })}
             </div>
           </div>
 
-          <ButtonLink whereTo="/servicios-tarifas" className="button big">
-            Ver más opiniones
+          <ButtonLink whereTo="/reviews" className="button big">
+            Ver más comentarios
           </ButtonLink>
         </SectionReviewsHome>
       </SectionBox>
 
       <SectionBox bgColor="orange" column>
-        <FaqsBox className="contain">
+        <FaqsBox className="contain" data-aos="fade-up">
           <H2>
             ¿Tienes dudas?{" "}
             <span className="item-block">
@@ -203,7 +214,7 @@ export const HomePage = () => {
       </SectionBox>
 
       <SectionBox column>
-        <ContainDivDefault className="contain">
+        <ContainDivDefault className="contain" data-aos="fade-up">
           <Col2Min inverse marginTopNone>
             <ContentText>
               <H2 color="blue">¿Quieres contactar con nosotros?</H2>

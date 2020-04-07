@@ -3,6 +3,8 @@ import styled from "styled-components";
 //Images
 import logo from "../images/logo-blanco.png";
 import logoNegro from "../images/logo-negro.png";
+import comillas from "../images/comillas.svg";
+import ArrowBottom from "../images/arrow.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -60,6 +62,7 @@ export const Main = styled.main`
   width: 100%;
   > section {
     display: flex;
+    justify-content: space-between;
     padding: 0 2.5%;
     width: 100%;
   }
@@ -95,6 +98,7 @@ export const SectionBox = styled.section`
   align-items: center;
   .contain {
     display: flex;
+    margin: 0 auto;
     justify-content: ${props => {
       switch (props.justify) {
         case "start":
@@ -277,6 +281,53 @@ export const Button = styled.button`
     }
   }
 `;
+export const FilterStars = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 490px;
+  margin-bottom: 50px;
+  border-bottom: 2px solid #e3e4e8;
+
+  ${Paragraphs} {
+    padding: 0;
+  }
+  .box-filter {
+    display: block;
+    float: left;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    width: auto;
+    select {
+      appearance: none;
+      text-transform: uppercase;
+      background-color: transparent;
+      border: none;
+      font-family: "Roboto", helvetica;
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 100%;
+      padding: 8px 35px 8px 15px;
+      margin: 0%;
+      &:active,
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    &:after {
+      background: url(${ArrowBottom}) center no-repeat;
+      content: " ";
+      height: 10px;
+      position: absolute;
+      right: 8px;
+      top: 53%;
+      transform: translate(0, -50%);
+      width: 17px;
+    }
+  }
+`;
 
 //Components DIV
 export const ContainDivDefault = styled.div`
@@ -310,52 +361,115 @@ export const HeaderBox = styled.header`
   position: fixed;
   width: 100%;
   z-index: 4;
-  > div {
-    align-items: center;
+  div.contain {
     display: flex;
-    justify-content: space-between;
     margin: 0 auto;
-    padding: 24px 2.5%;
+    padding: 0 2.5%;
     width: 100%;
-    h1 {
-      display: block;
-      width: 150px;
-      cursor: pointer;
-      a {
-        text-indent: -99999999px;
-        overflow: hidden;
-        position: relative;
+    div.header-inner {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 24px 0;
+      max-width: 1200px;
+      width: 100%;
+      .logo {
         display: block;
-        width: 100%;
-        background: url(${logo}) center no-repeat;
-        background-size: contain;
+        width: 150px;
+        cursor: pointer;
+        a {
+          text-indent: -99999999px;
+          overflow: hidden;
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 38px;
+          background: url(${logo}) center no-repeat;
+          background-size: contain;
+        }
       }
-    }
-    nav {
-      margin: 0;
-      padding: 0;
-      width: 350px;
-      ul {
+      .box-nav {
+        align-items: center;
         display: flex;
-        justify-content: space-around;
-        list-style: none;
-        li {
-          font-family: "Roboto", sans-serif;
-          line-height: 1%;
+        justify-content: space-between;
+        width: 100%;
+        nav {
+          margin: 0;
+          padding: 0;
+          margin-left: 100px;
+          width: 430px;
+          ul {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            li {
+              font-family: "Roboto", sans-serif;
+              line-height: 1;
+              a {
+                color: #fff;
+                position: relative;
+                text-decoration: none;
+                &:hover:after,
+                &.active:after {
+                  text-decoration: none;
+                  position: absolute;
+                  bottom: -3px;
+                  left: 0;
+                  content: "";
+                  display: block;
+                  height: 1px;
+                  background-color: #fff;
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+        .button-box {
           a {
-            color: #fff;
-            text-decoration: none;
-            &:hover {
-              text-decoration: underline;
+            &:last-child {
+              margin-left: 16px;
             }
           }
         }
       }
-    }
-    .button-box {
-      a {
-        &:last-child {
-          margin-left: 16px;
+
+      .hamburger {
+        display: none;
+        &:hover {
+          cursor: pointer;
+        }
+        &.active {
+          transition: all 0.3s ease-in-out;
+          transition-delay: 0.6s;
+          transform: rotate(45deg);
+          .line:nth-child(2) {
+            width: 0px;
+          }
+          .line:nth-child(1),
+          .line:nth-child(3) {
+            transition-delay: 0.3s;
+          }
+          .line:nth-child(1) {
+            transform: translateY(9px);
+          }
+          .line:nth-child(3) {
+            transform: translateY(-12px) rotate(90deg);
+          }
+        }
+        .line {
+          display: none;
+          width: 32px;
+          height: 2px;
+          background-color: #fff;
+          display: block;
+          margin: 8px auto;
+          -webkit-transition: all 0.3s ease-in-out;
+          -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
         }
       }
     }
@@ -363,26 +477,166 @@ export const HeaderBox = styled.header`
   &.active {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.13);
     background: #fff;
-    > div {
-      padding: 24px 2.5%;
-      h1 a {
-        background: url(${logoNegro}) center no-repeat;
-        background-size: contain;
-      }
-      nav ul li a {
-        color: #3e3874;
-      }
-      .button-box {
-        a {
-          &:last-child {
-            border: 2px solid #3e3874;
-            color: #3e3874;
-            &.white:hover {
-              background: rgba(62, 56, 116, 0.2);
+    div.contain {
+      div.header-inner {
+        .logo a {
+          background: url(${logoNegro}) center no-repeat;
+          background-size: contain;
+        }
+        nav ul li a {
+          color: #3e3874;
+          &:hover:after {
+            background-color: #3e3874;
+          }
+          &.active:after {
+            background-color: #3e3874;
+          }
+        }
+        .button-box {
+          a {
+            &:last-child {
+              border: 2px solid #3e3874;
+              color: #3e3874;
+              &.white:hover {
+                background: rgba(62, 56, 116, 0.2);
+              }
             }
           }
         }
+        .hamburger {
+          .line {
+            background-color: #3e3874;
+          }
+        }
       }
+    }
+  }
+  @media (max-width: 1200px) {
+    div.contain {
+      div.header-inner {
+        .box-nav {
+          nav {
+            width: 360px;
+            margin-left: 70px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 1024px) {
+    div.contain {
+      div.header-inner {
+        .box-nav {
+          nav {
+            width: 360px;
+            margin-left: 40px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    div.contain {
+      div.header-inner {
+        .box-nav {
+          background: #fff;
+          display: none;
+          height: 100vh;
+          left: 0;
+          margin: 0;
+          max-height: 100vh;
+          max-width: 100vw;
+          overflow: hidden;
+          padding: 0;
+          opacity: 0;
+          position: fixed;
+          top: 0;
+          width: 100vw;
+          z-index: -1;
+          &.active {
+            background-color: #8290ff;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 1;
+            z-index: 10;
+            nav {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 0;
+              width: 100%;
+              ul {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                li {
+                  margin-bottom: 4vh;
+                  font-size: 26px;
+                  a {
+                    color: #fff;
+                    font-weight: 100;
+                    &:hover {
+                      font-weight: 300;
+                    }
+                    &.active {
+                      font-weight: 300;
+                    }
+                  }
+                }
+              }
+            }
+            .button-box {
+              margin-left: 0;
+              margin-top: 4vh;
+              max-width: 300px;
+              width: 100%;
+              .button {
+                font-size: 16px;
+                padding: 18px;
+                width: 100%;
+                &:first-child {
+                  background-color: #fff;
+                  border-color: #fff;
+                  color: #3e3874;
+                  margin: 0 0 24px;
+                }
+                &:last-child {
+                  margin: 0;
+                  margin-left: 0;
+                }
+                &:hover {
+                  &:first-child {
+                    background-color: rgba(255, 255, 255, 0.65);
+                  }
+                }
+              }
+            }
+          }
+        }
+        .hamburger {
+          display: block;
+          z-index: 12;
+          &.active .line {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    div.contain {
+      padding: 0 4%;
+    }
+  }
+  @media (max-width: 480px) {
+    div.contain {
+      padding: 0 8%;
     }
   }
 `;
@@ -410,9 +664,29 @@ export const FooterBox = styled.footer`
         font-weight: 300;
         line-height: 1;
         text-align: center;
+        position:relative;
         text-decoration: none;
         &:hover {
-          text-decoration: underline;
+          text-decoration: none;
+          &:after {
+            text-decoration: none;
+            position: absolute;
+            bottom: -3px;
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: #fff;
+            width: 100%;
+          }
+        }
+        &.active:after {
+          position: absolute;
+          bottom: -3px;
+          content: "";
+          display: block;
+          height: 1px;
+          background-color: #fff;
+          width: 100%;
         }
       }
     }
@@ -452,10 +726,10 @@ export const FooterBox = styled.footer`
 
 //Components HOME PAGE
 export const Col2Header = styled.div`
-  padding: 100px 0 0;
+  padding: 125px 0 0;
   ${ContentText} {
     width: 43%;
-    ${H2} {
+    ${H1} {
       padding-bottom: 16px;
     }
     ${ParagraphTop} {
@@ -470,6 +744,7 @@ export const Col2Header = styled.div`
     }
   }
   @media (max-width: 1200px) {
+    padding: 135px 0 10px;
     ${ContentText} {
       width: 45%;
     }
@@ -479,6 +754,9 @@ export const Col2Header = styled.div`
         top: 50px;
       }
     }
+  }
+  @media (max-width: 1024px) {
+    padding: 150px 0 15px;
   }
   @media (max-width: 960px) {
     align-items: flex-end;
@@ -494,6 +772,7 @@ export const Col2Header = styled.div`
     }
   }
   @media (max-width: 768px) {
+    padding-top: 125px;
     &.contain {
       flex-direction: column;
 
@@ -599,6 +878,9 @@ export const Col2Min = styled.div`
 export const SectionServicesRates = styled.div`
   padding: 100px 0 70px;
   width: 100%;
+  &.first-section {
+    padding-top: 130px;
+  }
   .col5 {
     padding: 30px 0 50px;
     display: flex;
@@ -606,7 +888,7 @@ export const SectionServicesRates = styled.div`
     justify-content: space-evenly;
     width: 100%;
   }
-  ${H2} {
+  ${H1}, ${H2} {
     margin-bottom: 20px;
   }
   > ${Paragraphs} {
@@ -657,7 +939,10 @@ export const SectionServicesRates = styled.div`
 export const FaqsBox = styled.div`
   padding: 100px 0 70px;
   width: 100%;
-  ${H2} {
+  &.first-section {
+    padding-top: 130px;
+  }
+  ${H1}, ${H2} {
     text-align: center;
     margin-bottom: 30px;
     max-width: 480px;
@@ -717,13 +1002,13 @@ export const FaqsBox = styled.div`
   }
   @media (max-width: 768px) {
     padding: 70px 0 50px;
-    ${H2} {
+    ${H1}, ${H2} {
       margin-bottom: 10px;
     }
   }
   @media (max-width: 480px) {
     padding: 50px 0 30px;
-    ${H2} {
+    ${H1}, ${H2} {
       margin-bottom: 5px;
     }
   }
@@ -737,7 +1022,7 @@ export const SectionReviewsHome = styled.div`
     justify-content: space-between;
     .box-title {
       width: 22%;
-      ${H2} {
+      ${H1}, ${H2} {
         margin-bottom: 30px;
       }
       .average {
@@ -758,9 +1043,28 @@ export const SectionReviewsHome = styled.div`
     }
     .box-reviews {
       align-items: flex-start;
+      position: relative;
       display: flex;
       justify-content: space-between;
       width: 66%;
+      &:before,
+      &:after {
+        background: url(${comillas}) no-repeat center;
+        bottom: -65px;
+        content: "";
+        display: block;
+        height: 94px;
+        position: absolute;
+        transform: rotate(-180deg) scaleX(-1);
+        right: -20px;
+        width: 94px;
+        z-index: -1;
+      }
+      &:before {
+        top: -65px;
+        transform: rotate(0);
+        left: -20px;
+      }
     }
   }
   > .button {
@@ -768,7 +1072,7 @@ export const SectionReviewsHome = styled.div`
   }
   @media (max-width: 1200px) {
     .box-faqs {
-      .box-title ${H2} {
+      .box-title ${H1}, .box-title ${H2} {
         margin-bottom: 25px;
       }
       .box-reviews {
@@ -787,7 +1091,7 @@ export const SectionReviewsHome = styled.div`
         max-width: 100%;
         width: 100%;
         align-items: flex-start;
-        ${H2} {
+        ${H1}, ${H2} {
           margin-bottom: 0;
           width: 30%;
         }
@@ -804,8 +1108,20 @@ export const SectionReviewsHome = styled.div`
       }
       .box-reviews {
         justify-content: space-around;
-        margin-top: 40px;
+        margin-top: 70px;
         width: 100%;
+        &:before,
+        &:after {
+          bottom: -6px;
+          height: 75px;
+          right: -5px;
+          width: 75px;
+        }
+        &:before {
+          top: -50px;
+          transform: rotate(0);
+          left: -5px;
+        }
       }
     }
     > .button {
@@ -818,7 +1134,7 @@ export const SectionReviewsHome = styled.div`
       .box-title {
         flex-direction: column;
         align-items: center;
-        ${H2} {
+        ${H1}, ${H2} {
           text-align: center;
           margin-bottom: 30px;
           max-width: 350px;
@@ -829,6 +1145,10 @@ export const SectionReviewsHome = styled.div`
         flex-direction: column;
         justify-content: center;
         margin-top: 50px;
+        &:before,
+        &:after {
+          display: none;
+        }
       }
     }
     > .button {
@@ -837,6 +1157,70 @@ export const SectionReviewsHome = styled.div`
   }
 `;
 
-export const FormBox = styled.form``;
+export const SectionReviewsHeader = styled(SectionReviewsHome)`
+  &.first-section {
+    padding-top: 130px;
+  }
+  .box-faqs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    ${H1}, ${H2} {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .box-title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      ${Paragraphs} {
+        padding: 0;
+        width: 65%;
+      }
+      .average {
+        text-align: right;
+        width: 35%;
 
+        ${ParagraphTop}:first-child {
+          padding-bottom: 0;
+        }
+        ${ParagraphTop}:last-child {
+          line-height: 1;
+        }
+      }
+    }
+  }
+`;
+export const SectionReviews = styled(SectionReviewsHome)`
+.box-faqs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .box-title {
+      margin-bottom:40px;
+      width: 100%;
+        ${H1}, ${H2} {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+     
+    }
+    .box-reviews{
+       width:100%;
+       flex-flow: row wrap;
+       &:before,
+        &:after {
+          display: none;
+        }
+      
+       > div{
+         width: 31.5%;
+         margin-bottom: 30px;
+       }
+    }
+`;
+
+export const FormBox = styled.form``;
 export const LightBox = styled.div``;

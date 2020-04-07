@@ -1,5 +1,6 @@
 //React
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 //Styles & AOS animation
 import {
@@ -8,22 +9,12 @@ import {
   FooterBox
 } from "../../public/styles/Common.styles";
 
-//Images
-//import people from "../../public/images/people.svg";
-
-//Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
-
 export const Footer = () => (
   <FooterBox>
     <ContainDivDefault>
       <div className="button-box">
-        <ButtonLink whereTo="/terminos-y-condiciones">
-          Terminos y condiciones
-        </ButtonLink>
-        <ButtonLink whereTo="/politica-de-privacidad">
-          Política de privacidad
-        </ButtonLink>
+        <NavLink to="/terminos-y-condiciones">Terminos y condiciones</NavLink>
+        <NavLink to="/politica-de-privacidad">Política de privacidad</NavLink>
       </div>
       <Paragraphs>
         @2020 by{" "}

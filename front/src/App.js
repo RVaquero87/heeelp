@@ -1,5 +1,5 @@
 //React
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 //Styles & AOS animation
@@ -18,6 +18,9 @@ import { Layout } from "./layouts/Layout";
 
 // Pages Routes
 import { HomePage } from "./pages/Home.page";
+import { ServicesPage } from "./pages/Services.page";
+import { FaqsPage } from "./pages/Faqs.page";
+import { ReviewsPage } from "./pages/Reviews.page";
 import { LoginPage } from "./pages/Login.page";
 import { SignUpPage } from "./pages/SignUp.page";
 import { PrivatePage } from "./pages/Private.page";
@@ -35,6 +38,9 @@ export const App = withAuthentication(() => {
         <Layout>
           <Switch>
             <Route path="/" exact component={HomePage} />
+            <Route path="/servicios-tarifas" exact component={ServicesPage} />
+            <Route path="/faqs" exact component={FaqsPage} />
+            <Route path="/reviews" exact component={ReviewsPage} />
             <Route path="/signup" exact component={SignUpPage} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/private" exact component={PrivatePage} />

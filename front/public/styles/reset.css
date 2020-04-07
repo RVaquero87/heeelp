@@ -66,6 +66,12 @@ select {
   font: inherit;
 }
 
+button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -73,5 +79,11 @@ select {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 960px) {
+  body.active {
+    overflow: hidden;
   }
 }
