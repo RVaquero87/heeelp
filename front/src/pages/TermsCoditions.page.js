@@ -38,7 +38,7 @@ export const TermsConditionsPage = () => {
   return (
     <>
       <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up">
-        <Col2Header className="contain">
+        <Col2Header className="contain first-section">
           <ContentText>
             <H1>Términos y Condiciones</H1>
             <ParagraphTop>
@@ -47,9 +47,6 @@ export const TermsConditionsPage = () => {
               sapien sit amet dolor laoreet, quis lobortis nulla posuere.
             </ParagraphTop>
           </ContentText>
-          <BoxImg>
-            <img src={people} alt="heeelp!" title="heeelp!" />
-          </BoxImg>
         </Col2Header>
       </SectionBox>
 

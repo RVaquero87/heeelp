@@ -76,8 +76,8 @@ export const CreateReview = withRouter(({ history }) => {
                       message: "Este campo es requerido"
                     },
                     maxLength: {
-                      value: 50,
-                      message: "Máximo 10 caracteres"
+                      value: 40,
+                      message: "Máximo 40 caracteres"
                     }
                   })}
                 />

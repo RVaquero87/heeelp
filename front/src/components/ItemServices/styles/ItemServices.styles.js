@@ -1,3 +1,4 @@
+//Styles
 import styled from "styled-components";
 import { BoxImg, Paragraphs } from "../../../../public/styles/Common.styles";
 

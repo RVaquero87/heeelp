@@ -13,14 +13,14 @@ import {
   H2,
   ParagraphTop,
   Paragraphs,
-  Col2Header,
+  Col2HeaderContact,
   FormBox,
   ContactBox,
   FaqsBox,
 } from "../../public/styles/Common.styles";
 
 //Images
-import people from "../../public/images/people.svg";
+import contactHeader from "../../public/images/contact-2.svg";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
@@ -70,34 +70,25 @@ export const ContactPage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up">
-        <Col2Header className="contain">
+      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up" className="z1">
+        <Col2HeaderContact className="contain">
           <ContentText>
             <H1>Contacto</H1>
-            <ParagraphTop>
-              Lorem ipsum dolor sit amet,{" "}
-              <span>consectetur adipiscing elit</span>. In commodo vehicula
-              mauris, facilisis scelerisque purus lobortis feugiat. Aliquam ut
-              scelerisque ligula. <span>Vestibulum fringilla augue</span> quis
-              elit feugiat, ut ornare nunc interdum.
-            </ParagraphTop>
           </ContentText>
           <BoxImg>
-            <img src={people} alt="heeelp!" title="heeelp!" />
+            <img src={contactHeader} alt="heeelp!" title="heeelp!" />
           </BoxImg>
-        </Col2Header>
+        </Col2HeaderContact>
       </SectionBox>
 
       <SectionBox data-aos="fade-up" column justify="start">
         <ContactBox className="contain">
-          <H2 color="blue">Escribenos... </H2>
+          <H2 color="blue">Donec sodales mi eget.</H2>
           <Paragraphs blue>
-            Descubre el servicio que pone en contacto a personas que{" "}
-            <span>necesitan ayuda</span> en tareas del día a día con personas
-            que <span>están dispuestas a ayudar</span>.
+            Proin tortor nulla, semper ut auctor in, vehicula vitae tellus. <span>Aliquam non metus a diam imperdiet tempus. </span> Suspendisse condimentum neque eu tellus auctor, at sollicitudin quam efficitur. 
           </Paragraphs>
           <FormContext {...methods}>
-            <FormBox onSubmit={handleSubmit(sendContact)} data-aos="fade-up">
+            <FormBox onSubmit={handleSubmit(sendContact)} >
               <InputBox
                 label="Email"
                 name="username"
@@ -113,7 +104,7 @@ export const ContactPage = () => {
                 })}
               />
               <InputBox
-                label="Resumén tu valoración en una palabras"
+                label="Resumén tu consulta en pocas palabras"
                 name="title"
                 ref={register({
                   required: {
@@ -121,13 +112,13 @@ export const ContactPage = () => {
                     message: "Este campo es requerido",
                   },
                   maxLength: {
-                    value: 50,
-                    message: "Máximo 10 caracteres",
+                    value: 40,
+                    message: "Este campo solo admite un máximo de 40 caracteres",
                   },
                 })}
               />
               <TextAreaBox
-                label="Describe tu valoración"
+                label="Explica que te sucede"
                 name="message"
                 ref={register({
                   required: {
@@ -136,8 +127,8 @@ export const ContactPage = () => {
                   },
                 })}
               />
-              <button type="submit" className="button">
-                Crear
+              <button type="submit" className="button big">
+                Enviar
               </button>
             </FormBox>
           </FormContext>

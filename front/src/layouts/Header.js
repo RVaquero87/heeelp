@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { withRouter, Link, NavLink } from "react-router-dom";
 
 //Styles & AOS animation
-import { LightBox, HeaderBox } from "../../public/styles/Common.styles";
+import { LightBoxError, HeaderBox, Paragraphs } from "../../public/styles/Common.styles";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
@@ -89,7 +89,7 @@ export const Header = withRouter(({ history }) => {
                   <ButtonLink whereTo="/registro" className="button">
                     Regístrate
                   </ButtonLink>
-                  <ButtonLink whereTo="/login" className="button white">
+                  <ButtonLink whereTo="/login" className="button transparent">
                     Inicia sesión
                   </ButtonLink>
                 </div>
@@ -130,9 +130,9 @@ export const Header = withRouter(({ history }) => {
           </div>
 
           {messageError && (
-            <LightBox data-aos="fade-down">
-              <p>{messageError}</p>
-            </LightBox>
+            <LightBoxError>
+              <Paragraphs>{messageError}</Paragraphs>
+            </LightBoxError>
           )}
 
           <button

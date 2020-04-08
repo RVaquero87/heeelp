@@ -10,7 +10,8 @@ export const InputText = styled.input.attrs({
   border-bottom: 1px solid #e3e4e8;
   box-shadow: none;
   display: block;
-  margin-bottom: 30px;
+  margin: 0px;
+  padding: 1px 5px;
   width: 100%;
   &:-internal-autofill-selected {
     background-color: transparent !important;
@@ -20,9 +21,9 @@ export const InputText = styled.input.attrs({
     outline: none;
   }
   &.error {
-    border-bottom: 1px solid tomato;
+    border-bottom: 1px solid #E74128;
     &:focus {
-      border: 1px solid tomato;
+      border: 1px solid #E74128;
     }
   }
 `;
@@ -33,15 +34,8 @@ export const LabelText = styled.label`
   font-size: 18px;
   font-weight: 300;
   line-height: 1.2;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   width: 100%;
 `;
 
-export const ErrorMessage = styled.div`
-  color: red;
-  font-size: 13px;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  bottom: -19px;
-`;
+

@@ -1,7 +1,12 @@
+//React
 import React, { createContext, useState, useEffect } from "react";
+
+//Contexto
+export const PrincipalContext = createContext();
+
+//Functional & Services
 import { getAllReviews } from "../services/reviewsServices";
 
-export const PrincipalContext = createContext();
 export const PrincipalContextProvider = props => {
   //Loading State
   const [loading, setLoading] = useState(true);

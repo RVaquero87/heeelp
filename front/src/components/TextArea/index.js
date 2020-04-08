@@ -1,6 +1,13 @@
+//React
 import React from "react";
-import { LabelAreaText, AreaBox, ErrorMessage } from "./styles/input.styles";
+import { Link } from "react-router-dom";
+
+//Form
 import { useFormContext } from "react-hook-form";
+
+//Styles & AOS animation
+import { AreaBox, LabelAreaText } from "./styles/input.styles";
+import {ErrorMessage} from "../../../public/styles/Common.styles"
 
 const hasError = (errors, name) => {
   if (name in errors) return "error";

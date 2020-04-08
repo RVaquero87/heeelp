@@ -1,7 +1,16 @@
+//React
 import React, { useContext, useState, useEffect } from "react";
+
+//Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
+
+//Functional & Services
 import { doUnsubscribe, doEditUserAdmin } from "../../services/authServices";
+
+//Form
 import { useForm, FormContext } from "react-hook-form";
+
+//Components
 import { SelectBox } from "../../components/Select/index";
 
 export const UserBoxItem = ({ user }) => {

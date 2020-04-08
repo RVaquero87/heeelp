@@ -51,7 +51,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up">
+      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up" className="z1">
         <Col2Header className="contain">
           <ContentText>
             <H1>Una nueva forma de ayudar</H1>
@@ -180,7 +180,7 @@ export const HomePage = () => {
                 </ParagraphTop>
               </div>
             </div>
-            <div className="box-reviews">
+            <div className="box-reviews" data-aos="fade-up">
               {listReviews &&
                 listReviews
                   .sort((a, b) => b.stars - a.stars)
@@ -207,7 +207,7 @@ export const HomePage = () => {
             </span>
           </H2>
           <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button big white">
+          <ButtonLink whereTo="/faqs" className="button white big">
             VER MÁS FAQ'S
           </ButtonLink>
         </FaqsBox>

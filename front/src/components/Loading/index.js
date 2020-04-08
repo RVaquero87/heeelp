@@ -1,7 +1,11 @@
+//React
 import React from "react";
-import { LoadingBox } from "./styles/Loading.styles";
 
+//Images
 import loading from "../../../public/images/loading.gif";
+
+//Styles
+import { LoadingBox } from "./styles/Loading.styles";
 
 export const Loading = () => (
   <LoadingBox>

@@ -1,6 +1,12 @@
+//React
 import React from "react";
-import { SelectText, LabelText, ErrorMessage } from "./styles/select.styles";
+
+//Form
 import { useFormContext } from "react-hook-form";
+
+//Styles & AOS animation
+import { SelectText, LabelText } from "./styles/select.styles";
+import {ErrorMessage} from "../../../public/styles/Common.styles"
 
 const hasError = (errors, name) => {
   if (name in errors) return "error";
