@@ -3,7 +3,11 @@ import React, { useContext, useState, useEffect } from "react";
 import { withRouter, Link, NavLink } from "react-router-dom";
 
 //Styles & AOS animation
-import { LightBoxError, HeaderBox, Paragraphs } from "../../public/styles/Common.styles";
+import {
+  LightBoxError,
+  HeaderBox,
+  Paragraphs,
+} from "../../public/styles/Common.styles";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
@@ -37,16 +41,28 @@ export const Header = withRouter(({ history }) => {
   //Hamburguer Nav
   const [hamburguerNav, setHamburguerNav] = useState(false);
 
+  const Body = document.getElementsByTagName("body");
+
   const buttonAdd = (e) => {
     e.preventDefault();
     hamburguerNav ? setHamburguerNav(false) : setHamburguerNav(true);
-    const Body = document.getElementsByTagName("body");
     if (Body[0].classList.contains("active")) {
       Body[0].classList.remove("active");
     } else {
       Body[0].classList.add("active");
     }
   };
+
+  const navClick = document.querySelectorAll("#nav-resp .nav-link");
+
+  for (let i = 0; i < navClick.length; i++) {
+    navClick[i].onclick = function (e) {
+      if (screen.width <= 960) {
+        Body[0].classList.remove("active");
+        setHamburguerNav(false);
+      }
+    };
+  }
 
   return (
     <HeaderBox id="navbar">
@@ -64,32 +80,54 @@ export const Header = withRouter(({ history }) => {
                 <nav>
                   <ul>
                     <li>
-                      <NavLink activeClassName="active" to="/servicios-tarifas">
+                      <NavLink
+                        activeClassName="active"
+                        to="/servicios-tarifas"
+                        className="nav-link"
+                      >
                         servicios y tarifas
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink activeClassName="active" to="/faqs">
+                      <NavLink
+                        activeClassName="active"
+                        to="/faqs"
+                        className="nav-link"
+                        className="nav-link"
+                      >
                         faq's
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink activeClassName="active" to="/reviews">
+                      <NavLink
+                        activeClassName="active"
+                        to="/reviews"
+                        className="nav-link"
+                        className="nav-link"
+                      >
                         opiniones
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink activeClassName="active" to="/contacto">
+                      <NavLink
+                        activeClassName="active"
+                        to="/contacto"
+                        className="nav-link"
+                        className="nav-link"
+                      >
                         contacto
                       </NavLink>
                     </li>
                   </ul>
                 </nav>
                 <div className="button-box">
-                  <ButtonLink whereTo="/registro" className="button">
+                  <ButtonLink whereTo="/registro" className="button nav-link">
                     Regístrate
                   </ButtonLink>
-                  <ButtonLink whereTo="/login" className="button transparent">
+                  <ButtonLink
+                    whereTo="/login"
+                    className="button transparent nav-link"
+                  >
                     Inicia sesión
                   </ButtonLink>
                 </div>
@@ -99,16 +137,26 @@ export const Header = withRouter(({ history }) => {
               <nav>
                 <ul>
                   <li>
-                    <NavLink to="/private">Private Page</NavLink>
+                    <NavLink to="/private" className="nav-link">
+                      Private Page
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to="/profile" className="nav-link">
+                      Profile
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/create-review">Crear review</NavLink>
+                    <NavLink to="/create-review" className="nav-link">
+                      Crear review
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/" onClick={(e) => onClickLogout(e)}>
+                    <NavLink
+                      to="/"
+                      onClick={(e) => onClickLogout(e)}
+                      className="nav-link"
+                    >
                       Logout
                     </NavLink>
                   </li>
@@ -119,10 +167,14 @@ export const Header = withRouter(({ history }) => {
               <nav>
                 <ul>
                   <li>
-                    <NavLink to="/admin">Admin</NavLink>
+                    <NavLink to="/admin" className="nav-link">
+                      Admin
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/admin2">Admin Reviews</NavLink>
+                    <NavLink to="/admin2" className="nav-link">
+                      Admin Reviews
+                    </NavLink>
                   </li>
                 </ul>
               </nav>
