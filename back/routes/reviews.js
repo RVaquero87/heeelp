@@ -10,15 +10,13 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
   const { title, message, stars } = req.body;
   const idUser = req.user;
 
-  // Create the user
-
+  // Create the Review
   const newReviews = await Reviews.create({
     title,
     message,
     stars,
     creatorUserid: idUser
   });
-  // Directly login user
 
   return res.json({
     review: _.pick(newReviews, [

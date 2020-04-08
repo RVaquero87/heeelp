@@ -9,63 +9,64 @@ import ArrowBottom from "../images/arrow.svg";
 //Global Class
 export const GlobalContent = styled.div`
   .button {
-    background:#3e3874;
+    background: #3e3874;
     border-radius: 30px;
-    border:2px solid #3e3874;
+    border: 2px solid #3e3874;
     box-sizing: border-box;
-    color:#ffffff;
+    color: #ffffff;
     cursor: pointer;
     display: inline-block;
     font-family: "Roboto", verdana, sans-serif;
-    font-size:14px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 1px;
     line-height: 1;
     outline: none;
-    padding:10px 25px;
+    padding: 10px 25px;
     text-align: center;
     text-transform: uppercase;
-    text-decoration:none;
-    &.transparent{
-      background:rgba(255,255,255, 0);
-      border:2px solid #ffffff;
+    text-decoration: none;
+    &.transparent {
+      background: rgba(255, 255, 255, 0);
+      border: 2px solid #ffffff;
       color: #ffffff;
     }
-    &.transparent-blue{
-      background:rgba(255,255,255, 0);
-      border:2px solid #3e3874;
+    &.transparent-blue {
+      background: rgba(255, 255, 255, 0);
+      border: 2px solid #3e3874;
       color: #3e3874;
     }
-    &.white{
-      background: rgba(255,255,255);
-      border:2px solid rgba(255,255,255);
+    &.white {
+      background: rgba(255, 255, 255);
+      border: 2px solid rgba(255, 255, 255);
       color: #3e3874;
     }
-    &.big{
-      font-size:16px;
-      padding:15px 35px;
+    &.big {
+      font-size: 16px;
+      padding: 15px 35px;
     }
     &:hover {
-      background:#5f63b9;
-      color:#ffffff;
-      border-color:#5f63b9;
+      background: #5f63b9;
+      color: #ffffff;
+      border-color: #5f63b9;
       text-decoration: none;
       transition: all ease 500ms;
-      &.transparent,  &.transparent-blue{
+      &.transparent,
+      &.transparent-blue {
         background: #5f63b9;
         border: 2px solid #3e3874;
         color: #fff;
       }
-      &.white{
-        background: rgba(255,255,255, .5);
-        border: 2px solid rgba(255,255,255, 0);
+      &.white {
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0);
         color: #3e3874;
       }
     }
     @media (max-width: 480px) {
       display: block;
       font-size: 16px;
-      line-height:1;
+      line-height: 1;
       padding: 15px;
       margin: 0 auto;
       max-width: 300px;
@@ -117,9 +118,9 @@ export const SectionBox = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  &.z1{
-    position:relative;
-    z-index:1;
+  &.z1 {
+    position: relative;
+    z-index: 1;
   }
   .contain {
     display: flex;
@@ -273,6 +274,13 @@ export const ParagraphTop = styled.p`
   &:last-child {
     padding-bottom: 0;
   }
+  a {
+    color: ${(props) => (props.blue ? "#393b4f" : "#fff")};
+    text-decoration: underline;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
   @media (max-width: 768px) {
     font-size: 18px;
     line-height: 26px;
@@ -295,22 +303,22 @@ export const Paragraphs = styled(ParagraphTop)`
 `;
 
 export const ErrorMessage = styled.div`
-  background: #FDCFCC;
+  background: #fdcfcc;
   border-radius: 3px;
   bottom: -26px;
-  color: #E74128;
+  color: #e74128;
   font-size: 13px;
   font-weight: 300;
   line-height: 1;
   margin: 0;
   padding: 2px 4px;
   position: absolute;
-  &:after{
-    content: '';
+  &:after {
+    content: "";
     position: absolute;
     top: -5px;
     left: 7px;
-    border-color: transparent transparent #FDCFCC transparent;
+    border-color: transparent transparent #fdcfcc transparent;
     border-style: solid;
     border-width: 0 5px 5px 5px;
     height: 0;
@@ -333,18 +341,19 @@ export const Button = styled.button`
     }
   }};
   border-radius: 30px;
-  border: 2px solid ${(props) => {
-    switch (props.type) {
-      case "transparent":
-        return "#ffffff";
-      case "transparent-blue":
-        return "#3e3874";
-      case "white":
-        return "rgba(255,255,255)";
-      default:
-        return "#3e3874";
-    }
-  }};
+  border: 2px solid
+    ${(props) => {
+      switch (props.type) {
+        case "transparent":
+          return "#ffffff";
+        case "transparent-blue":
+          return "#3e3874";
+        case "white":
+          return "rgba(255,255,255)";
+        default:
+          return "#3e3874";
+      }
+    }};
   box-sizing: border-box;
   color: ${(props) => {
     switch (props.type) {
@@ -357,7 +366,7 @@ export const Button = styled.button`
       default:
         return "#ffffff";
     }
-  }};;
+  }};
   cursor: pointer;
   display: inline-block;
   font-family: "Roboto", verdana, sans-serif;
@@ -371,40 +380,40 @@ export const Button = styled.button`
   text-transform: uppercase;
   &:hover {
     background: ${(props) => {
-    switch (props.type) {
-      case "transparent":
-        return "#5f63b9";
-      case "transparent-blue":
-        return "#5f63b9";
-      case "white":
-        return "rgba(255,255,255, .5)";
-      default:
-        return "#5f63b9";
-    }
+      switch (props.type) {
+        case "transparent":
+          return "#5f63b9";
+        case "transparent-blue":
+          return "#5f63b9";
+        case "white":
+          return "rgba(255,255,255, .5)";
+        default:
+          return "#5f63b9";
+      }
     }};
     border-color: ${(props) => {
-    switch (props.type) {
-      case "transparent":
-        return "#3e3874";
-      case "transparent-blue":
-        return "#3e3874";
-      case "white":
-        return "rgba(255,255,255, 0)";
-      default:
-        return "#5f63b9";
-    }
+      switch (props.type) {
+        case "transparent":
+          return "#3e3874";
+        case "transparent-blue":
+          return "#3e3874";
+        case "white":
+          return "rgba(255,255,255, 0)";
+        default:
+          return "#5f63b9";
+      }
     }};
     color: ${(props) => {
-    switch (props.type) {
-      case "transparent":
-        return "#ffffff";
-      case "transparent-blue":
-        return "#ffffff";
-      case "white":
-        return "#3e3874";
-      default:
-        return "#ffffff";
-    }
+      switch (props.type) {
+        case "transparent":
+          return "#ffffff";
+        case "transparent-blue":
+          return "#ffffff";
+        case "white":
+          return "#3e3874";
+        default:
+          return "#ffffff";
+      }
     }};
     text-decoration: none;
     transition: all ease 500ms;
@@ -412,7 +421,7 @@ export const Button = styled.button`
   @media (max-width: 480px) {
     display: block;
     font-size: 16px;
-    line-height:1;
+    line-height: 1;
     padding: 15px;
     margin: 0 auto;
     max-width: 300px;
@@ -468,32 +477,32 @@ export const FilterStars = styled.div`
   }
   @media (max-width: 768px) {
     margin-bottom: 35px;
-     width:100%;
-     ${Paragraphs}{
-       width:50%;
-       padding-right:30px;
-     }
+    width: 100%;
+    ${Paragraphs} {
+      width: 50%;
+      padding-right: 30px;
+    }
   }
   @media (max-width: 480px) {
-    flex-direction:column;
+    flex-direction: column;
     align-items: flex-start;
-    width:initial;
-    ${Paragraphs}{
-       width:100%;
-       padding-right:0;
-       margin-bottom: 10px;
-     }
-     .box-filter{
-       select {
+    width: initial;
+    ${Paragraphs} {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 10px;
+    }
+    .box-filter {
+      select {
         padding-left: 0px;
       }
-     }
+    }
   }
 `;
 
 export const FormBox = styled.form`
   margin: 25px auto 0;
-  max-width:768px;
+  max-width: 768px;
   width: 100%;
   ${H1}, ${H2} {
     color: #393b4f;
@@ -501,10 +510,39 @@ export const FormBox = styled.form`
     line-height: 1.2;
     width: 100%;
   }
-  .box-input{
-    position:relative;
+  .box-input {
+    position: relative;
     margin-bottom: 40px;
-    width:100%;
+    width: 100%;
+  }
+`;
+
+export const LightBoxError = styled.div`
+  background: #cbcff5;
+  animation: messageError 500ms ease-in;
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  ${Paragraphs} {
+    color: #393b4f;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1;
+    padding: 15px;
+    z-index: 3;
+  }
+  @keyframes messageError {
+    0% {
+      bottom: -50px;
+      opacity: 0;
+    }
+    100% {
+      bottom: 0px;
+      opacity: 1;
+    }
   }
 `;
 
@@ -569,7 +607,7 @@ export const HeaderBox = styled.header`
     width: 100%;
     div.header-inner {
       align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
       display: flex;
       justify-content: space-between;
       margin: 0 auto;
@@ -636,7 +674,7 @@ export const HeaderBox = styled.header`
           }
         }
         .button-box {
-          display:flex;
+          display: flex;
           a {
             &:last-child {
               margin-left: 16px;
@@ -703,10 +741,10 @@ export const HeaderBox = styled.header`
         .button-box {
           a {
             &:last-child {
-              color:#3e3874;
-              border-color:#3e3874;
-              &:hover{
-                color:#fff;
+              color: #3e3874;
+              border-color: #3e3874;
+              &:hover {
+                color: #fff;
               }
             }
           }
@@ -744,12 +782,12 @@ export const HeaderBox = styled.header`
     }
   }
   @media (max-width: 960px) {
-      border-bottom: 1px solid rgba(255,255,255,.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     div.contain {
       div.header-inner {
-        border:none;
-        .logo{
-          max-width:130px;
+        border: none;
+        .logo {
+          max-width: 130px;
         }
         .box-nav {
           background: #fff;
@@ -807,13 +845,13 @@ export const HeaderBox = styled.header`
             .button-box {
               margin-left: 0;
               margin-top: 4vh;
-              display:flex;
+              display: flex;
               max-width: 650px;
-              justify-content:space-between;
+              justify-content: space-between;
               width: 100%;
               .button {
                 font-size: 16px;
-                max-width:300px;
+                max-width: 300px;
                 padding: 18px;
                 width: 100%;
                 &:first-child {
@@ -821,7 +859,7 @@ export const HeaderBox = styled.header`
                   border-color: #fff;
                   color: #3e3874;
                   margin: 0;
-                  &:hover{
+                  &:hover {
                     border-color: #3e3874;
                   }
                 }
@@ -852,11 +890,11 @@ export const HeaderBox = styled.header`
         .box-nav {
           &.active {
             .button-box {
-             flex-direction: column;
-             align-items:center;
+              flex-direction: column;
+              align-items: center;
               .button {
                 font-size: 16px;
-                max-width:290px;
+                max-width: 290px;
                 padding: 18px;
                 width: 100%;
                 &:first-child {
@@ -1033,51 +1071,95 @@ export const Col2Header = styled.div`
 `;
 
 export const Col2HeaderContact = styled(Col2Header)`
-  &.contain{
-    justify-content: space-evenly;
+  &.contain {
     ${ContentText} {
-      width:initial;
+      width: initial;
     }
     ${BoxImg} {
-      max-width:400px;
-      img{
-        top:28px;
+      max-width: 400px;
+      img {
+        top: 28px;
       }
     }
   }
   @media (max-width: 960px) {
-    &.contain{
-      flex-direction:row;
+    &.contain {
+      flex-direction: row;
       ${ContentText} {
         padding-bottom: 0;
         width: initial;
-        ${H1}{
-          line-height:1;
-          padding-bottom:0;
+        ${H1} {
+          line-height: 1;
+          padding-bottom: 0;
         }
       }
     }
   }
   @media (max-width: 768px) {
-    &.contain{
-      flex-direction:row;
+    &.contain {
+      flex-direction: row;
       ${BoxImg} {
         max-width: 55%;
       }
     }
   }
   @media (max-width: 480px) {
-    &.contain{
+    &.contain {
       justify-content: space-between;
       ${BoxImg} {
-        img{
-              top: 40px;
+        img {
+          top: 40px;
         }
       }
     }
   }
-`
+`;
 
+export const Col2HeaderLogin = styled(Col2Header)`
+  &.contain {
+    ${ContentText} {
+      width: initial;
+    }
+    ${BoxImg} {
+      max-width: 250px;
+      img {
+        top: 28px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      flex-direction: row;
+      ${ContentText} {
+        padding-bottom: 0;
+        width: initial;
+        ${H1} {
+          line-height: 1;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      flex-direction: row;
+      ${BoxImg} {
+        max-width: 40%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      justify-content: space-between;
+      ${BoxImg} {
+        max-width: 50%;
+        img {
+          top: 40px;
+        }
+      }
+    }
+  }
+`;
 
 export const Col2Min = styled.div`
   display: flex;
@@ -1464,8 +1546,8 @@ export const SectionReviewsHeader = styled(SectionReviewsHome)`
         }
         ${ParagraphTop}:last-child {
           line-height: 1;
-          span{
-            font-weight:100;
+          span {
+            font-weight: 100;
           }
         }
       }
@@ -1494,15 +1576,15 @@ export const SectionReviewsHeader = styled(SectionReviewsHome)`
         flex-direction: column;
         justify-content: flex-start;
         width: 100%;
-        > ${Paragraphs}{
-          width:100%;
-          margin-bottom: 40px
+        > ${Paragraphs} {
+          width: 100%;
+          margin-bottom: 40px;
         }
         .average {
           margin: 0 auto;
           width: initial;
           ${ParagraphTop} {
-            font-size:20px;
+            font-size: 20px;
           }
         }
       }
@@ -1522,8 +1604,8 @@ export const SectionReviews = styled(SectionReviewsHome)`
         width: 100%;
         margin-bottom: 10px;
       }
-      ${Paragraphs}{
-        max-width:800px;
+      ${Paragraphs} {
+        max-width: 800px;
       }
     }
     .box-reviews {
@@ -1541,46 +1623,46 @@ export const SectionReviews = styled(SectionReviewsHome)`
     }
   }
   @media (max-width: 960px) {
-    .box-faqs {  
-      align-items: flex-start;  
-      .box-title{
+    .box-faqs {
+      align-items: flex-start;
+      .box-title {
         flex-direction: column;
       }
-      .box-reviews{
+      .box-reviews {
         justify-content: space-between;
-        margin-top:0;
-        > div{
-          max-width:initial;
+        margin-top: 0;
+        > div {
+          max-width: initial;
           width: 48%;
-          .message{
-             height: 160px;
-          }
-        }
-      }
-    } 
-  }
-  @media (max-width: 768px) {
-    .box-faqs {  
-      .box-title{
-        align-items: flex-start;
-        ${H2}{
-          text-align: left;
-        }
-      }
-      .box-reviews{
-        justify-content: center;
-        align-items:center;
-        > div{
-          max-width:480px;
-          margin-bottom:40px;
-          width: 100%;
-          .message{
-             height: initial;
+          .message {
+            height: 160px;
           }
         }
       }
     }
-  } 
+  }
+  @media (max-width: 768px) {
+    .box-faqs {
+      .box-title {
+        align-items: flex-start;
+        ${H2} {
+          text-align: left;
+        }
+      }
+      .box-reviews {
+        justify-content: center;
+        align-items: center;
+        > div {
+          max-width: 480px;
+          margin-bottom: 40px;
+          width: 100%;
+          .message {
+            height: initial;
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const TermsBox = styled.div`
@@ -1595,42 +1677,22 @@ export const TermsBox = styled.div`
   }
 `;
 
-export const ContactBox = styled.div`
+export const SectionFormBox = styled.div`
   font-family: "Roboto", sans-serif;
   padding: 70px 0 50px;
-  &.contain{
+  &.contain {
     max-width: 768px;
   }
   ${H2} {
     margin-bottom: 12px;
-    text-align:center;
+    text-align: center;
     width: 100%;
   }
   ${ParagraphTop} {
-    text-align:center;
+    text-align: center;
     width: 100%;
   }
-`;
-
-export const LightBoxError = styled.div`
-  background:#cbcff5;
-  animation: messageError 500ms ease-in;
-  bottom:0;
-  display:block;
-  left:0;
-  position:fixed;
-  text-align: center;
-  width:100%;
-  ${Paragraphs}{
-      color: #393b4f;
-      font-size: 14px;
-      font-weight:300;
-      line-height: 1;
-      padding: 15px;
-      z-index:3;
-  }
-  @keyframes messageError {
-  0%   {bottom: -50px; opacity:0}
-  100% {bottom: 0px; opacity:1}
+  .button {
+    position: relative;
   }
 `;

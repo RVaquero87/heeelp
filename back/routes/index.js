@@ -9,6 +9,10 @@ router.use("/auth", auth);
 const reviews = require("./reviews");
 router.use("/reviews", reviews);
 
+// routes reviews
+const contact = require("./contact");
+router.use("/contact", contact);
+
 /* GET home page */
 router.get("/", (req, res, next) => {
   res.json({ status: "Welcome" });

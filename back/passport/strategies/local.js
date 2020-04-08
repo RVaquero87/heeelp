@@ -9,7 +9,9 @@ passport.use(
       const registeredUser = await Users.findOne({ username });
 
       if (!registeredUser || !checkHashed(password, registeredUser.password)) {
-        return done(null, false, { message: "Datos incorrectos" });
+        return done(null, false, {
+          message: "Los datos incluidos son incorrectos.",
+        });
       } else {
         return done(null, registeredUser);
       }

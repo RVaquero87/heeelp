@@ -30,6 +30,7 @@ import { PrivatePage } from "./pages/Private.page";
 import { ProfilePage } from "./pages/Profile.page";
 import { AdminUsers } from "./pages/Admin-users";
 import { AdminReviews } from "./pages/Admin-reviews";
+import { AdminContact } from "./pages/Admin-contact";
 import { CreateReview } from "./pages/create-reviews";
 
 export const App = withAuthentication(() => {
@@ -59,6 +60,7 @@ export const App = withAuthentication(() => {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/admin" component={AdminUsers} />
             <Route path="/admin2" component={AdminReviews} />
+            <Route path="/admin3" component={AdminContact} />
             <Route path="/create-review" component={CreateReview} />
           </Switch>
         </Layout>

@@ -1,5 +1,6 @@
 //React
 import React, { useContext, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 
 //Form
 import { useForm, FormContext } from "react-hook-form";
@@ -11,11 +12,10 @@ import {
   BoxImg,
   H1,
   H2,
-  ParagraphTop,
   Paragraphs,
   Col2HeaderContact,
   FormBox,
-  ContactBox,
+  SectionFormBox,
   FaqsBox,
 } from "../../public/styles/Common.styles";
 
@@ -27,6 +27,7 @@ import { PrincipalContext } from "../context/PrincipalContext";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
+import { sendMessageContact } from "../services/contactServices";
 
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/Index";
@@ -34,8 +35,8 @@ import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
 import { InputBox } from "../components/Input/Index";
 import { TextAreaBox } from "../components/TextArea/Index";
 
-export const ContactPage = () => {
-  const { user } = useContext(PrincipalContext);
+export const ContactPage = withRouter(({ history }) => {
+  const { user, setMessageError } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
@@ -61,16 +62,22 @@ export const ContactPage = () => {
 
   const sendContact = async (data) => {
     console.log(data);
-    //const responseServer = await createReview(data);
-    // setMessageError(responseServer.message);
-    // setTimeout(() => {
-    //   setMessageError(null);
-    // }, 5000);
+    const responseServer = await sendMessageContact(data);
+    setMessageError(responseServer.message);
+    history.push("/");
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
   };
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up" className="z1">
+      <SectionBox
+        bgColor="blueLight"
+        justify="evenly"
+        data-aos="fade-up"
+        className="z1"
+      >
         <Col2HeaderContact className="contain">
           <ContentText>
             <H1>Contacto</H1>
@@ -82,13 +89,15 @@ export const ContactPage = () => {
       </SectionBox>
 
       <SectionBox data-aos="fade-up" column justify="start">
-        <ContactBox className="contain">
+        <SectionFormBox className="contain">
           <H2 color="blue">Donec sodales mi eget.</H2>
           <Paragraphs blue>
-            Proin tortor nulla, semper ut auctor in, vehicula vitae tellus. <span>Aliquam non metus a diam imperdiet tempus. </span> Suspendisse condimentum neque eu tellus auctor, at sollicitudin quam efficitur. 
+            Proin tortor nulla, semper ut auctor in, vehicula vitae tellus.{" "}
+            <span>Aliquam non metus a diam imperdiet tempus. </span> Suspendisse
+            condimentum neque eu tellus auctor, at sollicitudin quam efficitur.
           </Paragraphs>
           <FormContext {...methods}>
-            <FormBox onSubmit={handleSubmit(sendContact)} >
+            <FormBox onSubmit={handleSubmit(sendContact)}>
               <InputBox
                 label="Email"
                 name="username"
@@ -113,7 +122,8 @@ export const ContactPage = () => {
                   },
                   maxLength: {
                     value: 40,
-                    message: "Este campo solo admite un máximo de 40 caracteres",
+                    message:
+                      "Este campo solo admite un máximo de 40 caracteres",
                   },
                 })}
               />
@@ -132,7 +142,7 @@ export const ContactPage = () => {
               </button>
             </FormBox>
           </FormContext>
-        </ContactBox>
+        </SectionFormBox>
       </SectionBox>
 
       <SectionBox bgColor="orange" column>
@@ -151,4 +161,4 @@ export const ContactPage = () => {
       </SectionBox>
     </>
   );
-};
+});
