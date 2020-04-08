@@ -8,5 +8,14 @@ export const ItemServiceRate = styled.div`
   }
   ${Paragraphs} {
     margin-top: 20px;
+  text-align: center;
+  padding-bottom: 7px;
+    &.content-services{
+      font-size: 16px;
+      line-height: 1.4;
+      margin: 0 auto;
+      max-width: 150px;
+      min-height: 85px;
+    }
   }
 `;

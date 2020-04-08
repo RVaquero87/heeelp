@@ -17,7 +17,7 @@ import { ButtonLink } from "../components/ButtonLink/Index";
 export const Header = withRouter(({ history }) => {
   const { user, setUser, messageError } = useContext(PrincipalContext);
 
-  const onClickLogout = async e => {
+  const onClickLogout = async (e) => {
     e.preventDefault();
     await doLogout();
     setUser(null);
@@ -37,7 +37,7 @@ export const Header = withRouter(({ history }) => {
   //Hamburguer Nav
   const [hamburguerNav, setHamburguerNav] = useState(false);
 
-  const buttonAdd = e => {
+  const buttonAdd = (e) => {
     e.preventDefault();
     hamburguerNav ? setHamburguerNav(false) : setHamburguerNav(true);
     const Body = document.getElementsByTagName("body");
@@ -87,7 +87,7 @@ export const Header = withRouter(({ history }) => {
                 </nav>
                 <div className="button-box">
                   <ButtonLink whereTo="/registro" className="button">
-                    Resgístrate
+                    Regístrate
                   </ButtonLink>
                   <ButtonLink whereTo="/login" className="button white">
                     Inicia sesión
@@ -108,7 +108,7 @@ export const Header = withRouter(({ history }) => {
                     <NavLink to="/create-review">Crear review</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/" onClick={e => onClickLogout(e)}>
+                    <NavLink to="/" onClick={(e) => onClickLogout(e)}>
                       Logout
                     </NavLink>
                   </li>
@@ -138,7 +138,7 @@ export const Header = withRouter(({ history }) => {
           <button
             id="hamburger"
             className={hamburguerNav ? "hamburger active" : "hamburger"}
-            onClick={e => buttonAdd(e)}
+            onClick={(e) => buttonAdd(e)}
           >
             <span className="line"></span>
             <span className="line"></span>

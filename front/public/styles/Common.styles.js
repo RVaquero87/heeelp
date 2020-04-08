@@ -79,7 +79,7 @@ export const Main = styled.main`
 `;
 
 export const SectionBox = styled.section`
-  background: ${props => {
+  background: ${(props) => {
     switch (props.bgColor) {
       case "blueLight":
         return "#8290ff";
@@ -89,6 +89,8 @@ export const SectionBox = styled.section`
         return "#3e3874";
       case "orange":
         return "#ffa500";
+      case "grey":
+        return "#f2f3f7";
       default:
         return "#fff;";
     }
@@ -99,7 +101,7 @@ export const SectionBox = styled.section`
   .contain {
     display: flex;
     margin: 0 auto;
-    justify-content: ${props => {
+    justify-content: ${(props) => {
       switch (props.justify) {
         case "start":
           return "flex-start";
@@ -115,16 +117,38 @@ export const SectionBox = styled.section`
           return "center";
       }
     }};
-    flex-direction: ${props => (props.column ? "column" : "row")};
+    flex-direction: ${(props) => (props.column ? "column" : "row")};
     align-items: center;
     max-width: 1200px;
     width: 100%;
+    &.first-section {
+      padding-top: 180px;
+      padding-bottom: 100px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .contain.first-section {
+      padding-top: 160px;
+      padding-bottom: 80px;
+    }
+  }
+  @media (max-width: 1024px) {
+    .contain.first-section {
+      padding-top: 140px;
+      padding-bottom: 70px;
+    }
+  }
+  @media (max-width: 768px) {
+    .contain.first-section {
+      padding-top: 120px;
+      padding-bottom: 60px;
+    }
   }
 `;
 
 //Components Text
 export const H1 = styled.h1`
-  color: ${props => {
+  color: ${(props) => {
     switch (props.color) {
       case "blue-light":
         return "#8290ff";
@@ -169,7 +193,7 @@ export const H1 = styled.h1`
 `;
 
 export const H2 = styled.h2`
-  color: ${props => {
+  color: ${(props) => {
     switch (props.color) {
       case "blue-light":
         return "#8290ff";
@@ -214,7 +238,7 @@ export const H2 = styled.h2`
 `;
 
 export const ParagraphTop = styled.p`
-  color: ${props => (props.blue ? "#393b4f" : "#fff")};
+  color: ${(props) => (props.blue ? "#393b4f" : "#fff")};
   font-family: "Roboto", verdana, sans-serif;
   padding-bottom: 32px;
   font-size: 20px;
@@ -234,7 +258,7 @@ export const ParagraphTop = styled.p`
 `;
 
 export const Paragraphs = styled(ParagraphTop)`
-  font-weight: ${props => (props.bold ? "700" : "300")};
+  font-weight: ${(props) => (props.bold ? "700" : "300")};
   font-size: 18px;
   line-height: 28px;
   padding-bottom: 24px;
@@ -249,24 +273,24 @@ export const Paragraphs = styled(ParagraphTop)`
 
 //Component Elements
 export const Button = styled.button`
-  background: ${props => (props.blue ? "#3e3874" : "rgba(255,255,255,0)")};
+  background: ${(props) => (props.blue ? "#3e3874" : "rgba(255,255,255,0)")};
   border-radius: 30px;
-  border: 2px solid ${props => (props.blue ? "#3e3874" : "#fff")};
+  border: 2px solid ${(props) => (props.blue ? "#3e3874" : "#fff")};
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   display: block;
   font-family: "Roboto", verdana, sans-serif;
-  font-size: ${props => (props.big ? "16px" : "14px")};
+  font-size: ${(props) => (props.big ? "16px" : "14px")};
   font-weight: 500;
   letter-spacing: 1px;
   line-height: 1;
   outline: none;
-  padding: ${props => (props.big ? "15px 35px" : "12px 25px")};
+  padding: ${(props) => (props.big ? "15px 35px" : "12px 25px")};
   text-align: center;
   text-transform: uppercase;
   &:hover {
-    background: ${props => (props.blue ? "rgba(62, 56, 116,.8)" : "#3e3874")};
+    background: ${(props) => (props.blue ? "rgba(62, 56, 116,.8)" : "#3e3874")};
     text-decoration: none;
     transition: all ease 1000ms;
   }
@@ -327,6 +351,29 @@ export const FilterStars = styled.div`
       width: 17px;
     }
   }
+  @media (max-width: 768px) {
+    margin-bottom: 35px;
+     width:100%;
+     ${Paragraphs}{
+       width:50%;
+       padding-right:30px;
+     }
+  }
+  @media (max-width: 480px) {
+    flex-direction:column;
+    align-items: flex-start;
+    width:initial;
+    ${Paragraphs}{
+       width:100%;
+       padding-right:0;
+       margin-bottom: 10px;
+     }
+     .box-filter{
+       select {
+        padding-left: 0px;
+      }
+     }
+  }
 `;
 
 //Components DIV
@@ -334,8 +381,30 @@ export const ContainDivDefault = styled.div`
   padding: 70px 0 50px;
   max-width: 1200px;
   width: 100%;
+  &.first-section {
+    padding-top: 180px;
+    padding-bottom: 100px;
+  }
   &.special-padding {
     padding: 100px 0 50px;
+  }
+  @media (max-width: 1200px) {
+    &.first-section {
+      padding-top: 160px;
+      padding-bottom: 80px;
+    }
+  }
+  @media (max-width: 1024px) {
+    &.first-section {
+      padding-top: 140px;
+      padding-bottom: 70px;
+    }
+  }
+  @media (max-width: 768px) {
+    &.first-section {
+      padding-top: 120px;
+      padding-bottom: 60px;
+    }
   }
 `;
 
@@ -350,6 +419,16 @@ export const BoxImg = styled.div`
     display:block;
     max-width:100%;
     width:100%:
+  }
+`;
+
+export const FormBox = styled.form`
+  width: 100%;
+  ${H1}, ${H2} {
+    color: #393b4f;
+    font-size: 24px;
+    line-height: 1.2;
+    width: 100%;
   }
 `;
 
@@ -392,12 +471,12 @@ export const HeaderBox = styled.header`
       .box-nav {
         align-items: center;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         width: 100%;
         nav {
           margin: 0;
           padding: 0;
-          margin-left: 100px;
+          margin-right: 64px;
           width: 430px;
           ul {
             display: flex;
@@ -412,17 +491,22 @@ export const HeaderBox = styled.header`
                 color: #fff;
                 position: relative;
                 text-decoration: none;
+                &:hover,
+                &.active {
+                  font-weight: 500;
+                }
                 &:hover:after,
                 &.active:after {
-                  text-decoration: none;
-                  position: absolute;
-                  bottom: -3px;
-                  left: 0;
+                  background-color: #fff;
+                  bottom: -7px;
                   content: "";
                   display: block;
-                  height: 1px;
-                  background-color: #fff;
-                  width: 100%;
+                  height: 2px;
+                  left: 50%;
+                  position: absolute;
+                  text-decoration: none;
+                  transform: translate(-50%, 0);
+                  width: 24px;
                 }
               }
             }
@@ -516,8 +600,8 @@ export const HeaderBox = styled.header`
       div.header-inner {
         .box-nav {
           nav {
-            width: 360px;
-            margin-left: 70px;
+            margin-right: 54px;
+            width: 400px;
           }
         }
       }
@@ -528,8 +612,8 @@ export const HeaderBox = styled.header`
       div.header-inner {
         .box-nav {
           nav {
+            margin-right: 48px;
             width: 360px;
-            margin-left: 40px;
           }
         }
       }
@@ -538,6 +622,9 @@ export const HeaderBox = styled.header`
   @media (max-width: 960px) {
     div.contain {
       div.header-inner {
+        .logo{
+          max-width:130px;
+        }
         .box-nav {
           background: #fff;
           display: none;
@@ -775,7 +862,6 @@ export const Col2Header = styled.div`
     padding-top: 125px;
     &.contain {
       flex-direction: column;
-
       ${ContentText} {
         padding-bottom: 10px;
         width: 100%;
@@ -801,7 +887,7 @@ export const Col2Header = styled.div`
 export const Col2Min = styled.div`
   display: flex;
   align-items: center;
-  justify-content: ${props => {
+  justify-content: ${(props) => {
     switch (props.justify) {
       case "start":
         return "flex-start";
@@ -817,16 +903,16 @@ export const Col2Min = styled.div`
         return "center";
     }
   }};
-  margin-top: ${props => (props.marginTopNone ? "0" : "70px")};
-  margin-bottom: ${props => (props.latest ? "70px" : "0")};
+  margin-top: ${(props) => (props.marginTopNone ? "0" : "70px")};
+  margin-bottom: ${(props) => (props.latest ? "70px" : "0")};
   width: 100%;
   ${ContentText} {
     width: 40%;
   }
   ${BoxImg} {
     width: 35%;
-    margin: ${props => (props.inverse ? "0 5% 0 0" : "0 0 0 5%")};
-    order: ${props => (props.inverse ? "-1" : "0")};
+    margin: ${(props) => (props.inverse ? "0 5% 0 0" : "0 0 0 5%")};
+    order: ${(props) => (props.inverse ? "-1" : "0")};
   }
   ${H2} {
     margin-bottom: 15px;
@@ -848,10 +934,10 @@ export const Col2Min = styled.div`
     }
   }
   @media (max-width: 768px) {
-    margin-bottom: ${props => (props.latest ? "50px" : "0")};
+    margin-bottom: ${(props) => (props.latest ? "50px" : "0")};
     justify-content: center;
     flex-direction: column;
-    margin-top: ${props => (props.marginTopNone ? "0" : "50px")};
+    margin-top: ${(props) => (props.marginTopNone ? "0" : "50px")};
     ${ContentText} {
       margin-top: 30px;
       width: 100%;
@@ -864,8 +950,8 @@ export const Col2Min = styled.div`
     }
   }
   @media (max-width: 480px) {
-    margin-bottom: ${props => (props.latest ? "40px" : "0")};
-    margin-top: ${props => (props.marginTopNone ? "0" : "40px")};
+    margin-bottom: ${(props) => (props.latest ? "40px" : "0")};
+    margin-top: ${(props) => (props.marginTopNone ? "0" : "40px")};
     ${ContentText} {
     }
     ${BoxImg} {
@@ -878,9 +964,6 @@ export const Col2Min = styled.div`
 export const SectionServicesRates = styled.div`
   padding: 100px 0 70px;
   width: 100%;
-  &.first-section {
-    padding-top: 130px;
-  }
   .col5 {
     padding: 30px 0 50px;
     display: flex;
@@ -922,6 +1005,8 @@ export const SectionServicesRates = styled.div`
   @media (max-width: 480px) {
     padding: 50px 0 40px;
     .col5 {
+      justify-content: center;
+      align-items: flex-start;
       > div {
         width: 50%;
         margin-bottom: 35px;
@@ -939,9 +1024,6 @@ export const SectionServicesRates = styled.div`
 export const FaqsBox = styled.div`
   padding: 100px 0 70px;
   width: 100%;
-  &.first-section {
-    padding-top: 130px;
-  }
   ${H1}, ${H2} {
     text-align: center;
     margin-bottom: 30px;
@@ -978,7 +1060,8 @@ export const FaqsBox = styled.div`
               left: 0;
               transform: translate(0, -50%);
               &.icon-by-plus {
-                opacity: 0;
+                opacity: 1;
+                transform: rotate(90deg);
               }
             }
           }
@@ -987,8 +1070,9 @@ export const FaqsBox = styled.div`
             .icon {
               img {
                 &.icon-by-plus {
-                  opacity: 1;
-                  transform: rotate(90deg);
+                  transform: rotate(0deg);
+                  transition: all ease 300ms;
+                  opacity: 0;
                 }
               }
             }
@@ -1158,9 +1242,6 @@ export const SectionReviewsHome = styled.div`
 `;
 
 export const SectionReviewsHeader = styled(SectionReviewsHome)`
-  &.first-section {
-    padding-top: 130px;
-  }
   .box-faqs {
     display: flex;
     flex-direction: column;
@@ -1188,39 +1269,144 @@ export const SectionReviewsHeader = styled(SectionReviewsHome)`
         }
         ${ParagraphTop}:last-child {
           line-height: 1;
+          span{
+            font-weight:100;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    .box-faqs {
+      .box-title {
+        .average {
+          ${ParagraphTop} {
+            &:last-child {
+              font-size: 100px;
+              span {
+                font-size: 60px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .box-faqs {
+      .box-title {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        > ${Paragraphs}{
+          width:100%;
+          margin-bottom: 40px
+        }
+        .average {
+          margin: 0 auto;
+          width: initial;
+          ${ParagraphTop} {
+            font-size:20px;
+          }
         }
       }
     }
   }
 `;
 export const SectionReviews = styled(SectionReviewsHome)`
-.box-faqs {
+  .box-faqs {
     display: flex;
     flex-direction: column;
     width: 100%;
     .box-title {
-      margin-bottom:40px;
+      margin-bottom: 40px;
       width: 100%;
-        ${H1}, ${H2} {
+      ${H1}, ${H2} {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      ${Paragraphs}{
+        max-width:800px;
+      }
+    }
+    .box-reviews {
+      width: 100%;
+      flex-flow: row wrap;
+      &:before,
+      &:after {
+        display: none;
+      }
+
+      > div {
+        width: 31.5%;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    .box-faqs {  
+      align-items: flex-start;  
+      .box-title{
+        flex-direction: column;
+      }
+      .box-reviews{
+        justify-content: space-between;
+        margin-top:0;
+        > div{
+          max-width:initial;
+          width: 48%;
+          .message{
+             height: 160px;
+          }
+        }
+      }
+    } 
+  }
+  @media (max-width: 768px) {
+    .box-faqs {  
+      .box-title{
+        align-items: flex-start;
+        ${H2}{
+          text-align: left;
+        }
+      }
+      .box-reviews{
+        justify-content: center;
+        align-items:center;
+        > div{
+          max-width:480px;
+          margin-bottom:40px;
           width: 100%;
-          margin-bottom: 10px;
+          .message{
+             height: initial;
+          }
         }
-     
+      }
     }
-    .box-reviews{
-       width:100%;
-       flex-flow: row wrap;
-       &:before,
-        &:after {
-          display: none;
-        }
-      
-       > div{
-         width: 31.5%;
-         margin-bottom: 30px;
-       }
-    }
+  } 
 `;
 
-export const FormBox = styled.form``;
+export const TermsBox = styled.div`
+  padding: 100px 0 50px;
+  ${ParagraphTop} {
+    text-align: left;
+    padding: 50px 0 15px;
+    width: 100%;
+  }
+  ${Paragraphs} {
+    padding-top: 0;
+  }
+`;
+
+export const ContactBox = styled.div`
+  font-family: "Roboto", sans-serif;
+  ${H2} {
+    width: 100%;
+  }
+  ${ParagraphTop} {
+    width: 100%;
+  }
+`;
+
 export const LightBox = styled.div``;

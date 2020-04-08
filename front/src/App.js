@@ -21,6 +21,9 @@ import { HomePage } from "./pages/Home.page";
 import { ServicesPage } from "./pages/Services.page";
 import { FaqsPage } from "./pages/Faqs.page";
 import { ReviewsPage } from "./pages/Reviews.page";
+import { TermsConditionsPage } from "./pages/TermsCoditions.page";
+import { PrivacyPolicyPage } from "./pages/PrivacyPolicy.page";
+import { ContactPage } from "./pages/Contact.page";
 import { LoginPage } from "./pages/Login.page";
 import { SignUpPage } from "./pages/SignUp.page";
 import { PrivatePage } from "./pages/Private.page";
@@ -38,16 +41,25 @@ export const App = withAuthentication(() => {
         <Layout>
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path="/servicios-tarifas" exact component={ServicesPage} />
-            <Route path="/faqs" exact component={FaqsPage} />
-            <Route path="/reviews" exact component={ReviewsPage} />
-            <Route path="/signup" exact component={SignUpPage} />
-            <Route path="/login" exact component={LoginPage} />
-            <Route path="/private" exact component={PrivatePage} />
-            <Route path="/profile" exact component={ProfilePage} />
-            <Route path="/admin" exact component={AdminUsers} />
-            <Route path="/admin2" exact component={AdminReviews} />
-            <Route path="/create-review" exact component={CreateReview} />
+            <Route path="/servicios-tarifas" component={ServicesPage} />
+            <Route path="/faqs" component={FaqsPage} />
+            <Route path="/reviews" component={ReviewsPage} />
+            <Route
+              path="/terminos-y-condiciones"
+              component={TermsConditionsPage}
+            />
+            <Route
+              path="/politica-de-privacidad"
+              component={PrivacyPolicyPage}
+            />
+            <Route path="/contacto" component={ContactPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/private" component={PrivatePage} />
+            <Route path="/profile" component={ProfilePage} />
+            <Route path="/admin" component={AdminUsers} />
+            <Route path="/admin2" component={AdminReviews} />
+            <Route path="/create-review" component={CreateReview} />
           </Switch>
         </Layout>
       </GlobalContent>

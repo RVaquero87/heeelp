@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import {
   BoxImg,
   ParagraphTop,
-  Paragraphs
+  Paragraphs,
 } from "../../../public/styles/Common.styles";
 
 //Contexto
@@ -25,7 +25,7 @@ export const ReviewsBoxItem = ({ review }) => {
     user,
     setMessageError,
     changeListReviews,
-    setchangeListReviews
+    setchangeListReviews,
   } = useContext(PrincipalContext);
 
   const deleteThisReview = async (e, value) => {
@@ -39,7 +39,7 @@ export const ReviewsBoxItem = ({ review }) => {
   };
 
   return (
-    <BoxReviews>
+    <BoxReviews data-aos="fade-up">
       <ParagraphTop blue className="title">
         <span>{review.title}</span>
       </ParagraphTop>
@@ -57,8 +57,8 @@ export const ReviewsBoxItem = ({ review }) => {
         <div className="box-user-item">
           <div className="box-top-user">
             <ParagraphTop blue>
-              {review.creatorUserid.name} -
-              <span> {getYearsOld(review.creatorUserid.birthYear)}</span> años
+              <span> {review.creatorUserid.name}</span> -{" "}
+              {getYearsOld(review.creatorUserid.birthYear)} años
             </ParagraphTop>
           </div>
           <div className="starts">
@@ -74,7 +74,7 @@ export const ReviewsBoxItem = ({ review }) => {
         <button
           className="delete"
           value={review._id}
-          onClick={e => deleteThisReview(e, e.target.value)}
+          onClick={(e) => deleteThisReview(e, e.target.value)}
         >
           X
         </button>

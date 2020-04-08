@@ -15,7 +15,7 @@ import {
   Col2Min,
   SectionServicesRates,
   SectionReviewsHome,
-  FaqsBox
+  FaqsBox,
 } from "../../public/styles/Common.styles";
 
 //Images
@@ -175,7 +175,7 @@ export const HomePage = () => {
                 </ParagraphTop>
                 <ParagraphTop blue>
                   {listReviews &&
-                    getAverage(listReviews.map(item => item.stars))}
+                    getAverage(listReviews.map((item) => item.stars))}
                   <span>/5</span>
                 </ParagraphTop>
               </div>
@@ -207,7 +207,7 @@ export const HomePage = () => {
             </span>
           </H2>
           <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button big">
+          <ButtonLink whereTo="/faqs" className="button big white">
             VER MÁS FAQ'S
           </ButtonLink>
         </FaqsBox>

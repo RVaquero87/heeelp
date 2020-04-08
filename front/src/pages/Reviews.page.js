@@ -104,17 +104,17 @@ export const ReviewsPage = () => {
           </SectionBox>
 
           <SectionBox column>
-            <SectionReviews className="contain" data-aos="fade-up">
+            <SectionReviews className="contain">
               <div className="box-faqs">
-                <div className="box-title">
-                  <H2 color="blue">Alfunas reviews...</H2>
+                <div className="box-title" data-aos="fade-up">
+                  <H2 color="blue">Nunc ultricies purus eu molestie volutpat.</H2>
                   <Paragraphs blue>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi lectus nulla, porttitor nec arcu non, facilisis
                     sollicitudin.
                   </Paragraphs>
                 </div>
-                <FilterStars>
+                <FilterStars data-aos="fade-up">
                   <Paragraphs blue>
                     <span>Filtra por el número de Estrellas:</span>
                   </Paragraphs>
