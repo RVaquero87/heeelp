@@ -72,13 +72,8 @@ export const ContactPage = withRouter(({ history }) => {
 
   return (
     <>
-      <SectionBox
-        bgColor="blueLight"
-        justify="evenly"
-        data-aos="fade-up"
-        className="z1"
-      >
-        <Col2HeaderContact className="contain">
+      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
+        <Col2HeaderContact className="contain" data-aos="fade-up">
           <ContentText>
             <H1>Contacto</H1>
           </ContentText>

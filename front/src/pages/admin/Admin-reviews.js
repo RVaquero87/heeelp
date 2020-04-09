@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { withProtected } from "../lib/protectRoute.hoc";
-import { getAverage } from "../lib/commonFunctional";
-import { PrincipalContext } from "../context/PrincipalContext";
-import { Loading } from "../components/Loading/index";
-import { ReviewsBoxItem } from "../components/ListItemReviews/index";
+import { getAverage } from "../../lib/commonFunctional";
+import { PrincipalContext } from "../../context/PrincipalContext";
+import { Loading } from "../../components/Loading/index";
+import { ReviewsBoxItem } from "../../components/ListItemReviews/index";
 
-const AdminContactPage = () => {
+export const AdminReviews = () => {
   const {
     changeListReviews,
     setchangeListReviews,
@@ -62,6 +61,3 @@ const AdminContactPage = () => {
     </>
   );
 };
-export const AdminContact = withProtected(AdminContactPage, {
-  redirect: false,
-});

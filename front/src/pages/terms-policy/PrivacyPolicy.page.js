@@ -1,5 +1,5 @@
 //React
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
 //Styles & AOS animation
 import {
@@ -13,23 +13,19 @@ import {
   Paragraphs,
   Col2Header,
   Col2Min,
-  TermsBox
-} from "../../public/styles/Common.styles";
+  TermsBox,
+} from "../../../public/styles/Common.styles";
 
 //Images
-import people from "../../public/images/people.svg";
-import contact from "../../public/images/contact.svg";
-
-//Contexto
-import { PrincipalContext } from "../context/PrincipalContext";
+import contact from "../../../public/images/contact.svg";
 
 //Functional & Services
-import { scrollInit } from "../lib/commonFunctional";
+import { scrollInit } from "../../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
+import { ButtonLink } from "../../components/ButtonLink/Index";
 
-export const TermsConditionsPage = () => {
+export const PrivacyPolicyPage = () => {
   //Reset Scroll
   useEffect(() => {
     scrollInit();
@@ -37,10 +33,10 @@ export const TermsConditionsPage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up">
-        <Col2Header className="contain first-section">
+      <SectionBox bgColor="blueLight" justify="between">
+        <Col2Header className="contain first-section" data-aos="fade-up">
           <ContentText>
-            <H1>Términos y Condiciones</H1>
+            <H1>Política de Privacidad</H1>
             <ParagraphTop>
               En heeelp! urna sit amet justo lacinia auctor ut at nisl. Duis
               elementum elit sit amet felis porta vestibulum. Vestibulum lacinia

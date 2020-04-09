@@ -20,11 +20,11 @@ export const SignUpPage = withRouter(({ history }) => {
 
   //Image USER
   const [image, setImage] = useState({
-    imageUrl: user?.image || imgProfile
+    imageUrl: user?.image || imgProfile,
   });
   const [imagePreview, setImagePreview] = useState(image.imageUrl);
   const [changeOneFile, setChangeOneFile] = useState(false);
-  const handleChangeFile = e => {
+  const handleChangeFile = (e) => {
     setImage({ imageUrl: e.target.files[0] });
     setImagePreview(URL.createObjectURL(e.target.files[0]));
     setChangeOneFile(true);
@@ -50,14 +50,14 @@ export const SignUpPage = withRouter(({ history }) => {
       letter: "",
       postalCode: "",
       city: "Madrid",
-      legalCheck: ""
-    }
+      legalCheck: "",
+    },
   });
 
   const { register, handleSubmit, errors } = methods;
 
   //Regitrar los datos
-  const messageRedirect = message => {
+  const messageRedirect = (message) => {
     setMessageError(message);
     setTimeout(() => {
       setUser(null);
@@ -68,7 +68,7 @@ export const SignUpPage = withRouter(({ history }) => {
     }, 5000);
   };
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     const responseServer = await doSignup(data);
 
     if (changeOneFile === true) {
@@ -94,7 +94,7 @@ export const SignUpPage = withRouter(({ history }) => {
 
   return (
     <FormContext {...methods}>
-      <FormBox onSubmit={handleSubmit(onSubmit)} data-aos="fade-up">
+      <form onSubmit={handleSubmit(onSubmit)} data-aos="fade-up">
         <div className="left">
           <h1>Registro</h1>
           <SelectBox
@@ -105,8 +105,8 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
           <div className="box-input">
@@ -119,12 +119,12 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
+                message: "Este campo es requerido",
               },
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
-                message: "El email incluido no es válido"
-              }
+                message: "El email incluido no es válido",
+              },
             })}
           />
 
@@ -135,13 +135,13 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
+                message: "Este campo es requerido",
               },
               pattern: {
                 value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/,
                 message:
-                  "Debe tener al menos una mayúsucula, una minúscula, un número y un símbolo"
-              }
+                  "Debe tener al menos una mayúsucula, una minúscula, un número y un símbolo",
+              },
             })}
           />
           <InputBox
@@ -150,8 +150,8 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
           <InputBox
@@ -160,8 +160,8 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
 
@@ -172,14 +172,16 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
 
           <p>
-            <button onClick={e => onChangePassport(e, true)}>DNI</button>/
-            <button onClick={e => onChangePassport(e, false)}>Passport</button>
+            <button onClick={(e) => onChangePassport(e, true)}>DNI</button>/
+            <button onClick={(e) => onChangePassport(e, false)}>
+              Passport
+            </button>
           </p>
 
           {(dniPassportTabs && (
@@ -189,12 +191,12 @@ export const SignUpPage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
+                  message: "Este campo es requerido",
                 },
                 pattern: {
                   value: /[0-9]{8}[A-Za-z]{1}/,
-                  message: "El DNI incluido no es válido"
-                }
+                  message: "El DNI incluido no es válido",
+                },
               })}
             />
           )) || (
@@ -204,12 +206,12 @@ export const SignUpPage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
+                  message: "Este campo es requerido",
                 },
                 pattern: {
                   value: /[a-zA-Z]{2}[0-9]{7}/,
-                  message: "El número del Pasaporte es incorrecto"
-                }
+                  message: "El número del Pasaporte es incorrecto",
+                },
               })}
             />
           )}
@@ -220,8 +222,8 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
 
@@ -232,8 +234,8 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
           <InputBox label="Portal" name="portal" ref={register()} />
@@ -247,12 +249,12 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
+                message: "Este campo es requerido",
               },
               pattern: {
                 value: /((0[1-9]|5[0-2])|[1-4][0-9])[0-9]{3}/,
-                message: "Código postal incorrecto"
-              }
+                message: "Código postal incorrecto",
+              },
             })}
           />
           <SelectBox
@@ -308,13 +310,13 @@ export const SignUpPage = withRouter(({ history }) => {
               "Valladolid",
               "Vizcaya",
               "Zamora",
-              "Zaragoza"
+              "Zaragoza",
             ]}
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
           <InputBox
@@ -324,8 +326,8 @@ export const SignUpPage = withRouter(({ history }) => {
             ref={register({
               required: {
                 value: true,
-                message: "Este campo es requerido"
-              }
+                message: "Este campo es requerido",
+              },
             })}
           />
 
@@ -333,7 +335,7 @@ export const SignUpPage = withRouter(({ history }) => {
             Registrar
           </button>
         </div>
-      </FormBox>
+      </form>
     </FormContext>
   );
 });

@@ -1,23 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
-import { withProtected } from "../lib/protectRoute.hoc";
-import { getAverage } from "../lib/commonFunctional";
-import { PrincipalContext } from "../context/PrincipalContext";
-import { Loading } from "../components/Loading/index";
-import { ReviewsBoxItem } from "../components/ListItemReviews/index";
+import { getAverage } from "../../lib/commonFunctional";
+import { PrincipalContext } from "../../context/PrincipalContext";
+import { Loading } from "../../components/Loading/index";
+import { ReviewsBoxItem } from "../../components/ListItemReviews/index";
 
-const AdminReviewsPage = () => {
+export const AdminContact = () => {
   const {
     changeListReviews,
     setchangeListReviews,
     listReviews,
     filterReviews,
-    setFilterReviews
+    setFilterReviews,
   } = useContext(PrincipalContext);
 
   //Filter stars
   const handleFilterReviews = async (e, value) => {
     e.preventDefault();
-    let filter = await listReviews.filter(item => {
+    let filter = await listReviews.filter((item) => {
       return item.stars == value;
     });
     setFilterReviews(filter);
@@ -33,7 +32,7 @@ const AdminReviewsPage = () => {
       ) : (
         <>
           <p>Filtro</p>
-          <select onChange={e => handleFilterReviews(e, e.target.value)}>
+          <select onChange={(e) => handleFilterReviews(e, e.target.value)}>
             <option value="all">Todos</option>
             <option value="0">0 Estrellas</option>
             <option value="1">1 Estrellas</option>
@@ -48,7 +47,7 @@ const AdminReviewsPage = () => {
             <>
               <p>
                 Nota media de Reviews Total:{" "}
-                {getAverage(listReviews.map(item => item.stars))}
+                {getAverage(listReviews.map((item) => item.stars))}
               </p>
               <div data-aos="fade-up">
                 {filterReviews.map((review, i) => {
@@ -62,6 +61,3 @@ const AdminReviewsPage = () => {
     </>
   );
 };
-export const AdminReviews = withProtected(AdminReviewsPage, {
-  redirect: false
-});

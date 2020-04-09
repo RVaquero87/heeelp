@@ -1,6 +1,6 @@
 //React
 import React, { useContext, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 //Form
 import { useForm, FormContext } from "react-hook-form";
@@ -22,7 +22,7 @@ import {
 } from "../../public/styles/Common.styles";
 
 //Images
-import GirlComputer from "../../public/images/girl-computer.png";
+import girlComputer from "../../public/images/girl-computer.png";
 import contact from "../../public/images/contact.svg";
 
 //Contexto
@@ -36,10 +36,9 @@ import { scrollInit } from "../lib/commonFunctional";
 import { ButtonLink } from "../components/ButtonLink/Index";
 import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
 import { InputBox } from "../components/Input/Index";
-import { TextAreaBox } from "../components/TextArea/Index";
 
 export const LoginPage = withRouter(({ history }) => {
-  const { user, setUser, setMessageError } = useContext(PrincipalContext);
+  const { setUser, setMessageError } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
@@ -75,13 +74,8 @@ export const LoginPage = withRouter(({ history }) => {
   };
   return (
     <>
-      <SectionBox
-        bgColor="blueLight"
-        justify="evenly"
-        data-aos="fade-up"
-        className="z1"
-      >
-        <Col2HeaderLogin className="contain">
+      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
+        <Col2HeaderLogin className="contain" data-aos="fade-up">
           <ContentText>
             <H1>
               Accede a <span className="item-light">h</span>eee
@@ -89,7 +83,7 @@ export const LoginPage = withRouter(({ history }) => {
             </H1>
           </ContentText>
           <BoxImg>
-            <img src={GirlComputer} alt="heeelp!" title="heeelp!" />
+            <img src={girlComputer} alt="heeelp!" title="heeelp!" />
           </BoxImg>
         </Col2HeaderLogin>
       </SectionBox>

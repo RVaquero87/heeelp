@@ -19,7 +19,7 @@ import { doLogout } from "../services/authServices";
 import { ButtonLink } from "../components/ButtonLink/Index";
 
 export const Header = withRouter(({ history }) => {
-  const { user, setUser, messageError } = useContext(PrincipalContext);
+  const { Body, user, setUser, messageError } = useContext(PrincipalContext);
 
   const onClickLogout = async (e) => {
     e.preventDefault();
@@ -41,8 +41,6 @@ export const Header = withRouter(({ history }) => {
   //Hamburguer Nav
   const [hamburguerNav, setHamburguerNav] = useState(false);
 
-  const Body = document.getElementsByTagName("body");
-
   const buttonAdd = (e) => {
     e.preventDefault();
     hamburguerNav ? setHamburguerNav(false) : setHamburguerNav(true);
@@ -57,10 +55,8 @@ export const Header = withRouter(({ history }) => {
 
   for (let i = 0; i < navClick.length; i++) {
     navClick[i].onclick = function (e) {
-      if (screen.width <= 960) {
-        Body[0].classList.remove("active");
-        setHamburguerNav(false);
-      }
+      Body[0].classList.remove("active");
+      setHamburguerNav(false);
     };
   }
 
@@ -160,22 +156,13 @@ export const Header = withRouter(({ history }) => {
                       Logout
                     </NavLink>
                   </li>
-                </ul>
-              </nav>
-            )}
-            {user?.rol === "Admin" && (
-              <nav>
-                <ul>
-                  <li>
-                    <NavLink to="/admin" className="nav-link">
-                      Admin
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/admin2" className="nav-link">
-                      Admin Reviews
-                    </NavLink>
-                  </li>
+                  {user?.rol === "Admin" && (
+                    <li>
+                      <NavLink to="/control-admin" className="nav-link">
+                        Admin
+                      </NavLink>
+                    </li>
+                  )}
                 </ul>
               </nav>
             )}

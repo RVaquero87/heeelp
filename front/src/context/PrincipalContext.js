@@ -7,9 +7,12 @@ export const PrincipalContext = createContext();
 //Functional & Services
 import { getAllReviews } from "../services/reviewsServices";
 
-export const PrincipalContextProvider = props => {
+export const PrincipalContextProvider = (props) => {
   //Loading State
   const [loading, setLoading] = useState(true);
+
+  //Body Tag
+  const Body = document.getElementsByTagName("body");
 
   //Users Active
   const [user, setUser] = useState();
@@ -27,17 +30,18 @@ export const PrincipalContextProvider = props => {
 
   useEffect(() => {
     getAllReviews()
-      .then(review => {
+      .then((review) => {
         setListReviews(review);
         setFilterReviews(review);
       })
-      .catch(e => {});
+      .catch((e) => {});
   }, [changeListReviews]);
 
   return (
     <PrincipalContext.Provider
       value={{
         loading,
+        Body,
         setLoading,
         user,
         setUser,
@@ -50,7 +54,7 @@ export const PrincipalContextProvider = props => {
         listReviews,
         setListReviews,
         filterReviews,
-        setFilterReviews
+        setFilterReviews,
       }}
     >
       {props.children}

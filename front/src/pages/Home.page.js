@@ -51,8 +51,8 @@ export const HomePage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between" data-aos="fade-up" className="z1">
-        <Col2Header className="contain">
+      <SectionBox bgColor="blueLight" justify="between" className="z1">
+        <Col2Header className="contain" data-aos="fade-up">
           <ContentText>
             <H1>Una nueva forma de ayudar</H1>
             <ParagraphTop>

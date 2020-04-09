@@ -82,8 +82,6 @@ button {
   }
 }
 
-@media (max-width: 960px) {
-  body.active {
-    overflow: hidden;
-  }
+body.active {
+  overflow: hidden;
 }

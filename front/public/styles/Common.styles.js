@@ -4,7 +4,7 @@ import styled from "styled-components";
 import logo from "../images/logo-blanco.svg";
 import logoNegro from "../images/logo-negro.svg";
 import comillas from "../images/comillas.svg";
-import ArrowBottom from "../images/arrow.svg";
+import arrowBottom from "../images/arrow.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -271,6 +271,9 @@ export const ParagraphTop = styled.p`
   span {
     font-weight: 500;
   }
+  span.item-light {
+    font-weight: 100;
+  }
   &:last-child {
     padding-bottom: 0;
   }
@@ -465,7 +468,7 @@ export const FilterStars = styled.div`
       }
     }
     &:after {
-      background: url(${ArrowBottom}) center no-repeat;
+      background: url(${arrowBottom}) center no-repeat;
       content: " ";
       height: 10px;
       position: absolute;
@@ -1694,5 +1697,202 @@ export const SectionFormBox = styled.div`
   }
   .button {
     position: relative;
+  }
+`;
+
+export const SectionProtectedBox = styled.div`
+  background: #8290ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 3;
+  .box-inner {
+    animation: ease-in-out 500ms protectedZoom;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    padding: 40px;
+    position: relative;
+    @keyframes protectedZoom {
+      0% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    ${H1} {
+      margin-bottom: 30px;
+    }
+    .button-box {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      width: 100%;
+      .button:last-child {
+        margin-left: 36px;
+      }
+    }
+    .button-close {
+      border-radius: 100%;
+      color: #3e3874;
+      font-family: "Roboto", sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      position: absolute;
+      right: 20px;
+      text-decoration: none;
+      top: 15px;
+      width: 20px;
+      height: 20px;
+      &:hover {
+        opacity: 0.85;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    align-items: flex-start;
+    .box-inner {
+      background: none;
+      animation: ease-in-out 500ms protectedTop;
+      border-radius: none;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      padding: 150px 40px 20px;
+      position: relative;
+      @keyframes protectedTop {
+        0% {
+          transform: translate(0, 50%);
+          opacity: 0;
+        }
+        100% {
+          transform: translate(0, 0%);
+          opacity: 1;
+        }
+      }
+      ${H1}, ${Paragraphs} {
+        color: #fff;
+      }
+      .button-box {
+        .button:first-child {
+          background: rgba(255, 255, 255);
+          border: 2px solid rgba(255, 255, 255);
+          color: #3e3874;
+          &:hover {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0);
+            color: #3e3874;
+          }
+        }
+        .button:last-child {
+          background: rgba(255, 255, 255, 0);
+          border: 2px solid #ffffff;
+          color: #ffffff;
+          &:hover {
+            background: #5f63b9;
+            border: 2px solid #3e3874;
+            color: #fff;
+          }
+        }
+      }
+      .button-close {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .box-inner {
+      .button-box {
+        flex-direction: column;
+        margin-top: 24px;
+        .button:last-child {
+          margin: 36px auto 0;
+        }
+      }
+    }
+  }
+`;
+
+export const LightBoxRegisterRol = styled.div`
+  display: none;
+  &.active {
+    background: #8290ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 3;
+    ${H2} {
+      margin-bottom: 12px;
+    }
+    > ${ParagraphTop} {
+      text-align: center;
+      max-width: 350px;
+      padding-bottom: 56px;
+    }
+    .box-buttons {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      button {
+        align-items: center;
+        border-radius: 4px;
+        border: solid 3px rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 320px;
+        max-width: 180px;
+        overflow: hidden;
+        padding: 21px 0;
+        position: relative;
+        width: 100%;
+        z-index: 0;
+        &:first-child ${BoxImg} img {
+          max-width: 132px;
+          margin: 0 auto;
+        }
+        &:last-child {
+          margin-left: 36px;
+        }
+        &:hover {
+          border: solid 3px rgba(255, 255, 255, 1);
+        }
+        ${BoxImg} {
+          position: relative;
+          overflow: hidden;
+          z-index: -1;
+        }
+        ${Paragraphs} {
+          margin-top: 20px;
+          padding: 0 24px;
+          position: relative;
+          text-transform: uppercase;
+          z-index: -1;
+        }
+      }
+    }
   }
 `;

@@ -1,12 +1,17 @@
+//React
 import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
-import { ProtectedPage } from "../pages/Protected.page";
+
+//Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
+
+//Page
+import { ProtectedPage } from "../pages/Protected.page";
 
 export const withProtected = (
   Component,
   { redirect = true, redirectTo = "/" } = {}
-) => props => {
+) => (props) => {
   const { user, loading } = useContext(PrincipalContext);
 
   if (user) {
