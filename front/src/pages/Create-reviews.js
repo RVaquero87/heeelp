@@ -16,7 +16,7 @@ export const CreateReview = withRouter(({ history }) => {
     user,
     setMessageError,
     changeListReviews,
-    setchangeListReviews
+    setchangeListReviews,
   } = useContext(PrincipalContext);
 
   const [listIDReviews, setListIDReviews] = useState();
@@ -26,10 +26,10 @@ export const CreateReview = withRouter(({ history }) => {
 
   useEffect(() => {
     getIDReview(user)
-      .then(review => {
+      .then((review) => {
         setListIDReviews(review);
       })
-      .catch(e => {});
+      .catch((e) => {});
   }, [changeListReviews, user]);
 
   //Form
@@ -38,13 +38,13 @@ export const CreateReview = withRouter(({ history }) => {
     defaultValues: {
       title: "",
       message: "",
-      stars: ""
-    }
+      stars: "",
+    },
   });
 
   const { register, handleSubmit, errors } = methods;
 
-  const getReviewsNew = async data => {
+  const getReviewsNew = async (data) => {
     const responseServer = await createReview(data);
     setGetFormReviews(!getFormReviews);
     setchangeListReviews(!changeListReviews);
@@ -73,12 +73,13 @@ export const CreateReview = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido"
+                      message: "El campo es requerido",
                     },
                     maxLength: {
                       value: 40,
-                      message: "Máximo 40 caracteres"
-                    }
+                      message:
+                        "Este campo solo admite un máximo de 40 caracteres",
+                    },
                   })}
                 />
                 <TextAreaBox
@@ -87,8 +88,8 @@ export const CreateReview = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido"
-                    }
+                      message: "El campo es requerido",
+                    },
                   })}
                 />
                 <SelectBox
@@ -98,8 +99,8 @@ export const CreateReview = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido"
-                    }
+                      message: "El campo es requerido",
+                    },
                   })}
                 />
 
@@ -112,7 +113,7 @@ export const CreateReview = withRouter(({ history }) => {
 
           <p>
             Nota media de tus Reviews:
-            {getAverage(listIDReviews.map(item => item.stars))}
+            {getAverage(listIDReviews.map((item) => item.stars))}
           </p>
           <div data-aos="fade-up">
             {listIDReviews.map((review, i) => {

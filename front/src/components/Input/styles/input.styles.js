@@ -21,10 +21,13 @@ export const InputText = styled.input.attrs({
     outline: none;
   }
   &.error {
-    border-bottom: 1px solid #E74128;
+    border-bottom: 1px solid #e74128;
     &:focus {
-      border: 1px solid #E74128;
+      border: 1px solid #e74128;
     }
+  }
+  &[type="checkbox"] {
+    appearance: checkbox !important;
   }
 `;
 
@@ -37,5 +40,3 @@ export const LabelText = styled.label`
   margin-bottom: 10px;
   width: 100%;
 `;
-
-

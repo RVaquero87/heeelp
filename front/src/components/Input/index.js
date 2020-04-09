@@ -7,7 +7,7 @@ import { useFormContext } from "react-hook-form";
 
 //Styles & AOS animation
 import { InputText, LabelText } from "./styles/input.styles";
-import {ErrorMessage} from "../../../public/styles/Common.styles"
+import { ErrorMessage, Paragraphs } from "../../../public/styles/Common.styles";
 
 const hasError = (errors, name) => {
   if (name in errors) return "error";
@@ -29,11 +29,12 @@ export const InputBox = React.forwardRef(
           name={name}
           ref={ref}
         />
-        {type == "radio" && (
-          <p>
-            He leido y acepto las <Link to="/">Bases Legales</Link> y el
-            <Link to="/">contrato de Proteccion de datos</Link>
-          </p>
+        {type == "checkbox" && (
+          <Paragraphs blue>
+            He leido y acepto los{" "}
+            <Link to="/terminos-y-condiciones">Terminos y condiciones</Link> y
+            la <Link to="/politica-de-privacidad">Política de privacidad</Link>
+          </Paragraphs>
         )}
         {errors[name]?.message && (
           <ErrorMessage>{errors[name].message}</ErrorMessage>

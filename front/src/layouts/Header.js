@@ -7,6 +7,7 @@ import {
   LightBoxError,
   HeaderBox,
   Paragraphs,
+  Button,
 } from "../../public/styles/Common.styles";
 
 //Contexto
@@ -19,13 +20,24 @@ import { doLogout } from "../services/authServices";
 import { ButtonLink } from "../components/ButtonLink/Index";
 
 export const Header = withRouter(({ history }) => {
-  const { Body, user, setUser, messageError } = useContext(PrincipalContext);
+  const { Body, user, setUser, messageError, setLightboxRegister } = useContext(
+    PrincipalContext
+  );
 
   const onClickLogout = async (e) => {
     e.preventDefault();
     await doLogout();
     setUser(null);
     history.push("/");
+  };
+
+  //Register lighboxRol and Active Body
+  const onClickRegister = async (e) => {
+    e.preventDefault();
+    setHamburguerNav(false);
+    Body[0].classList.add("active");
+    setLightboxRegister(true);
+    history.push("/registro");
   };
 
   //Nav Scroll Change
@@ -51,7 +63,7 @@ export const Header = withRouter(({ history }) => {
     }
   };
 
-  const navClick = document.querySelectorAll("#nav-resp .nav-link");
+  const navClick = document.querySelectorAll("#navbar .nav-link");
 
   for (let i = 0; i < navClick.length; i++) {
     navClick[i].onclick = function (e) {
@@ -65,7 +77,9 @@ export const Header = withRouter(({ history }) => {
       <div className="contain">
         <div className="header-inner">
           <div className="logo">
-            <Link to="/">heeelp</Link>
+            <Link to="/" className="nav-link">
+              heeelp
+            </Link>
           </div>
           <div
             id="nav-resp"
@@ -117,9 +131,14 @@ export const Header = withRouter(({ history }) => {
                   </ul>
                 </nav>
                 <div className="button-box">
-                  <ButtonLink whereTo="/registro" className="button nav-link">
+                  <Button
+                    type="blue"
+                    id="button-register"
+                    className="button"
+                    onClick={(e) => onClickRegister(e)}
+                  >
                     Regístrate
-                  </ButtonLink>
+                  </Button>
                   <ButtonLink
                     whereTo="/login"
                     className="button transparent nav-link"

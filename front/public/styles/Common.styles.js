@@ -445,10 +445,8 @@ export const FilterStars = styled.div`
   }
   .box-filter {
     display: block;
-    float: left;
     max-width: 100%;
     position: relative;
-    width: 100%;
     width: auto;
     select {
       appearance: none;
@@ -507,12 +505,6 @@ export const FormBox = styled.form`
   margin: 25px auto 0;
   max-width: 768px;
   width: 100%;
-  ${H1}, ${H2} {
-    color: #393b4f;
-    font-size: 24px;
-    line-height: 1.2;
-    width: 100%;
-  }
   .box-input {
     position: relative;
     margin-bottom: 40px;
@@ -1164,6 +1156,57 @@ export const Col2HeaderLogin = styled(Col2Header)`
   }
 `;
 
+export const Col2HeaderRegister = styled(Col2Header)`
+  &.contain {
+    ${ContentText} {
+      width: initial;
+    }
+    ${BoxImg} {
+      max-width: 361px;
+      &.helped {
+        max-width: 344px;
+        img {
+        }
+      }
+      img {
+        top: 28px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      flex-direction: row;
+      ${ContentText} {
+        padding-bottom: 0;
+        width: initial;
+        ${H1} {
+          line-height: 1;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      flex-direction: row;
+      ${BoxImg} {
+        max-width: 50%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      justify-content: space-between;
+      ${BoxImg} {
+        max-width: 55%;
+        img {
+          top: 0px;
+        }
+      }
+    }
+  }
+`;
+
 export const Col2Min = styled.div`
   display: flex;
   align-items: center;
@@ -1700,6 +1743,118 @@ export const SectionFormBox = styled.div`
   }
 `;
 
+export const SectionFormBoxRegister = styled(SectionFormBox)`
+  .box-title-image {
+    align-items: flex-start;
+    display: flex;
+    margin-bottom: 7px;
+    justify-content: space-between;
+    width: 100%;
+    ${H2} {
+      text-align: left;
+      width: 200px;
+    }
+    .box-input {
+      margin: 0%;
+      width: 100px;
+      &:after {
+        color: #9a9caf;
+        content: "Sube tu foto";
+        display: inline-block;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1;
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+      }
+      .box-image-profile {
+        border-radius: 100%;
+        border: 2px solid #8290ff;
+        margin: 0;
+        position: relative;
+        overflow: hidden;
+        height: 100px;
+        width: 100px;
+        &:hover {
+          opacity: 0.75;
+        }
+        img {
+          width: 100%;
+        }
+        input {
+          cursor: pointer;
+          height: 100px;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          &:focus,
+          &:active {
+            outline: none;
+          }
+          &::-webkit-file-upload-button {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+
+  ${ParagraphTop} {
+    font-size: 24px;
+    padding: 24px 0;
+    text-align: left;
+  }
+  .box-personal {
+    .passport-dni {
+      margin-bottom: 12px;
+      line-height: 1;
+      font-weight: 300;
+      button {
+        cursor: pointer;
+        font-weight: 100;
+        color: #9a9caf;
+        padding: 0;
+        &.active {
+          color: #3e3874;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  .box-check-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    input {
+      width: 20px;
+    }
+    p {
+      color: #9a9caf;
+      font-size: 16px;
+      line-height: 1.1;
+      padding: 0 0 0 6px;
+    }
+  }
+  @media (max-width: 960px) {
+    .box-title-image {
+      ${H2} {
+        text-align: left;
+        width: 150px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .box-title-image {
+      margin-bottom: 16px;
+    }
+  }
+`;
+
 export const SectionProtectedBox = styled.div`
   background: #8290ff;
   display: flex;
@@ -1891,6 +2046,34 @@ export const LightBoxRegisterRol = styled.div`
           position: relative;
           text-transform: uppercase;
           z-index: -1;
+        }
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.active {
+      justify-content: flex-start;
+      padding: 150px 0 50px;
+      overflow: scroll;
+    }
+  }
+  @media (max-width: 480px) {
+    &.active {
+      justify-content: flex-start;
+      padding: 140px 15px 50px;
+      overflow: scroll;
+      > ${ParagraphTop} {
+        padding-bottom: 26px;
+      }
+      .box-buttons {
+        button {
+          height: 280px;
+          &:first-child ${BoxImg} img {
+            max-width: 100px;
+          }
+          &:last-child {
+            margin-left: 16px;
+          }
         }
       }
     }

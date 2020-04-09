@@ -37,6 +37,9 @@ export const PrincipalContextProvider = (props) => {
       .catch((e) => {});
   }, [changeListReviews]);
 
+  //Register Lightbox
+  const [lightboxRegister, setLightboxRegister] = useState(true);
+
   return (
     <PrincipalContext.Provider
       value={{
@@ -55,6 +58,8 @@ export const PrincipalContextProvider = (props) => {
         setListReviews,
         filterReviews,
         setFilterReviews,
+        lightboxRegister,
+        setLightboxRegister,
       }}
     >
       {props.children}

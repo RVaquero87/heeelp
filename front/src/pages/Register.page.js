@@ -8,7 +8,7 @@ import { useForm, FormContext } from "react-hook-form";
 //Styles & AOS animation
 import {
   SectionBox,
-  Col2HeaderLogin,
+  Col2HeaderRegister,
   ContentText,
   H1,
   H2,
@@ -16,7 +16,7 @@ import {
   Paragraphs,
   FormBox,
   Col2Min,
-  SectionFormBox,
+  SectionFormBoxRegister,
   FaqsBox,
   ContainDivDefault,
   ParagraphTop,
@@ -45,7 +45,14 @@ import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
 import { InputBox } from "../components/Input/Index";
 
 export const RegisterPage = withRouter(({ history }) => {
-  const { Body, user, setUser, setMessageError } = useContext(PrincipalContext);
+  const {
+    Body,
+    user,
+    setUser,
+    setMessageError,
+    lightboxRegister,
+    setLightboxRegister,
+  } = useContext(PrincipalContext);
 
   //Reset Scroll & Include Active Body
   useEffect(() => {
@@ -54,7 +61,6 @@ export const RegisterPage = withRouter(({ history }) => {
   }, []);
 
   //Lightbox & rolUser
-  const [lightboxRegister, setLightboxRegister] = useState(true);
   const [rolRegister, setRolRegister] = useState("Helpers");
 
   const getRolRegisterLigthBox = (e, value) => {
@@ -134,10 +140,8 @@ export const RegisterPage = withRouter(({ history }) => {
   //Regitrar los datos
   const messageRedirect = (message) => {
     setMessageError(message);
-    setTimeout(() => {
-      setUser(null);
-      history.push("/login");
-    }, 2500);
+    setUser(null);
+    history.push("/login");
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -170,7 +174,7 @@ export const RegisterPage = withRouter(({ history }) => {
   return (
     <>
       <SectionBox bgColor="blueLight" justify="evenly" className="z1">
-        <Col2HeaderLogin className="contain" data-aos="fade-up">
+        <Col2HeaderRegister className="contain" data-aos="fade-up">
           <ContentText>
             <H1>
               Regístrate en <span className="item-light">h</span>eee
@@ -184,7 +188,7 @@ export const RegisterPage = withRouter(({ history }) => {
               title="heeelp!"
             />
           </BoxImg>
-        </Col2HeaderLogin>
+        </Col2HeaderRegister>
       </SectionBox>
 
       <LightBoxRegisterRol className={lightboxRegister ? "active" : ""}>
@@ -231,37 +235,40 @@ export const RegisterPage = withRouter(({ history }) => {
       </LightBoxRegisterRol>
 
       <SectionBox column justify="start">
-        <SectionFormBox className="contain">
+        <SectionFormBoxRegister className="contain">
           <FormContext {...methods}>
             <FormBox onSubmit={handleSubmit(onSubmit)}>
-              <div className="box-title-image" data-aos="fade-up">
-                <H2 color="blue">Nuevo usuario</H2>
-                <div className="box-input">
-                  <img width="100px" src={imagePreview} alt="imagen" />
-                  <input type="file" onChange={handleChangeFile} />
-                </div>
-              </div>
-
               <div className="box-user-password" data-aos="fade-up">
                 <SelectBox
-                  label="Rol"
+                  label="Rol:"
                   name="rol"
                   classNameDiv="rol-box"
                   value={["Helpers", "Helped"]}
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
+
+                <div className="box-title-image" data-aos="fade-up">
+                  <H2 color="blue">Nuevo usuario</H2>
+                  <div className="box-input">
+                    <div className="box-image-profile">
+                      <img src={imagePreview} alt="imagen" />
+                      <input type="file" onChange={handleChangeFile} />
+                    </div>
+                  </div>
+                </div>
+
                 <InputBox
                   label="Usuario / Email"
                   name="username"
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
@@ -277,12 +284,11 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                     pattern: {
                       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/,
-                      message:
-                        "Debe tener al menos una mayúsucula, una minúscula, un número y un símbolo",
+                      message: "El formato no es válido.",
                     },
                   })}
                 />
@@ -298,7 +304,7 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
@@ -308,49 +314,68 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
-                <Paragraphs blue>
-                  <button onClick={(e) => onChangePassport(e, true)}>
-                    DNI
-                  </button>
-                  /
-                  <button onClick={(e) => onChangePassport(e, false)}>
-                    Passport
-                  </button>
-                </Paragraphs>
                 {(dniPassportTabs && (
-                  <InputBox
-                    label="Número de DNI"
-                    name="dniPassport"
-                    ref={register({
-                      required: {
-                        value: true,
-                        message: "Este campo es requerido",
-                      },
-                      pattern: {
-                        value: /[0-9]{8}[A-Za-z]{1}/,
-                        message: "El DNI incluido no es válido",
-                      },
-                    })}
-                  />
+                  <>
+                    <div className="passport-dni">
+                      <button
+                        className="active"
+                        onClick={(e) => onChangePassport(e, true)}
+                      >
+                        DNI
+                      </button>{" "}
+                      |{" "}
+                      <button onClick={(e) => onChangePassport(e, false)}>
+                        Pasaporte
+                      </button>
+                    </div>
+                    <InputBox
+                      label="DNI"
+                      name="dniPassport"
+                      ref={register({
+                        required: {
+                          value: true,
+                          message: "El campo es requerido",
+                        },
+                        pattern: {
+                          value: /[0-9]{8}[A-Za-z]{1}/,
+                          message: "El DNI incluido no es válido",
+                        },
+                      })}
+                    />
+                  </>
                 )) || (
-                  <InputBox
-                    label="Número de Pasaporte"
-                    name="dniPassport"
-                    ref={register({
-                      required: {
-                        value: true,
-                        message: "Este campo es requerido",
-                      },
-                      pattern: {
-                        value: /[a-zA-Z]{2}[0-9]{7}/,
-                        message: "El número del Pasaporte es incorrecto",
-                      },
-                    })}
-                  />
+                  <>
+                    <div className="passport-dni">
+                      <button onClick={(e) => onChangePassport(e, true)}>
+                        DNI
+                      </button>{" "}
+                      |{" "}
+                      <button
+                        className="active"
+                        onClick={(e) => onChangePassport(e, false)}
+                      >
+                        Pasaporte
+                      </button>
+                    </div>
+                    <InputBox
+                      label="Pasaporte"
+                      name="dniPassport"
+                      ref={register({
+                        required: {
+                          value: true,
+                          message: "El campo es requerido",
+                        },
+                        pattern: {
+                          value: /[a-zA-Z]{2}[0-9]{7}/,
+                          message: "El Pasaporte incluido no es válido",
+                        },
+                      })}
+                    />
+                  </>
                 )}
                 <InputBox
                   label="Fecha de nacimiento"
@@ -359,7 +384,7 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
@@ -367,16 +392,16 @@ export const RegisterPage = withRouter(({ history }) => {
 
               <div className="box-direction" data-aos="fade-up">
                 <ParagraphTop blue>
-                  <span>Dirección</span>
+                  <span>Domicilio</span>
                 </ParagraphTop>
 
                 <InputBox
-                  label="Dirección (avenida, calle, plaza, glorieta...)"
+                  label="Dirección"
                   name="street"
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
@@ -388,7 +413,7 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
@@ -408,11 +433,11 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                     pattern: {
                       value: /((0[1-9]|5[0-2])|[1-4][0-9])[0-9]{3}/,
-                      message: "Código postal incorrecto",
+                      message: "El código postal incluido es incorrecto",
                     },
                   })}
                 />
@@ -474,29 +499,32 @@ export const RegisterPage = withRouter(({ history }) => {
                   ref={register({
                     required: {
                       value: true,
-                      message: "Este campo es requerido",
-                    },
-                  })}
-                />
-                <InputBox
-                  name="legalCheck"
-                  type="radio"
-                  textCheckbox={``}
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: "Este campo es requerido",
+                      message: "El campo es requerido",
                     },
                   })}
                 />
               </div>
+              <div data-aos="fade-up">
+                <InputBox
+                  name="legalCheck"
+                  type="checkbox"
+                  classNameDiv="box-check-box"
+                  textCheckbox={``}
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: "El campo es requerido",
+                    },
+                  })}
+                />
 
-              <button type="submit" className="button big" data-aos="fade-up">
-                Registrarse
-              </button>
+                <button type="submit" className="button big">
+                  Registrarse
+                </button>
+              </div>
             </FormBox>
           </FormContext>
-        </SectionFormBox>
+        </SectionFormBoxRegister>
       </SectionBox>
       <SectionBox bgColor="orange" column>
         <FaqsBox className="contain" data-aos="fade-up">

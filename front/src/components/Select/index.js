@@ -5,8 +5,8 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 //Styles & AOS animation
-import { SelectText, LabelText } from "./styles/select.styles";
-import {ErrorMessage} from "../../../public/styles/Common.styles"
+import { SelectText, LabelText, BoxSelect } from "./styles/select.styles";
+import { ErrorMessage } from "../../../public/styles/Common.styles";
 
 const hasError = (errors, name) => {
   if (name in errors) return "error";
@@ -18,7 +18,9 @@ export const SelectBox = React.forwardRef(
     const { errors } = useFormContext();
 
     return (
-      <div className={classNameDiv ? `box-input ${classNameDiv}` : `box-input`}>
+      <BoxSelect
+        className={classNameDiv ? `box-input ${classNameDiv}` : `box-input`}
+      >
         <LabelText>{label}</LabelText>
         <SelectText className={hasError(errors, name)} name={name} ref={ref}>
           {value.map((value, i) => {
@@ -32,7 +34,7 @@ export const SelectBox = React.forwardRef(
         {errors[name]?.message && (
           <ErrorMessage>{errors[name].message}</ErrorMessage>
         )}
-      </div>
+      </BoxSelect>
     );
   }
 );

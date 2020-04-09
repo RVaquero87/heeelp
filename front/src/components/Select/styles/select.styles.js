@@ -1,27 +1,70 @@
 import styled from "styled-components";
 
+//Images
+import arrowBottom from "../../../../public/images/arrow.svg";
+
+export const BoxSelect = styled.div`
+  &.rol-box {
+    align-items: center;
+    cursor: text;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 12px;
+    font-size: 18px;
+    pointer-events: none;
+    line-height: 1;
+    label {
+      width: initial;
+      margin: 0;
+      outline: none;
+      &:active,
+      &:focus {
+        outline: none;
+      }
+      &:after {
+        display: none;
+      }
+    }
+    select {
+      border: none;
+      cursor: text;
+      line-height: 1;
+      margin-left: 12px;
+      padding: 0;
+      width: initial;
+      &:-internal-autofill-selected {
+        background-color: initial !important;
+      }
+    }
+  }
+`;
+
 export const SelectText = styled.select`
-   appearance: none !important;
+  appearance: none !important;
   background-color: transparent !important;
+  border: none;
   border-radius: 0;
-  border: 0;
   border-bottom: 1px solid #e3e4e8;
   box-shadow: none;
   display: block;
   margin: 0px;
+  max-width: 100%;
   padding: 1px 5px;
+  position: relative;
+  text-transform: uppercase;
   width: 100%;
   &:-internal-autofill-selected {
     background-color: transparent !important;
   }
+  &:active,
   &:focus {
     border: 1px solid #e3e4e8;
     outline: none;
   }
   &.error {
-    border-bottom: 1px solid #E74128;
+    border-bottom: 1px solid #e74128;
     &:focus {
-      border: 1px solid #E74128;
+      border: 1px solid #e74128;
     }
   }
 `;
@@ -33,5 +76,16 @@ export const LabelText = styled.label`
   font-weight: 300;
   line-height: 1.2;
   margin-bottom: 10px;
+  position: relative;
   width: 100%;
+  &:after {
+    background: url(${arrowBottom}) center no-repeat;
+    content: " ";
+    display: block;
+    height: 10px;
+    position: absolute;
+    right: 8px;
+    top: 40px;
+    width: 17px;
+  }
 `;
