@@ -12,7 +12,7 @@ import {
   Paragraphs,
   Col2Min,
   SectionServicesRates,
-  FaqsBox
+  FaqsBox,
 } from "../../public/styles/Common.styles";
 
 //Images
@@ -53,11 +53,31 @@ export const ServicesPage = () => {
           </Paragraphs>
 
           <div className="col5">
-            <ItemServicies ImgSrc={icon1} ItemText="Lavandería" ItemContent="Etiam blandit neque sed orci ultricies auctor." />
-            <ItemServicies ImgSrc={icon2} ItemText="Supermercado" ItemContent="Vivamus eu diam non sem finibus dictum."/>
-            <ItemServicies ImgSrc={icon3} ItemText="Farmacia" ItemContent="Aliquam semper ipsum et libero cursus blandit."/>
-            <ItemServicies ImgSrc={icon4} ItemText="Tareas domésticas" ItemContent="Nunc ultricies purus eu molestie volutpat."/>
-            <ItemServicies ImgSrc={icon5} ItemText="Animales domésticos" ItemContent="Nam eu odio et massa consectetur pulvinar."/>
+            <ItemServicies
+              ImgSrc={icon1}
+              ItemText="Lavandería"
+              ItemContent="Etiam blandit neque sed orci ultricies auctor."
+            />
+            <ItemServicies
+              ImgSrc={icon2}
+              ItemText="Supermercado"
+              ItemContent="Vivamus eu diam non sem finibus dictum."
+            />
+            <ItemServicies
+              ImgSrc={icon3}
+              ItemText="Farmacia"
+              ItemContent="Aliquam semper ipsum et libero cursus blandit."
+            />
+            <ItemServicies
+              ImgSrc={icon4}
+              ItemText="Tareas domésticas"
+              ItemContent="Nunc ultricies purus eu molestie volutpat."
+            />
+            <ItemServicies
+              ImgSrc={icon5}
+              ItemText="Animales domésticos"
+              ItemContent="Nam eu odio et massa consectetur pulvinar."
+            />
           </div>
 
           <Paragraphs>
@@ -77,7 +97,7 @@ export const ServicesPage = () => {
             </span>
           </H2>
           <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button big">
+          <ButtonLink whereTo="/faqs" className="button white big">
             VER MÁS FAQ'S
           </ButtonLink>
         </FaqsBox>

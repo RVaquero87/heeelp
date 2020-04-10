@@ -13,17 +13,12 @@ import {
   H1,
   H2,
   BoxImg,
-  Paragraphs,
   FormBox,
-  Col2Min,
   SectionFormBox,
-  FaqsBox,
-  ContainDivDefault,
 } from "../../public/styles/Common.styles";
 
 //Images
 import girlComputer from "../../public/images/girl-computer.png";
-import contact from "../../public/images/contact.svg";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
@@ -33,8 +28,6 @@ import { doLogin } from "../services/authServices";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
 import { InputBox } from "../components/Input/Index";
 
 export const LoginPage = withRouter(({ history }) => {
@@ -124,42 +117,6 @@ export const LoginPage = withRouter(({ history }) => {
             </FormBox>
           </FormContext>
         </SectionFormBox>
-      </SectionBox>
-
-      <SectionBox bgColor="orange" column>
-        <FaqsBox className="contain" data-aos="fade-up">
-          <H2>
-            ¿Tienes dudas?
-            <span className="item-block">
-              Consulta nuestras preguntas frecuentes
-            </span>
-          </H2>
-          <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button big">
-            VER MÁS FAQ'S
-          </ButtonLink>
-        </FaqsBox>
-      </SectionBox>
-
-      <SectionBox column>
-        <ContainDivDefault className="contain" data-aos="fade-up">
-          <Col2Min inverse marginTopNone>
-            <ContentText>
-              <H2 color="blue">¿Quieres contactar con nosotros?</H2>
-              <Paragraphs blue>
-                Si tienes cualquier pregunta que hacernos, no dudes en
-                enviarnoslas. Clicka en contacta, rellena el formulario y te
-                responderemos lo antes posible.
-              </Paragraphs>
-              <ButtonLink whereTo="/contacto" className="button big">
-                Contactar
-              </ButtonLink>
-            </ContentText>
-            <BoxImg>
-              <img src={contact} alt="Contacto" title="Contacto" />
-            </BoxImg>
-          </Col2Min>
-        </ContainDivDefault>
       </SectionBox>
     </>
   );

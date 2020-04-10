@@ -10,10 +10,11 @@ export const BoxSelect = styled.div`
     display: flex;
     justify-content: flex-start;
     margin-bottom: 12px;
-    font-size: 18px;
+    font-size: 14px;
     pointer-events: none;
     line-height: 1;
     label {
+      font-size: 14px;
       width: initial;
       margin: 0;
       outline: none;

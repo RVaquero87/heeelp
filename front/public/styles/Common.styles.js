@@ -523,10 +523,10 @@ export const LightBoxError = styled.div`
   width: 100%;
   ${Paragraphs} {
     color: #393b4f;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     line-height: 1;
-    padding: 15px;
+    padding: 24px 20px;
     z-index: 3;
   }
   @keyframes messageError {
@@ -544,6 +544,7 @@ export const LightBoxError = styled.div`
 //Components DIV
 export const ContainDivDefault = styled.div`
   padding: 70px 0 50px;
+  margin: 0 auto;
   max-width: 1200px;
   width: 100%;
   &.first-section {
@@ -1207,6 +1208,12 @@ export const Col2HeaderRegister = styled(Col2Header)`
   }
 `;
 
+export const Col2HeaderPrivacy = styled(Col2Header)``;
+
+export const Col2HeaderTerms = styled(Col2Header)``;
+
+export const Col2HeaderControlUser = styled(Col2Header)``;
+
 export const Col2Min = styled.div`
   display: flex;
   align-items: center;
@@ -1711,21 +1718,31 @@ export const SectionReviews = styled(SectionReviewsHome)`
   }
 `;
 
-export const TermsBox = styled.div`
-  padding: 20px 0 50px;
-  ${ParagraphTop} {
-    text-align: left;
-    padding: 50px 0 15px;
-    width: 100%;
+export const SectionReviewsAdmin = styled(SectionReviews)`
+  padding: 0px 0 70px;
+  ${FilterStars} {
+    border: none;
   }
-  ${Paragraphs} {
-    padding-top: 0;
+`;
+
+export const TermsBox = styled.div`
+  &.contain {
+    padding: 60px 0 80px;
+    max-width: 768px;
+    ${ParagraphTop} {
+      text-align: left;
+      padding: 50px 0 15px;
+      width: 100%;
+    }
+    ${Paragraphs} {
+      padding-top: 0;
+    }
   }
 `;
 
 export const SectionFormBox = styled.div`
   font-family: "Roboto", sans-serif;
-  padding: 70px 0 50px;
+  padding: 100px 0;
   &.contain {
     max-width: 768px;
   }
@@ -1853,6 +1870,12 @@ export const SectionFormBoxRegister = styled(SectionFormBox)`
       margin-bottom: 16px;
     }
   }
+`;
+
+export const SectionFormBoxContact = styled(SectionFormBox)`
+${H2}, > ${Paragraphs}{
+  text-align:left;
+}
 `;
 
 export const SectionProtectedBox = styled.div`
@@ -2013,7 +2036,7 @@ export const LightBoxRegisterRol = styled.div`
       button {
         align-items: center;
         border-radius: 4px;
-        border: solid 3px rgba(255, 255, 255, 0.5);
+        border: solid 3px rgba(255, 255, 255, 0.3);
         cursor: pointer;
         display: flex;
         flex-direction: column;
@@ -2074,6 +2097,70 @@ export const LightBoxRegisterRol = styled.div`
           &:last-child {
             margin-left: 16px;
           }
+        }
+      }
+    }
+  }
+`;
+
+export const AdminPanelBox = styled.div`
+  padding: 150px 0 0;
+  border-bottom: 1px solid #e3e4e8;
+  .button-box {
+    display: flex;
+    width: 100%;
+    button {
+      position: relative;
+      border: 1px solid transparent;
+      border-radius: 4px 4px 0 0;
+      color: #3e3874;
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      line-height: 1;
+      padding: 14px 28px 12px;
+      position: relative;
+      top: 1px;
+      cursor: pointer;
+      text-align: left;
+      i,
+      span {
+        pointer-events: none;
+      }
+      &.active {
+        background-color: #fff;
+        border-color: #e3e4e8;
+        border-bottom: 1px solid transparent;
+      }
+      i {
+        position: relative;
+        margin-right: 12px;
+      }
+    }
+  }
+  @media (max-width: 1200px) {
+    padding-top: 120px;
+  }
+  @media (max-width: 768px) {
+    padding-top: 100px;
+    .button-box {
+      button {
+        text-transform: capitalize;
+        padding: 14px 16px 12px;
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    padding-top: 80px;
+    .button-box {
+      button {
+        padding: 10px 10px 8px;
+        font-size: 16px;
+        i {
+          display: none;
         }
       }
     }

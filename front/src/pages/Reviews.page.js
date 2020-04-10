@@ -15,7 +15,7 @@ import {
   SectionReviewsHeader,
   SectionReviews,
   FaqsBox,
-  FilterStars
+  FilterStars,
 } from "../../public/styles/Common.styles";
 
 //Images
@@ -39,7 +39,7 @@ export const ReviewsPage = () => {
     setchangeListReviews,
     listReviews,
     filterReviews,
-    setFilterReviews
+    setFilterReviews,
   } = useContext(PrincipalContext);
 
   //Reset Scroll
@@ -50,7 +50,7 @@ export const ReviewsPage = () => {
   //Filter stars
   const handleFilterReviews = async (e, value) => {
     e.preventDefault();
-    let filter = await listReviews.filter(item => {
+    let filter = await listReviews.filter((item) => {
       return item.stars == value;
     });
     setFilterReviews(filter);
@@ -94,7 +94,7 @@ export const ReviewsPage = () => {
                     </ParagraphTop>
                     <ParagraphTop>
                       {listReviews &&
-                        getAverage(listReviews.map(item => item.stars))}
+                        getAverage(listReviews.map((item) => item.stars))}
                       <span>/5</span>
                     </ParagraphTop>
                   </div>
@@ -107,7 +107,9 @@ export const ReviewsPage = () => {
             <SectionReviews className="contain">
               <div className="box-faqs">
                 <div className="box-title" data-aos="fade-up">
-                  <H2 color="blue">Nunc ultricies purus eu molestie volutpat.</H2>
+                  <H2 color="blue">
+                    Nunc ultricies purus eu molestie volutpat.
+                  </H2>
                   <Paragraphs blue>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi lectus nulla, porttitor nec arcu non, facilisis
@@ -120,7 +122,7 @@ export const ReviewsPage = () => {
                   </Paragraphs>
                   <div className="box-filter">
                     <select
-                      onChange={e => handleFilterReviews(e, e.target.value)}
+                      onChange={(e) => handleFilterReviews(e, e.target.value)}
                     >
                       <option value="all">Todas las opiniones</option>
                       <option value="0">0 Estrellas</option>
@@ -161,7 +163,7 @@ export const ReviewsPage = () => {
                 </span>
               </H2>
               <AccordionFaqsBox />
-              <ButtonLink whereTo="/faqs" className="button big">
+              <ButtonLink whereTo="/faqs" className="button white big">
                 VER MÁS FAQ'S
               </ButtonLink>
             </FaqsBox>

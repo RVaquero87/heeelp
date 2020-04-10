@@ -1,6 +1,6 @@
 //React
 import React, { useContext, useState, useEffect } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 //Form
 import { useForm, FormContext } from "react-hook-form";
@@ -15,10 +15,7 @@ import {
   BoxImg,
   Paragraphs,
   FormBox,
-  Col2Min,
   SectionFormBoxRegister,
-  FaqsBox,
-  ContainDivDefault,
   ParagraphTop,
   LightBoxRegisterRol,
 } from "../../public/styles/Common.styles";
@@ -29,7 +26,6 @@ import youngGirlIntro from "../../public/images/young-girl-2.svg";
 import oldGirlIntro from "../../public/images/old-girl-2.svg";
 import youngGirl from "../../public/images/young-girl.svg";
 import oldGirl from "../../public/images/old-girl.svg";
-import contact from "../../public/images/contact.svg";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
@@ -40,8 +36,6 @@ import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
 import { SelectBox } from "../components/Select/index";
-import { ButtonLink } from "../components/ButtonLink/Index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
 import { InputBox } from "../components/Input/Index";
 
 export const RegisterPage = withRouter(({ history }) => {
@@ -525,40 +519,6 @@ export const RegisterPage = withRouter(({ history }) => {
             </FormBox>
           </FormContext>
         </SectionFormBoxRegister>
-      </SectionBox>
-      <SectionBox bgColor="orange" column>
-        <FaqsBox className="contain" data-aos="fade-up">
-          <H2>
-            ¿Tienes dudas?
-            <span className="item-block">
-              Consulta nuestras preguntas frecuentes
-            </span>
-          </H2>
-          <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button big">
-            VER MÁS FAQ'S
-          </ButtonLink>
-        </FaqsBox>
-      </SectionBox>
-      <SectionBox column>
-        <ContainDivDefault className="contain" data-aos="fade-up">
-          <Col2Min inverse marginTopNone>
-            <ContentText>
-              <H2 color="blue">¿Quieres contactar con nosotros?</H2>
-              <Paragraphs blue>
-                Si tienes cualquier pregunta que hacernos, no dudes en
-                enviarnoslas. Clicka en contacta, rellena el formulario y te
-                responderemos lo antes posible.
-              </Paragraphs>
-              <ButtonLink whereTo="/contacto" className="button big">
-                Contactar
-              </ButtonLink>
-            </ContentText>
-            <BoxImg>
-              <img src={contact} alt="Contacto" title="Contacto" />
-            </BoxImg>
-          </Col2Min>
-        </ContainDivDefault>
       </SectionBox>
     </>
   );

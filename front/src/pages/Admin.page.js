@@ -5,10 +5,18 @@ import React, { useEffect, useState } from "react";
 import { withProtected } from "../lib/protectRoute.hoc";
 
 //Styles & AOS animation
-import { Button } from "../../public/styles/Common.styles";
+import {
+  SectionBox,
+  ContentText,
+  ContainDivDefault,
+  H1,
+  BoxImg,
+  AdminPanelBox,
+  Col2HeaderControlUser,
+} from "../../public/styles/Common.styles";
 
 //Images
-import people from "../../public/images/people.svg";
+import peopleAdmin from "../../public/images/people.svg";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
@@ -35,31 +43,57 @@ export const AdminPanel = () => {
 
   return (
     <>
-      <div className="button-box">
-        <Button
-          value="users"
-          onClick={(e) => getComponentAdmin(e, e.target.value)}
-        >
-          Users
-        </Button>
-        <Button
-          value="reviews"
-          onClick={(e) => getComponentAdmin(e, e.target.value)}
-        >
-          Reviews
-        </Button>
-        <Button
-          value="messages"
-          onClick={(e) => getComponentAdmin(e, e.target.value)}
-        >
-          Mesaage COntact
-        </Button>
-      </div>
-      <div>
-        {tabsAdmin === "users" && <AdminUsers data-aos="fade-up" />}
-        {tabsAdmin === "reviews" && <AdminReviews data-aos="fade-up" />}
-        {tabsAdmin === "messages" && <AdminContact data-aos="fade-up" />}
-      </div>
+      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
+        <Col2HeaderControlUser className="contain" data-aos="fade-up">
+          <ContentText>
+            <H1>Contacto</H1>
+          </ContentText>
+          <BoxImg>
+            <img src={peopleAdmin} alt="heeelp!" title="heeelp!" />
+          </BoxImg>
+        </Col2HeaderControlUser>
+      </SectionBox>
+
+      <SectionBox justify="start">
+        <AdminPanelBox className="contain" data-aos="fade-up">
+          <div className="button-box">
+            <button
+              value="users"
+              className={tabsAdmin === "users" ? "active" : ""}
+              onClick={(e) => getComponentAdmin(e, e.target.value)}
+            >
+              <i className="fas fa-users"></i>
+              <span>Lista de </span>usuarios
+            </button>
+            <button
+              value="messages"
+              className={tabsAdmin === "messages" ? "active" : ""}
+              onClick={(e) => getComponentAdmin(e, e.target.value)}
+            >
+              <i className="fas fa-envelope-open-text"></i>
+              Mensajes<span> de contacto</span>
+            </button>
+            <button
+              value="reviews"
+              className={tabsAdmin === "reviews" ? "active" : ""}
+              onClick={(e) => getComponentAdmin(e, e.target.value)}
+            >
+              <i className="fas fa-comments"></i>
+              <span>Lista de </span>opiniones
+            </button>
+          </div>
+        </AdminPanelBox>
+      </SectionBox>
+
+      <SectionBox>
+        <ContainDivDefault>
+          <>
+            {tabsAdmin === "users" && <AdminUsers data-aos="fade-up" />}
+            {tabsAdmin === "messages" && <AdminContact data-aos="fade-up" />}
+            {tabsAdmin === "reviews" && <AdminReviews data-aos="fade-up" />}
+          </>
+        </ContainDivDefault>
+      </SectionBox>
     </>
   );
 };

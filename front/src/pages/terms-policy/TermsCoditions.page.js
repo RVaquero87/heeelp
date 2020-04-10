@@ -11,12 +11,13 @@ import {
   H2,
   ParagraphTop,
   Paragraphs,
-  Col2Header,
+  Col2HeaderTerms,
   Col2Min,
   TermsBox,
 } from "../../../public/styles/Common.styles";
 
 //Images
+import termsImg from "../../../public/images/contact.svg";
 import contact from "../../../public/images/contact.svg";
 
 //Functional & Services
@@ -34,16 +35,14 @@ export const TermsConditionsPage = () => {
   return (
     <>
       <SectionBox bgColor="blueLight" justify="between">
-        <Col2Header className="contain first-section" data-aos="fade-up">
+        <Col2HeaderTerms className="contain first-section" data-aos="fade-up">
           <ContentText>
             <H1>Términos y Condiciones</H1>
-            <ParagraphTop>
-              En heeelp! urna sit amet justo lacinia auctor ut at nisl. Duis
-              elementum elit sit amet felis porta vestibulum. Vestibulum lacinia
-              sapien sit amet dolor laoreet, quis lobortis nulla posuere.
-            </ParagraphTop>
           </ContentText>
-        </Col2Header>
+          <BoxImg>
+            <img src={termsImg} alt="heeelp!" title="heeelp!" />
+          </BoxImg>
+        </Col2HeaderTerms>
       </SectionBox>
 
       <SectionBox bgColor="grey" column>

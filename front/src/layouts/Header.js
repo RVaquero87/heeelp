@@ -166,6 +166,13 @@ export const Header = withRouter(({ history }) => {
                       Crear review
                     </NavLink>
                   </li>
+                  {user?.rol === "Admin" && (
+                    <li>
+                      <NavLink to="/control-admin" className="nav-link">
+                        Admin
+                      </NavLink>
+                    </li>
+                  )}
                   <li>
                     <NavLink
                       to="/"
@@ -175,13 +182,6 @@ export const Header = withRouter(({ history }) => {
                       Logout
                     </NavLink>
                   </li>
-                  {user?.rol === "Admin" && (
-                    <li>
-                      <NavLink to="/control-admin" className="nav-link">
-                        Admin
-                      </NavLink>
-                    </li>
-                  )}
                 </ul>
               </nav>
             )}

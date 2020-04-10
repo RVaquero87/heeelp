@@ -15,7 +15,7 @@ import {
   Paragraphs,
   Col2HeaderContact,
   FormBox,
-  SectionFormBox,
+  SectionFormBoxContact,
   FaqsBox,
 } from "../../public/styles/Common.styles";
 
@@ -84,7 +84,7 @@ export const ContactPage = withRouter(({ history }) => {
       </SectionBox>
 
       <SectionBox data-aos="fade-up" column justify="start">
-        <SectionFormBox className="contain">
+        <SectionFormBoxContact className="contain">
           <H2 color="blue">Donec sodales mi eget.</H2>
           <Paragraphs blue>
             Proin tortor nulla, semper ut auctor in, vehicula vitae tellus.{" "}
@@ -137,7 +137,7 @@ export const ContactPage = withRouter(({ history }) => {
               </button>
             </FormBox>
           </FormContext>
-        </SectionFormBox>
+        </SectionFormBoxContact>
       </SectionBox>
 
       <SectionBox bgColor="orange" column>
@@ -149,7 +149,7 @@ export const ContactPage = withRouter(({ history }) => {
             </span>
           </H2>
           <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button big">
+          <ButtonLink whereTo="/faqs" className="button white big">
             VER MÁS FAQ'S
           </ButtonLink>
         </FaqsBox>
