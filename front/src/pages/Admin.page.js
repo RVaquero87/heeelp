@@ -16,13 +16,12 @@ import {
 } from "../../public/styles/Common.styles";
 
 //Images
-import peopleAdmin from "../../public/images/people.svg";
+import peopleAdmin from "../../public/images/people-admin.svg";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
 import { AdminUsers } from "./admin/Admin-users";
 import { AdminReviews } from "./admin/Admin-reviews";
 import { AdminContact } from "./admin/Admin-contact";
@@ -46,7 +45,7 @@ export const AdminPanel = () => {
       <SectionBox bgColor="blueLight" justify="evenly" className="z1">
         <Col2HeaderControlUser className="contain" data-aos="fade-up">
           <ContentText>
-            <H1>Contacto</H1>
+            <H1>Control de usuarios</H1>
           </ContentText>
           <BoxImg>
             <img src={peopleAdmin} alt="heeelp!" title="heeelp!" />

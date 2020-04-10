@@ -1,8 +1,25 @@
+//React
 import React, { useContext, useState, useEffect } from "react";
-import { getListUsers } from "../../services/authServices";
+
+//Styles & AOS animation
+import {
+  SectionBox,
+  SectionUsersAdmin,
+  Paragraphs,
+  FilterUser,
+  FilterText,
+  ContainDivDefault,
+  SectionUserAdminList,
+} from "../../../public/styles/Common.styles";
+
+//Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
-import { Loading } from "../../components/Loading/index";
-import { UserBoxItem } from "../../components/ListItemUser/index";
+
+//Functional & Services
+import { getListUsers } from "../../services/authServices";
+
+//Compoments
+import { UserBoxItem } from "../../components/ListItemUser/Index";
 
 export const AdminUsers = () => {
   const { changeLisUsers, setchangeLisUsers } = useContext(PrincipalContext);
@@ -41,7 +58,7 @@ export const AdminUsers = () => {
     setFilterStartText(value);
     let filter = await listUsers.filter((item) => {
       const re = new RegExp(value);
-      return re.test(item.name);
+      return re.test(item.username);
     });
     setFilterlistUsers(filter);
   };
@@ -50,36 +67,84 @@ export const AdminUsers = () => {
   return (
     <>
       {!filterlistUsers ? (
-        <Loading />
+        <SectionBox column>
+          <ContainDivDefault>
+            <Paragraphs blue>
+              <span>Loading...</span>
+            </Paragraphs>
+          </ContainDivDefault>
+        </SectionBox>
       ) : (
         <>
-          <p>Filtro</p>
-          <input
-            placeholder="Filtro"
-            value={filterStartText}
-            onChange={(e) => handleFilterTextUser(e, e.target.value)}
-          />
-          <select onChange={(e) => handleFilterRolUser(e, e.target.value)}>
-            <option value="all">Todos</option>
-            <option value="Helpers">Helpers</option>
-            <option value="Helped">Helped</option>
-            <option value="Admin">Admin</option>
-          </select>
-          <p>NºTotal de uSUARIOS {listUsers.length} </p>
-          <p>NºTotal de Admin: {filterNumberLenght("Admin")}</p>
-          <p>NºTotal de Helpers: {filterNumberLenght("Helpers")}</p>
-          <p>NºTotal de Helped: {filterNumberLenght("Helped")}</p>
-          {filterlistUsers.length === 0 ? (
-            <p>No existen nínguna con ese filtro</p>
-          ) : (
-            <>
-              <div data-aos="fade-up">
-                {filterlistUsers.map((user, i) => {
-                  return <UserBoxItem user={user} key={i} />;
-                })}
+          <SectionBox justify="start">
+            <SectionUsersAdmin className="contain">
+              <FilterUser data-aos="fade-up">
+                <div className="contain-filters">
+                  <Paragraphs blue>
+                    <span>Filtrar por tipo de usuario:</span>
+                  </Paragraphs>
+                  <div className="box-filter">
+                    <select
+                      onChange={(e) => handleFilterRolUser(e, e.target.value)}
+                    >
+                      <option value="all">Todos los Usuarios</option>
+                      <option value="Helpers">Usuarios Helpers</option>
+                      <option value="Helped">Usuarios Helped</option>
+                      <option value="Admin">Usuarios Admin</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="contain-filters">
+                  <Paragraphs blue>
+                    <span>Filtrar por username:</span>
+                  </Paragraphs>
+                  <FilterText
+                    value={filterStartText}
+                    onChange={(e) => handleFilterTextUser(e, e.target.value)}
+                  />
+                </div>
+              </FilterUser>
+              <div className="box-counter">
+                <Paragraphs blue>
+                  Nº de usuarios: <span>{listUsers.length}</span>
+                </Paragraphs>
+                <Paragraphs blue>
+                  Nº de Admins: <span>{filterNumberLenght("Admin")}</span>
+                </Paragraphs>
+                <Paragraphs blue>
+                  Nº de Helpers: <span>{filterNumberLenght("Helpers")}</span>
+                </Paragraphs>
+                <Paragraphs blue>
+                  Nº de Helped: <span>{filterNumberLenght("Helped")}</span>
+                </Paragraphs>
               </div>
-            </>
-          )}
+            </SectionUsersAdmin>
+          </SectionBox>
+
+          <SectionBox>
+            <SectionUserAdminList>
+              {filterlistUsers.length === 0 ? (
+                <Paragraphs blue>No existen nínguna con ese filtro</Paragraphs>
+              ) : (
+                <>
+                  {filterlistUsers
+                    .sort((a, b) => {
+                      if (a.createdAt > b.createdAt) {
+                        return -1;
+                      }
+                      if (a.createdAt < b.createdAt) {
+                        return 1;
+                      }
+                      // a must be equal to b
+                      return 0;
+                    })
+                    .map((user, i) => {
+                      return <UserBoxItem user={user} key={i} />;
+                    })}
+                </>
+              )}
+            </SectionUserAdminList>
+          </SectionBox>
         </>
       )}
     </>

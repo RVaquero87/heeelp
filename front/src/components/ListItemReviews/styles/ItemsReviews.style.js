@@ -44,24 +44,23 @@ export const BoxReviews = styled.div`
   .delete {
     cursor: pointer;
     outline: none;
+    color: #3e3874;
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 22px;
+    font-weight: 500;
     position: absolute;
-    right: 10px;
-    top: 10px;
-    border-radius: 200%;
-    border: 1px solid #3e3874;
-    height: 30px;
-    width: 30px;
-    background: #3e3874;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0;
+    right: 16px;
+    text-decoration: none;
+    top: 16px;
+    width: 16px;
+    height: 16px;
     &:hover {
-      opacity: 0.8;
-      transition: all ease 1000;
+      opacity: 0.85;
+    }
+    img {
+      width: 100%;
+      pointer-events: none;
     }
   }
   @media (max-width: 1200px) {

@@ -15,6 +15,7 @@ import { BoxReviews } from "./styles/ItemsReviews.style";
 //Images
 import startOn from "../../../public/images/star-on.svg";
 import startOff from "../../../public/images/star-off.svg";
+import closeX from "../../../public/images/close.svg";
 
 //Functional & Services
 import { deleteReviews } from "../../services/reviewsServices";
@@ -57,8 +58,12 @@ export const ReviewsBoxItem = ({ review }) => {
         <div className="box-user-item">
           <div className="box-top-user">
             <ParagraphTop blue>
-              <span> {review.creatorUserid.name}</span> -{" "}
-              {getYearsOld(review.creatorUserid.birthYear)} años
+              <span>
+                {" "}
+                {review.creatorUserid.name}{" "}
+                {review.creatorUserid.lastname.slice(0, 1)}.
+              </span>{" "}
+              - {getYearsOld(review.creatorUserid.birthYear)} años
             </ParagraphTop>
           </div>
           <div className="starts">
@@ -76,7 +81,7 @@ export const ReviewsBoxItem = ({ review }) => {
           value={review._id}
           onClick={(e) => deleteThisReview(e, e.target.value)}
         >
-          X
+          <img src={closeX} alt="ELIMINAR" title="ELIMINAR" />
         </button>
       )}
     </BoxReviews>

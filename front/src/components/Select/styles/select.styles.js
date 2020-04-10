@@ -48,6 +48,7 @@ export const SelectText = styled.select`
   border-bottom: 1px solid #e3e4e8;
   box-shadow: none;
   display: block;
+  font-family: "Roboto", sans-serif;
   margin: 0px;
   max-width: 100%;
   padding: 1px 5px;
@@ -74,6 +75,7 @@ export const LabelText = styled.label`
   color: #9a9caf;
   display: block;
   font-size: 18px;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   line-height: 1.2;
   margin-bottom: 10px;

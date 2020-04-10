@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import {
   SectionBox,
   Paragraphs,
+  ContainDivDefault,
   SectionReviewsAdmin,
   FilterStars,
 } from "../../../public/styles/Common.styles";
@@ -43,7 +44,13 @@ export const AdminReviews = () => {
   return (
     <>
       {!filterReviews ? (
-        <Loading />
+        <SectionBox column>
+          <ContainDivDefault>
+            <Paragraphs blue>
+              <span>Loading...</span>
+            </Paragraphs>
+          </ContainDivDefault>
+        </SectionBox>
       ) : (
         <>
           <SectionBox column>

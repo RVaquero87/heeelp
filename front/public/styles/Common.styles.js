@@ -432,6 +432,34 @@ export const Button = styled.button`
   }
 `;
 
+export const FilterText = styled.input`
+  appearance: none !important;
+  background-color: transparent !important;
+  border-radius: 0;
+  border: 0;
+  font-weight: 300;
+  border-bottom: 1px solid #e3e4e8;
+  box-shadow: none;
+  font-family: "Roboto", sans-serif;
+  display: block;
+  margin: 0px;
+  padding: 1px 10px;
+  width: 100%;
+  &:-internal-autofill-selected {
+    background-color: transparent !important;
+  }
+  &:focus {
+    border: 1px solid #e3e4e8;
+    outline: none;
+  }
+  &.error {
+    border-bottom: 1px solid #e74128;
+    &:focus {
+      border: 1px solid #e74128;
+    }
+  }
+`;
+
 export const FilterStars = styled.div`
   align-items: center;
   display: flex;
@@ -497,6 +525,24 @@ export const FilterStars = styled.div`
       select {
         padding-left: 0px;
       }
+    }
+  }
+`;
+
+export const FilterUser = styled(FilterStars)`
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 475px;
+  .contain-filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    ${Paragraphs} {
+      width: 100%;
     }
   }
 `;
@@ -1208,11 +1254,155 @@ export const Col2HeaderRegister = styled(Col2Header)`
   }
 `;
 
-export const Col2HeaderPrivacy = styled(Col2Header)``;
+export const Col2HeaderPrivacy = styled(Col2Header)`
+  &.contain {
+    ${ContentText} {
+      max-width: 250px;
+      width: initial;
+    }
+    ${BoxImg} {
+      max-width: 381px;
+      img {
+        top: 37px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      flex-direction: row;
+      ${ContentText} {
+        padding-bottom: 0;
+        width: initial;
+        ${H1} {
+          line-height: 1;
+          padding-bottom: 0;
+        }
+      }
+      ${BoxImg} {
+        img {
+          top: 45px;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      flex-direction: row;
+      ${BoxImg} {
+        max-width: 55%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      justify-content: space-between;
+      ${BoxImg} {
+        max-width: 45%;
+        img {
+          top: 0px;
+        }
+      }
+    }
+  }
+`;
 
-export const Col2HeaderTerms = styled(Col2Header)``;
+export const Col2HeaderTerms = styled(Col2Header)`
+  &.contain {
+    ${ContentText} {
+      max-width: 250px;
+      width: initial;
+    }
+    ${BoxImg} {
+      max-width: 475px;
+      img {
+        top: 37px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      flex-direction: row;
+      ${ContentText} {
+        padding-bottom: 0;
+        width: initial;
+        ${H1} {
+          line-height: 1;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      flex-direction: row;
+      ${BoxImg} {
+        max-width: 60%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      justify-content: space-between;
+      ${BoxImg} {
+        max-width: 42%;
+        img {
+          top: 0px;
+        }
+      }
+    }
+  }
+`;
 
-export const Col2HeaderControlUser = styled(Col2Header)``;
+export const Col2HeaderControlUser = styled(Col2Header)`
+  &.contain {
+    ${ContentText} {
+      width: initial;
+    }
+    ${BoxImg} {
+      max-width: 341px;
+      img {
+        top: 37px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      flex-direction: row;
+      ${ContentText} {
+        padding-bottom: 0;
+        width: initial;
+        ${H1} {
+          line-height: 1;
+          padding-bottom: 0;
+        }
+      }
+      ${BoxImg} {
+        img {
+          top: 45px;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      flex-direction: row;
+      ${BoxImg} {
+        max-width: 55%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      justify-content: space-between;
+      ${BoxImg} {
+        max-width: 50%;
+        img {
+          top: 0px;
+        }
+      }
+    }
+  }
+`;
 
 export const Col2Min = styled.div`
   display: flex;
@@ -1719,9 +1909,99 @@ export const SectionReviews = styled(SectionReviewsHome)`
 `;
 
 export const SectionReviewsAdmin = styled(SectionReviews)`
-  padding: 0px 0 70px;
-  ${FilterStars} {
-    border: none;
+  &.contain {
+    padding: 0px 0 70px;
+    ${FilterStars} {
+      border: none;
+    }
+  }
+`;
+
+export const SectionUsersAdmin = styled(SectionReviews)`
+  &.contain {
+    align-items: flex-end;
+    justify-content: space-between;
+    display: flex;
+    padding: 0px 0 70px;
+    .box-counter {
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      width: 155px;
+      ${Paragraphs} {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    ${FilterStars} {
+      border: none;
+    }
+  }
+  @media (max-width: 1200px) {
+    width: 23%;
+    margin-bottom: 26px;
+    ${Paragraphs} {
+      font-size: 16px;
+      padding-bottom: 16px;
+    }
+  }
+  @media (max-width: 960px) {
+    padding-bottom: 50px;
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      align-items: flex-start;
+      flex-direction: column-reverse;
+      padding-bottom: 50px;
+      .box-counter {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        margin: 0 auto;
+        max-width: 400px;
+        width: 100%;
+        ${Paragraphs} {
+          max-width: 155px;
+          width: 48%;
+        }
+      }
+      ${FilterStars} {
+        margin: 40px 0 0;
+        max-width: 400px;
+        width: 100%;
+        .contain-filters {
+          margin-bottom: 7px;
+        }
+        p {
+          padding: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      .box-counter {
+        display: flex;
+        flex-direction: column;
+        ${Paragraphs} {
+          width: 100%;
+        }
+      }
+      ${FilterStars} {
+        .contain-filters {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 24px;
+        }
+        p {
+          padding: 0;
+        }
+      }
+    }
   }
 `;
 
@@ -1736,6 +2016,16 @@ export const TermsBox = styled.div`
     }
     ${Paragraphs} {
       padding-top: 0;
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      padding: 60px 0 50px;
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      padding: 30px 0 40px;
     }
   }
 `;
@@ -1937,6 +2227,7 @@ export const SectionProtectedBox = styled.div`
         opacity: 0.85;
       }
       img {
+        pointer-events: none;
         width: 100%;
       }
     }
@@ -2165,4 +2456,12 @@ export const AdminPanelBox = styled.div`
       }
     }
   }
+`;
+
+export const SectionUserAdminList = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;

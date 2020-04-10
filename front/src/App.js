@@ -62,6 +62,8 @@ export const App = withAuthentication(() => {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/create-review" component={CreateReview} />
             <Route path="/private" component={PrivatePage} />
+            <Route path="*" component={HomePage} />
+            {/* <Route path="*" component={NotFoundPage} /> */}
           </Switch>
         </Layout>
       </GlobalContent>

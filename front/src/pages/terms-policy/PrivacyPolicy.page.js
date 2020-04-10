@@ -17,7 +17,7 @@ import {
 } from "../../../public/styles/Common.styles";
 
 //Images
-import privacyImg from "../../../public/images/contact.svg";
+import privacyImg from "../../../public/images/privacy-img.svg";
 import contact from "../../../public/images/contact.svg";
 
 //Functional & Services
@@ -34,8 +34,8 @@ export const PrivacyPolicyPage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between">
-        <Col2HeaderPrivacy className="contain first-section" data-aos="fade-up">
+      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
+        <Col2HeaderPrivacy className="contain" data-aos="fade-up">
           <ContentText>
             <H1>Política de Privacidad</H1>
           </ContentText>

@@ -17,7 +17,7 @@ import {
 } from "../../../public/styles/Common.styles";
 
 //Images
-import termsImg from "../../../public/images/contact.svg";
+import termsImg from "../../../public/images/terms-img.svg";
 import contact from "../../../public/images/contact.svg";
 
 //Functional & Services
@@ -34,8 +34,8 @@ export const TermsConditionsPage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="between">
-        <Col2HeaderTerms className="contain first-section" data-aos="fade-up">
+      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
+        <Col2HeaderTerms className="contain" data-aos="fade-up">
           <ContentText>
             <H1>Términos y Condiciones</H1>
           </ContentText>
