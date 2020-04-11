@@ -25,7 +25,7 @@ router.post("/signup", async (req, res, next) => {
     letter,
     postalCode,
     city,
-    legalCheck
+    legalCheck,
   } = req.body;
 
   // Create the user
@@ -47,10 +47,10 @@ router.post("/signup", async (req, res, next) => {
       letter,
       postalCode,
       city,
-      legalCheck
+      legalCheck,
     });
     // Directly login user
-    req.logIn(newUser, err => {
+    req.logIn(newUser, (err) => {
       req.user.visits += 1;
       req.user.save();
       return res.json(
@@ -73,7 +73,7 @@ router.post("/signup", async (req, res, next) => {
           "city",
           "country",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
         ])
       );
     });
@@ -93,7 +93,7 @@ router.post("/login", (req, res, next) => {
       return res.json({ status: 401, message: failureDetails.message });
     }
 
-    req.login(user, err => {
+    req.login(user, (err) => {
       if (err) {
         return res.json({ status: 500, message: "Sesion mal guardada" });
       }
@@ -122,7 +122,7 @@ router.post("/login", (req, res, next) => {
           "lat",
           "lng",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
         ])
       );
     });
@@ -137,7 +137,7 @@ router.post("/logout", isLoggedIn(), async (req, res, next) => {
   } else {
     return res.json({
       status: 401,
-      message: "No puedes realizar el logout sin estar login"
+      message: "No puedes realizar el logout sin estar login",
     });
   }
 });
@@ -158,7 +158,7 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       floor,
       letter,
       postalCode,
-      city
+      city,
     } = req.body;
     await Users.findByIdAndUpdate(id, {
       name,
@@ -172,11 +172,11 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
       floor,
       letter,
       postalCode,
-      city
+      city,
     });
     return res.json({
       status: 200,
-      message: "Usuario editado satisfactoriamente"
+      message: "Usuario editado satisfactoriamente",
     });
   } catch (error) {
     return res.json({ status: 401, message: "Fallo al editar Usuario" });
@@ -208,7 +208,7 @@ router.post("/whoami", (req, res, next) => {
         "lat",
         "lng",
         "createdAt",
-        "updatedAt"
+        "updatedAt",
       ])
     );
   else
@@ -229,7 +229,7 @@ router.post("/upload", uploader.single("imageUrl"), async (req, res, next) => {
     await Users.findByIdAndUpdate(
       req.user._id,
       {
-        image: imageUpload
+        image: imageUpload,
       },
       { new: true }
     );
@@ -237,7 +237,7 @@ router.post("/upload", uploader.single("imageUrl"), async (req, res, next) => {
   res.json({
     secure_url: imageUpload,
     status: 200,
-    message: "Subida de imagen satisfactoria"
+    message: "Subida de imagen satisfactoria",
   });
 });
 
@@ -258,7 +258,7 @@ router.post("/users-delete", isLoggedIn(), async (req, res) => {
     await Users.findByIdAndRemove(_id);
     return res.json({
       status: 200,
-      message: "Usuario eliminado satisfactoriamente"
+      message: "Usuario eliminado satisfactoriamente",
     });
   } catch (err) {
     return res.json({ status: 400, message: "No encontrado" });
@@ -270,11 +270,11 @@ router.post("/users-edit", isLoggedIn(), async (req, res) => {
   const { _id, rol } = req.body;
   try {
     await Users.findByIdAndUpdate(_id, {
-      rol
+      rol,
     });
     return res.json({
       status: 200,
-      message: "Usuario editado satisfactoriamente"
+      message: "Usuario editado satisfactoriamente",
     });
   } catch (err) {
     return res.json({ status: 400, message: "No encontrado" });

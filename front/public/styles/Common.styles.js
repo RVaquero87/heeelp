@@ -2168,6 +2168,8 @@ ${H2}, > ${Paragraphs}{
 }
 `;
 
+export const SectionFormBoxAdminContact = styled(SectionFormBox)``;
+
 export const SectionProtectedBox = styled.div`
   background: #8290ff;
   display: flex;

@@ -44,7 +44,6 @@ export const ContactPage = withRouter(({ history }) => {
   }, []);
 
   //Form
-
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -61,7 +60,6 @@ export const ContactPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   const sendContact = async (data) => {
-    console.log(data);
     const responseServer = await sendMessageContact(data);
     setMessageError(responseServer.message);
     history.push("/");

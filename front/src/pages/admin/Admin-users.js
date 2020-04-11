@@ -57,8 +57,8 @@ export const AdminUsers = () => {
     e.preventDefault();
     setFilterStartText(value);
     let filter = await listUsers.filter((item) => {
-      const re = new RegExp(value);
-      return re.test(item.username);
+      const re = new RegExp(value.toLowerCase());
+      return re.test(item.username.toLowerCase());
     });
     setFilterlistUsers(filter);
   };

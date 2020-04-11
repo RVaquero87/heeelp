@@ -15,7 +15,7 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
     title,
     message,
     stars,
-    creatorUserid: idUser
+    creatorUserid: idUser,
   });
 
   return res.json({
@@ -25,10 +25,10 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
       "stars",
       "creatorUserid",
       "createdAt",
-      "updatedAt"
+      "updatedAt",
     ]),
     status: 200,
-    message: "Comentario creado satisfactoriamente"
+    message: "Comentario creado satisfactoriamente",
   });
 });
 
@@ -38,7 +38,7 @@ router.post("/alls", async (req, res) => {
     const { _id } = req.body;
     if (_id) {
       const reviewsList = await Reviews.find({
-        creatorUserid: { _id: _id }
+        creatorUserid: { _id: _id },
       })
         .sort({ createdAt: -1 })
         .populate("creatorUserid");
@@ -60,7 +60,7 @@ router.post("/delete", isLoggedIn(), async (req, res) => {
     await Reviews.findByIdAndRemove(_id);
     return res.json({
       status: 200,
-      message: "Comentario eliminado satisfactoriamente"
+      message: "Comentario eliminado satisfactoriamente",
     });
   } catch (err) {
     return res.json({ status: 400, message: "No encontrado" });

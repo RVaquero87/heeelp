@@ -2,7 +2,7 @@ import axios from "axios";
 
 const authService = axios.create({
   baseURL: "http://localhost:3000/auth",
-  withCredentials: true
+  withCredentials: true,
 });
 
 export const doSignup = async ({
@@ -22,7 +22,7 @@ export const doSignup = async ({
   postalCode,
   city,
   country,
-  legalCheck
+  legalCheck,
 }) => {
   const res = await authService.post("/signup", {
     username,
@@ -41,7 +41,7 @@ export const doSignup = async ({
     postalCode,
     city,
     country,
-    legalCheck
+    legalCheck,
   });
   return res.data;
 };
@@ -49,7 +49,7 @@ export const doSignup = async ({
 export const doLogin = async ({ username, password }) => {
   const res = await authService.post("/login", {
     username,
-    password
+    password,
   });
   return res.data;
 };
@@ -67,7 +67,7 @@ export const doEdit = async ({
   letter,
   postalCode,
   city,
-  country
+  country,
 }) => {
   const res = await authService.post("/edit", {
     name,
@@ -82,7 +82,7 @@ export const doEdit = async ({
     letter,
     postalCode,
     city,
-    country
+    country,
   });
   return res.data;
 };
@@ -96,7 +96,7 @@ export const whoUser = async () => {
   return res.data;
 };
 
-export const uploadPhoto = async image => {
+export const uploadPhoto = async (image) => {
   const res = await authService.post("/upload", image);
   return res.data;
 };
@@ -106,12 +106,12 @@ export const getListUsers = async () => {
   return res.data;
 };
 
-export const doUnsubscribe = async user => {
+export const doUnsubscribe = async (user) => {
   const data = await authService.post("/users-delete", user);
   return data;
 };
 
-export const doEditUserAdmin = async user => {
+export const doEditUserAdmin = async (user) => {
   const res = await authService.post("/users-edit", user);
   return res.data;
 };

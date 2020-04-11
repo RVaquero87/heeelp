@@ -60,7 +60,10 @@ export const CreateReview = withRouter(({ history }) => {
         <Loading />
       ) : (
         <>
-          <button onClick={() => setGetFormReviews(!getFormReviews)}>
+          <button
+            style={{ paddingTop: "100px" }}
+            onClick={() => setGetFormReviews(!getFormReviews)}
+          >
             {getFormReviews ? " Ocular form" : "Crear Review"}
           </button>
           {getFormReviews && (
@@ -110,16 +113,21 @@ export const CreateReview = withRouter(({ history }) => {
               </form>
             </FormContext>
           )}
-
-          <p>
-            Nota media de tus Reviews:
-            {getAverage(listIDReviews.map((item) => item.stars))}
-          </p>
-          <div data-aos="fade-up">
-            {listIDReviews.map((review, i) => {
-              return <ReviewsBoxItem review={review} key={i} />;
-            })}
-          </div>
+          {listIDReviews.length === 0 ? (
+            <p>No creaste ninguna review</p>
+          ) : (
+            <>
+              <p>
+                Nota media de tus Reviews:
+                {getAverage(listIDReviews.map((item) => item.stars))}
+              </p>
+              <div data-aos="fade-up">
+                {listIDReviews.map((review, i) => {
+                  return <ReviewsBoxItem review={review} key={i} />;
+                })}
+              </div>
+            </>
+          )}
         </>
       )}
     </>

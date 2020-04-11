@@ -1,17 +1,16 @@
 export const getByFilter = (arrayFilter, itemFilter, itemProp) => {
-  console.log(arrayFilter, itemProp, itemFilter);
-  return arrayFilter.filter(item => {
+  return arrayFilter.filter((item) => {
     return item[itemProp] === itemFilter;
   });
 };
 
 export const getAllLessOneByFilter = (arrayFilter, itemFilter) => {
-  return arrayFilter.filter(item => {
+  return arrayFilter.filter((item) => {
     return item !== itemFilter;
   });
 };
 
-export const getAverage = arrayFilter => {
+export const getAverage = (arrayFilter) => {
   return (
     Math.round(
       (arrayFilter.reduce((itemA, itemB) => {
@@ -23,7 +22,7 @@ export const getAverage = arrayFilter => {
   );
 };
 
-export const getYearsOld = fecha => {
+export const getYearsOld = (fecha) => {
   let today = new Date();
   let myBirthday = new Date(fecha);
   let yearOld = today.getFullYear() - myBirthday.getFullYear();

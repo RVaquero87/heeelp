@@ -37,6 +37,13 @@ export const PrincipalContextProvider = (props) => {
       .catch((e) => {});
   }, [changeListReviews]);
 
+  //List Contact Message Change
+  const [listMessageContactChange, setListMessageContactChange] = useState();
+
+  //Response Message Contact
+  const [responseMessageContact, setResponseMessageContact] = useState();
+  const [formSendEmailView, setFormSendEmailView] = useState(false);
+
   //Register Lightbox
   const [lightboxRegister, setLightboxRegister] = useState(true);
 
@@ -58,8 +65,14 @@ export const PrincipalContextProvider = (props) => {
         setListReviews,
         filterReviews,
         setFilterReviews,
+        listMessageContactChange,
+        setListMessageContactChange,
         lightboxRegister,
         setLightboxRegister,
+        responseMessageContact,
+        setResponseMessageContact,
+        formSendEmailView,
+        setFormSendEmailView,
       }}
     >
       {props.children}

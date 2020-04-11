@@ -1,4 +1,5 @@
 const express = require("express");
+const axios = require("axios");
 const router = express.Router();
 const Contacts = require("../models/Contacts");
 const _ = require("lodash");
@@ -39,6 +40,40 @@ router.post("/delete", isLoggedIn(), async (req, res) => {
     return res.json({
       status: 200,
       message: "Mensaje eliminado satisfactoriamente",
+    });
+  } catch (err) {
+    return res.json({ status: 400, message: "No encontrado" });
+  }
+});
+
+//SEND MESSAGES CONTACT
+router.post("/send", isLoggedIn(), async (req, res) => {
+  try {
+    const { from, to, subject, emailbody } = req.body;
+
+    // const contactService = axios.create({
+    //   baseURL: "https://api.sendgrid.com/v3/mail/send",
+    // });
+
+    // contactService
+    //   .post("/", {
+    //     from,
+    //     to,
+    //     subject,
+    //     emailbody,
+    //   })
+    //   .then((response) => {
+    //     console.log("response del servudior", response);
+    //     return response;
+    //   })
+    //   .catch(function (error) {
+    //     console.log("error del servidor", error);
+    //     return error;
+    //   });
+
+    return res.json({
+      status: 200,
+      message: "Email enviado satisfactoriamente",
     });
   } catch (err) {
     return res.json({ status: 400, message: "No encontrado" });
