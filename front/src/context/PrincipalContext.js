@@ -42,7 +42,7 @@ export const PrincipalContextProvider = (props) => {
 
   //Response Message Contact
   const [responseMessageContact, setResponseMessageContact] = useState();
-  const [formSendEmailView, setFormSendEmailView] = useState(false);
+  const [formSendEmailView, setFormSendEmailView] = useState("false");
 
   //Register Lightbox
   const [lightboxRegister, setLightboxRegister] = useState(true);

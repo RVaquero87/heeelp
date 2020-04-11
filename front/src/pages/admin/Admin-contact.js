@@ -10,8 +10,10 @@ import {
   Paragraphs,
   SectionFormBoxAdminContact,
   FormBox,
+  FilterContactMessage,
   FilterText,
   ContainDivDefault,
+  SectionMessageContactContent,
 } from "../../../public/styles/Common.styles";
 
 //Contexto
@@ -31,10 +33,10 @@ import { TextAreaBox } from "../../components/TextArea/Index";
 export const AdminContact = () => {
   const {
     listMessageContactChange,
-    setListMessageContactChange,
     formSendEmailView,
     setFormSendEmailView,
     responseMessageContact,
+    Button,
     setResponseMessageContact,
     setMessageError,
   } = useContext(PrincipalContext);
@@ -88,11 +90,16 @@ export const AdminContact = () => {
   const sendEmailAdmin = async (dataEmail) => {
     const reponseServer = await sendMessageEmail(dataEmail);
     setMessageError(reponseServer.message);
-    setFormSendEmailView(!formSendEmailView);
+    setFormSendEmailView("false");
     setResponseMessageContact(null);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
+  };
+
+  const closeFormSensMessageContact = (e) => {
+    e.preventDefault();
+    setFormSendEmailView("false");
   };
 
   return (
@@ -107,90 +114,107 @@ export const AdminContact = () => {
         </SectionBox>
       ) : (
         <>
-          {formSendEmailView && (
-            <SectionBox data-aos="fade-up" column justify="start">
-              <SectionFormBoxAdminContact className="contain">
-                <FormContext {...methods}>
-                  <FormBox onSubmit={handleSubmit(sendEmailAdmin)}>
-                    <InputBox
-                      label="Email de"
-                      name="from"
-                      ref={register({
-                        required: {
-                          value: true,
-                          message: "El campo es requerido",
-                        },
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
-                          message: "El email incluido no es válido",
-                        },
-                      })}
-                    />
-                    <InputBox
-                      label="Email para"
-                      name="to"
-                      ref={register({
-                        required: {
-                          value: true,
-                          message: "El campo es requerido",
-                        },
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
-                          message: "El email incluido no es válido",
-                        },
-                      })}
-                    />
-                    <InputBox
-                      label="Resumén tu consulta en pocas palabras"
-                      name="subject"
-                      ref={register({
-                        required: {
-                          value: true,
-                          message: "El campo es requerido",
-                        },
-                      })}
-                    />
-                    <TextAreaBox
-                      label="Explica que te sucede"
-                      name="emailbody"
-                      ref={register({
-                        required: {
-                          value: true,
-                          message: "El campo es requerido",
-                        },
-                      })}
-                    />
-                    <button type="submit" className="button big">
-                      Enviar
-                    </button>
-                  </FormBox>
-                </FormContext>
-              </SectionFormBoxAdminContact>
-            </SectionBox>
+          {formSendEmailView === "true" && (
+            <>
+              <SectionBox data-aos="fade-up" column justify="start">
+                <SectionFormBoxAdminContact className="contain">
+                  <FormContext {...methods}>
+                    <FormBox onSubmit={handleSubmit(sendEmailAdmin)}>
+                      <InputBox
+                        label="Email de"
+                        name="from"
+                        ref={register({
+                          required: {
+                            value: true,
+                            message: "El campo es requerido",
+                          },
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
+                            message: "El email incluido no es válido",
+                          },
+                        })}
+                      />
+                      <InputBox
+                        label="Email para"
+                        name="to"
+                        ref={register({
+                          required: {
+                            value: true,
+                            message: "El campo es requerido",
+                          },
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
+                            message: "El email incluido no es válido",
+                          },
+                        })}
+                      />
+                      <InputBox
+                        label="Resumén tu consulta en pocas palabras"
+                        name="subject"
+                        ref={register({
+                          required: {
+                            value: true,
+                            message: "El campo es requerido",
+                          },
+                        })}
+                      />
+                      <TextAreaBox
+                        label="Explica que te sucede"
+                        name="emailbody"
+                        ref={register({
+                          required: {
+                            value: true,
+                            message: "El campo es requerido",
+                          },
+                        })}
+                      />
+                      <button type="submit" className="button big">
+                        Enviar
+                      </button>
+                      <button
+                        onClick={(e) => closeFormSensMessageContact(e)}
+                        className="button big transparent-blue delete"
+                      >
+                        cerrar
+                      </button>
+                    </FormBox>
+                  </FormContext>
+                </SectionFormBoxAdminContact>
+              </SectionBox>
+            </>
           )}
-          <div className="contain-filters">
-            <Paragraphs blue>
-              <span>Filtrar por username:</span>
-            </Paragraphs>
-            <FilterText
-              value={filterStartEmailText}
-              onChange={(e) => handleFilterTextContact(e, e.target.value)}
-            />
-          </div>
-          <SectionBox column>
-            {filterEmailText.length === 0 ? (
-              <Paragraphs blue>No existen nínguno con ese filtro</Paragraphs>
-            ) : (
-              <>
-                {filterEmailText &&
-                  filterEmailText.map((messageContact, i) => {
-                    return (
-                      <MessageBoxItem messageContact={messageContact} key={i} />
-                    );
-                  })}
-              </>
-            )}
-            )
+
+          <SectionBox justify="start">
+            <FilterContactMessage className="contain">
+              <div className="contain-filters">
+                <Paragraphs blue>
+                  <span>Filtrar por username:</span>
+                </Paragraphs>
+                <FilterText
+                  value={filterStartEmailText}
+                  onChange={(e) => handleFilterTextContact(e, e.target.value)}
+                />
+              </div>
+            </FilterContactMessage>
+          </SectionBox>
+          <SectionBox justify="between">
+            <SectionMessageContactContent className="contain">
+              {filterEmailText.length === 0 ? (
+                <Paragraphs blue>No existen nínguno con ese filtro</Paragraphs>
+              ) : (
+                <>
+                  {filterEmailText &&
+                    filterEmailText.map((messageContact, i) => {
+                      return (
+                        <MessageBoxItem
+                          messageContact={messageContact}
+                          key={i}
+                        />
+                      );
+                    })}
+                </>
+              )}
+            </SectionMessageContactContent>
           </SectionBox>
         </>
       )}

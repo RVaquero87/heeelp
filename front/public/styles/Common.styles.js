@@ -274,6 +274,9 @@ export const ParagraphTop = styled.p`
   span.item-light {
     font-weight: 100;
   }
+  span.item-block {
+    display: block;
+  }
   &:last-child {
     padding-bottom: 0;
   }
@@ -507,8 +510,9 @@ export const FilterStars = styled.div`
   @media (max-width: 768px) {
     margin-bottom: 35px;
     width: 100%;
+    max-width: 485px;
     ${Paragraphs} {
-      width: 50%;
+      width: initial;
       padding-right: 30px;
     }
   }
@@ -543,6 +547,55 @@ export const FilterUser = styled(FilterStars)`
     width: 100%;
     ${Paragraphs} {
       width: 100%;
+    }
+  }
+`;
+
+export const FilterContactMessage = styled(FilterStars)`
+  &.contain {
+    margin: 0 0 50px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .contain-filters {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: flex-start;
+      width: 490px;
+      ${Paragraphs} {
+        width: 330px;
+      }
+    }
+  }
+  @media (max-width: 1024px) {
+    &.contain {
+      .contain-filters {
+        width: 48.5%;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      .contain-filters {
+        max-width: 400px;
+        width: 100%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      .contain-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        ${Paragraphs} {
+          width: 100%;
+          padding-right: 0;
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 `;
@@ -1039,7 +1092,7 @@ export const FooterBox = styled.footer`
   }
 `;
 
-//Components HOME PAGE
+//Components Specific
 export const Col2Header = styled.div`
   padding: 125px 0 0;
   ${ContentText} {
@@ -2168,7 +2221,20 @@ ${H2}, > ${Paragraphs}{
 }
 `;
 
-export const SectionFormBoxAdminContact = styled(SectionFormBox)``;
+export const SectionFormBoxAdminContact = styled(SectionFormBox)`
+  padding: 0 0 70px;
+  form {
+    margin: 0 auto;
+    .delete {
+      margin-left: 24px;
+    }
+  }
+  @media (max-width: 480px) {
+    form .delete {
+      margin: 24px auto 0;
+    }
+  }
+`;
 
 export const SectionProtectedBox = styled.div`
   background: #8290ff;
@@ -2466,4 +2532,8 @@ export const SectionUserAdminList = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+`;
+
+export const SectionMessageContactContent = styled.div`
+  flex-flow: row wrap;
 `;

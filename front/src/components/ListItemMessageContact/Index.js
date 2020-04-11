@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 //Styles & AOS animation
-import { Paragraphs } from "../../../public/styles/Common.styles";
+import { Paragraphs, Button } from "../../../public/styles/Common.styles";
 import { BoxMessageContact } from "./styles/ItemsMessageContact.style";
 
 //Images
@@ -43,43 +43,51 @@ export const MessageBoxItem = ({ messageContact }) => {
       username: dataEmail[0],
       title: dataEmail[1],
     });
-    setFormSendEmailView(!formSendEmailView);
+    setFormSendEmailView("true");
   };
 
   return (
     <BoxMessageContact data-aos="fade-up">
+      <div className="data-intro">
+        <Paragraphs blue>
+          De: <span>{messageContact.username}</span>
+        </Paragraphs>
+        <Paragraphs blue>
+          <span>
+            {messageContact.createdAt.slice(8, 10)}/
+            {messageContact.createdAt.slice(5, 7)}/
+            {messageContact.createdAt.slice(0, 4)}
+          </span>
+          <span className="item-block">
+            {messageContact.createdAt.slice(11, 16)}
+          </span>
+        </Paragraphs>
+      </div>
       <Paragraphs blue>
-        <span>{messageContact.username}</span>
-      </Paragraphs>
-      <Paragraphs blue>{messageContact.title}</Paragraphs>
-
-      <Paragraphs blue>
-        <span>{messageContact.message}</span>
-      </Paragraphs>
-      <Paragraphs blue>
-        {messageContact.createdAt.slice(11, 16)} -
-        <span>
-          {messageContact.createdAt.slice(8, 10)}/
-          {messageContact.createdAt.slice(5, 7)}/
-          {messageContact.createdAt.slice(0, 4)}
-        </span>
+        <span>{messageContact.title}</span>
       </Paragraphs>
 
-      <button
-        className="delete"
-        value={messageContact._id}
-        onClick={(e) => getIdMessageContactDelete(e, e.target.value)}
-      >
-        <img src={closeX} alt="ELIMINAR" title="ELIMINAR" />
-      </button>
+      <Paragraphs className="message" blue>
+        {messageContact.message}
+      </Paragraphs>
 
-      <button
-        className="response button"
-        value={[messageContact.username, messageContact.title]}
-        onClick={(e) => sendDataSendEmail(e, e.target.value)}
-      >
-        Responder
-      </button>
+      <div className="box-buttons">
+        <Button
+          value={[messageContact.username, messageContact.title]}
+          onClick={(e) => sendDataSendEmail(e, e.target.value)}
+        >
+          Responder
+        </Button>
+
+        <Button
+          className="delete"
+          type="transparent-blue"
+          value={messageContact._id}
+          onClick={(e) => getIdMessageContactDelete(e, e.target.value)}
+        >
+          Eliminar
+        </Button>
+      </div>
     </BoxMessageContact>
   );
 };

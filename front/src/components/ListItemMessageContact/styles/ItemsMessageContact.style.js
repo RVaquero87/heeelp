@@ -1,32 +1,76 @@
 //Styles & AOS animation
 import styled from "styled-components";
+import { Paragraphs, Button } from "../../../../public/styles/Common.styles";
 
 export const BoxMessageContact = styled.div`
-  .delete {
-    cursor: pointer;
-    outline: none;
-    border-radius: 0;
-    color: #3e3874;
-    font-family: "Roboto", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    padding: 0;
-    position: absolute;
-    right: 16px;
-    text-decoration: none;
-    top: 16px;
-    width: 16px;
-    height: 16px;
-    &:hover {
-      color: rgb(62, 56, 116, 0.85);
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 11px 4px rgba(62, 56, 116, 0.1);
+  padding: 25px 30px;
+  width: 48.5%;
+  position: relative;
+  margin-bottom: 30px;
+  .data-intro {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+    ${Paragraphs}:last-child {
+      text-align: right;
     }
-    img {
-      width: 100%;
-      position: relative;
-      pointer-events: none;
+  }
+  > ${Paragraphs} {
+    padding-bottom: 14px;
+    width: 100%;
+    &.message {
+      max-height: 85px;
+      overflow-y: scroll;
+      padding-right: 10px;
+      padding-bottom: 0;
+    }
+  }
+  .box-buttons {
+    margin-top: 36px;
+    ${Button}:last-child {
+      margin-left: 16px;
     }
   }
 
+  @media (max-width: 960px) {
+    width: 100%;
+    > ${Paragraphs} {
+      &.message {
+        max-height: initial;
+        overflow: initial;
+        padding-right: 0px;
+      }
+    }
+  }
   @media (max-width: 480px) {
+    padding: 30px 25px;
+    .data-intro {
+      flex-direction: column-reverse;
+      margin-bottom: 12px;
+      width: 100%;
+      ${Paragraphs} {
+        padding-bottom: 10px;
+      }
+      ${Paragraphs}:last-child {
+        text-align: left;
+
+        .item-block {
+          display: inline;
+          &:before {
+            content: " - ";
+          }
+        }
+      }
+    }
+    .box-buttons {
+      margin-top: 24px;
+      ${Button}:last-child {
+        margin: 16px auto 0;
+      }
+    }
   }
 `;

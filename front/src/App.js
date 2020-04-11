@@ -27,6 +27,7 @@ import { ContactPage } from "./pages/Contact.page";
 import { RegisterPage } from "./pages/Register.page";
 import { LoginPage } from "./pages/Login.page";
 import { AdminPage } from "./pages/Admin.page";
+import { NotFoundPage } from "./pages/NotFound.page";
 
 //Sin hacer aun
 import { ProfilePage } from "./pages/Profile.page";
@@ -62,8 +63,8 @@ export const App = withAuthentication(() => {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/create-review" component={CreateReview} />
             <Route path="/private" component={PrivatePage} />
-            <Route path="*" component={HomePage} />
-            {/* <Route path="*" component={NotFoundPage} /> */}
+
+            <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>
       </GlobalContent>
