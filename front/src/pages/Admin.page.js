@@ -61,7 +61,7 @@ export const AdminPanel = () => {
               className={tabsAdmin === "users" ? "active" : ""}
               onClick={(e) => getComponentAdmin(e, e.target.value)}
             >
-              <i className="fas fa-users"></i>
+              <i className="fas fa-users" aria-hidden="true"></i>
               <span>Lista de </span>usuarios
             </button>
             <button
@@ -69,7 +69,7 @@ export const AdminPanel = () => {
               className={tabsAdmin === "messages" ? "active" : ""}
               onClick={(e) => getComponentAdmin(e, e.target.value)}
             >
-              <i className="fas fa-envelope-open-text"></i>
+              <i className="fas fa-envelope-open-text" aria-hidden="true"></i>
               Mensajes<span> de contacto</span>
             </button>
             <button
@@ -77,7 +77,7 @@ export const AdminPanel = () => {
               className={tabsAdmin === "reviews" ? "active" : ""}
               onClick={(e) => getComponentAdmin(e, e.target.value)}
             >
-              <i className="fas fa-comments"></i>
+              <i className="fas fa-comments" aria-hidden="true"></i>
               <span>Lista de </span>opiniones
             </button>
           </div>

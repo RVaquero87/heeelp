@@ -10,7 +10,6 @@ import {
 import { BoxUser } from "./styles/ItemsUsers.style";
 
 //Images
-import closeX from "../../../public/images/close.svg";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
@@ -93,7 +92,7 @@ export const UserBoxItem = ({ user }) => {
             })}
           />
           <button type="submit">
-            <i className="fas fa-sync-alt"></i>
+            <i className="fas fa-sync-alt" aria-hidden="true"></i>
           </button>
         </FormBox>
       </FormContext>
@@ -107,7 +106,7 @@ export const UserBoxItem = ({ user }) => {
         value={user._id}
         onClick={(e) => deleteUser(e, e.target.value)}
       >
-        <img src={closeX} alt="ELIMINAR" title="ELIMINAR" />
+        <i className="fa fa-trash-alt" aria-hidden="true"></i>
       </button>
     </BoxUser>
   );

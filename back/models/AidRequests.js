@@ -7,10 +7,11 @@ const userSchema = new Schema(
     title: String,
     summary: String,
     content: String,
-    shoppinglist: [{ type: Schema.Types.ObjectId, ref: "ListItems" }]
+    // price y tiemo de servico;
+    shoppinglist: [{ type: Schema.Types.ObjectId, ref: "ListItems" }],
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

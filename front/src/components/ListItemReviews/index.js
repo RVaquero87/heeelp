@@ -15,7 +15,6 @@ import { BoxReviews } from "./styles/ItemsReviews.style";
 //Images
 import startOn from "../../../public/images/star-on.svg";
 import startOff from "../../../public/images/star-off.svg";
-import closeX from "../../../public/images/close.svg";
 
 //Functional & Services
 import { deleteReviews } from "../../services/reviewsServices";
@@ -81,7 +80,7 @@ export const ReviewsBoxItem = ({ review }) => {
           value={review._id}
           onClick={(e) => deleteThisReview(e, e.target.value)}
         >
-          <img src={closeX} alt="ELIMINAR" title="ELIMINAR" />
+          <i className="fa fa-trash-alt" aria-hidden="true"></i>
         </button>
       )}
     </BoxReviews>

@@ -42,24 +42,22 @@ export const BoxReviews = styled.div`
     }
   }
   .delete {
-    cursor: pointer;
-    outline: none;
     color: #3e3874;
+    cursor: pointer;
     font-family: "Roboto", sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
-    position: absolute;
+    line-height: 1;
+    outline: none;
     padding: 0;
-    right: 16px;
+    position: absolute;
+    right: 14px;
     text-decoration: none;
-    top: 16px;
-    width: 16px;
-    height: 16px;
+    top: 14px;
     &:hover {
       opacity: 0.85;
     }
-    img {
-      width: 100%;
+    i {
       pointer-events: none;
     }
   }

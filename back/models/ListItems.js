@@ -9,17 +9,16 @@ const userSchema = new Schema(
     kind: {
       type: String,
       enum: [
-        "Todos",
         "Farmacia",
         "Supermercado",
         "Lavandería",
         "Ayuda con máscotas",
-        "Tareas de domésticas"
-      ]
-    }
+        "Tareas domésticas",
+      ],
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
