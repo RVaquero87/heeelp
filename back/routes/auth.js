@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../models/Users");
 const _ = require("lodash");
 const passport = require("passport");
 const { hashPassword, checkHashed } = require("../lib/hashing");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 const uploader = require("../cloudinary/cloudinary.config");
+
+//Models
+const Users = require("../models/Users");
 
 // SIGNUP
 router.post("/signup", async (req, res, next) => {

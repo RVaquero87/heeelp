@@ -3,13 +3,14 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    creatorUserid: { type: Schema.Types.ObjectId, ref: "Users" },
-    receptorUserid: { type: Schema.Types.ObjectId, ref: "Users" },
     title: String,
-    message: String
+    message: String,
+    creatorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
+    receptorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
+    aidResquestId: { type: Schema.Types.ObjectId, ref: "AidRequests" },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

@@ -1,9 +1,11 @@
 const express = require("express");
-const axios = require("axios");
 const router = express.Router();
-const Contacts = require("../models/Contacts");
+const axios = require("axios");
 const _ = require("lodash");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
+
+//Models
+const Contacts = require("../models/Contacts");
 
 // CREATE MESSAGE CONTACT
 router.post("/create", async (req, res, next) => {

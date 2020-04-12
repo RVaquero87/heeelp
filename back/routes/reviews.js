@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Reviews = require("../models/Reviews");
-const Users = require("../models/Users");
 const _ = require("lodash");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
+
+//Models
+const Reviews = require("../models/Reviews");
 
 // CREATE REVIEWS
 router.post("/create", isLoggedIn(), async (req, res, next) => {
