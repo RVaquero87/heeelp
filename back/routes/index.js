@@ -9,13 +9,13 @@ router.use("/auth", auth);
 const aidRequest = require("./aid-requests");
 router.use("/aid-requests", aidRequest);
 
+// routes listItems
+const listItems = require("./list-items");
+router.use("/list-items", listItems);
+
 // routes Notifications
 const notifications = require("./notifications");
 router.use("/notifications", notifications);
-
-// routes ShoppingList
-const shoppingLists = require("./shopping-lists");
-router.use("/shopping-lists", shoppingLists);
 
 // routes reviews
 const reviews = require("./reviews");

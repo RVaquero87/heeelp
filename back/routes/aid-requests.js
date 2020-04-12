@@ -4,20 +4,13 @@ const _ = require("lodash");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 
 //Models
-const Users = require("../models/Users");
 const AidRequests = require("../models/AidRequests");
-const ShoppingLists = require("../models/ShoppingLists");
 
 // CREATE AidRequest
 router.post("/create", isLoggedIn(), async (req, res, next) => {
   try {
     const { title, content, price, time, type } = req.body;
     const idUser = req.user;
-
-    //Create the ShoppingList
-    const newShoppingList = await ShoppingLists.create({
-      type: type,
-    });
 
     // Create the AidRequest
     await AidRequests.create({
@@ -26,7 +19,6 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
       creatorUserid: idUser,
       price,
       time,
-      shoppinglist: newShoppingList._id,
       type,
       status: "En creación",
     });
@@ -112,30 +104,43 @@ router.post("/alls", async (req, res) => {
       .populate("helperId")
       .populate("shoppinglist");
 
-    // const aidRequestModify = await aidResquests.map(async (aidrequest) => {
-    //   try {
-    //     const dateActually = new Date();
-    //     if (dateActually > aidrequest.time) {
-    //       await AidRequests.findByIdAndUpdate(aidrequest._id, {
-    //         status: "Realizada",
-    //       });
-    //     }
-    //     return aidrequest;
-    //   } catch (error) {
-    //     return res.json({
-    //       status: 401,
-    //       message: "Fallo al publicar la petición de ayuda",
-    //     });
-    //   }
-    // });
-
-    // console.log("aidRequestModify", aidRequestModify);
-
     return res.json(aidResquests);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
 });
+
+// //GET ALL AidRequest
+// router.post("/alls", async (req, res) => {
+//   try {
+//     const aidResquests = await AidRequests.find().then(async (aidResquests) => {
+//       const arrayModifyList = await Promise.all(
+//         aidResquests.map(async (item) => {
+//           const dateActually = new Date();
+
+//           if (dateActually > item.time && item.status === "En curso") {
+//             const itemModify = await AidRequests.findByIdAndUpdate(item._id, {
+//               status: "Realizada",
+//             })
+//               .sort({ createdAt: -1 })
+//               .populate("creatorUserid")
+//               .populate("helperId")
+//               .populate("shoppinglist");
+//             console.log("dsdfdfsdfdsfsdfsdfsdfsdfsf   itemModify", itemModify);
+//             return itemModify;
+//           }
+//           console.log("itemfadsfasfsa", item);
+//           return item;
+//         })
+//       );
+
+//       return arrayModifyList;
+//     });
+//     return res.json(aidResquests);
+//   } catch (err) {
+//     return res.json({ status: 400, message: "Fallo al recibir los datos" });
+//   }
+// });
 
 /* PUBLIC AidRequest */
 router.post("/public", isLoggedIn(), async (req, res, next) => {
@@ -163,7 +168,7 @@ router.post("/add-helper", isLoggedIn(), async (req, res, next) => {
     const idUser = req.user;
     await AidRequests.findByIdAndUpdate(_id, {
       helperId: idUser._id,
-      status: "En Curso",
+      status: "En curso",
     });
     return res.json({
       status: 200,
@@ -207,12 +212,6 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
       "shoppinglist"
     );
 
-    //Create the ShoppingList
-    const newShoppingList = await ShoppingLists.create({
-      list: oldAidRequest.shoppinglist.list,
-      type: oldAidRequest.type,
-    });
-
     // Create the AidRequest
     await AidRequests.create({
       title,
@@ -220,7 +219,6 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
       creatorUserid: oldAidRequest.creatorUserid,
       price: oldAidRequest.price,
       time,
-      shoppinglist: newShoppingList._id,
       type: oldAidRequest.type,
       status: "En creación",
     });

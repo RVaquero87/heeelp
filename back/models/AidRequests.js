@@ -12,7 +12,7 @@ const userSchema = new Schema(
       enum: ["Free", "5€/h", "6€/h", "7€/h", "8€/h", "9€/h", "10€/h"],
     },
     time: Date,
-    shoppinglist: { type: Schema.Types.ObjectId, ref: "ShoppingLists" },
+    shoppinglist: [{ type: Schema.Types.ObjectId, ref: "ShoppingLists" }],
     type: {
       type: String,
       enum: [
@@ -25,7 +25,7 @@ const userSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["Realizada", "En Curso", "Publicada", "En creación"],
+      enum: ["Realizada", "En curso", "Publicada", "En creación"],
     },
   },
   {
