@@ -57,12 +57,30 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
   }
 });
 
-//GET ID AidRequest Creator
+//GET ID AidRequests Creator
 router.post("/id-creator", async (req, res) => {
   try {
     const idUser = req.user;
 
-    const aidResquests = await AidRequests.find({
+    // const aidRequests = await AidRequests.find({
+    //   creatorUserid: { _id: idUser._id },
+    // });
+
+    // await Promise.all(
+    //   aidRequests.map(async (aidRequest) => {
+    //     const dateActually = new Date();
+    //     if (
+    //       dateActually > aidRequest.time &&
+    //       aidRequest.status === "En curso"
+    //     ) {
+    //       await AidRequests.findByIdAndUpdate(aidRequest._id, {
+    //         status: "Realizada",
+    //       }).then((aidRequest) => aidRequest);
+    //     }
+    //   })
+    // );
+
+    const aidRequestsModify = await AidRequests.find({
       creatorUserid: { _id: idUser._id },
     })
       .sort({ createdAt: -1 })
@@ -70,18 +88,36 @@ router.post("/id-creator", async (req, res) => {
       .populate("helperId")
       .populate("shoppinglist");
 
-    return res.json(aidResquests);
+    return res.json(aidRequestsModify);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
 });
 
-//GET ID AidRequest Helper
+//GET ID AidRequests Helper
 router.post("/id-helper", async (req, res) => {
   try {
     const idUser = req.user;
 
-    const aidResquests = await AidRequests.find({
+    // const aidRequests = await AidRequests.find({
+    //   helperId: { _id: idUser._id },
+    // });
+
+    // await Promise.all(
+    //   aidRequests.map(async (aidRequest) => {
+    //     const dateActually = new Date();
+    //     if (
+    //       dateActually > aidRequest.time &&
+    //       aidRequest.status === "En curso"
+    //     ) {
+    //       await AidRequests.findByIdAndUpdate(aidRequest._id, {
+    //         status: "Realizada",
+    //       }).then((aidRequest) => aidRequest);
+    //     }
+    //   })
+    // );
+
+    const aidRequestsModify = await AidRequests.find({
       helperId: { _id: idUser._id },
     })
       .sort({ createdAt: -1 })
@@ -89,7 +125,7 @@ router.post("/id-helper", async (req, res) => {
       .populate("helperId")
       .populate("shoppinglist");
 
-    return res.json(aidResquests);
+    return res.json(aidRequestsModify);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
@@ -98,54 +134,62 @@ router.post("/id-helper", async (req, res) => {
 //GET ALL AidRequest
 router.post("/alls", async (req, res) => {
   try {
-    const aidResquests = await AidRequests.find()
+    const aidRequests = await AidRequests.find();
+
+    await Promise.all(
+      aidRequests.map(async (aidRequest) => {
+        const dateActually = new Date();
+        if (dateActually > aidRequest.time) {
+          if (aidRequest.status === "En curso") {
+            await AidRequests.findByIdAndUpdate(aidRequest._id, {
+              status: "Realizada",
+            }).then((aidRequest) => aidRequest);
+          } else if (aidRequest.status === "Publicada") {
+            await AidRequests.findByIdAndUpdate(aidRequest._id, {
+              status: "Cancelada",
+            });
+          }
+        }
+      })
+    );
+
+    const aidRequestsModify = await AidRequests.find()
       .sort({ createdAt: -1 })
       .populate("creatorUserid")
       .populate("helperId")
       .populate("shoppinglist");
 
-    return res.json(aidResquests);
+    return res.json(aidRequestsModify);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
 });
 
-// //GET ALL AidRequest
-// router.post("/alls", async (req, res) => {
-//   try {
-//     const aidResquests = await AidRequests.find().then(async (aidResquests) => {
-//       const arrayModifyList = await Promise.all(
-//         aidResquests.map(async (item) => {
-//           const dateActually = new Date();
-
-//           if (dateActually > item.time && item.status === "En curso") {
-//             const itemModify = await AidRequests.findByIdAndUpdate(item._id, {
-//               status: "Realizada",
-//             })
-//               .sort({ createdAt: -1 })
-//               .populate("creatorUserid")
-//               .populate("helperId")
-//               .populate("shoppinglist");
-//             console.log("dsdfdfsdfdsfsdfsdfsdfsdfsf   itemModify", itemModify);
-//             return itemModify;
-//           }
-//           console.log("itemfadsfasfsa", item);
-//           return item;
-//         })
-//       );
-
-//       return arrayModifyList;
-//     });
-//     return res.json(aidResquests);
-//   } catch (err) {
-//     return res.json({ status: 400, message: "Fallo al recibir los datos" });
-//   }
-// });
-
 /* PUBLIC AidRequest */
 router.post("/public", isLoggedIn(), async (req, res, next) => {
   try {
     const { _id } = req.body;
+
+    const aidRequest = await AidRequests.findById(_id);
+
+    console.log("_id", _id);
+    console.log("aidRequest", aidRequest);
+    console.log("x[shoppinglist].length");
+
+    if (aidRequest.shoppinglist.length <= 0) {
+      return res.json({
+        status: 401,
+        message: "Debe incluir una lista de peticiones",
+      });
+    }
+    const dateActually = new Date();
+    if (dateActually > aidRequest.time) {
+      return res.json({
+        status: 401,
+        message: "La fecha de la tarea no puede ser anterior al día actual",
+      });
+    }
+
     await AidRequests.findByIdAndUpdate(_id, {
       status: "Publicada",
     });
@@ -231,6 +275,26 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
     return res.json({
       status: 401,
       message: "Fallo al duplicar la petición de ayuda",
+    });
+  }
+});
+
+/* Delete CANCEL AidRequest */
+router.post("/cancel", isLoggedIn(), async (req, res, next) => {
+  try {
+    const { _id } = req.body;
+    await AidRequests.findByIdAndUpdate(_id, {
+      helperId: null,
+      status: "Cancelada",
+    });
+    return res.json({
+      status: 200,
+      message: "La petición ha sido cancelada",
+    });
+  } catch (error) {
+    return res.json({
+      status: 401,
+      message: "Fallo al cancelar la petición de ayuda",
     });
   }
 });

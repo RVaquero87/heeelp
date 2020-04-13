@@ -65,7 +65,7 @@ export const ServicesPage = () => {
             />
             <ItemServicies
               ImgSrc={icon3}
-              ItemText="Farmacia"
+              ItemText="Parafarmacia"
               ItemContent="Aliquam semper ipsum et libero cursus blandit."
             />
             <ItemServicies

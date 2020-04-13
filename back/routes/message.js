@@ -4,15 +4,15 @@ const _ = require("lodash");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 
 //Models
-const Notifications = require("../models/Notifications");
+const Messages = require("../models/Messages");
 
-// CREATE NOTIFICATIONS
+// CREATE MESSAGES
 router.post("/create", isLoggedIn(), async (req, res, next) => {
   const { title, message, aidResquestId, receptorUserId } = req.body;
   const idUser = req.user;
 
-  // Create the Notifications
-  await Notifications.create({
+  // Create the Messages
+  await Messages.create({
     title,
     message,
     creatorUserId: idUser._id,
@@ -26,61 +26,61 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
   });
 });
 
-//GET NOTIFICATIONS BY ID USER CREATOR
+//GET MESSAGES BY ID USER CREATOR
 router.post("/alls-creator-id", async (req, res) => {
   try {
     const idUser = req.user;
-    const notificationsList = await Notifications.find({
+    const messagesList = await Messages.find({
       creatorUserId: { _id: idUser._id },
     })
       .sort({ createdAt: -1 })
       .populate("receptorUserId")
       .populate("aidResquestId");
 
-    return res.json(notificationsList);
+    return res.json(messagesList);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
 });
 
-//GET NOTIFICATIONS BY ID USER RECEPTOR
+//GET MESSAGES BY ID USER RECEPTOR
 router.post("/alls-receptor-id", async (req, res) => {
   try {
     const idUser = req.user;
 
-    const notificationsList = await Notifications.find({
+    const messagesList = await Messages.find({
       receptorUserId: { _id: idUser._id },
     })
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
       .populate("aidResquestId");
 
-    return res.json(notificationsList);
+    return res.json(messagesList);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
 });
 
-//GET NOTIFICATIONS ALLS
+//GET MESSAGES ALLS
 router.post("/alls", async (req, res) => {
   try {
-    const notificationsList = await Notifications.find()
+    const messagesList = await Messages.find()
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
       .populate("receptorUserId")
       .populate("aidResquestId");
 
-    return res.json(notificationsList);
+    return res.json(messagesList);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
   }
 });
 
-//DELETE NOTIFICATIONS BY ID
+//DELETE MESSAGES BY ID
 router.post("/delete", isLoggedIn(), async (req, res) => {
   try {
     const { _id } = req.body;
-    await Notifications.findByIdAndRemove(_id);
+    await Messages.findByIdAndRemove(_id);
     return res.json({
       status: 200,
       message: "Mensaje eliminado satisfactoriamente",

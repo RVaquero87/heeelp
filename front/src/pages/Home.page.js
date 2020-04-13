@@ -143,7 +143,7 @@ export const HomePage = () => {
           <div className="col5">
             <ItemServicies ImgSrc={icon1} ItemText="Lavandería" />
             <ItemServicies ImgSrc={icon2} ItemText="Supermercado" />
-            <ItemServicies ImgSrc={icon3} ItemText="Farmacia" />
+            <ItemServicies ImgSrc={icon3} ItemText="Parafarmacia" />
             <ItemServicies ImgSrc={icon4} ItemText="Tareas domésticas" />
             <ItemServicies ImgSrc={icon5} ItemText="Animales domésticos" />
           </div>

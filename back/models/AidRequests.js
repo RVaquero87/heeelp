@@ -18,14 +18,14 @@ const userSchema = new Schema(
       enum: [
         "Lavandería",
         "Supermercado",
-        "Farmacia",
+        "Parafarmacia",
         "Tareas domésticas",
         "Animales domésticos",
       ],
     },
     status: {
       type: String,
-      enum: ["Realizada", "En curso", "Publicada", "En creación"],
+      enum: ["Cancelada", "Realizada", "En curso", "Publicada", "En creación"],
     },
   },
   {

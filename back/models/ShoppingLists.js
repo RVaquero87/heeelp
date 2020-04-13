@@ -5,7 +5,6 @@ const userSchema = new Schema(
   {
     name: String,
     description: String,
-    image: String,
     quantity: Number,
   },
   {

@@ -10,12 +10,11 @@ const ShoppingLists = require("../models/ShoppingLists");
 //CREATE ShoppingList
 router.post("/create", isLoggedIn(), async (req, res, next) => {
   try {
-    const { aidRequestsId, name, description, image, quantity } = req.body;
+    const { aidRequestsId, name, description, quantity } = req.body;
 
     const listItem = await ShoppingLists.create({
       name,
       description,
-      image,
       quantity,
     });
 
@@ -38,12 +37,11 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
 //EDIT ShoppingList
 router.post("/edit", isLoggedIn(), async (req, res, next) => {
   try {
-    const { name, description, image, quantity, _id } = req.body;
+    const { name, description, quantity, _id } = req.body;
 
     await ShoppingLists.findByIdAndUpdate(_id, {
       name,
       description,
-      image,
       quantity,
     });
 

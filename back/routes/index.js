@@ -13,6 +13,10 @@ router.use("/aid-requests", aidRequest);
 const listItems = require("./list-items");
 router.use("/list-items", listItems);
 
+// routes Message
+const message = require("./message");
+router.use("/message", message);
+
 // routes Notifications
 const notifications = require("./notifications");
 router.use("/notifications", notifications);
