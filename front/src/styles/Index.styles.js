@@ -86,9 +86,21 @@ export const Main = styled.main`
     padding: 0 2.5%;
     width: 100%;
   }
+  .item-resp {
+    display: none;
+  }
+  .item-desktop {
+    display: inline-block;
+  }
   @media (max-width: 768px) {
     > section {
       padding: 0 4%;
+    }
+    .item-resp {
+      display: inline-block;
+    }
+    .item-desktop {
+      display: none;
     }
   }
   @media (max-width: 480px) {
@@ -2216,9 +2228,9 @@ export const SectionFormBoxRegister = styled(SectionFormBox)`
 `;
 
 export const SectionFormBoxContact = styled(SectionFormBox)`
-${H2}, > ${Paragraphs}{
-  text-align:left;
-}
+  ${H2}, > ${Paragraphs}{
+    text-align:left;
+  }
 `;
 
 export const SectionFormBoxAdminContact = styled(SectionFormBox)`
@@ -2536,4 +2548,43 @@ export const SectionUserAdminList = styled.div`
 
 export const SectionMessageContactContent = styled.div`
   flex-flow: row wrap;
+`;
+
+export const Page404 = styled.div`
+  &.contain {
+    max-width: 558px;
+    height: 93vh;
+    padding: 20vh 0 15vh;
+    text-align: center;
+    ${H1} {
+      margin: 30px auto 15px;
+    }
+    ${Paragraphs} {
+      padding-bottom: 36px;
+    }
+    .button-box {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+  @media (max-height: 768px) {
+    &.contain {
+      height: initial;
+    }
+  }
+  @media (max-width: 768px) {
+    .button-box {
+      flex-direction: column;
+      .button {
+        margin: 0 auto;
+        .item-resp {
+          display: inline-block;
+        }
+        &:last-child {
+          margin-top: 24px;
+        }
+      }
+    }
+  }
 `;

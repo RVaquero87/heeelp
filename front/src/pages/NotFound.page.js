@@ -7,6 +7,7 @@ import {
   ContentText,
   BoxImg,
   H1,
+  Page404,
   ParagraphTop,
   Paragraphs,
   Col2HeaderPrivacy,
@@ -14,7 +15,7 @@ import {
 } from "../styles/Index.styles";
 
 //Images
-import privacyImg from "../../public/images/privacy-img.svg";
+import img404 from "../../public/images/img-404.svg";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
@@ -30,43 +31,32 @@ export const NotFoundPage = () => {
 
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
-        <Col2HeaderPrivacy className="contain" data-aos="fade-up">
-          <ContentText>
-            <H1>Página 404</H1>
-          </ContentText>
-          <BoxImg>
-            <img src={privacyImg} alt="heeelp!" title="heeelp!" />
+      <SectionBox bgColor="blueLight" justify="center" column>
+        <Page404 className="contain">
+          <BoxImg data-aos="fade-up">
+            <img src={img404} alt="heeelp!" title="heeelp!" />
           </BoxImg>
-        </Col2HeaderPrivacy>
-      </SectionBox>
-
-      <SectionBox bgColor="grey" column>
-        <TermsBox className="contain">
-          <div data-aos="fade-up">
-            <ParagraphTop blue>
-              <span>Lorem ipsum dolor </span>
-            </ParagraphTop>
-            <Paragraphs blue>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at
-              enim ut nibh semper venenatis vitae posuere justo. Aliquam vitae
-              feugiat nunc, id convallis magna. Mauris vitae metus hendrerit sit
-              amet felis porta vestibulum.
+          <ContentText data-aos="fade-up">
+            <H1>Página no encontrada</H1>
+            <Paragraphs>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              bibendum, erat convallis vulputate cursus, lacus dui maximus sem,
+              eget fringilla arcu tortor sit amet lectus.
             </Paragraphs>
-            <Paragraphs blue>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at
-              enim ut nibh semper venenatis vitae posuere justo. Aliquam vitae
-              feugiat nunc, id convallis magna. Mauris vitae metus hendrerit sit
-              amet felis porta vestibulum.
-            </Paragraphs>
-            <Paragraphs blue>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at
-              enim ut nibh semper venenatis vitae posuere justo. Aliquam vitae
-              feugiat nunc, id convallis magna. Mauris vitae metus hendrerit sit
-              amet felis porta vestibulum.
-            </Paragraphs>
-          </div>
-        </TermsBox>
+            <div className="button-box">
+              <ButtonLink
+                className="button transparent big"
+                whereTo="/contacto"
+              >
+                <span className="item-desktop">contacta con nosotros </span>
+                <span className="item-resp">contactanos</span>
+              </ButtonLink>
+              <ButtonLink className="button big" whereTo="/">
+                ir a inicio
+              </ButtonLink>
+            </div>
+          </ContentText>
+        </Page404>
       </SectionBox>
     </>
   );
