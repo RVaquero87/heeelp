@@ -7,7 +7,7 @@ import { useFormContext } from "react-hook-form";
 
 //Styles & AOS animation
 import { InputText, LabelText } from "./styles/input.styles";
-import { ErrorMessage, Paragraphs } from "../../../public/styles/Common.styles";
+import { ErrorMessage, Paragraphs } from "../../styles/Index.styles";
 
 const hasError = (errors, name) => {
   if (name in errors) return "error";

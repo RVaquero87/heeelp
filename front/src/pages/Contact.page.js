@@ -17,7 +17,7 @@ import {
   FormBox,
   SectionFormBoxContact,
   FaqsBox,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import contactHeader from "../../public/images/contact-2.svg";

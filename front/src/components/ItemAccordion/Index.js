@@ -5,11 +5,11 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 
 //Styles & AOS animation
-import { ParagraphTop, Paragraphs } from "../../../public/styles/Common.styles";
+import { ParagraphTop, Paragraphs } from "../../styles/Index.styles";
 
 //Images
 import iconLess from "../../../public/images/icon-less.svg";

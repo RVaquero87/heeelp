@@ -18,7 +18,7 @@ import {
   SectionFormBoxRegister,
   ParagraphTop,
   LightBoxRegisterRol,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import imgProfile from "../../public/images/default-profile.png";

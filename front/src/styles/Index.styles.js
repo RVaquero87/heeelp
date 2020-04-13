@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 //Images
-import logo from "../images/logo-blanco.svg";
-import logoNegro from "../images/logo-negro.svg";
-import comillas from "../images/comillas.svg";
-import arrowBottom from "../images/arrow.svg";
+import logo from "../../public/images/logo-blanco.svg";
+import logoNegro from "../../public/images/logo-negro.svg";
+import comillas from "../../public/images/comillas.svg";
+import arrowBottom from "../../public/images/arrow.svg";
 
 //Global Class
 export const GlobalContent = styled.div`

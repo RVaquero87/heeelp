@@ -14,7 +14,7 @@ import {
   FilterText,
   ContainDivDefault,
   SectionMessageContactContent,
-} from "../../../public/styles/Common.styles";
+} from "../../styles/Index.styles";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";

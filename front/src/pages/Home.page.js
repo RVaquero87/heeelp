@@ -16,7 +16,7 @@ import {
   SectionServicesRates,
   SectionReviewsHome,
   FaqsBox,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import people from "../../public/images/people.svg";

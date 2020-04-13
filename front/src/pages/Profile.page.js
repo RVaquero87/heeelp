@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { FormBox } from "../../public/styles/Common.styles";
+import { FormBox } from "../styles/Index.styles";
 import {
   doLogout,
   doEdit,
   doUnsubscribe,
-  uploadPhoto
+  uploadPhoto,
 } from "../services/authServices";
 import { PrincipalContext } from "../context/PrincipalContext";
 import { useForm, FormContext } from "react-hook-form";
@@ -17,7 +17,7 @@ export const ProfilePage = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);
 
   //lOGOUT
-  const onClickLogout = async e => {
+  const onClickLogout = async (e) => {
     e.preventDefault();
     await doLogout();
     await setUser(null);
@@ -25,7 +25,7 @@ export const ProfilePage = withRouter(({ history }) => {
   };
 
   //UNSUBSCRIBE
-  const onClickUnsubscribe = async e => {
+  const onClickUnsubscribe = async (e) => {
     e.preventDefault();
     const responseUnsubscribe = await doUnsubscribe(user);
     setMessageError(responseUnsubscribe.message);
@@ -48,10 +48,10 @@ export const ProfilePage = withRouter(({ history }) => {
 
   //Image USER
   const [image, setImage] = useState({
-    imageUrl: user?.image || imgProfile
+    imageUrl: user?.image || imgProfile,
   });
   const [imagePreview, setImagePreview] = useState(image.imageUrl);
-  const handleChangeFile = e => {
+  const handleChangeFile = (e) => {
     setImage({ imageUrl: e.target.files[0] });
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
@@ -70,8 +70,8 @@ export const ProfilePage = withRouter(({ history }) => {
       floor: user?.floor,
       letter: user?.letter,
       postalCode: user?.postalCode,
-      city: user?.city || "Madrid"
-    }
+      city: user?.city || "Madrid",
+    },
   });
 
   useEffect(() => {
@@ -87,14 +87,14 @@ export const ProfilePage = withRouter(({ history }) => {
       floor: user?.floor,
       letter: user?.letter,
       postalCode: user?.postalCode,
-      city: user?.city
+      city: user?.city,
     });
   }, [user]);
 
   const { register, handleSubmit, errors } = methods;
 
   //Editar los datos
-  const onEdit = async data => {
+  const onEdit = async (data) => {
     const responseServer = await doEdit(data);
 
     const uploadData = new FormData();
@@ -130,8 +130,8 @@ export const ProfilePage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
-                }
+                  message: "Este campo es requerido",
+                },
               })}
             />
             <InputBox
@@ -140,8 +140,8 @@ export const ProfilePage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
-                }
+                  message: "Este campo es requerido",
+                },
               })}
             />
 
@@ -152,14 +152,14 @@ export const ProfilePage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
-                }
+                  message: "Este campo es requerido",
+                },
               })}
             />
 
             <p>
-              <button onClick={e => onChangePassport(e, true)}>DNI</button>/
-              <button onClick={e => onChangePassport(e, false)}>
+              <button onClick={(e) => onChangePassport(e, true)}>DNI</button>/
+              <button onClick={(e) => onChangePassport(e, false)}>
                 Passport
               </button>
             </p>
@@ -171,12 +171,12 @@ export const ProfilePage = withRouter(({ history }) => {
                 ref={register({
                   required: {
                     value: true,
-                    message: "Este campo es requerido"
+                    message: "Este campo es requerido",
                   },
                   pattern: {
                     value: /[0-9]{8}[A-Za-z]{1}/,
-                    message: "El DNI incluido no es válido"
-                  }
+                    message: "El DNI incluido no es válido",
+                  },
                 })}
               />
             )) || (
@@ -186,12 +186,12 @@ export const ProfilePage = withRouter(({ history }) => {
                 ref={register({
                   required: {
                     value: true,
-                    message: "Este campo es requerido"
+                    message: "Este campo es requerido",
                   },
                   pattern: {
                     value: /[a-zA-Z]{2}[0-9]{7}/,
-                    message: "El número del Pasaporte es incorrecto"
-                  }
+                    message: "El número del Pasaporte es incorrecto",
+                  },
                 })}
               />
             )}
@@ -201,8 +201,8 @@ export const ProfilePage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
-                }
+                  message: "Este campo es requerido",
+                },
               })}
             />
 
@@ -213,8 +213,8 @@ export const ProfilePage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
-                }
+                  message: "Este campo es requerido",
+                },
               })}
             />
             <InputBox label="Portal" name="portal" ref={register()} />
@@ -233,12 +233,12 @@ export const ProfilePage = withRouter(({ history }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
+                  message: "Este campo es requerido",
                 },
                 pattern: {
                   value: /((0[1-9]|5[0-2])|[1-4][0-9])[0-9]{3}/,
-                  message: "Código postal incorrecto"
-                }
+                  message: "Código postal incorrecto",
+                },
               })}
             />
             <SelectBox
@@ -294,13 +294,13 @@ export const ProfilePage = withRouter(({ history }) => {
                 "Valladolid",
                 "Vizcaya",
                 "Zamora",
-                "Zaragoza"
+                "Zaragoza",
               ]}
               ref={register({
                 required: {
                   value: true,
-                  message: "Este campo es requerido"
-                }
+                  message: "Este campo es requerido",
+                },
               })}
             />
           </div>
@@ -311,11 +311,11 @@ export const ProfilePage = withRouter(({ history }) => {
         </FormBox>
       </FormContext>
 
-      <button className="button" onClick={e => onClickLogout(e)}>
+      <button className="button" onClick={(e) => onClickLogout(e)}>
         Logout
       </button>
 
-      <button className="button" onClick={e => onClickUnsubscribe(e)}>
+      <button className="button" onClick={(e) => onClickUnsubscribe(e)}>
         Darse Baja
       </button>
     </>

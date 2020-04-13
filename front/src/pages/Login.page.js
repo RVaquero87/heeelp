@@ -15,7 +15,7 @@ import {
   BoxImg,
   FormBox,
   SectionFormBox,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import girlComputer from "../../public/images/girl-computer.png";

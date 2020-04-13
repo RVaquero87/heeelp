@@ -6,8 +6,8 @@ import { NavLink } from "react-router-dom";
 import {
   Paragraphs,
   ContainDivDefault,
-  FooterBox
-} from "../../public/styles/Common.styles";
+  FooterBox,
+} from "../styles/Index.styles";
 
 export const Footer = () => (
   <FooterBox>

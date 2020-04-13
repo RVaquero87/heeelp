@@ -16,7 +16,7 @@ import {
   SectionReviews,
   FaqsBox,
   FilterStars,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import contact from "../../public/images/contact.svg";

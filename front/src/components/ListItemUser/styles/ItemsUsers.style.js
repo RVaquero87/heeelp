@@ -1,10 +1,6 @@
 //Styles & AOS animation
 import styled from "styled-components";
-import {
-  BoxImg,
-  Paragraphs,
-  FormBox,
-} from "../../../../public/styles/Common.styles";
+import { BoxImg, Paragraphs, FormBox } from "../../../styles/Index.styles";
 
 //Img
 import arrowBottom from "../../../../public/images/arrow.svg";

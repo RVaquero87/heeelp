@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 //Styles & AOS animation
-import { Paragraphs, Button } from "../../../public/styles/Common.styles";
+import { Paragraphs, Button } from "../../styles/Index.styles";
 import { BoxMessageContact } from "./styles/ItemsMessageContact.style";
 
 //Images

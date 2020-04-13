@@ -11,7 +11,7 @@ import AOS from "aos";
 import { withAuthentication } from "./lib/withAuthentication";
 
 //Global CSS
-import { GlobalContent } from "../public/styles/Common.styles";
+import { GlobalContent } from "./styles/Index.styles";
 
 //Header - Footer
 import { Layout } from "./layouts/Layout";

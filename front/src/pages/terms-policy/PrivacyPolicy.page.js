@@ -14,7 +14,7 @@ import {
   Col2HeaderPrivacy,
   Col2Min,
   TermsBox,
-} from "../../../public/styles/Common.styles";
+} from "../../styles/Index.styles";
 
 //Images
 import privacyImg from "../../../public/images/privacy-img.svg";

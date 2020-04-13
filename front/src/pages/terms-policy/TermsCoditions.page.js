@@ -14,7 +14,7 @@ import {
   Col2HeaderTerms,
   Col2Min,
   TermsBox,
-} from "../../../public/styles/Common.styles";
+} from "../../styles/Index.styles";
 
 //Images
 import termsImg from "../../../public/images/terms-img.svg";

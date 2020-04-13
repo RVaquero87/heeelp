@@ -2,11 +2,7 @@
 import React, { useContext, useEffect } from "react";
 
 //Styles & AOS animation
-import {
-  FormBox,
-  BoxImg,
-  Paragraphs,
-} from "../../../public/styles/Common.styles";
+import { FormBox, BoxImg, Paragraphs } from "../../styles/Index.styles";
 import { BoxUser } from "./styles/ItemsUsers.style";
 
 //Images

@@ -13,7 +13,7 @@ import {
   BoxImg,
   AdminPanelBox,
   Col2HeaderControlUser,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import peopleAdmin from "../../public/images/people-admin.svg";

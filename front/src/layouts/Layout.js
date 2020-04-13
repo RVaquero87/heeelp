@@ -2,7 +2,7 @@
 import React from "react";
 
 //Styles & AOS animation
-import { Main } from "../../public/styles/Common.styles";
+import { Main } from "../styles/Index.styles";
 
 //Header - Footer
 import { Header } from "./Header";

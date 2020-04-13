@@ -2,11 +2,7 @@
 import React, { useContext } from "react";
 
 //Styles & AOS animation
-import {
-  BoxImg,
-  ParagraphTop,
-  Paragraphs,
-} from "../../../public/styles/Common.styles";
+import { BoxImg, ParagraphTop, Paragraphs } from "../../styles/Index.styles";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";

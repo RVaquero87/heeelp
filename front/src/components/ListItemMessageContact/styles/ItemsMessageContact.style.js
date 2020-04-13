@@ -1,6 +1,6 @@
 //Styles & AOS animation
 import styled from "styled-components";
-import { Paragraphs, Button } from "../../../../public/styles/Common.styles";
+import { Paragraphs, Button } from "../../../styles/Index.styles";
 
 export const BoxMessageContact = styled.div`
   background: #fff;

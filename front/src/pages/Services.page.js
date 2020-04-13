@@ -13,7 +13,7 @@ import {
   Col2Min,
   SectionServicesRates,
   FaqsBox,
-} from "../../public/styles/Common.styles";
+} from "../styles/Index.styles";
 
 //Images
 import icon1 from "../../public/images/icon-1.svg";

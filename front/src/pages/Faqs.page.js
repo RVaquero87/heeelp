@@ -11,8 +11,8 @@ import {
   H2,
   Paragraphs,
   Col2Min,
-  FaqsBox
-} from "../../public/styles/Common.styles";
+  FaqsBox,
+} from "../styles/Index.styles";
 
 //Images
 import contact from "../../public/images/contact.svg";

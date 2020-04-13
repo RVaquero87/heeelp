@@ -2,11 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //Styles & AOS animation
-import {
-  SectionProtectedBox,
-  H1,
-  Paragraphs,
-} from "../../public/styles/Common.styles";
+import { SectionProtectedBox, H1, Paragraphs } from "../styles/Index.styles";
 
 //Images
 import closeX from "../../public/images/close.svg";

@@ -1,6 +1,6 @@
 //Styles
 import styled from "styled-components";
-import { BoxImg, Paragraphs } from "../../../../public/styles/Common.styles";
+import { BoxImg, Paragraphs } from "../../../styles/Index.styles";
 
 export const ItemServiceRate = styled.div`
   ${BoxImg} {
@@ -9,9 +9,9 @@ export const ItemServiceRate = styled.div`
   }
   ${Paragraphs} {
     margin-top: 20px;
-  text-align: center;
-  padding-bottom: 7px;
-    &.content-services{
+    text-align: center;
+    padding-bottom: 7px;
+    &.content-services {
       font-size: 16px;
       line-height: 1.4;
       margin: 0 auto;
