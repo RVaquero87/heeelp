@@ -62,23 +62,26 @@ router.post("/id-creator", async (req, res) => {
   try {
     const idUser = req.user;
 
-    // const aidRequests = await AidRequests.find({
-    //   creatorUserid: { _id: idUser._id },
-    // });
+    const aidRequests = await AidRequests.find({
+      creatorUserid: { _id: idUser._id },
+    });
 
-    // await Promise.all(
-    //   aidRequests.map(async (aidRequest) => {
-    //     const dateActually = new Date();
-    //     if (
-    //       dateActually > aidRequest.time &&
-    //       aidRequest.status === "En curso"
-    //     ) {
-    //       await AidRequests.findByIdAndUpdate(aidRequest._id, {
-    //         status: "Realizada",
-    //       }).then((aidRequest) => aidRequest);
-    //     }
-    //   })
-    // );
+    await Promise.all(
+      aidRequests.map(async (aidRequest) => {
+        const dateActually = new Date();
+        if (dateActually > aidRequest.time) {
+          if (aidRequest.status === "En curso") {
+            await AidRequests.findByIdAndUpdate(aidRequest._id, {
+              status: "Realizada",
+            }).then((aidRequest) => aidRequest);
+          } else if (aidRequest.status === "Publicada") {
+            await AidRequests.findByIdAndUpdate(aidRequest._id, {
+              status: "Cancelada",
+            });
+          }
+        }
+      })
+    );
 
     const aidRequestsModify = await AidRequests.find({
       creatorUserid: { _id: idUser._id },
@@ -99,23 +102,26 @@ router.post("/id-helper", async (req, res) => {
   try {
     const idUser = req.user;
 
-    // const aidRequests = await AidRequests.find({
-    //   helperId: { _id: idUser._id },
-    // });
+    const aidRequests = await AidRequests.find({
+      helperId: { _id: idUser._id },
+    });
 
-    // await Promise.all(
-    //   aidRequests.map(async (aidRequest) => {
-    //     const dateActually = new Date();
-    //     if (
-    //       dateActually > aidRequest.time &&
-    //       aidRequest.status === "En curso"
-    //     ) {
-    //       await AidRequests.findByIdAndUpdate(aidRequest._id, {
-    //         status: "Realizada",
-    //       }).then((aidRequest) => aidRequest);
-    //     }
-    //   })
-    // );
+    await Promise.all(
+      aidRequests.map(async (aidRequest) => {
+        const dateActually = new Date();
+        if (dateActually > aidRequest.time) {
+          if (aidRequest.status === "En curso") {
+            await AidRequests.findByIdAndUpdate(aidRequest._id, {
+              status: "Realizada",
+            }).then((aidRequest) => aidRequest);
+          } else if (aidRequest.status === "Publicada") {
+            await AidRequests.findByIdAndUpdate(aidRequest._id, {
+              status: "Cancelada",
+            });
+          }
+        }
+      })
+    );
 
     const aidRequestsModify = await AidRequests.find({
       helperId: { _id: idUser._id },
@@ -171,10 +177,6 @@ router.post("/public", isLoggedIn(), async (req, res, next) => {
     const { _id } = req.body;
 
     const aidRequest = await AidRequests.findById(_id);
-
-    console.log("_id", _id);
-    console.log("aidRequest", aidRequest);
-    console.log("x[shoppinglist].length");
 
     if (aidRequest.shoppinglist.length <= 0) {
       return res.json({
