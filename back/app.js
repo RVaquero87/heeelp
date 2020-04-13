@@ -32,11 +32,7 @@ const debug = require("debug")(
 const app = express();
 
 // Cross Domain CORS whitlist
-const whitelist = [
-  "http://localhost:3000",
-  "http://localhost:1234",
-  "https://api.sendgrid.com",
-];
+const whitelist = ["http://localhost:3000", "http://localhost:1234"];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);

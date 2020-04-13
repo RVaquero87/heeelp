@@ -1,8 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
+const nodemailer = require("nodemailer");
 const _ = require("lodash");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
+const messageDefault = require("../email/messageDefault");
+
 
 //Models
 const Contacts = require("../models/Contacts");
@@ -51,27 +54,26 @@ router.post("/delete", isLoggedIn(), async (req, res) => {
 //SEND MESSAGES CONTACT
 router.post("/send", isLoggedIn(), async (req, res) => {
   try {
-    const { from, to, subject, emailbody } = req.body;
+    const { to, subject, emailbody } = req.body;
 
-    // const contactService = axios.create({
-    //   baseURL: "https://api.sendgrid.com/v3/mail/send",
-    // });
+    let transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+    let mailOptions = {
+      from: '"heeelp!" <heeelp.web@gmail.com>',
+      to: to,
+      subject: subject,
+      html: `Saludos Cordiales,<br/><br/>${emailbody}<br/><br/>Recibe un cordial saludo,<br/><br/>El Equipo de h<b>eee</b>lp!<br/><br/>${messageDefault}`
+    };
 
-    // contactService
-    //   .post("/", {
-    //     from,
-    //     to,
-    //     subject,
-    //     emailbody,
-    //   })
-    //   .then((response) => {
-    //     console.log("response del servudior", response);
-    //     return response;
-    //   })
-    //   .catch(function (error) {
-    //     console.log("error del servidor", error);
-    //     return error;
-    //   });
+    transporter
+      .sendMail(mailOptions)
+      .then((info) => console.log("enviado"))
+      .catch((error) => console.log("error"));
 
     return res.json({
       status: 200,

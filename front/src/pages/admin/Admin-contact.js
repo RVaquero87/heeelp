@@ -69,19 +69,17 @@ export const AdminContact = () => {
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
-      from: "info@heeelp.com",
       to: "",
       subject: "",
-      emailbody: "Hola,\nSaludos Cordiales,\nRubén Vaquero",
+      emailbody: "",
     },
   });
 
   useEffect(() => {
     methods.reset({
-      from: "info@heeelp.com",
       to: responseMessageContact?.username,
       subject: `Respuesta a la consulta: ${responseMessageContact?.title}`,
-      emailbody: "Hola,\nSaludos Cordiales,\nRubén Vaquero",
+      emailbody: "",
     });
   }, [responseMessageContact]);
 
@@ -121,21 +119,7 @@ export const AdminContact = () => {
                   <FormContext {...methods}>
                     <FormBox onSubmit={handleSubmit(sendEmailAdmin)}>
                       <InputBox
-                        label="Email de"
-                        name="from"
-                        ref={register({
-                          required: {
-                            value: true,
-                            message: "El campo es requerido",
-                          },
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i,
-                            message: "El email incluido no es válido",
-                          },
-                        })}
-                      />
-                      <InputBox
-                        label="Email para"
+                        label="Email"
                         name="to"
                         ref={register({
                           required: {
@@ -149,7 +133,7 @@ export const AdminContact = () => {
                         })}
                       />
                       <InputBox
-                        label="Resumén tu consulta en pocas palabras"
+                        label="Asunto"
                         name="subject"
                         ref={register({
                           required: {
@@ -159,7 +143,7 @@ export const AdminContact = () => {
                         })}
                       />
                       <TextAreaBox
-                        label="Explica que te sucede"
+                        label="Contenido"
                         name="emailbody"
                         ref={register({
                           required: {

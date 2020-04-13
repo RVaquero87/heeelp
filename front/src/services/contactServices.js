@@ -29,9 +29,8 @@ export const deleteMessageContact = async (value) => {
   return res.data;
 };
 
-export const sendMessageEmail = async ({ from, to, subject, emailbody }) => {
+export const sendMessageEmail = async ({ to, subject, emailbody }) => {
   const res = await contactService.post("/send", {
-    from,
     to,
     subject,
     emailbody,

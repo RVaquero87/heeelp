@@ -498,24 +498,22 @@ export const RegisterPage = withRouter(({ history }) => {
                   })}
                 />
               </div>
-              <div data-aos="fade-up">
-                <InputBox
-                  name="legalCheck"
-                  type="checkbox"
-                  classNameDiv="box-check-box"
-                  textCheckbox={``}
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: "El campo es requerido",
-                    },
-                  })}
-                />
+              <InputBox
+                name="legalCheck"
+                type="checkbox"
+                classNameDiv="box-check-box"
+                textCheckbox={``}
+                ref={register({
+                  required: {
+                    value: true,
+                    message: "El campo es requerido",
+                  },
+                })}
+              />
 
-                <button type="submit" className="button big">
-                  Registrarse
-                </button>
-              </div>
+              <button type="submit" className="button big">
+                Registrarse
+              </button>
             </FormBox>
           </FormContext>
         </SectionFormBoxRegister>

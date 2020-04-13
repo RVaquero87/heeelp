@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
@@ -5,6 +6,17 @@ const passport = require("passport");
 const { hashPassword, checkHashed } = require("../lib/hashing");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 const uploader = require("../cloudinary/cloudinary.config");
+const nodemailer = require("nodemailer");
+const welcome = require("../email/welcome");
+const bye = require("../email/bye");
+
+let transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 //Models
 const Users = require("../models/Users");
@@ -51,6 +63,19 @@ router.post("/signup", async (req, res, next) => {
       city,
       legalCheck,
     });
+
+    let mailOptions = {
+      from: '"heeelp!"  <heeelp.web@gmail.com>',
+      to: username,
+      subject: `Bienvenido a heeelp!`,
+      html: welcome,
+    };
+
+    transporter
+      .sendMail(mailOptions)
+      .then((info) => console.log("enviado"))
+      .catch((error) => console.log("error"));
+
     // Directly login user
     req.logIn(newUser, (err) => {
       req.user.visits += 1;
@@ -257,7 +282,20 @@ router.post("/users-list", isLoggedIn(), async (req, res) => {
 router.post("/users-delete", isLoggedIn(), async (req, res) => {
   try {
     const { _id } = req.body;
-    await Users.findByIdAndRemove(_id);
+    const userDelete = await Users.findByIdAndRemove(_id);
+
+    let mailOptions2 = {
+      from: '"heeelp!"  <heeelp.web@gmail.com>',
+      to: userDelete.username,
+      subject: `Hasta pronto!`,
+      html: bye,
+    };
+
+    transporter
+      .sendMail(mailOptions2)
+      .then((info) => console.log("enviado"))
+      .catch((error) => console.log("error"));
+
     return res.json({
       status: 200,
       message: "Usuario eliminado satisfactoriamente",
