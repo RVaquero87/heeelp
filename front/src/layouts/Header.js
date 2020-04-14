@@ -160,15 +160,28 @@ export const Header = withRouter(({ history }) => {
             )}
             {user && (
               <>
-                <nav>
+                <nav
+                  className={
+                    (user?.rol === "Helped" && "user-nav user-helped") ||
+                    (user?.rol === "Admin" && "user-nav user-admin") ||
+                    "user-nav"
+                  }
+                >
                   <ul>
                     <>
                       {(user?.rol === "Admin" && (
-                        <li>
-                          <NavLink to="/control-admin" className="nav-link">
-                            Control de Admin
-                          </NavLink>
-                        </li>
+                        <>
+                          <li>
+                            <NavLink to="/home" className="nav-link">
+                              listado de peticiones
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink to="/control-admin" className="nav-link">
+                              Control de Admin
+                            </NavLink>
+                          </li>
+                        </>
                       )) ||
                         (user?.rol === "Helpers" && (
                           <>
@@ -192,6 +205,7 @@ export const Header = withRouter(({ history }) => {
                             </li>
                           </>
                         )}
+
                       <li>
                         <NavLink to="/reviews" className="nav-link">
                           opiniones
@@ -200,19 +214,28 @@ export const Header = withRouter(({ history }) => {
                     </>
                   </ul>
                 </nav>
-                <div className="button-box">
-                  <ButtonLink whereTo="/profile" className="nav-link">
-                    Profile
-                  </ButtonLink>
-                  <ButtonLink whereTo="/profile" className="nav-link">
+                <div className="button-box icons">
+                  <NavLink to="/profile" className="nav-link profile">
+                    <img src={user?.image} alt="" title="" />
+                    <p>
+                      {user?.name} {user?.lastname.slice(0, 1)}.
+                    </p>
+                  </NavLink>
+                  <ButtonLink
+                    whereTo="/profile"
+                    className="nav-link messages active"
+                  >
                     Mensajes
                   </ButtonLink>
-                  <ButtonLink whereTo="/profile" className="nav-link">
+                  <ButtonLink
+                    whereTo="/profile"
+                    className="nav-link notifications active"
+                  >
                     Notificaciones
                   </ButtonLink>
                   <button
                     onClick={(e) => onClickLogout(e)}
-                    className="nav-link"
+                    className="nav-link log-out"
                   >
                     Logout
                   </button>

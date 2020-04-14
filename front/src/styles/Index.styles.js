@@ -4,8 +4,13 @@ import styled from "styled-components";
 import logo from "../../public/images/logo-blanco.svg";
 import logoNegro from "../../public/images/logo-negro.svg";
 import comillas from "../../public/images/comillas.svg";
-import arrowBottom from "../../public/images/arrow.svg";
 import arrowBottomBlue from "../../public/images/arrow-blue.svg";
+import logOut from "../../public/images/log-out.svg";
+import logOutBlue from "../../public/images/log-out-blue.svg";
+import message from "../../public/images/mensajes.svg";
+import messageBlue from "../../public/images/mensajes-blue.svg";
+import notifications from "../../public/images/bell.svg";
+import notificationsBlue from "../../public/images/bell-blue.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -803,12 +808,103 @@ export const HeaderBox = styled.header`
               }
             }
           }
+          &.user-helped {
+            width: 270px;
+          }
+          &.user-admin {
+            width: 480px;
+          }
         }
         .button-box {
+          overflow: hidden;
           display: flex;
           a {
             &:last-child {
               margin-left: 16px;
+            }
+          }
+          &.icons {
+            align-items: center;
+            > a,
+            button {
+              color: #fff;
+              cursor: pointer;
+              margin-left: 36px;
+              text-decoration: none;
+              &.profile {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                img {
+                  border-radius: 100%;
+                  max-width: 48px;
+                  pointer-events: none;
+                }
+                p {
+                  font-family: "Roboto", sans-serif;
+                  font-size: 16px;
+                  font-weight: 500;
+                  line-height: 1;
+                  margin-left: 12px;
+                  position: relative;
+                  pointer-events: none;
+                }
+                &:hover p,
+                &.active p {
+                  font-weight: 500;
+                }
+                &:hover p:after,
+                &.active p:after {
+                  background-color: #fff;
+                  bottom: -7px;
+                  content: "";
+                  display: block;
+                  height: 2px;
+                  left: 50%;
+                  position: absolute;
+                  text-decoration: none;
+                  transform: translate(-50%, 0);
+                  width: 24px;
+                }
+              }
+              &.messages,
+              &.notifications,
+              &.log-out {
+                height: 24px;
+                position: relative;
+                line-height: 0;
+                font-size: 0;
+                text-indent: -999999999px;
+                &:hover {
+                  opacity: 0.85;
+                }
+                &.active:after {
+                  content: "";
+                  background-color: #ffa500;
+                  border-radius: 100%;
+                  bottom: 0;
+                  height: 10px;
+                  position: absolute;
+                  right: -4px;
+                  width: 10px;
+                }
+              }
+              &.messages {
+                background: url(${message}) no-repeat center;
+                background-size: contain;
+                width: 24px;
+              }
+              &.notifications {
+                background: url(${notifications}) no-repeat center;
+                background-size: contain;
+                width: 21px;
+              }
+              &.log-out {
+                background: url(${logOut}) no-repeat center;
+                background-size: contain;
+                width: 22px;
+              }
             }
           }
         }
@@ -879,6 +975,31 @@ export const HeaderBox = styled.header`
               }
             }
           }
+          &.icons {
+            > a,
+            button {
+              color: #3e3874;
+              &.profile {
+                &:hover p:after,
+                &.active p:after {
+                  background-color: #3e3874;
+                }
+              }
+
+              &.messages {
+                background: url(${messageBlue}) no-repeat center;
+                background-size: contain;
+              }
+              &.notifications {
+                background: url(${notificationsBlue}) no-repeat center;
+                background-size: contain;
+              }
+              &.log-out {
+                background: url(${logOutBlue}) no-repeat center;
+                background-size: contain;
+              }
+            }
+          }
         }
         .hamburger {
           .line {
@@ -895,6 +1016,16 @@ export const HeaderBox = styled.header`
           nav {
             margin-right: 54px;
             width: 400px;
+            &.user-nav {
+              margin-right: 27px;
+            }
+            &.user-helped {
+              margin-right: 36px;
+              width: 250px;
+            }
+            &.user-admin {
+              width: 425px;
+            }
           }
         }
       }
@@ -907,6 +1038,10 @@ export const HeaderBox = styled.header`
           nav {
             margin-right: 48px;
             width: 360px;
+            &.user-admin {
+              width: 400px;
+              margin-right: 10px;
+            }
           }
         }
       }
@@ -1001,6 +1136,43 @@ export const HeaderBox = styled.header`
                   margin-left: 0;
                 }
               }
+              &.icons {
+                flex-flow: wrap row;
+                justify-content: space-around;
+                max-width: 250px;
+                .profile {
+                  width: 100%;
+                  justify-content: center;
+                  margin: 0 0 5vh;
+                  img {
+                    max-width: 80px;
+                  }
+                }
+                .messages,
+                .notifications,
+                .log-out {
+                  height: 40px;
+                  margin: 0%;
+                  height: 30px;
+                }
+                .messages {
+                  width: 32px;
+                  &.active:after {
+                    right: -6px;
+                    width: 12px;
+                  }
+                }
+                .notifications {
+                  width: 28px;
+                  &.active:after {
+                    right: -6px;
+                    width: 12px;
+                  }
+                }
+                .log-out {
+                  width: 29.3px;
+                }
+              }
             }
           }
         }
@@ -1009,6 +1181,33 @@ export const HeaderBox = styled.header`
           z-index: 12;
           &.active .line {
             background-color: #fff;
+          }
+        }
+      }
+    }
+    &.active {
+      &.icons {
+        > a,
+        button {
+          color: #3e3874;
+          &.profile {
+            &:hover p:after,
+            &.active p:after {
+              background-color: #3e3874;
+            }
+          }
+
+          &.messages {
+            background: url(${messageBlue}) no-repeat center;
+            background-size: contain;
+          }
+          &.notifications {
+            background: url(${notificationsBlue}) no-repeat center;
+            background-size: contain;
+          }
+          &.log-out {
+            background: url(${logOutBlue}) no-repeat center;
+            background-size: contain;
           }
         }
       }
