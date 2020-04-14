@@ -500,12 +500,12 @@ export const FilterStars = styled.div`
     width: auto;
     select {
       appearance: none;
-      text-transform: uppercase;
+      color: #3e3874;
       background-color: transparent;
       border: none;
       font-family: "Roboto", sans-serif;
       font-size: 1rem;
-      font-weight: 300;
+      font-weight: 500;
       max-width: 100%;
       padding: 8px 40px 8px 15px;
       margin: 0%;
@@ -883,11 +883,12 @@ export const HeaderBox = styled.header`
                   content: "";
                   background-color: #ffa500;
                   border-radius: 100%;
-                  bottom: 0;
-                  height: 10px;
+                  border: 2px solid #8290ff;
+                  bottom: -3px;
+                  height: 14px;
                   position: absolute;
-                  right: -4px;
-                  width: 10px;
+                  right: -6px;
+                  width: 14px;
                 }
               }
               &.messages {
@@ -912,6 +913,7 @@ export const HeaderBox = styled.header`
 
       .hamburger {
         display: none;
+        position: relative;
         &:hover {
           cursor: pointer;
         }
@@ -932,6 +934,17 @@ export const HeaderBox = styled.header`
           .line:nth-child(3) {
             transform: translateY(-12px) rotate(90deg);
           }
+        }
+        &.active-notice:after {
+          content: "";
+          background-color: #ffa500;
+          border-radius: 100%;
+          border: 2px solid #8290ff;
+          bottom: 2px;
+          height: 14px;
+          position: absolute;
+          right: 0;
+          width: 14px;
         }
         .line {
           display: none;
@@ -985,7 +998,14 @@ export const HeaderBox = styled.header`
                   background-color: #3e3874;
                 }
               }
-
+              &.messages,
+              &.notifications,
+              &.log-out {
+                &.active:after {
+                  content: "";
+                  border: 2px solid #fff;
+                }
+              }
               &.messages {
                 background: url(${messageBlue}) no-repeat center;
                 background-size: contain;
@@ -1208,6 +1228,13 @@ export const HeaderBox = styled.header`
           &.log-out {
             background: url(${logOutBlue}) no-repeat center;
             background-size: contain;
+          }
+        }
+      }
+      .contain .header-inner {
+        .hamburger {
+          &.active-notice:after {
+            border: 2px solid #ffffff;
           }
         }
       }

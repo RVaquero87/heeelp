@@ -252,7 +252,9 @@ export const Header = withRouter(({ history }) => {
 
           <button
             id="hamburger"
-            className={hamburguerNav ? "hamburger active" : "hamburger"}
+            className={
+              hamburguerNav ? "hamburger active" : "hamburger active-notice"
+            }
             onClick={(e) => buttonAdd(e)}
           >
             <span className="line"></span>
