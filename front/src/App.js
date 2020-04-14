@@ -28,6 +28,7 @@ import { RegisterPage } from "./pages/Register.page";
 import { LoginPage } from "./pages/Login.page";
 import { AdminPage } from "./pages/Admin.page";
 import { NotFoundPage } from "./pages/NotFound.page";
+import { HomeRolPagePrivate } from "./pages/HomeRol.page";
 
 //Sin hacer aun
 import { ProfilePage } from "./pages/Profile.page";
@@ -57,6 +58,7 @@ export const App = withAuthentication(() => {
             <Route path="/registro" component={RegisterPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/control-admin" component={AdminPage} />
+            <Route path="/home" component={HomeRolPagePrivate} />
 
             {/* Sin hacer aun */}
             <Route path="/profile" component={ProfilePage} />

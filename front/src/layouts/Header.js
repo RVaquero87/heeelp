@@ -77,9 +77,22 @@ export const Header = withRouter(({ history }) => {
       <div className="contain">
         <div className="header-inner">
           <div className="logo">
-            <Link to="/" className="nav-link">
-              heeelp
-            </Link>
+            <>
+              {(!user && (
+                <Link to="/" className="nav-link">
+                  heeelp
+                </Link>
+              )) ||
+                (user?.rol == "Admin" && (
+                  <Link to="/control-admin" className="nav-link">
+                    heeelp
+                  </Link>
+                )) || (
+                  <Link to="/home" className="nav-link">
+                    heeelp
+                  </Link>
+                )}
+            </>
           </div>
           <div
             id="nav-resp"
@@ -149,35 +162,54 @@ export const Header = withRouter(({ history }) => {
               <>
                 <nav>
                   <ul>
-                    <li>
-                      <NavLink to="/private" className="nav-link">
-                        Private Page
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/profile" className="nav-link">
-                        Profile
-                      </NavLink>
-                    </li>
-                    {user?.rol === "Admin" && (
+                    <>
+                      {(user?.rol === "Admin" && (
+                        <li>
+                          <NavLink to="/control-admin" className="nav-link">
+                            Control de Admin
+                          </NavLink>
+                        </li>
+                      )) ||
+                        (user?.rol === "Helpers" && (
+                          <>
+                            <li>
+                              <NavLink to="/home" className="nav-link">
+                                listado de peticiones
+                              </NavLink>
+                            </li>
+                            <li>
+                              <NavLink to="/home" className="nav-link">
+                                mis peticiones
+                              </NavLink>
+                            </li>
+                          </>
+                        )) || (
+                          <>
+                            <li>
+                              <NavLink to="/home" className="nav-link">
+                                mis peticiones
+                              </NavLink>
+                            </li>
+                          </>
+                        )}
                       <li>
-                        <NavLink to="/control-admin" className="nav-link">
-                          Admin
+                        <NavLink to="/reviews" className="nav-link">
+                          opiniones
                         </NavLink>
                       </li>
-                    )}
-                    <li>
-                      <NavLink
-                        activeClassName="active"
-                        to="/reviews"
-                        className="nav-link"
-                      >
-                        opiniones
-                      </NavLink>
-                    </li>
+                    </>
                   </ul>
                 </nav>
                 <div className="button-box">
+                  <ButtonLink whereTo="/profile" className="nav-link">
+                    Profile
+                  </ButtonLink>
+                  <ButtonLink whereTo="/profile" className="nav-link">
+                    Mensajes
+                  </ButtonLink>
+                  <ButtonLink whereTo="/profile" className="nav-link">
+                    Notificaciones
+                  </ButtonLink>
                   <button
                     onClick={(e) => onClickLogout(e)}
                     className="nav-link"

@@ -160,7 +160,7 @@ export const RegisterPage = withRouter(({ history }) => {
         messageRedirect(responseServer.message);
       } else {
         setUser(data);
-        history.push("/profile");
+        history.push("/home");
       }
     }
   };

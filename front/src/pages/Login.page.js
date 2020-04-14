@@ -62,7 +62,11 @@ export const LoginPage = withRouter(({ history }) => {
       }, 5000);
     } else {
       setUser(responseServer);
-      history.push("/profile");
+      if (responseServer.rol === "Admin") {
+        history.push("/control-admin");
+      } else {
+        history.push("/home");
+      }
     }
   };
   return (

@@ -1,19 +1,35 @@
+//React
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+
+//Route Protected
+import { withProtected } from "../lib/protectRoute.hoc";
+
+//Styles & AOS animation
 import { FormBox } from "../styles/Index.styles";
+
+//Form
+import { useForm, FormContext } from "react-hook-form";
+
+//Images
+import imgProfile from "../../public/images/default-profile.png";
+
+//Contexto
+import { PrincipalContext } from "../context/PrincipalContext";
+
+//Functional & Services
 import {
   doLogout,
   doEdit,
   doUnsubscribe,
   uploadPhoto,
 } from "../services/authServices";
-import { PrincipalContext } from "../context/PrincipalContext";
-import { useForm, FormContext } from "react-hook-form";
+
+//Compoments
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
-import imgProfile from "../../public/images/default-profile.png";
 
-export const ProfilePage = withRouter(({ history }) => {
+export const Profile = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);
 
   //lOGOUT
@@ -320,4 +336,8 @@ export const ProfilePage = withRouter(({ history }) => {
       </button>
     </>
   );
+});
+
+export const ProfilePage = withProtected(Profile, {
+  redirect: false,
 });
