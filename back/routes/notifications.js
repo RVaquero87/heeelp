@@ -26,6 +26,36 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
   });
 });
 
+//CHANGE NOTIFICATIONS STATUS
+router.post("/change-status", async (req, res) => {
+  try {
+    const idUser = req.user;
+    const notificationsList = await Notifications.find({
+      creatorUserId: { _id: idUser._id },
+    });
+
+    await Promise.all(
+      notificationsList.map(async (aidRequest) => {
+        if (aidRequest.status === "Nuevo") {
+          await Notifications.findByIdAndUpdate(aidRequest._id, {
+            status: "Visto",
+          }).then((aidRequest) => aidRequest);
+        }
+      })
+    );
+
+    return res.json({
+      status: 200,
+      message: "Status cambiado",
+    });
+  } catch (err) {
+    return res.json({
+      status: 400,
+      message: "Fallo al cambiar status",
+    });
+  }
+});
+
 //GET NOTIFICATIONS BY ID USER CREATOR
 router.post("/alls-creator-id", async (req, res) => {
   try {
@@ -34,6 +64,7 @@ router.post("/alls-creator-id", async (req, res) => {
       creatorUserId: { _id: idUser._id },
     })
       .sort({ createdAt: -1 })
+      .populate("creatorUserId")
       .populate("receptorUserId")
       .populate("aidResquestId");
 
@@ -53,6 +84,7 @@ router.post("/alls-receptor-id", async (req, res) => {
     })
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
+      .populate("receptorUserId")
       .populate("aidResquestId");
 
     return res.json(notificationsList);

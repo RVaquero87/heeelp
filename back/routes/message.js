@@ -26,6 +26,36 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
   });
 });
 
+//CHANGE MESSAGES STATUS
+router.post("/change-status", async (req, res) => {
+  try {
+    const idUser = req.user;
+    const messagesList = await Messages.find({
+      creatorUserId: { _id: idUser._id },
+    });
+
+    await Promise.all(
+      messagesList.map(async (message) => {
+        if (message.status === "Nuevo") {
+          await Messages.findByIdAndUpdate(message._id, {
+            status: "Visto",
+          }).then((message) => message);
+        }
+      })
+    );
+
+    return res.json({
+      status: 200,
+      message: "Status cambiado",
+    });
+  } catch (err) {
+    return res.json({
+      status: 400,
+      message: "Fallo al cambiar status",
+    });
+  }
+});
+
 //GET MESSAGES BY ID USER CREATOR
 router.post("/alls-creator-id", async (req, res) => {
   try {
@@ -34,6 +64,7 @@ router.post("/alls-creator-id", async (req, res) => {
       creatorUserId: { _id: idUser._id },
     })
       .sort({ createdAt: -1 })
+      .populate("creatorUserId")
       .populate("receptorUserId")
       .populate("aidResquestId");
 
@@ -53,6 +84,7 @@ router.post("/alls-receptor-id", async (req, res) => {
     })
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
+      .populate("receptorUserId")
       .populate("aidResquestId");
 
     return res.json(messagesList);

@@ -5,6 +5,7 @@ const userSchema = new Schema(
   {
     title: String,
     message: String,
+    status: { type: String, enum: ["Visto", "Nuevo"], default: "Nuevo" },
     creatorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
     receptorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
     aidResquestId: { type: Schema.Types.ObjectId, ref: "AidRequests" },
