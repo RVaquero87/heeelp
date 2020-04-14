@@ -70,7 +70,7 @@ export const ReviewsBoxItem = ({ review }) => {
           </div>
         </div>
       </div>
-      {user?.rol === "Admin" && (
+      {(user?.rol === "Admin" || user?._id === review.creatorUserid?._id) && (
         <button
           className="delete"
           value={review._id}

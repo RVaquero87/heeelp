@@ -103,7 +103,6 @@ export const Header = withRouter(({ history }) => {
                         activeClassName="active"
                         to="/faqs"
                         className="nav-link"
-                        className="nav-link"
                       >
                         faq's
                       </NavLink>
@@ -113,7 +112,6 @@ export const Header = withRouter(({ history }) => {
                         activeClassName="active"
                         to="/reviews"
                         className="nav-link"
-                        className="nav-link"
                       >
                         opiniones
                       </NavLink>
@@ -122,7 +120,6 @@ export const Header = withRouter(({ history }) => {
                       <NavLink
                         activeClassName="active"
                         to="/contacto"
-                        className="nav-link"
                         className="nav-link"
                       >
                         contacto
@@ -149,41 +146,46 @@ export const Header = withRouter(({ history }) => {
               </>
             )}
             {user && (
-              <nav>
-                <ul>
-                  <li>
-                    <NavLink to="/private" className="nav-link">
-                      Private Page
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/profile" className="nav-link">
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/create-review" className="nav-link">
-                      Crear review
-                    </NavLink>
-                  </li>
-                  {user?.rol === "Admin" && (
+              <>
+                <nav>
+                  <ul>
                     <li>
-                      <NavLink to="/control-admin" className="nav-link">
-                        Admin
+                      <NavLink to="/private" className="nav-link">
+                        Private Page
                       </NavLink>
                     </li>
-                  )}
-                  <li>
-                    <NavLink
-                      to="/"
-                      onClick={(e) => onClickLogout(e)}
-                      className="nav-link"
-                    >
-                      Logout
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
+                    <li>
+                      <NavLink to="/profile" className="nav-link">
+                        Profile
+                      </NavLink>
+                    </li>
+                    {user?.rol === "Admin" && (
+                      <li>
+                        <NavLink to="/control-admin" className="nav-link">
+                          Admin
+                        </NavLink>
+                      </li>
+                    )}
+                    <li>
+                      <NavLink
+                        activeClassName="active"
+                        to="/reviews"
+                        className="nav-link"
+                      >
+                        opiniones
+                      </NavLink>
+                    </li>
+                  </ul>
+                </nav>
+                <div className="button-box">
+                  <button
+                    onClick={(e) => onClickLogout(e)}
+                    className="nav-link"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
             )}
           </div>
 

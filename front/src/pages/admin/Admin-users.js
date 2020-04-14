@@ -81,27 +81,25 @@ export const AdminUsers = () => {
               <FilterUser data-aos="fade-up">
                 <div className="contain-filters">
                   <Paragraphs blue>
-                    <span>Filtrar por tipo de usuario:</span>
-                  </Paragraphs>
-                  <div className="box-filter">
-                    <select
-                      onChange={(e) => handleFilterRolUser(e, e.target.value)}
-                    >
-                      <option value="all">Todos los Usuarios</option>
-                      <option value="Helpers">Usuarios Helpers</option>
-                      <option value="Helped">Usuarios Helped</option>
-                      <option value="Admin">Usuarios Admin</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="contain-filters">
-                  <Paragraphs blue>
-                    <span>Filtrar por username:</span>
+                    <span>Filtrar por usuario:</span>
                   </Paragraphs>
                   <FilterText
                     value={filterStartText}
                     onChange={(e) => handleFilterTextUser(e, e.target.value)}
                   />
+                </div>
+                <div className="contain-filters">
+                  <div className="box-filter">
+                    <select
+                      onChange={(e) => handleFilterRolUser(e, e.target.value)}
+                    >
+                      <option value="all">Filtra tipo de Usuario</option>
+                      <option value="Helpers">Usuarios Helpers</option>
+                      <option value="Helped">Usuarios Helped</option>
+                      <option value="Admin">Usuarios Admin</option>
+                      <option value="all">Todos los Usuarios</option>
+                    </select>
+                  </div>
                 </div>
               </FilterUser>
               <div className="box-counter">

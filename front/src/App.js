@@ -32,7 +32,6 @@ import { NotFoundPage } from "./pages/NotFound.page";
 //Sin hacer aun
 import { ProfilePage } from "./pages/Profile.page";
 import { PrivatePage } from "./pages/Private.page";
-import { CreateReview } from "./pages/create-reviews";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -61,7 +60,6 @@ export const App = withAuthentication(() => {
 
             {/* Sin hacer aun */}
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/create-review" component={CreateReview} />
             <Route path="/private" component={PrivatePage} />
 
             <Route path="*" component={NotFoundPage} />

@@ -5,7 +5,8 @@ import React, { createContext, useState, useEffect } from "react";
 export const PrincipalContext = createContext();
 
 //Functional & Services
-import { getAllReviews } from "../services/reviewsServices";
+import { getAllReviews, getIDReview } from "../services/reviewsServices";
+import { getAverage } from "../lib/commonFunctional";
 
 export const PrincipalContextProvider = (props) => {
   //Loading State
@@ -17,25 +18,44 @@ export const PrincipalContextProvider = (props) => {
   //Users Active
   const [user, setUser] = useState();
 
-  //Message Error Global Form
-  const [messageError, setMessageError] = useState();
-
   //Users List CHange
   const [changeLisUsers, setchangeLisUsers] = useState(false);
+
+  //Message Error Global Form
+  const [messageError, setMessageError] = useState();
 
   //Reviews List CHange
   const [changeListReviews, setchangeListReviews] = useState(false);
   const [listReviews, setListReviews] = useState();
+  const [listIDReviews, setListIDReviews] = useState();
   const [filterReviews, setFilterReviews] = useState();
+  const [averageReviews, setAverageReviews] = useState();
 
   useEffect(() => {
     getAllReviews()
       .then((review) => {
-        setListReviews(review);
-        setFilterReviews(review);
+        const averageReview = getAverage(review.map((item) => item.stars));
+        setAverageReviews(averageReview);
+        if (user) {
+          const reviewNotId = review.filter(
+            (review) => review.creatorUserid._id != user._id
+          );
+          setListReviews(reviewNotId);
+          setFilterReviews(reviewNotId);
+        } else {
+          setListReviews(review);
+          setFilterReviews(review);
+        }
       })
       .catch((e) => {});
-  }, [changeListReviews]);
+    if (user) {
+      getIDReview(user)
+        .then((review) => {
+          setListIDReviews(review);
+        })
+        .catch((e) => {});
+    }
+  }, [changeListReviews, user]);
 
   //List Contact Message Change
   const [listMessageContactChange, setListMessageContactChange] = useState();
@@ -50,29 +70,51 @@ export const PrincipalContextProvider = (props) => {
   return (
     <PrincipalContext.Provider
       value={{
+        //Loading State
         loading,
-        Body,
         setLoading,
+
+        //Body Tag
+        Body,
+
+        //Users Active
         user,
         setUser,
-        messageError,
-        setMessageError,
+
+        //Users List CHange
         changeLisUsers,
         setchangeLisUsers,
+
+        //Message Error Global Form
+        messageError,
+        setMessageError,
+
+        //Reviews List CHange
+
         changeListReviews,
         setchangeListReviews,
         listReviews,
         setListReviews,
+        listIDReviews,
+        setListIDReviews,
         filterReviews,
         setFilterReviews,
+        averageReviews,
+        setAverageReviews,
+
+        //List Contact Message Change
         listMessageContactChange,
         setListMessageContactChange,
-        lightboxRegister,
-        setLightboxRegister,
+
+        //Response Message Contact
         responseMessageContact,
         setResponseMessageContact,
         formSendEmailView,
         setFormSendEmailView,
+
+        //Register Lightbox
+        lightboxRegister,
+        setLightboxRegister,
       }}
     >
       {props.children}

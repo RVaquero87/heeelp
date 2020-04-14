@@ -57,20 +57,18 @@ export const AdminReviews = () => {
             <SectionReviewsAdmin className="contain">
               <div className="box-faqs">
                 <FilterStars data-aos="fade-up">
-                  <Paragraphs blue>
-                    <span>Filtra por el número de Estrellas:</span>
-                  </Paragraphs>
                   <div className="box-filter">
                     <select
                       onChange={(e) => handleFilterReviews(e, e.target.value)}
                     >
-                      <option value="all">Todas las opiniones</option>
+                      <option value="all">Filtra por valoración</option>
                       <option value="0">0 Estrellas</option>
                       <option value="1">1 Estrellas</option>
                       <option value="2">2 Estrellas</option>
                       <option value="3">3 Estrellas</option>
                       <option value="4">4 Estrellas</option>
                       <option value="5">5 Estrellas</option>
+                      <option value="all">Todas las opiniones</option>
                     </select>
                   </div>
                 </FilterStars>

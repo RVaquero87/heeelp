@@ -5,6 +5,7 @@ import logo from "../../public/images/logo-blanco.svg";
 import logoNegro from "../../public/images/logo-negro.svg";
 import comillas from "../../public/images/comillas.svg";
 import arrowBottom from "../../public/images/arrow.svg";
+import arrowBottomBlue from "../../public/images/arrow-blue.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -481,12 +482,13 @@ export const FilterStars = styled.div`
   justify-content: space-between;
   width: 490px;
   margin-bottom: 50px;
-  border-bottom: 2px solid #e3e4e8;
 
   ${Paragraphs} {
     padding: 0;
   }
   .box-filter {
+    border-radius: 30px;
+    border: solid 2px #3e3874;
     display: block;
     max-width: 100%;
     position: relative;
@@ -496,11 +498,11 @@ export const FilterStars = styled.div`
       text-transform: uppercase;
       background-color: transparent;
       border: none;
-      font-family: "Roboto", helvetica;
+      font-family: "Roboto", sans-serif;
       font-size: 1rem;
       font-weight: 300;
       max-width: 100%;
-      padding: 8px 35px 8px 15px;
+      padding: 8px 40px 8px 15px;
       margin: 0%;
       &:active,
       &:focus {
@@ -509,11 +511,11 @@ export const FilterStars = styled.div`
       }
     }
     &:after {
-      background: url(${arrowBottom}) center no-repeat;
+      background: url(${arrowBottomBlue}) center no-repeat;
       content: " ";
       height: 10px;
       position: absolute;
-      right: 8px;
+      right: 15px;
       top: 53%;
       transform: translate(0, -50%);
       width: 17px;
@@ -531,15 +533,17 @@ export const FilterStars = styled.div`
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: flex-start;
-    width: initial;
+    width: 100%;
     ${Paragraphs} {
       width: 100%;
       padding-right: 0;
       margin-bottom: 10px;
     }
     .box-filter {
+      width: 100%;
       select {
-        padding-left: 0px;
+        padding-left: 25px;
+        width: 100%;
       }
     }
   }
@@ -548,17 +552,36 @@ export const FilterStars = styled.div`
 export const FilterUser = styled(FilterStars)`
   margin: 0;
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  width: 475px;
+  align-items: center;
+  width: 630px;
+
   .contain-filters {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     ${Paragraphs} {
+      padding-bottom: 0;
       width: 100%;
+    }
+  }
+  @media (max-width: 960px) {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    .contain-filters {
+      margin-bottom: 0;
+      &:last-child {
+        padding-bottom: 20px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .contain-filters {
+      width: 100%;
+      &:last-child {
+        padding-bottom: 10px;
+      }
     }
   }
 `;
@@ -619,6 +642,7 @@ export const FormBox = styled.form`
   .box-input {
     position: relative;
     margin-bottom: 40px;
+    font-family: "Roboto", sans-serif;
     width: 100%;
   }
 `;
@@ -1901,11 +1925,20 @@ export const SectionReviewsHeader = styled(SectionReviewsHome)`
 `;
 
 export const SectionReviews = styled(SectionReviewsHome)`
+  padding-top: 60px;
+  &.my-reviews {
+    padding-top: 80px;
+    padding-bottom: 0;
+    .box-faqs .box-title {
+      margin-bottom: 30px;
+    }
+  }
   .box-faqs {
     display: flex;
     flex-direction: column;
     width: 100%;
     .box-title {
+      margin-top: 40px;
       margin-bottom: 40px;
       width: 100%;
       ${H1}, ${H2} {
@@ -1915,6 +1948,9 @@ export const SectionReviews = styled(SectionReviewsHome)`
       ${Paragraphs} {
         max-width: 800px;
       }
+      &.active {
+        margin-top: 0;
+      }
     }
     .box-reviews {
       width: 100%;
@@ -1922,6 +1958,11 @@ export const SectionReviews = styled(SectionReviewsHome)`
       &:before,
       &:after {
         display: none;
+      }
+
+      > ${Paragraphs} {
+        text-align: left;
+        width: 100%;
       }
 
       > div {
@@ -1950,6 +1991,11 @@ export const SectionReviews = styled(SectionReviewsHome)`
     }
   }
   @media (max-width: 768px) {
+    &.my-reviews {
+      .box-faqs .box-title {
+        margin-bottom: 20px;
+      }
+    }
     .box-faqs {
       .box-title {
         align-items: flex-start;
@@ -1968,6 +2014,45 @@ export const SectionReviews = styled(SectionReviewsHome)`
             height: initial;
           }
         }
+      }
+    }
+  }
+`;
+
+export const SectionCreateReview = styled.div`
+  .content-text {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 0;
+    &.active {
+      border-bottom: 1px solid rgba(154, 156, 175, 0.3);
+    }
+    ${ParagraphTop} {
+      padding-bottom: 0;
+      width: 70%;
+    }
+  }
+  ${FormBox} {
+    margin: 0;
+    padding: 80px 0;
+    ${H2} {
+      padding-bottom: 50px;
+    }
+  }
+  @media (max-width: 960px) {
+    .content-text {
+      flex-direction: column;
+      padding: 60px 0;
+      ${ParagraphTop} {
+        padding-bottom: 24px;
+        width: 100%;
+      }
+    }
+    ${FormBox} {
+      padding: 60px 0;
+      ${H2} {
+        padding-bottom: 40px;
       }
     }
   }
@@ -2001,9 +2086,6 @@ export const SectionUsersAdmin = styled(SectionReviews)`
         justify-content: space-between;
         align-items: center;
       }
-    }
-    ${FilterStars} {
-      border: none;
     }
   }
   @media (max-width: 1200px) {
