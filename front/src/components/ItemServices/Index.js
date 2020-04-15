@@ -2,12 +2,17 @@
 import React from "react";
 
 //Styles & AOS animation
-import { BoxImg, Paragraphs } from "../../styles/Index.styles";
+import { BoxImg, Paragraphs, ParagraphTop } from "../../styles/Index.styles";
 import { ItemServiceRate } from "./styles/ItemServices.styles";
 
-export const ItemServicies = ({ ImgSrc, ItemText, ItemContent = false }) => {
+export const ItemServicies = ({
+  ImgSrc,
+  ItemText,
+  ItemContent = false,
+  NumberServicesProvided = false,
+}) => {
   return (
-    <ItemServiceRate>
+    <ItemServiceRate className={NumberServicesProvided == 0 ? "disabled" : ""}>
       <BoxImg>
         <img src={ImgSrc} title={ItemText} name={ItemText} />
       </BoxImg>
@@ -18,6 +23,11 @@ export const ItemServicies = ({ ImgSrc, ItemText, ItemContent = false }) => {
         <Paragraphs blue className="content-services">
           {ItemContent}
         </Paragraphs>
+      )}
+      {NumberServicesProvided && (
+        <ParagraphTop blue className="number-services">
+          <span>{NumberServicesProvided}</span>
+        </ParagraphTop>
       )}
     </ItemServiceRate>
   );

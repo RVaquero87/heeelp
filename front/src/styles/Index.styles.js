@@ -197,6 +197,8 @@ export const H1 = styled.h1`
         return "#8290ff";
       case "blue":
         return "#3e3874";
+      case "black":
+        return "#393b4f";
       case "orange":
         return "#ffa500";
       default:
@@ -242,6 +244,8 @@ export const H2 = styled.h2`
         return "#8290ff";
       case "blue":
         return "#3e3874";
+      case "black":
+        return "#393b4f";
       case "orange":
         return "#ffa500";
       default:
@@ -1800,67 +1804,6 @@ export const Col2Min = styled.div`
     }
   }
 `;
-
-export const SectionServicesRates = styled.div`
-  padding: 100px 0 70px;
-  width: 100%;
-  .col5 {
-    padding: 30px 0 50px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    width: 100%;
-  }
-  ${H1}, ${H2} {
-    margin-bottom: 20px;
-  }
-  > ${Paragraphs} {
-    max-width: 750px;
-    text-align: center;
-  }
-  .button {
-    margin-top: 30px;
-  }
-  @media (max-width: 1024px) {
-    padding: 70px 0 50px;
-
-    .col5 {
-      padding: 20px 0 40px;
-      justify-content: space-between;
-    }
-  }
-  @media (max-width: 768px) {
-    .col5 {
-      flex-wrap: wrap;
-      justify-content: space-around;
-      max-width: 500px;
-      padding-bottom: 0;
-      > div {
-        width: 33%;
-        text-align: center;
-        margin-bottom: 40px;
-      }
-    }
-  }
-  @media (max-width: 480px) {
-    padding: 50px 0 40px;
-    .col5 {
-      justify-content: center;
-      align-items: flex-start;
-      > div {
-        width: 50%;
-        margin-bottom: 35px;
-      }
-    }
-    > ${Paragraphs} {
-      text-align: left;
-    }
-    .button {
-      margin-top: 20px;
-    }
-  }
-`;
-
 export const FaqsBox = styled.div`
   padding: 100px 0 70px;
   width: 100%;
@@ -2637,6 +2580,15 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
           font-size: 20px;
         }
       }
+      .button-box {
+        align-content: center;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        button:first-child {
+          margin-right: 36px;
+        }
+      }
     }
     &.no-edit {
       .data-profile {
@@ -2655,7 +2607,7 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
           span:first-child {
             display: inline-block;
             color: #9a9caf;
-            font-weight: 100;
+            font-weight: 300;
             width: 290px;
           }
         }
@@ -2686,23 +2638,131 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
     }
   }
   @media (max-width: 480px) {
-    &.contain.no-edit {
-      .data-profile {
-        ${Paragraphs} {
-          flex-direction: column;
-          padding-top: 0;
-          &:last-child {
-            padding-bottom: 0;
-          }
-          span {
-            width: 100%;
-            &:first-child {
-              padding-bottom: 10;
+    &.contain {
+      .no-edit {
+        .data-profile {
+          ${Paragraphs} {
+            flex-direction: column;
+            padding-top: 0;
+            &:last-child {
+              padding-bottom: 0;
+            }
+            span {
+              width: 100%;
+              &:first-child {
+                padding-bottom: 3px;
+              }
             }
           }
         }
       }
+      .button-box {
+        flex-direction: column-reverse;
+
+        button:first-child {
+          margin: 24px 0 0;
+        }
+      }
     }
+  }
+`;
+
+//Section Services Provided
+
+export const SectionServicesRates = styled.div`
+  padding: 100px 0 70px;
+  width: 100%;
+  .col5 {
+    padding: 30px 0 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  ${H1}, ${H2} {
+    margin-bottom: 20px;
+  }
+  > ${Paragraphs} {
+    max-width: 750px;
+    text-align: center;
+  }
+  .button {
+    margin-top: 30px;
+  }
+  @media (max-width: 1024px) {
+    padding: 70px 0 50px;
+
+    .col5 {
+      padding: 20px 0 40px;
+      justify-content: space-between;
+    }
+  }
+  @media (max-width: 768px) {
+    .col5 {
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 500px;
+      padding-bottom: 0;
+      > div {
+        width: 33%;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    padding: 50px 0 40px;
+    .col5 {
+      justify-content: center;
+      align-items: flex-end;
+      > div {
+        width: 50%;
+        margin-bottom: 35px;
+      }
+    }
+    > ${Paragraphs} {
+      text-align: left;
+    }
+    .button {
+      margin-top: 20px;
+    }
+  }
+`;
+
+export const SectionServicesProvided = styled(SectionServicesRates)`
+  .total-services {
+    color: #8290ff;
+    font-size: 120px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+  }
+`;
+
+export const SectionServicesProvidedProfile = styled(SectionServicesProvided)`
+  &.contain {
+    padding-top: 0;
+    max-width: 995px;
+  }
+  ${H2} {
+    align-self: flex-start;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  > ${Paragraphs} {
+    align-self: flex-start;
+    font-size: 20px;
+    text-align: left;
+    span:first-child {
+      display: inline-block;
+      color: #9a9caf;
+      font-weight: 300;
+      width: 290px;
+    }
+  }
+  .col5 {
+    justify-content: space-between;
   }
 `;
 
@@ -3092,7 +3152,7 @@ export const Page404 = styled.div`
   }
 `;
 
-//LighBox
+//LightBox
 export const LightBoxRegisterRol = styled.div`
   display: none;
   &.active {

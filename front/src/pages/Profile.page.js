@@ -16,6 +16,8 @@ import {
   H1,
   H2,
   SectionFormBoxProfile,
+  SectionServicesProvidedProfile,
+  ParagraphTop,
 } from "../styles/Index.styles";
 
 //Form
@@ -23,6 +25,11 @@ import { useForm, FormContext } from "react-hook-form";
 
 //Images
 import imgProfile from "../../public/images/default-profile.png";
+import icon1 from "../../public/images/icon-1.svg";
+import icon2 from "../../public/images/icon-2.svg";
+import icon3 from "../../public/images/icon-3.svg";
+import icon4 from "../../public/images/icon-4.svg";
+import icon5 from "../../public/images/icon-5.svg";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
@@ -34,6 +41,7 @@ import { scrollInit } from "../lib/commonFunctional";
 //Compoments
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
+import { ItemServicies } from "../components/ItemServices/Index";
 
 export const Profile = withRouter(({ history }) => {
   const { user, setUser, setMessageError } = useContext(PrincipalContext);
@@ -213,7 +221,7 @@ export const Profile = withRouter(({ history }) => {
           {buttonProfileView ? (
             <>
               <div className="data-profile" data-aos="fade-up">
-                <H2 color="blue">
+                <H2 color="black">
                   <span>Datos personales</span>
                 </H2>
                 <Paragraphs blue>
@@ -248,7 +256,7 @@ export const Profile = withRouter(({ history }) => {
             <FormContext {...methods}>
               <FormBox onSubmit={handleSubmit(onEdit)}>
                 <div className="box-personal" data-aos="fade-up">
-                  <H2 color="blue">
+                  <H2 color="black">
                     <span>Datos personales</span>
                   </H2>
                   <InputBox
@@ -343,7 +351,7 @@ export const Profile = withRouter(({ history }) => {
                   )}
                 </div>
                 <div className="box-direction" data-aos="fade-up">
-                  <H2 color="blue">
+                  <H2 color="black">
                     <span>Domicilio</span>
                   </H2>
                   <InputBox
@@ -455,13 +463,60 @@ export const Profile = withRouter(({ history }) => {
                     })}
                   />
                 </div>
-                <button type="submit" className="button big">
-                  Editar
-                </button>
+                <div className="button-box">
+                  <Button
+                    type="transparent-blue"
+                    big
+                    onClick={(e) => setbuttonProfileView(!buttonProfileView)}
+                  >
+                    Cancelar
+                  </Button>
+                  <button type="submit" className="button big">
+                    Guardar Cambios
+                  </button>
+                </div>
               </FormBox>
             </FormContext>
           )}
         </SectionFormBoxProfile>
+      </SectionBox>
+
+      <SectionBox justify="center" column>
+        <SectionServicesProvidedProfile className="contain" data-aos="fade-up">
+          <H2 color="black">Servicios que presto</H2>
+          <Paragraphs blue>
+            {" "}
+            <span>Total de servicios prestados </span> <span>22</span>
+          </Paragraphs>
+
+          <div className="col5">
+            <ItemServicies
+              ImgSrc={icon1}
+              ItemText="Lavandería"
+              NumberServicesProvided="5"
+            />
+            <ItemServicies
+              ImgSrc={icon2}
+              ItemText="Supermercado"
+              NumberServicesProvided="0"
+            />
+            <ItemServicies
+              ImgSrc={icon3}
+              ItemText="Parafarmacia"
+              NumberServicesProvided="5"
+            />
+            <ItemServicies
+              ImgSrc={icon4}
+              ItemText="Tareas domésticas"
+              NumberServicesProvided="5"
+            />
+            <ItemServicies
+              ImgSrc={icon5}
+              ItemText="Animales domésticos"
+              NumberServicesProvided="0"
+            />
+          </div>
+        </SectionServicesProvidedProfile>
       </SectionBox>
     </>
   );
