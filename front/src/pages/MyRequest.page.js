@@ -41,10 +41,14 @@ import { scrollInit } from "../lib/commonFunctional";
 import { ItemServicies } from "../components/ItemServices/Index";
 import { ButtonLink } from "../components/ButtonLink/Index";
 import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
-import { AidsRequestBox } from "../components/ItemAidRequest/Index";
 
-export const HomeRolPage = () => {
-  const { user, aidsRequestId } = useContext(PrincipalContext);
+export const MyRequestRolPage = () => {
+  const {
+    user,
+    aidsRequestId,
+    changeAidsRequest,
+    setChangeAidsRequest,
+  } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
@@ -63,11 +67,7 @@ export const HomeRolPage = () => {
       <SectionBox bgColor="blueLight" justify="evenly" className="z1">
         <Col2HeaderHomeRol className="contain" data-aos="fade-up">
           <ContentText>
-            <H1>¡Hola {user.name}!</H1>
-            <Paragraphs>
-              Donec urna nulla, feugiat eget purus vel, pulvinar convallis
-              lacus. Quisque accumsan mauris sed sapien porta ultricies.{" "}
-            </Paragraphs>
+            <H1>¡Mis peticiones</H1>
           </ContentText>
           <BoxImg className={user?.rol === "Helpers" ? "helper" : "helped"}>
             <img
@@ -124,41 +124,34 @@ export const HomeRolPage = () => {
       </SectionBox>
 
       <SectionBox justify="center" column>
-        <SectionAidsRequest
-          className={
-            aidsRequestId.length == 0 ? "contain zero-aids" : "contain"
-          }
-          data-aos="fade-up"
-        >
+        <SectionAidsRequest className="contain" data-aos="fade-up">
           <H2 color="black">
-            <span>
-              Mis últimas {user?.rol === "Helpers" ? "tareas" : "peticiones"}
-            </span>
+            <span>Peticiones en borrador </span>
           </H2>
-          <div className="box-aids">
-            {aidsRequestId.length == 0 ? (
-              <Paragraphs blue>
-                <span>
-                  {user?.rol === "Helpers"
-                    ? `{user.name} aun no te pediste ninguna tarea. Puedes elegirlas en
-                mis peticiones`
-                    : `${user.name} ${user.lastname.slice(
-                        0,
-                        1
-                      )}. aun no creaste ninguna petición. Puedes crearlas en mis peticiones`}
-                </span>
-              </Paragraphs>
-            ) : (
-              aidsRequestId.map((aidrequest, i) => {
-                if (i <= 2) {
-                  return <AidsRequestBox aidrequest={aidrequest} key={i} />;
-                }
-              })
-            )}
-          </div>
-          <ButtonLink whereTo="/mis-peticiones" className="button big">
-            Ver todas mis {user?.rol === "Helpers" ? "tareas" : "peticiones"}
-          </ButtonLink>
+        </SectionAidsRequest>
+      </SectionBox>
+
+      <SectionBox justify="center" column>
+        <SectionAidsRequest className="contain" data-aos="fade-up">
+          <H2 color="black">
+            <span>Peticiones Publicadas </span>
+          </H2>
+        </SectionAidsRequest>
+      </SectionBox>
+
+      <SectionBox justify="center" column>
+        <SectionAidsRequest className="contain" data-aos="fade-up">
+          <H2 color="black">
+            <span>Peticiones en curso </span>
+          </H2>
+        </SectionAidsRequest>
+      </SectionBox>
+
+      <SectionBox justify="center" column>
+        <SectionAidsRequest className="contain" data-aos="fade-up">
+          <H2 color="black">
+            <span>Peticiones Realizas </span>
+          </H2>
         </SectionAidsRequest>
       </SectionBox>
 
@@ -201,6 +194,6 @@ export const HomeRolPage = () => {
   );
 };
 
-export const HomeRolPagePrivate = withProtected(HomeRolPage, {
+export const MyRequestRolPagePrivate = withProtected(MyRequestRolPage, {
   redirect: false,
 });

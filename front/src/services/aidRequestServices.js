@@ -1,18 +1,18 @@
 import axios from "axios";
 
-const aidResquestService = axios.create({
+const aidRequestService = axios.create({
   baseURL: "http://localhost:3000/aid-requests",
   withCredentials: true,
 });
 
-export const createAidResquest = async ({
+export const createAidRequest = async ({
   title,
   content,
   price,
   time,
   type,
 }) => {
-  const res = await aidResquestService.post("/create", {
+  const res = await aidRequestService.post("/create", {
     title,
     content,
     price,
@@ -22,8 +22,8 @@ export const createAidResquest = async ({
   return res;
 };
 
-export const editAidResquest = async ({ _id, title, content, price, time }) => {
-  const res = await aidResquestService.post("/edit", {
+export const editAidRequest = async ({ _id, title, content, price, time }) => {
+  const res = await aidRequestService.post("/edit", {
     _id,
     title,
     content,
@@ -33,44 +33,51 @@ export const editAidResquest = async ({ _id, title, content, price, time }) => {
   return res;
 };
 
-export const getAidResquestCreator = async () => {
-  const res = await aidResquestService.post("/id-creator");
+export const getAidRequestCreator = async () => {
+  const res = await aidRequestService.post("/id-creator");
   return res.data;
 };
 
-export const getAidResquestHelper = async () => {
-  const res = await aidResquestService.post("/id-helper");
+export const getAidRequestHelper = async () => {
+  const res = await aidRequestService.post("/id-helper");
   return res.data;
 };
 
-export const getAidResquest = async () => {
-  const res = await aidResquestService.post("/alls");
+export const getAidRequest = async () => {
+  const res = await aidRequestService.post("/alls");
   return res.data;
 };
 
-export const publicAidResquest = async ({ _id }) => {
-  const res = await aidResquestService.post("/public", {
+export const getOneAidRequest = async (_id) => {
+  const res = await aidRequestService.post("/id-one", {
+    _id,
+  });
+  return res.data;
+};
+
+export const publicAidRequest = async (_id) => {
+  const res = await aidRequestService.post("/public", {
     _id,
   });
   return res;
 };
 
-export const takeOverAidResquest = async ({ _id }) => {
-  const res = await aidResquestService.post("/add-helper", {
+export const takeOverAidRequest = async (_id) => {
+  const res = await aidRequestService.post("/add-helper", {
     _id,
   });
   return res;
 };
 
-export const stopTakeOverAidResquest = async ({ _id }) => {
-  const res = await aidResquestService.post("/delete-helper", {
+export const stopTakeOverAidRequest = async (_id) => {
+  const res = await aidRequestService.post("/delete-helper", {
     _id,
   });
   return res;
 };
 
-export const duplicateAidResquest = async ({ _id, title, time }) => {
-  const res = await aidResquestService.post("/duplicate", {
+export const duplicateAidRequest = async ({ _id, title, time }) => {
+  const res = await aidRequestService.post("/duplicate", {
     _id,
     title,
     time,
@@ -78,8 +85,8 @@ export const duplicateAidResquest = async ({ _id, title, time }) => {
   return res;
 };
 
-export const cancelAidResquest = async ({ _id }) => {
-  const res = await aidResquestService.post("/cancel", {
+export const cancelAidRequest = async (_id) => {
+  const res = await aidRequestService.post("/cancel", {
     _id,
   });
   return res;

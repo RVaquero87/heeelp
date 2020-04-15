@@ -73,7 +73,7 @@ export const GlobalContent = styled.div`
     @media (max-width: 480px) {
       display: block;
       font-size: 16px;
-      line-height: 1;
+      line-height: 1.2;
       padding: 15px;
       margin: 0 auto;
       max-width: 300px;
@@ -450,7 +450,7 @@ export const Button = styled.button`
   @media (max-width: 480px) {
     display: block;
     font-size: 16px;
-    line-height: 1;
+    line-height: 1.2;
     padding: 15px;
     margin: 0 auto;
     max-width: 300px;
@@ -1743,6 +1743,72 @@ export const Col2HeaderControlUser = styled(Col2Header)`
   }
 `;
 
+export const Col2HeaderHomeRol = styled(Col2Header)`
+  &.contain {
+    padding: 150px 0 0;
+    ${ContentText} {
+      width: 35%;
+    }
+    ${BoxImg} {
+      width: 60%;
+      max-width: 474px;
+      &.helped {
+        max-width: 400px;
+        img {
+        }
+      }
+      img {
+        top: 28px;
+      }
+    }
+  }
+  @media (max-width: 1200px) {
+    &.contain {
+      ${BoxImg} {
+        max-width: 395px;
+        &.helped {
+          max-width: 370px;
+        }
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      padding: 120px 0 0;
+      ${BoxImg} {
+        max-width: 365px;
+        &.helped {
+          max-width: 350px;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      ${ContentText} {
+        width: 100%;
+      }
+      ${BoxImg} {
+        max-width: 325px;
+        &.helped {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      ${BoxImg} {
+        max-width: 280px;
+        width: 100%;
+        &.helped {
+          max-width: 280px;
+        }
+      }
+    }
+  }
+`;
+
 //Sections Specials
 export const Col2Min = styled.div`
   display: flex;
@@ -2750,6 +2816,7 @@ export const SectionServicesProvided = styled(SectionServicesRates)`
     font-size: 120px;
     font-weight: 700;
     line-height: 1;
+    padding-bottom: 0;
     text-align: center;
   }
 `;
@@ -3264,6 +3331,25 @@ export const LightBoxRegisterRol = styled.div`
           }
         }
       }
+    }
+  }
+`;
+
+//AidsRequest Sections
+export const SectionAidsRequest = styled.div`
+  padding: 96px 0 80px;
+  &.zero-aids {
+    ${H2} {
+      margin-bottom: 34px;
+    }
+  }
+  ${H2} {
+    margin-bottom: 64px;
+  }
+  .box-aids {
+    margin-bottom: 60px;
+    > ${Paragraphs} {
+      text-align: left;
     }
   }
 `;

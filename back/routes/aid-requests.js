@@ -207,6 +207,24 @@ router.post("/public", isLoggedIn(), async (req, res, next) => {
   }
 });
 
+//GET AIDREQUEST BY ID
+router.post("/id-one", async (req, res) => {
+  try {
+    const { _id } = req.body;
+
+    const aidRequests = await AidRequests.find({
+      _id,
+    })
+      .populate("creatorUserid")
+      .populate("helperId")
+      .populate("shoppinglist");
+
+    return res.json(aidRequests);
+  } catch (err) {
+    return res.json({ status: 400, message: "Fallo al recibir los datos" });
+  }
+});
+
 /* Add HELPER in AidRequest */
 router.post("/add-helper", isLoggedIn(), async (req, res, next) => {
   try {

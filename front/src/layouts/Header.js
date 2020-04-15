@@ -192,7 +192,10 @@ export const Header = withRouter(({ history }) => {
                               </NavLink>
                             </li>
                             <li>
-                              <NavLink to="/home" className="nav-link">
+                              <NavLink
+                                to="/mis-peticiones"
+                                className="nav-link"
+                              >
                                 mis peticiones
                               </NavLink>
                             </li>
@@ -200,7 +203,10 @@ export const Header = withRouter(({ history }) => {
                         )) || (
                           <>
                             <li>
-                              <NavLink to="/home" className="nav-link">
+                              <NavLink
+                                to="/mis-peticiones"
+                                className="nav-link"
+                              >
                                 mis peticiones
                               </NavLink>
                             </li>

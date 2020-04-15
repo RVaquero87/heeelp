@@ -8,7 +8,7 @@ const Messages = require("../models/Messages");
 
 // CREATE MESSAGES
 router.post("/create", isLoggedIn(), async (req, res, next) => {
-  const { title, message, aidResquestId, receptorUserId } = req.body;
+  const { title, message, aidRequestId, receptorUserId } = req.body;
   const idUser = req.user;
 
   // Create the Messages
@@ -16,7 +16,7 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
     title,
     message,
     creatorUserId: idUser._id,
-    aidResquestId,
+    aidRequestId,
     receptorUserId,
   });
 
@@ -66,7 +66,7 @@ router.post("/alls-creator-id", async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
       .populate("receptorUserId")
-      .populate("aidResquestId");
+      .populate("aidRequestId");
 
     return res.json(messagesList);
   } catch (err) {
@@ -85,7 +85,7 @@ router.post("/alls-receptor-id", async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
       .populate("receptorUserId")
-      .populate("aidResquestId");
+      .populate("aidRequestId");
 
     return res.json(messagesList);
   } catch (err) {
@@ -100,7 +100,7 @@ router.post("/alls", async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("creatorUserId")
       .populate("receptorUserId")
-      .populate("aidResquestId");
+      .populate("aidRequestId");
 
     return res.json(messagesList);
   } catch (err) {

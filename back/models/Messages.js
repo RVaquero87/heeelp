@@ -8,7 +8,7 @@ const userSchema = new Schema(
     status: { type: String, enum: ["Visto", "Nuevo"], default: "Nuevo" },
     creatorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
     receptorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
-    aidResquestId: { type: Schema.Types.ObjectId, ref: "AidRequests" },
+    aidRequestId: { type: Schema.Types.ObjectId, ref: "AidRequests" },
   },
   {
     timestamps: true,

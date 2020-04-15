@@ -98,7 +98,7 @@ export const ServicesPage = () => {
           </H2>
           <AccordionFaqsBox />
           <ButtonLink whereTo="/faqs" className="button white big">
-            VER MÁS FAQ'S
+            VER TODAS
           </ButtonLink>
         </FaqsBox>
       </SectionBox>

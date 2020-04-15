@@ -7,9 +7,9 @@ export const PrincipalContext = createContext();
 //Functional & Services
 import { getAllReviews, getIDReview } from "../services/reviewsServices";
 import {
-  getAidResquest,
-  getAidResquestCreator,
-  getAidResquestHelper,
+  getAidRequest,
+  getAidRequestCreator,
+  getAidRequestHelper,
 } from "../services/aidRequestServices";
 import { getAverage } from "../lib/commonFunctional";
 
@@ -71,19 +71,19 @@ export const PrincipalContextProvider = (props) => {
 
   useEffect(() => {
     if (user?.rol === "Helpers") {
-      getAidResquestHelper()
+      getAidRequestHelper()
         .then((aidsRequest) => {
           setAidsRequestid(aidsRequest);
         })
         .catch((e) => {});
     } else if (user?.rol === "Helped") {
-      getAidResquestCreator()
+      getAidRequestCreator()
         .then((aidsRequest) => {
           setAidsRequestid(aidsRequest);
         })
         .catch((e) => {});
     } else {
-      getAidResquest()
+      getAidRequest()
         .then((aidsRequest) => {
           setAidsRequest(aidsRequest);
         })
