@@ -8,6 +8,7 @@ import {
   HeaderBox,
   Paragraphs,
   Button,
+  BoxImg,
 } from "../styles/Index.styles";
 
 //Contexto
@@ -216,7 +217,9 @@ export const Header = withRouter(({ history }) => {
                 </nav>
                 <div className="button-box icons">
                   <NavLink to="/profile" className="nav-link profile">
-                    <img src={user?.image} alt="" title="" />
+                    <BoxImg>
+                      <img src={user?.image} alt="" title="" />
+                    </BoxImg>
                     <p>
                       {user?.name} {user?.lastname.slice(0, 1)}.
                     </p>

@@ -8,10 +8,11 @@ export const AreaBox = styled.textarea`
   border: 1px solid #e3e4e8;
   box-shadow: none;
   display: block;
+  color: #3e3874;
   margin: 0px;
-  max-width:100%;
-  min-width:100%;
-  min-height:150px;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 150px;
   width: 100%;
   &:-internal-autofill-selected {
     background-color: transparent !important;
@@ -20,9 +21,9 @@ export const AreaBox = styled.textarea`
     outline: none;
   }
   &.error {
-    border: 1px solid #E74128;
+    border: 1px solid #e74128;
     &:focus {
-      border: 1px solid #E74128;
+      border: 1px solid #e74128;
     }
   }
 `;

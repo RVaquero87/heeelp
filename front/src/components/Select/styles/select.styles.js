@@ -29,6 +29,7 @@ export const BoxSelect = styled.div`
     select {
       border: none;
       cursor: text;
+      color: #3e3874;
       line-height: 1;
       margin-left: 12px;
       padding: 0;

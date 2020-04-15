@@ -9,6 +9,7 @@ export const InputText = styled.input.attrs({
   border: 0;
   border-bottom: 1px solid #e3e4e8;
   box-shadow: none;
+  color: #3e3874;
   display: block;
   margin: 0px;
   padding: 1px 5px;

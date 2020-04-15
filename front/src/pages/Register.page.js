@@ -153,7 +153,7 @@ export const RegisterPage = withRouter(({ history }) => {
         messageRedirect(responseServer.message);
       } else {
         setUser({ ...data, image: imageURL.secure_url });
-        history.push("/profile");
+        history.push("/home");
       }
     } else {
       if (responseServer.status) {

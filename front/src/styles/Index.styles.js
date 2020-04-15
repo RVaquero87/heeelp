@@ -11,6 +11,7 @@ import message from "../../public/images/mensajes.svg";
 import messageBlue from "../../public/images/mensajes-blue.svg";
 import notifications from "../../public/images/bell.svg";
 import notificationsBlue from "../../public/images/bell-blue.svg";
+import editProfile from "../../public/images/edit.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -729,7 +730,6 @@ export const BoxImg = styled.div`
 `;
 
 //Components LAYOUT
-
 export const HeaderBox = styled.header`
   display: block;
   max-width: 100%;
@@ -809,7 +809,7 @@ export const HeaderBox = styled.header`
             }
           }
           &.user-helped {
-            width: 270px;
+            width: 250px;
           }
           &.user-admin {
             width: 480px;
@@ -836,10 +836,12 @@ export const HeaderBox = styled.header`
                 justify-content: space-between;
                 align-items: center;
 
-                img {
+                ${BoxImg} {
                   border-radius: 100%;
-                  max-width: 48px;
+                  height: 48px;
+                  overflow: hidden;
                   pointer-events: none;
+                  width: 48px;
                 }
                 p {
                   font-family: "Roboto", sans-serif;
@@ -1041,7 +1043,7 @@ export const HeaderBox = styled.header`
             }
             &.user-helped {
               margin-right: 36px;
-              width: 250px;
+              width: 230px;
             }
             &.user-admin {
               width: 425px;
@@ -1354,7 +1356,9 @@ export const FooterBox = styled.footer`
   }
 `;
 
-//Components Specific
+//COMPONENTS SPECIFIC
+
+//Headers
 export const Col2Header = styled.div`
   padding: 125px 0 0;
   ${ContentText} {
@@ -1719,6 +1723,7 @@ export const Col2HeaderControlUser = styled(Col2Header)`
   }
 `;
 
+//Sections Specials
 export const Col2Min = styled.div`
   display: flex;
   align-items: center;
@@ -1933,6 +1938,7 @@ export const FaqsBox = styled.div`
   }
 `;
 
+//Reviews
 export const SectionReviewsHome = styled.div`
   padding: 100px 0 70px;
   .box-faqs {
@@ -2284,6 +2290,7 @@ export const SectionCreateReview = styled.div`
   }
 `;
 
+//Admin
 export const SectionReviewsAdmin = styled(SectionReviews)`
   &.contain {
     padding: 0px 0 70px;
@@ -2378,31 +2385,79 @@ export const SectionUsersAdmin = styled(SectionReviews)`
   }
 `;
 
-export const TermsBox = styled.div`
-  &.contain {
-    padding: 60px 0 80px;
-    max-width: 768px;
-    ${ParagraphTop} {
+export const AdminPanelBox = styled.div`
+  padding: 150px 0 0;
+  border-bottom: 1px solid #e3e4e8;
+  .button-box {
+    display: flex;
+    width: 100%;
+    button {
+      position: relative;
+      border: 1px solid transparent;
+      border-radius: 4px 4px 0 0;
+      color: #3e3874;
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      line-height: 1;
+      padding: 14px 28px 12px;
+      position: relative;
+      top: 1px;
+      cursor: pointer;
       text-align: left;
-      padding: 50px 0 15px;
-      width: 100%;
-    }
-    ${Paragraphs} {
-      padding-top: 0;
+      i,
+      span {
+        pointer-events: none;
+      }
+      &.active {
+        background-color: #fff;
+        border-color: #e3e4e8;
+        border-bottom: 1px solid transparent;
+      }
+      i {
+        position: relative;
+        margin-right: 12px;
+      }
     }
   }
+  @media (max-width: 1200px) {
+    padding-top: 120px;
+  }
   @media (max-width: 768px) {
-    &.contain {
-      padding: 60px 0 50px;
+    padding-top: 100px;
+    .button-box {
+      button {
+        text-transform: capitalize;
+        padding: 14px 16px 12px;
+
+        span {
+          display: none;
+        }
+      }
     }
   }
   @media (max-width: 480px) {
-    &.contain {
-      padding: 30px 0 40px;
+    padding-top: 80px;
+    .button-box {
+      button {
+        padding: 10px 10px 8px;
+        font-size: 16px;
+        i {
+          display: none;
+        }
+      }
     }
   }
 `;
 
+export const SectionUserAdminList = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+//Forms Sections Pages
 export const SectionFormBox = styled.div`
   font-family: "Roboto", sans-serif;
   padding: 100px 0;
@@ -2556,6 +2611,315 @@ export const SectionFormBoxAdminContact = styled(SectionFormBox)`
   }
 `;
 
+export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
+  &.contain {
+    align-items: flex-start;
+    border-bottom: 1px solid #e3e4e8;
+    margin: 80px auto;
+    max-width: 995px;
+    padding: 0;
+    ${FormBox} {
+      justify-content: flex-start;
+      margin: 0;
+      max-width: 768px;
+      padding-bottom: 64px;
+      width: 100%;
+      ${H2} {
+        font-size: 32px;
+        margin-bottom: 30px;
+        text-align: left;
+      }
+      .box-direction {
+        margin-top: 60px;
+      }
+      .box-input {
+        label {
+          font-size: 20px;
+        }
+      }
+    }
+    &.no-edit {
+      .data-profile {
+        justify-content: flex-start;
+        margin-left: 0;
+        max-width: 768px;
+        padding-bottom: 64px;
+        width: 100%;
+        ${H2} {
+          font-size: 32px;
+          margin-bottom: 30px;
+          text-align: left;
+        }
+        ${Paragraphs} {
+          font-size: 20px;
+          span:first-child {
+            display: inline-block;
+            color: #9a9caf;
+            font-weight: 100;
+            width: 290px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 1024px) {
+    &.contain.no-edit {
+      .data-profile {
+        ${Paragraphs} span:first-child {
+          width: 220px;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain.no-edit {
+      .data-profile {
+        ${Paragraphs} {
+          display: flex;
+          align-items: flex-start;
+          span {
+            font-size: 16px;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain.no-edit {
+      .data-profile {
+        ${Paragraphs} {
+          flex-direction: column;
+          padding-top: 0;
+          &:last-child {
+            padding-bottom: 0;
+          }
+          span {
+            width: 100%;
+            &:first-child {
+              padding-bottom: 10;
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+//Pages Sections
+export const ProfileHeader = styled.div`
+  &.contain {
+    max-width: 995px;
+    padding: 190px 0 65px;
+
+    ${BoxImg} {
+      border-radius: 100%;
+      height: 230px;
+      overflow: hidden;
+      width: 230px;
+      &.active {
+        position: relative;
+        overflow: visible;
+        &:hover.active:after {
+          opacity: 0.85;
+        }
+      }
+      &.active:after {
+        background: #fff url(${editProfile}) center no-repeat;
+        background-size: 20px;
+        border-radius: 100%;
+        bottom: 4px;
+        content: "";
+        display: block;
+        height: 40px;
+        pointer-events: none;
+        position: absolute;
+        right: 30px;
+        width: 40px;
+      }
+      .box-image-profile {
+        border-radius: 100%;
+        height: 230px;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        width: 230px;
+        &:hover {
+          opacity: 0.75;
+        }
+        img {
+          width: 100%;
+        }
+        input {
+          cursor: pointer;
+          height: 230px;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          &:focus,
+          &:active {
+            outline: none;
+          }
+          &::-webkit-file-upload-button {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+    .box-text {
+      display: flex;
+      flex-direction: column;
+      margin-left: 40px;
+      ${H1} {
+      }
+      ${H2} {
+      }
+      .button-box {
+        align-items: center;
+        display: flex;
+        margin-top: 35px;
+        > ${Button} {
+          margin-right: 32px;
+        }
+        .box-unsubscribe {
+          position: relative;
+          > button {
+            color: #fff;
+            cursor: pointer;
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            position: relative;
+            text-transform: uppercase;
+            &:hover:after {
+              background-color: #fff;
+              bottom: -2px;
+              content: "";
+              display: block;
+              height: 2px;
+              left: 50%;
+              position: absolute;
+              text-decoration: none;
+              transform: translate(-50%, 0);
+              width: 24px;
+            }
+          }
+          .box-segure {
+            align-items: center;
+            background: #fff;
+            border-radius: 5px;
+            cursor: default;
+            display: flex;
+            justify-content: space-between;
+            bottom: -80px;
+            padding: 12px 20px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 200px;
+            &:before {
+              border-color: transparent transparent #ffffff transparent;
+              border-style: solid;
+              border-width: 0 7.5px 8px 7.5px;
+              content: "";
+              display: block;
+              height: 0;
+              left: 50%;
+              position: absolute;
+              top: -8px;
+              transform: translate(-50%, 0);
+              width: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      max-width: 995px;
+      padding: 150px 0 50px;
+      .box-text .button-box > ${Button} {
+        margin-right: 32px;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      flex-direction: column-reverse;
+      .box-text {
+        margin: 0 0 50px;
+      }
+      ${BoxImg} {
+        height: 180px;
+        width: 180px;
+        &.active:after {
+          bottom: 6px;
+          right: 10px;
+        }
+        .box-image-profile {
+          height: 180px;
+          width: 180px;
+
+          input {
+            height: 180px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      .box-text {
+        ${H1} {
+          margin-bottom: 10px;
+        }
+        .button-box {
+          flex-direction: column;
+          .box-unsubscribe {
+            margin-top: 24px;
+            > button:hover:after {
+              display: none;
+            }
+            .box-segure ${Button} {
+              display: inline-block;
+              padding: 12px 20px;
+              width: initial;
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const TermsBox = styled.div`
+  &.contain {
+    padding: 60px 0 80px;
+    max-width: 768px;
+    ${ParagraphTop} {
+      text-align: left;
+      padding: 50px 0 15px;
+      width: 100%;
+    }
+    ${Paragraphs} {
+      padding-top: 0;
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      padding: 60px 0 50px;
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      padding: 30px 0 40px;
+    }
+  }
+`;
+
 export const SectionProtectedBox = styled.div`
   background: #8290ff;
   display: flex;
@@ -2685,6 +3049,50 @@ export const SectionProtectedBox = styled.div`
   }
 `;
 
+export const SectionMessageContactContent = styled.div`
+  flex-flow: row wrap;
+`;
+
+export const Page404 = styled.div`
+  &.contain {
+    max-width: 558px;
+    height: 93vh;
+    padding: 20vh 0 15vh;
+    text-align: center;
+    ${H1} {
+      margin: 30px auto 15px;
+    }
+    ${Paragraphs} {
+      padding-bottom: 36px;
+    }
+    .button-box {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+  @media (max-height: 768px) {
+    &.contain {
+      height: initial;
+    }
+  }
+  @media (max-width: 768px) {
+    .button-box {
+      flex-direction: column;
+      .button {
+        margin: 0 auto;
+        .item-resp {
+          display: inline-block;
+        }
+        &:last-child {
+          margin-top: 24px;
+        }
+      }
+    }
+  }
+`;
+
+//LighBox
 export const LightBoxRegisterRol = styled.div`
   display: none;
   &.active {
@@ -2776,121 +3184,6 @@ export const LightBoxRegisterRol = styled.div`
           &:last-child {
             margin-left: 16px;
           }
-        }
-      }
-    }
-  }
-`;
-
-export const AdminPanelBox = styled.div`
-  padding: 150px 0 0;
-  border-bottom: 1px solid #e3e4e8;
-  .button-box {
-    display: flex;
-    width: 100%;
-    button {
-      position: relative;
-      border: 1px solid transparent;
-      border-radius: 4px 4px 0 0;
-      color: #3e3874;
-      font-family: "Roboto", sans-serif;
-      font-size: 18px;
-      line-height: 1;
-      padding: 14px 28px 12px;
-      position: relative;
-      top: 1px;
-      cursor: pointer;
-      text-align: left;
-      i,
-      span {
-        pointer-events: none;
-      }
-      &.active {
-        background-color: #fff;
-        border-color: #e3e4e8;
-        border-bottom: 1px solid transparent;
-      }
-      i {
-        position: relative;
-        margin-right: 12px;
-      }
-    }
-  }
-  @media (max-width: 1200px) {
-    padding-top: 120px;
-  }
-  @media (max-width: 768px) {
-    padding-top: 100px;
-    .button-box {
-      button {
-        text-transform: capitalize;
-        padding: 14px 16px 12px;
-
-        span {
-          display: none;
-        }
-      }
-    }
-  }
-  @media (max-width: 480px) {
-    padding-top: 80px;
-    .button-box {
-      button {
-        padding: 10px 10px 8px;
-        font-size: 16px;
-        i {
-          display: none;
-        }
-      }
-    }
-  }
-`;
-
-export const SectionUserAdminList = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`;
-
-export const SectionMessageContactContent = styled.div`
-  flex-flow: row wrap;
-`;
-
-export const Page404 = styled.div`
-  &.contain {
-    max-width: 558px;
-    height: 93vh;
-    padding: 20vh 0 15vh;
-    text-align: center;
-    ${H1} {
-      margin: 30px auto 15px;
-    }
-    ${Paragraphs} {
-      padding-bottom: 36px;
-    }
-    .button-box {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-  }
-  @media (max-height: 768px) {
-    &.contain {
-      height: initial;
-    }
-  }
-  @media (max-width: 768px) {
-    .button-box {
-      flex-direction: column;
-      .button {
-        margin: 0 auto;
-        .item-resp {
-          display: inline-block;
-        }
-        &:last-child {
-          margin-top: 24px;
         }
       }
     }
