@@ -13,7 +13,7 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
     const idUser = req.user;
 
     // Create the AidRequest
-    await AidRequests.create({
+    const aidRequest = await AidRequests.create({
       title,
       content,
       creatorUserid: idUser,
@@ -24,6 +24,7 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
     });
 
     return res.json({
+      aidRequest: aidRequest,
       status: 200,
       message: "Petición de ayuda creada satisfactoriamente",
     });
@@ -39,13 +40,14 @@ router.post("/create", isLoggedIn(), async (req, res, next) => {
 router.post("/edit", isLoggedIn(), async (req, res, next) => {
   try {
     const { _id, title, content, price, time } = req.body;
-    await AidRequests.findByIdAndUpdate(_id, {
+    const aidRequest = await AidRequests.findByIdAndUpdate(_id, {
       title,
       content,
       price,
       time,
     });
     return res.json({
+      aidRequest: aidRequest,
       status: 200,
       message: "Petición de ayuda editada satisfactoriamente",
     });
@@ -158,13 +160,11 @@ router.post("/alls", async (req, res) => {
         }
       })
     );
-
     const aidRequestsModify = await AidRequests.find()
       .sort({ createdAt: -1 })
       .populate("creatorUserid")
       .populate("helperId")
       .populate("shoppinglist");
-
     return res.json(aidRequestsModify);
   } catch (err) {
     return res.json({ status: 400, message: "Fallo al recibir los datos" });
@@ -259,7 +259,7 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
     );
 
     // Create the AidRequest
-    await AidRequests.create({
+    const newAidRequest = await AidRequests.create({
       title,
       content: oldAidRequest.content,
       creatorUserid: oldAidRequest.creatorUserid,
@@ -270,6 +270,7 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
     });
 
     return res.json({
+      aidRequest: newAidRequest,
       status: 200,
       message: "Petición de ayuda duplicada satisfactoriamente",
     });

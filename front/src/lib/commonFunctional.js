@@ -1,15 +1,3 @@
-export const getByFilter = (arrayFilter, itemFilter, itemProp) => {
-  return arrayFilter.filter((item) => {
-    return item[itemProp] === itemFilter;
-  });
-};
-
-export const getAllLessOneByFilter = (arrayFilter, itemFilter) => {
-  return arrayFilter.filter((item) => {
-    return item !== itemFilter;
-  });
-};
-
 export const getAverage = (arrayFilter) => {
   return (
     Math.round(

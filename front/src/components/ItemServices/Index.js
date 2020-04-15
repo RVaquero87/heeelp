@@ -9,7 +9,7 @@ export const ItemServicies = ({
   ImgSrc,
   ItemText,
   ItemContent = false,
-  NumberServicesProvided = false,
+  NumberServicesProvided = "false",
 }) => {
   return (
     <ItemServiceRate className={NumberServicesProvided == 0 ? "disabled" : ""}>
@@ -24,7 +24,7 @@ export const ItemServicies = ({
           {ItemContent}
         </Paragraphs>
       )}
-      {NumberServicesProvided && (
+      {NumberServicesProvided != "false" && (
         <ParagraphTop blue className="number-services">
           <span>{NumberServicesProvided}</span>
         </ParagraphTop>

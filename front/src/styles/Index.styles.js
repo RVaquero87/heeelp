@@ -1134,6 +1134,25 @@ export const HeaderBox = styled.header`
                 }
               }
             }
+            nav {
+              ul li {
+                a {
+                  &.active,
+                  &:hover {
+                    font-weight: 500;
+                  }
+                  &.active:after,
+                  &:hover:after {
+                    display: none;
+                  }
+                }
+              }
+              &.user-nav {
+                ul li {
+                  font-size: 24px;
+                }
+              }
+            }
             .button-box {
               margin-left: 0;
               margin-top: 4vh;
@@ -1163,25 +1182,38 @@ export const HeaderBox = styled.header`
                 }
               }
               &.icons {
-                flex-flow: wrap row;
-                justify-content: space-around;
+                flex-direction: column;
+                justify-content: center;
+                margin: 0 auto;
                 max-width: 250px;
                 .profile {
-                  width: 100%;
+                  border: none;
+                  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                  border-top: 1px solid rgba(255, 255, 255, 0.2);
+                  padding: 1.5vh 0;
                   justify-content: center;
-                  margin: 0 0 5vh;
-                  img {
-                    max-width: 80px;
+                  margin: 0;
+                  width: 100%;
+                  ${BoxImg} {
+                    height: 64px;
+                    width: 64px;
+                  }
+                  p {
+                    font-size: 18px;
+                    margin-left: 18px;
+                    color: #fff;
                   }
                 }
                 .messages,
                 .notifications,
                 .log-out {
-                  height: 40px;
-                  margin: 0%;
+                  display: block;
+                  margin: 5vh 0 0;
                   height: 30px;
                 }
                 .messages {
+                  background: url(${message}) no-repeat center;
+                  background-size: contain;
                   width: 32px;
                   &.active:after {
                     right: -6px;
@@ -1189,6 +1221,8 @@ export const HeaderBox = styled.header`
                   }
                 }
                 .notifications {
+                  background: url(${notifications}) no-repeat center;
+                  background-size: contain;
                   width: 28px;
                   &.active:after {
                     right: -6px;
@@ -1196,6 +1230,8 @@ export const HeaderBox = styled.header`
                   }
                 }
                 .log-out {
+                  background: url(${logOut}) no-repeat center;
+                  background-size: contain;
                   width: 29.3px;
                 }
               }
@@ -1216,25 +1252,6 @@ export const HeaderBox = styled.header`
         > a,
         button {
           color: #3e3874;
-          &.profile {
-            &:hover p:after,
-            &.active p:after {
-              background-color: #3e3874;
-            }
-          }
-
-          &.messages {
-            background: url(${messageBlue}) no-repeat center;
-            background-size: contain;
-          }
-          &.notifications {
-            background: url(${notificationsBlue}) no-repeat center;
-            background-size: contain;
-          }
-          &.log-out {
-            background: url(${logOutBlue}) no-repeat center;
-            background-size: contain;
-          }
         }
       }
       .contain .header-inner {
@@ -1361,7 +1378,6 @@ export const FooterBox = styled.footer`
 `;
 
 //COMPONENTS SPECIFIC
-
 //Headers
 export const Col2Header = styled.div`
   padding: 125px 0 0;
@@ -2668,7 +2684,6 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
 `;
 
 //Section Services Provided
-
 export const SectionServicesRates = styled.div`
   padding: 100px 0 70px;
   width: 100%;
@@ -2759,6 +2774,9 @@ export const SectionServicesProvidedProfile = styled(SectionServicesProvided)`
       color: #9a9caf;
       font-weight: 300;
       width: 290px;
+    }
+    span:last-child {
+      font-size: 24px;
     }
   }
   .col5 {

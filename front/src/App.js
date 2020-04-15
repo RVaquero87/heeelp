@@ -29,10 +29,7 @@ import { LoginPage } from "./pages/Login.page";
 import { AdminPage } from "./pages/Admin.page";
 import { NotFoundPage } from "./pages/NotFound.page";
 import { HomeRolPagePrivate } from "./pages/HomeRol.page";
-
-//Sin hacer aun
 import { ProfilePage } from "./pages/Profile.page";
-import { PrivatePage } from "./pages/Private.page";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -59,11 +56,7 @@ export const App = withAuthentication(() => {
             <Route path="/login" component={LoginPage} />
             <Route path="/control-admin" component={AdminPage} />
             <Route path="/home" component={HomeRolPagePrivate} />
-
-            {/* Sin hacer aun */}
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/private" component={PrivatePage} />
-
             <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>

@@ -31,45 +31,58 @@ import { scrollInit } from "../lib/commonFunctional";
 import { ItemServicies } from "../components/ItemServices/Index";
 
 export const HomeRolPage = () => {
-  const {} = useContext(PrincipalContext);
+  const { aidsRequestId } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
     scrollInit();
   }, []);
 
+  //Function AidsRequestId Type Lenght
+  const lenghtAidsRequestType = (typeAidRequest) => {
+    const result = aidsRequestId.filter((item) => item.type == typeAidRequest)
+      .length;
+    return result;
+  };
+
   return (
     <>
       <SectionBox justify="center" column bgColor="grey">
         <SectionServicesProvided className="contain" data-aos="fade-up">
           <H2 color="black">Total de servicios prestados</H2>
-          <ParagraphTop className="total-services">22</ParagraphTop>
+          <ParagraphTop className="total-services">
+            {aidsRequestId.length}
+          </ParagraphTop>
 
           <div className="col5">
             <ItemServicies
               ImgSrc={icon1}
               ItemText="Lavandería"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType("Lavandería")}
             />
             <ItemServicies
               ImgSrc={icon2}
               ItemText="Supermercado"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType("Supermercado")}
             />
             <ItemServicies
               ImgSrc={icon3}
               ItemText="Parafarmacia"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType("Parafarmacia")}
             />
             <ItemServicies
               ImgSrc={icon4}
               ItemText="Tareas domésticas"
-              NumberServicesProvided="0"
+              NumberServicesProvided={lenghtAidsRequestType(
+                "Tareas domésticas"
+              )}
             />
             <ItemServicies
               ImgSrc={icon5}
               ItemText="Animales domésticos"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType(
+                "Animales domésticos"
+              )}
             />
           </div>
         </SectionServicesProvided>

@@ -17,7 +17,6 @@ import {
   H2,
   SectionFormBoxProfile,
   SectionServicesProvidedProfile,
-  ParagraphTop,
 } from "../styles/Index.styles";
 
 //Form
@@ -44,12 +43,21 @@ import { SelectBox } from "../components/Select/index";
 import { ItemServicies } from "../components/ItemServices/Index";
 
 export const Profile = withRouter(({ history }) => {
-  const { user, setUser, setMessageError } = useContext(PrincipalContext);
+  const { user, setUser, setMessageError, aidsRequestId } = useContext(
+    PrincipalContext
+  );
 
   //Reset Scroll & Include Active Body
   useEffect(() => {
     scrollInit();
   }, []);
+
+  //Function AidsRequestId Type Lenght
+  const lenghtAidsRequestType = (typeAidRequest) => {
+    const result = aidsRequestId.filter((item) => item.type == typeAidRequest)
+      .length;
+    return result;
+  };
 
   //BUTTON EDIT // VIEW PROFILE
   const [buttonProfileView, setbuttonProfileView] = useState(true);
@@ -486,34 +494,40 @@ export const Profile = withRouter(({ history }) => {
           <H2 color="black">Servicios que presto</H2>
           <Paragraphs blue>
             {" "}
-            <span>Total de servicios prestados </span> <span>22</span>
+            <span>Total de servicios prestados </span>{" "}
+            <span>{aidsRequestId.length}</span>
           </Paragraphs>
 
           <div className="col5">
+            {console.log(aidsRequestId)}
             <ItemServicies
               ImgSrc={icon1}
               ItemText="Lavandería"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType("Lavandería")}
             />
             <ItemServicies
               ImgSrc={icon2}
               ItemText="Supermercado"
-              NumberServicesProvided="0"
+              NumberServicesProvided={lenghtAidsRequestType("Supermercado")}
             />
             <ItemServicies
               ImgSrc={icon3}
               ItemText="Parafarmacia"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType("Parafarmacia")}
             />
             <ItemServicies
               ImgSrc={icon4}
               ItemText="Tareas domésticas"
-              NumberServicesProvided="5"
+              NumberServicesProvided={lenghtAidsRequestType(
+                "Tareas domésticas"
+              )}
             />
             <ItemServicies
               ImgSrc={icon5}
               ItemText="Animales domésticos"
-              NumberServicesProvided="0"
+              NumberServicesProvided={lenghtAidsRequestType(
+                "Animales domésticos"
+              )}
             />
           </div>
         </SectionServicesProvidedProfile>

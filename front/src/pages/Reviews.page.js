@@ -31,7 +31,7 @@ import contact from "../../public/images/contact.svg";
 import { PrincipalContext } from "../context/PrincipalContext";
 
 //Functional & Services
-import { getAverage, scrollInit } from "../lib/commonFunctional";
+import { scrollInit } from "../lib/commonFunctional";
 import { createReview } from "../services/reviewsServices";
 
 //Compoments

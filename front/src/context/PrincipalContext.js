@@ -6,6 +6,11 @@ export const PrincipalContext = createContext();
 
 //Functional & Services
 import { getAllReviews, getIDReview } from "../services/reviewsServices";
+import {
+  getAidResquest,
+  getAidResquestCreator,
+  getAidResquestHelper,
+} from "../services/aidRequestServices";
 import { getAverage } from "../lib/commonFunctional";
 
 export const PrincipalContextProvider = (props) => {
@@ -36,16 +41,8 @@ export const PrincipalContextProvider = (props) => {
       .then((review) => {
         const averageReview = getAverage(review.map((item) => item.stars));
         setAverageReviews(averageReview);
-        if (user) {
-          const reviewNotId = review.filter(
-            (review) => review.creatorUserid._id != user._id
-          );
-          setListReviews(reviewNotId);
-          setFilterReviews(reviewNotId);
-        } else {
-          setListReviews(review);
-          setFilterReviews(review);
-        }
+        setListReviews(review);
+        setFilterReviews(review);
       })
       .catch((e) => {});
     if (user) {
@@ -66,6 +63,33 @@ export const PrincipalContextProvider = (props) => {
 
   //Register Lightbox
   const [lightboxRegister, setLightboxRegister] = useState(true);
+
+  //AidsRequest
+  const [aidsRequest, setAidsRequest] = useState([]);
+  const [aidsRequestId, setAidsRequestid] = useState([]);
+  const [changeAidsRequest, setChangeAidsRequest] = useState();
+
+  useEffect(() => {
+    if (user?.rol === "Helpers") {
+      getAidResquestHelper()
+        .then((aidsRequest) => {
+          setAidsRequestid(aidsRequest);
+        })
+        .catch((e) => {});
+    } else if (user?.rol === "Helped") {
+      getAidResquestCreator()
+        .then((aidsRequest) => {
+          setAidsRequestid(aidsRequest);
+        })
+        .catch((e) => {});
+    } else {
+      getAidResquest()
+        .then((aidsRequest) => {
+          setAidsRequest(aidsRequest);
+        })
+        .catch((e) => {});
+    }
+  }, [changeAidsRequest, user]);
 
   return (
     <PrincipalContext.Provider
@@ -115,6 +139,14 @@ export const PrincipalContextProvider = (props) => {
         //Register Lightbox
         lightboxRegister,
         setLightboxRegister,
+
+        //AidsRequest
+        aidsRequest,
+        setAidsRequest,
+        aidsRequestId,
+        setAidsRequestid,
+        changeAidsRequest,
+        setChangeAidsRequest,
       }}
     >
       {props.children}

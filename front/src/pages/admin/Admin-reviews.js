@@ -14,7 +14,6 @@ import {
 import { PrincipalContext } from "../../context/PrincipalContext";
 
 //Functional & Services
-import { getAverage } from "../../lib/commonFunctional";
 
 //Compoments
 import { ReviewsBoxItem } from "../../components/ListItemReviews/Index";
