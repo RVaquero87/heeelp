@@ -499,7 +499,6 @@ export const Profile = withRouter(({ history }) => {
           </Paragraphs>
 
           <div className="col5">
-            {console.log(aidsRequestId)}
             <ItemServicies
               ImgSrc={icon1}
               ItemText="Lavandería"

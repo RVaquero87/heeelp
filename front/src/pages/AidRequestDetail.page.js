@@ -216,21 +216,21 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                           name="price"
                           options={[
                             "No puedo permitirme pagar nada",
-                            "Puedo permitirme pagar 5€/h",
-                            "Puedo permitirme pagar 6€/h",
-                            "Puedo permitirme pagar 7€/h",
-                            "Puedo permitirme pagar 8€/h",
-                            "Puedo permitirme pagar 9€/h",
-                            "Puedo permitirme pagar 10€/h",
+                            "Puedo permitirme pagar 5€/hora",
+                            "Puedo permitirme pagar 6€/hora",
+                            "Puedo permitirme pagar 7€/hora",
+                            "Puedo permitirme pagar 8€/hora",
+                            "Puedo permitirme pagar 9€/hora",
+                            "Puedo permitirme pagar 10€/hora",
                           ]}
                           value={[
                             "Free",
-                            "5€/h",
-                            "6€/h",
-                            "7€/h",
-                            "8€/h",
-                            "9€/h",
-                            "10€/h",
+                            "5€/hora",
+                            "6€/hora",
+                            "7€/hora",
+                            "8€/hora",
+                            "9€/hora",
+                            "10€/hora",
                           ]}
                           ref={register({
                             required: {

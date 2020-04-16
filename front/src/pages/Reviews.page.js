@@ -37,7 +37,7 @@ import { createReview } from "../services/reviewsServices";
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/Index";
 import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
-import { ReviewsBoxItem } from "../components/ListItemReviews/Index";
+import { ReviewsBoxItem } from "../components/ListItemReviews/index";
 import { Loading } from "../components/Loading/index";
 import { InputBox } from "../components/Input/index";
 import { TextAreaBox } from "../components/TextArea/index";

@@ -30,8 +30,9 @@ import { AdminPage } from "./pages/Admin.page";
 import { NotFoundPage } from "./pages/NotFound.page";
 import { HomeRolPagePrivate } from "./pages/HomeRol.page";
 import { ProfilePage } from "./pages/Profile.page";
-import { MyRequestRolPage } from "./pages/MyRequest.page";
+import { MyRequestsPrivate } from "./pages/MyRequest.page";
 import { MyRequestDetailsRolPagePrivate } from "./pages/AidRequestDetail.page";
+import { ListAidsRequestPagePrivate } from "./pages/ListAidsRequest";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -59,10 +60,14 @@ export const App = withAuthentication(() => {
             <Route path="/control-admin" component={AdminPage} />
             <Route path="/home" component={HomeRolPagePrivate} />
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/mis-peticiones" component={MyRequestRolPage} />
+            <Route path="/mis-peticiones" component={MyRequestsPrivate} />
             <Route
               path="/mi-peticion/:id"
               component={MyRequestDetailsRolPagePrivate}
+            />
+            <Route
+              path="/listado-de-peticiones"
+              component={ListAidsRequestPagePrivate}
             />
             <Route path="*" component={NotFoundPage} />
           </Switch>

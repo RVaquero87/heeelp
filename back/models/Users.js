@@ -7,7 +7,7 @@ const userSchema = new Schema(
     password: String,
     rol: {
       type: String,
-      enum: ["Admin", "Helpers", "Helped"]
+      enum: ["Admin", "Helpers", "Helped"],
     },
     name: String,
     lastname: String,
@@ -16,7 +16,7 @@ const userSchema = new Schema(
     image: {
       type: String,
       default:
-        "https://res.cloudinary.com/dbe3zwswv/image/upload/v1585834440/heeelp/default-profile_a6kktl.png"
+        "https://res.cloudinary.com/dbe3zwswv/image/upload/v1585834440/heeelp/default-profile_a6kktl.png",
     },
     street: String,
     number: Number,
@@ -77,20 +77,20 @@ const userSchema = new Schema(
         "Valladolid",
         "Vizcaya",
         "Zamora",
-        "Zaragoza"
-      ]
+        "Zaragoza",
+      ],
     },
     country: {
       type: String,
-      default: "España"
+      default: "España",
     },
     lat: Number,
     lng: Number,
     legalCheck: String,
-    visits: { type: Number, default: 0 }
+    visits: { type: Number, default: 0 },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
@@ -99,8 +99,8 @@ const Users = mongoose.model("Users", userSchema);
 Users.collection.createIndexes([
   {
     key: { username: 1 },
-    name: "username"
-  }
+    name: "username",
+  },
 ]);
 
 module.exports = Users;

@@ -173,7 +173,10 @@ export const Header = withRouter(({ history }) => {
                       {(user?.rol === "Admin" && (
                         <>
                           <li>
-                            <NavLink to="/home" className="nav-link">
+                            <NavLink
+                              to="/listado-de-peticiones"
+                              className="nav-link"
+                            >
                               listado de peticiones
                             </NavLink>
                           </li>
@@ -187,7 +190,10 @@ export const Header = withRouter(({ history }) => {
                         (user?.rol === "Helpers" && (
                           <>
                             <li>
-                              <NavLink to="/home" className="nav-link">
+                              <NavLink
+                                to="/listado-de-peticiones"
+                                className="nav-link"
+                              >
                                 listado de peticiones
                               </NavLink>
                             </li>

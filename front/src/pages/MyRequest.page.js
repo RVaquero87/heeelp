@@ -53,7 +53,7 @@ import { TextAreaBox } from "../components/TextArea/index";
 import { SelectBox } from "../components/Select/index";
 import { AidsRequestBox } from "../components/ItemAidRequest/Index";
 
-export const MyRequestRolPage = () => {
+export const MyRequests = () => {
   const {
     user,
     aidsRequestId,
@@ -267,21 +267,21 @@ export const MyRequestRolPage = () => {
                           name="price"
                           options={[
                             "No puedo permitirme pagar nada",
-                            "Puedo permitirme pagar 5€/h",
-                            "Puedo permitirme pagar 6€/h",
-                            "Puedo permitirme pagar 7€/h",
-                            "Puedo permitirme pagar 8€/h",
-                            "Puedo permitirme pagar 9€/h",
-                            "Puedo permitirme pagar 10€/h",
+                            "Puedo permitirme pagar 5€/hora",
+                            "Puedo permitirme pagar 6€/hora",
+                            "Puedo permitirme pagar 7€/hora",
+                            "Puedo permitirme pagar 8€/hora",
+                            "Puedo permitirme pagar 9€/hora",
+                            "Puedo permitirme pagar 10€/hora",
                           ]}
                           value={[
                             "Free",
-                            "5€/h",
-                            "6€/h",
-                            "7€/h",
-                            "8€/h",
-                            "9€/h",
-                            "10€/h",
+                            "5€/hora",
+                            "6€/hora",
+                            "7€/hora",
+                            "8€/hora",
+                            "9€/hora",
+                            "10€/hora",
                           ]}
                           ref={register({
                             required: {
@@ -299,206 +299,215 @@ export const MyRequestRolPage = () => {
                   )}
                 </SectionCreateAidsRequest>
               </SectionBox>
+
+              <SectionBox justify="center" column>
+                <SectionAidsRequest
+                  className={
+                    aidsRequestId.filter(
+                      (aids) => aids?.status == "En creación"
+                    ).length == 0
+                      ? "contain my-request-aids zero-aids"
+                      : "contain my-request-aids"
+                  }
+                  data-aos="fade-up"
+                >
+                  <H2 color="black">
+                    <span>
+                      Peticiones en{" "}
+                      <span className="item-block">
+                        creación (
+                        {
+                          aidsRequestId.filter(
+                            (aids) => aids?.status == "En creación"
+                          ).length
+                        }
+                        )
+                      </span>
+                    </span>
+                  </H2>
+                  <div className="box-aids">
+                    {aidsRequestId.filter(
+                      (aids) => aids?.status == "En creación"
+                    ).length == 0 ? (
+                      <Paragraphs blue>
+                        <span>
+                          {user?.name} {user?.lastname.slice(0, 1)}. no tienes
+                          ninguna petición en creación o borrador.
+                        </span>
+                      </Paragraphs>
+                    ) : (
+                      <>
+                        {aidsRequestId.filter(
+                          (aids) => aids?.status == "En creación"
+                        ).length >= 3 ? (
+                          <>
+                            <>
+                              {(expandAidsCreacion && (
+                                <>
+                                  {aidsRequestId
+                                    .filter(
+                                      (aids) => aids?.status == "En creación"
+                                    )
+                                    .map((aids, i) => {
+                                      return (
+                                        <AidsRequestBox
+                                          aidrequest={aids}
+                                          key={i}
+                                        />
+                                      );
+                                    })}
+                                </>
+                              )) || (
+                                <>
+                                  {aidsRequestId
+                                    .filter(
+                                      (aids) => aids?.status == "En creación"
+                                    )
+                                    .map((aids, i) => {
+                                      if (i <= 2) {
+                                        return (
+                                          <AidsRequestBox
+                                            aidrequest={aids}
+                                            key={i}
+                                          />
+                                        );
+                                      }
+                                    })}
+                                </>
+                              )}
+                            </>
+                            <div className="box-button">
+                              <Button
+                                big
+                                onClick={(e) =>
+                                  setExpandAidsCreacion(!expandAidsCreacion)
+                                }
+                              >
+                                {(expandAidsCreacion && "Ver menos") ||
+                                  "Ver más"}
+                              </Button>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            {aidsRequestId
+                              .filter((aids) => aids?.status == "En creación")
+                              .map((aids, i) => {
+                                return (
+                                  <AidsRequestBox aidrequest={aids} key={i} />
+                                );
+                              })}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </SectionAidsRequest>
+              </SectionBox>
+
+              <SectionBox justify="center" column>
+                <SectionAidsRequest
+                  className={
+                    aidsRequestId.filter((aids) => aids?.status == "Publicada")
+                      .length == 0
+                      ? "contain my-request-aids zero-aids"
+                      : "contain my-request-aids"
+                  }
+                  data-aos="fade-up"
+                >
+                  <H2 color="black">
+                    <span>
+                      Peticiones{" "}
+                      <span className="item-block">
+                        publicadas (
+                        {
+                          aidsRequestId.filter(
+                            (aids) => aids?.status == "Publicada"
+                          ).length
+                        }
+                        )
+                      </span>
+                    </span>
+                  </H2>
+                  <div className="box-aids">
+                    {aidsRequestId.filter((aids) => aids?.status == "Publicada")
+                      .length == 0 ? (
+                      <Paragraphs blue>
+                        <span>
+                          {user?.name} {user?.lastname.slice(0, 1)}. no tienes
+                          ninguna petición publicada en estos momentos.
+                        </span>
+                      </Paragraphs>
+                    ) : (
+                      <>
+                        {aidsRequestId.filter(
+                          (aids) => aids?.status == "Publicada"
+                        ).length >= 3 ? (
+                          <>
+                            <>
+                              {(expandAidsPublicada && (
+                                <>
+                                  {aidsRequestId
+                                    .filter(
+                                      (aids) => aids?.status == "Publicada"
+                                    )
+                                    .map((aids, i) => {
+                                      return (
+                                        <AidsRequestBox
+                                          aidrequest={aids}
+                                          key={i}
+                                        />
+                                      );
+                                    })}
+                                </>
+                              )) || (
+                                <>
+                                  {aidsRequestId
+                                    .filter(
+                                      (aids) => aids?.status == "Publicada"
+                                    )
+                                    .map((aids, i) => {
+                                      if (i <= 2) {
+                                        return (
+                                          <AidsRequestBox
+                                            aidrequest={aids}
+                                            key={i}
+                                          />
+                                        );
+                                      }
+                                    })}
+                                </>
+                              )}
+                            </>
+                            <div className="box-button">
+                              <Button
+                                big
+                                onClick={(e) =>
+                                  setExpandAidsPublicada(!expandAidsPublicada)
+                                }
+                              >
+                                {(expandAidsPublicada && "Ver menos") ||
+                                  "Ver más"}
+                              </Button>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            {aidsRequestId
+                              .filter((aids) => aids?.status == "Publicada")
+                              .map((aids, i) => {
+                                return (
+                                  <AidsRequestBox aidrequest={aids} key={i} />
+                                );
+                              })}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </SectionAidsRequest>
+              </SectionBox>
             </>
-          )}
-
-          {user?.rol === "Helped" && (
-            <SectionBox justify="center" column>
-              <SectionAidsRequest
-                className={
-                  aidsRequestId.filter((aids) => aids?.status == "En creación")
-                    .length == 0
-                    ? "contain my-request-aids zero-aids"
-                    : "contain my-request-aids"
-                }
-                data-aos="fade-up"
-              >
-                <H2 color="black">
-                  <span>
-                    Peticiones en creación (
-                    {
-                      aidsRequestId.filter(
-                        (aids) => aids?.status == "En creación"
-                      ).length
-                    }
-                    )
-                  </span>
-                </H2>
-                <div className="box-aids">
-                  {aidsRequestId.filter((aids) => aids?.status == "En creación")
-                    .length == 0 ? (
-                    <Paragraphs blue>
-                      <span>
-                        {user?.name} {user?.lastname.slice(0, 1)}. no tienes
-                        ninguna petición en creación o borrador.
-                      </span>
-                    </Paragraphs>
-                  ) : (
-                    <>
-                      {aidsRequestId.filter(
-                        (aids) => aids?.status == "En creación"
-                      ).length >= 3 ? (
-                        <>
-                          <>
-                            {(expandAidsCreacion && (
-                              <>
-                                {aidsRequestId
-                                  .filter(
-                                    (aids) => aids?.status == "En creación"
-                                  )
-                                  .map((aids, i) => {
-                                    return (
-                                      <AidsRequestBox
-                                        aidrequest={aids}
-                                        key={i}
-                                      />
-                                    );
-                                  })}
-                              </>
-                            )) || (
-                              <>
-                                {aidsRequestId
-                                  .filter(
-                                    (aids) => aids?.status == "En creación"
-                                  )
-                                  .map((aids, i) => {
-                                    if (i <= 2) {
-                                      return (
-                                        <AidsRequestBox
-                                          aidrequest={aids}
-                                          key={i}
-                                        />
-                                      );
-                                    }
-                                  })}
-                              </>
-                            )}
-                          </>
-                          <div className="box-button">
-                            <Button
-                              big
-                              onClick={(e) =>
-                                setExpandAidsCreacion(!expandAidsCreacion)
-                              }
-                            >
-                              {(expandAidsCreacion && "Ver menos") || "Ver más"}
-                            </Button>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          {aidsRequestId
-                            .filter((aids) => aids?.status == "En creación")
-                            .map((aids, i) => {
-                              return (
-                                <AidsRequestBox aidrequest={aids} key={i} />
-                              );
-                            })}
-                        </>
-                      )}
-                    </>
-                  )}
-                </div>
-              </SectionAidsRequest>
-            </SectionBox>
-          )}
-
-          {user?.rol === "Helped" && (
-            <SectionBox justify="center" column>
-              <SectionAidsRequest
-                className={
-                  aidsRequestId.filter((aids) => aids?.status == "Publicada")
-                    .length == 0
-                    ? "contain my-request-aids zero-aids"
-                    : "contain my-request-aids"
-                }
-                data-aos="fade-up"
-              >
-                <H2 color="black">
-                  <span>
-                    Peticiones publicadas (
-                    {
-                      aidsRequestId.filter(
-                        (aids) => aids?.status == "Publicada"
-                      ).length
-                    }
-                    )
-                  </span>
-                </H2>
-                <div className="box-aids">
-                  {aidsRequestId.filter((aids) => aids?.status == "Publicada")
-                    .length == 0 ? (
-                    <Paragraphs blue>
-                      <span>
-                        {user?.name} {user?.lastname.slice(0, 1)}. no tienes
-                        ninguna petición publicada en estos momentos.
-                      </span>
-                    </Paragraphs>
-                  ) : (
-                    <>
-                      {aidsRequestId.filter(
-                        (aids) => aids?.status == "Publicada"
-                      ).length >= 3 ? (
-                        <>
-                          <>
-                            {(expandAidsPublicada && (
-                              <>
-                                {aidsRequestId
-                                  .filter((aids) => aids?.status == "Publicada")
-                                  .map((aids, i) => {
-                                    return (
-                                      <AidsRequestBox
-                                        aidrequest={aids}
-                                        key={i}
-                                      />
-                                    );
-                                  })}
-                              </>
-                            )) || (
-                              <>
-                                {aidsRequestId
-                                  .filter((aids) => aids?.status == "Publicada")
-                                  .map((aids, i) => {
-                                    if (i <= 2) {
-                                      return (
-                                        <AidsRequestBox
-                                          aidrequest={aids}
-                                          key={i}
-                                        />
-                                      );
-                                    }
-                                  })}
-                              </>
-                            )}
-                          </>
-                          <div className="box-button">
-                            <Button
-                              big
-                              onClick={(e) =>
-                                setExpandAidsPublicada(!expandAidsPublicada)
-                              }
-                            >
-                              {(expandAidsPublicada && "Ver menos") ||
-                                "Ver más"}
-                            </Button>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          {aidsRequestId
-                            .filter((aids) => aids?.status == "Publicada")
-                            .map((aids, i) => {
-                              return (
-                                <AidsRequestBox aidrequest={aids} key={i} />
-                              );
-                            })}
-                        </>
-                      )}
-                    </>
-                  )}
-                </div>
-              </SectionAidsRequest>
-            </SectionBox>
           )}
 
           <SectionBox justify="center" column>
@@ -513,12 +522,15 @@ export const MyRequestRolPage = () => {
             >
               <H2 color="black">
                 <span>
-                  Peticiones en curso (
-                  {
-                    aidsRequestId.filter((aids) => aids?.status == "En curso")
-                      .length
-                  }
-                  )
+                  Peticiones en{" "}
+                  <span className="item-block">
+                    curso (
+                    {
+                      aidsRequestId.filter((aids) => aids?.status == "En curso")
+                        .length
+                    }
+                    )
+                  </span>
                 </span>
               </H2>
               <div className="box-aids">
@@ -601,12 +613,16 @@ export const MyRequestRolPage = () => {
             >
               <H2 color="black">
                 <span>
-                  Peticiones realizadas (
-                  {
-                    aidsRequestId.filter((aids) => aids?.status == "Realizada")
-                      .length
-                  }
-                  )
+                  Peticiones{" "}
+                  <span className="item-block">
+                    realizadas (
+                    {
+                      aidsRequestId.filter(
+                        (aids) => aids?.status == "Realizada"
+                      ).length
+                    }
+                    )
+                  </span>
                 </span>
               </H2>
               <div className="box-aids">
@@ -692,13 +708,16 @@ export const MyRequestRolPage = () => {
               >
                 <H2 color="black">
                   <span>
-                    Peticiones canceladas (
-                    {
-                      aidsRequestId.filter(
-                        (aids) => aids?.status == "Cancelada"
-                      ).length
-                    }
-                    )
+                    Peticiones{" "}
+                    <span className="item-block">
+                      canceladas (
+                      {
+                        aidsRequestId.filter(
+                          (aids) => aids?.status == "Cancelada"
+                        ).length
+                      }
+                      )
+                    </span>
                   </span>
                 </H2>
                 <div className="box-aids">
@@ -818,6 +837,6 @@ export const MyRequestRolPage = () => {
   );
 };
 
-export const MyRequestRolPagePrivate = withProtected(MyRequestRolPage, {
+export const MyRequestsPrivate = withProtected(MyRequests, {
   redirect: false,
 });

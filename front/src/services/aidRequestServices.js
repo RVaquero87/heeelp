@@ -56,7 +56,7 @@ export const getOneAidRequest = async (_id) => {
   return res.data;
 };
 
-export const publicAidRequest = async (_id) => {
+export const getPublicAidRequest = async (_id) => {
   const res = await serviceApi.post("/aid-requests/public", {
     _id,
   });
@@ -77,7 +77,7 @@ export const stopTakeOverAidRequest = async (_id) => {
   return res.data;
 };
 
-export const duplicateAidRequest = async ({ _id, title, time }) => {
+export const getDuplicateAidRequest = async ({ _id, title, time }) => {
   const res = await serviceApi.post("/aid-requests/duplicate", {
     _id,
     title,
@@ -86,7 +86,7 @@ export const duplicateAidRequest = async ({ _id, title, time }) => {
   return res.data;
 };
 
-export const cancelAidRequest = async (_id) => {
+export const getCancelAidRequest = async (_id) => {
   const res = await serviceApi.post("/aid-requests/cancel", {
     _id,
   });

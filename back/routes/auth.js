@@ -212,12 +212,11 @@ router.post("/edit", isLoggedIn(), async (req, res, next) => {
 
 // WHOAMI
 router.post("/whoami", (req, res, next) => {
-  if (req.user)
+  if (req.user) {
     return res.json(
       _.pick(req.user, [
         "_id",
         "username",
-        "rol",
         "image",
         "name",
         "lastname",
@@ -232,16 +231,18 @@ router.post("/whoami", (req, res, next) => {
         "postalCode",
         "city",
         "country",
+        "rol",
         "lat",
         "lng",
         "createdAt",
         "updatedAt",
       ])
     );
-  else
+  } else {
     return res
       .status(401)
       .json({ status: 401, message: "No existe ningun usuario" });
+  }
 });
 
 //Image Upload

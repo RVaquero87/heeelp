@@ -765,11 +765,11 @@ export const ContentText = styled.div`
 `;
 
 export const BoxImg = styled.div`
-  width:100%;
-  img{
-    display:block;
-    max-width:100%;
-    width:100%:
+  width: 100%;
+  img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
   }
 `;
 
@@ -818,16 +818,20 @@ export const HeaderBox = styled.header`
           margin: 0;
           padding: 0;
           margin-right: 64px;
-          width: 430px;
           ul {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             list-style: none;
             padding: 0;
             width: 100%;
             li {
               font-family: "Roboto", sans-serif;
               line-height: 1;
+              width: initial;
+              margin-left: 50px;
+              &:first-child {
+                margin-left: 0;
+              }
               a {
                 color: #fff;
                 position: relative;
@@ -851,12 +855,6 @@ export const HeaderBox = styled.header`
                 }
               }
             }
-          }
-          &.user-helped {
-            width: 250px;
-          }
-          &.user-admin {
-            width: 480px;
           }
         }
         .button-box {
@@ -1081,16 +1079,14 @@ export const HeaderBox = styled.header`
         .box-nav {
           nav {
             margin-right: 54px;
-            width: 400px;
+            ul li {
+              margin-left: 40px;
+            }
             &.user-nav {
               margin-right: 27px;
             }
             &.user-helped {
               margin-right: 36px;
-              width: 230px;
-            }
-            &.user-admin {
-              width: 425px;
             }
           }
         }
@@ -1102,10 +1098,11 @@ export const HeaderBox = styled.header`
       div.header-inner {
         .box-nav {
           nav {
-            margin-right: 48px;
-            width: 360px;
-            &.user-admin {
-              width: 400px;
+            margin-right: 42px;
+            ul li {
+              margin-left: 30px;
+            }
+            &.user-nav {
               margin-right: 10px;
             }
           }
@@ -3421,6 +3418,9 @@ export const SectionAidsRequest = styled.div`
     ${H2} {
       margin-bottom: 34px;
     }
+    .box-aids {
+      justify-content: center;
+    }
   }
   ${H2} {
     margin-bottom: 64px;
@@ -3439,13 +3439,16 @@ export const SectionAidsRequest = styled.div`
       text-align: left;
       display: inline-block;
       width: 100%;
+      .item-block {
+        display: inline;
+      }
     }
     .box-aids {
       margin-bottom: 0;
       > .box-button {
-        width: 100%;
         display: block;
         margin-top: 60px;
+        width: 100%;
       }
     }
     &.zero-aids {
@@ -3463,6 +3466,13 @@ export const SectionAidsRequest = styled.div`
       > div {
         max-width: 480px;
         width: 100%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.my-request-aids {
+      ${H2} .item-block {
+        display: block;
       }
     }
   }

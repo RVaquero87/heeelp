@@ -6,7 +6,6 @@ const _ = require("lodash");
 const { isLoggedIn, isLoggedOut } = require("../lib/isLoggedMiddleware");
 const messageDefault = require("../email/messageDefault");
 
-
 //Models
 const Contacts = require("../models/Contacts");
 
@@ -67,7 +66,7 @@ router.post("/send", isLoggedIn(), async (req, res) => {
       from: '"heeelp!" <heeelp.web@gmail.com>',
       to: to,
       subject: subject,
-      html: `Saludos Cordiales,<br/><br/>${emailbody}<br/><br/>Recibe un cordial saludo,<br/><br/>El Equipo de h<b>eee</b>lp!<br/><br/>${messageDefault}`
+      html: `Saludos Cordiales,<br/><br/>${emailbody}<br/><br/>Recibe un cordial saludo,<br/><br/>El Equipo de h<b>eee</b>lp!<br/><br/>${messageDefault}`,
     };
 
     transporter

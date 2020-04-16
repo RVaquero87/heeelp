@@ -9,7 +9,15 @@ const userSchema = new Schema(
     helperId: { type: Schema.Types.ObjectId, ref: "Users" },
     price: {
       type: String,
-      enum: ["Free", "5€/h", "6€/h", "7€/h", "8€/h", "9€/h", "10€/h"],
+      enum: [
+        "Free",
+        "5€/hora",
+        "6€/hora",
+        "7€/hora",
+        "8€/hora",
+        "9€/hora",
+        "10€/hora",
+      ],
     },
     time: Date,
     shoppinglist: [{ type: Schema.Types.ObjectId, ref: "ShoppingLists" }],

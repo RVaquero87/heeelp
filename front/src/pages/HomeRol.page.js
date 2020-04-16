@@ -160,8 +160,10 @@ export const HomeRolPage = () => {
                 )}
               </div>
               <ButtonLink whereTo="/mis-peticiones" className="button big">
-                Ver todas mis{" "}
-                {user?.rol === "Helpers" ? "tareas" : "peticiones"}
+                Ver todas{" "}
+                <span className="item-desktop">
+                  mis {user?.rol === "Helpers" ? "tareas" : "peticiones"}
+                </span>
               </ButtonLink>
             </SectionAidsRequest>
           </SectionBox>
