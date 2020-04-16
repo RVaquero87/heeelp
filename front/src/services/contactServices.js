@@ -1,17 +1,7 @@
-import axios from "axios";
-
-const contactService = axios.create({
-  baseURL: "http://localhost:3000/contact",
-  withCredentials: true,
-});
-
-const sendEmail = axios.create({
-  baseURL: "https://api.sendgrid.com/v3/mail/send",
-  withCredentials: false,
-});
+import { serviceApi } from "../lib/commonFunctional";
 
 export const sendMessageContact = async ({ username, title, message }) => {
-  const res = await contactService.post("/create", {
+  const res = await serviceApi.post("/contact/create", {
     username,
     title,
     message,
@@ -20,17 +10,17 @@ export const sendMessageContact = async ({ username, title, message }) => {
 };
 
 export const getAllMessageContact = async () => {
-  const res = await contactService.post("/alls");
+  const res = await serviceApi.post("/contact/alls");
   return res.data;
 };
 
 export const deleteMessageContact = async (value) => {
-  const res = await contactService.post("/delete", value);
+  const res = await serviceApi.post("/contact/delete", value);
   return res.data;
 };
 
 export const sendMessageEmail = async ({ to, subject, emailbody }) => {
-  const res = await contactService.post("/send", {
+  const res = await serviceApi.post("/contact/send", {
     to,
     subject,
     emailbody,

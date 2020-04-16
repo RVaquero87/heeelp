@@ -1,8 +1,11 @@
 //React
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 //Route Protected
 import { withProtected } from "../lib/protectRoute.hoc";
+
+//Form
+import { useForm, FormContext } from "react-hook-form";
 
 //Styles & AOS animation
 import {
@@ -15,10 +18,13 @@ import {
   H1,
   H2,
   Col2HeaderHomeRol,
+  SectionCreateAidsRequest,
+  Button,
   ParagraphTop,
   Paragraphs,
   FaqsBox,
   SectionAidsRequest,
+  FormBox,
 } from "../styles/Index.styles";
 
 //Images
@@ -36,11 +42,16 @@ import { PrincipalContext } from "../context/PrincipalContext";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
+import { createAidRequest } from "../services/aidRequestServices";
 
 //Compoments
 import { ItemServicies } from "../components/ItemServices/Index";
 import { ButtonLink } from "../components/ButtonLink/Index";
 import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
+import { InputBox } from "../components/Input/index";
+import { TextAreaBox } from "../components/TextArea/index";
+import { SelectBox } from "../components/Select/index";
+import { AidsRequestBox } from "../components/ItemAidRequest/Index";
 
 export const MyRequestRolPage = () => {
   const {
@@ -48,6 +59,7 @@ export const MyRequestRolPage = () => {
     aidsRequestId,
     changeAidsRequest,
     setChangeAidsRequest,
+    setMessageError,
   } = useContext(PrincipalContext);
 
   //Reset Scroll
@@ -62,134 +74,746 @@ export const MyRequestRolPage = () => {
     return result;
   };
 
+  //Tab Form Aid Request
+  const [getFormAidRequest, setGetFormAidRequest] = useState(false);
+
+  //Tab more 3 aids expand
+  const [expandAidsCreacion, setExpandAidsCreacion] = useState(false);
+  const [expandAidsPublicada, setExpandAidsPublicada] = useState(false);
+  const [expandAidsCurso, setExpandAidsCurso] = useState(false);
+  const [expandAidsRealizada, setExpandAidsRealizada] = useState(false);
+  const [expandAidsCancelada, setExpandAidsCancelada] = useState(false);
+
+  //Form
+  const methods = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      title: "",
+      content: "",
+      price: "",
+      time: "",
+      type: "",
+    },
+  });
+
+  const { register, handleSubmit, errors } = methods;
+
+  const createNewAidRequest = async (data) => {
+    const responseServer = await createAidRequest(data);
+    setGetFormAidRequest(!getFormAidRequest);
+    setChangeAidsRequest(!changeAidsRequest);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
   return (
     <>
-      <SectionBox bgColor="blueLight" justify="evenly" className="z1">
-        <Col2HeaderHomeRol className="contain" data-aos="fade-up">
-          <ContentText>
-            <H1>¡Mis peticiones</H1>
-          </ContentText>
-          <BoxImg className={user?.rol === "Helpers" ? "helper" : "helped"}>
-            <img
-              src={user?.rol === "Helpers" ? youngGirl : oldGirl}
-              alt="heeelp!"
-              title="heeelp!"
-            />
-          </BoxImg>
-        </Col2HeaderHomeRol>
-      </SectionBox>
+      {!aidsRequestId ? (
+        <Loading />
+      ) : (
+        <>
+          <SectionBox bgColor="blueLight" justify="evenly" className="z1">
+            <Col2HeaderHomeRol className="contain" data-aos="fade-up">
+              <ContentText>
+                <H1>Mis peticiones</H1>
+              </ContentText>
+              <BoxImg className={user?.rol === "Helpers" ? "helper" : "helped"}>
+                <img
+                  src={user?.rol === "Helpers" ? youngGirl : oldGirl}
+                  alt="heeelp!"
+                  title="heeelp!"
+                />
+              </BoxImg>
+            </Col2HeaderHomeRol>
+          </SectionBox>
 
-      <SectionBox justify="center" column bgColor="grey">
-        <SectionServicesProvided className="contain" data-aos="fade-up">
-          <H2 color="black">
-            Total de servicios{" "}
-            {user?.rol === "Helpers" ? "prestados" : "pedidos"}
-          </H2>
-          <ParagraphTop className="total-services">
-            {aidsRequestId.length}
-          </ParagraphTop>
+          <SectionBox justify="center" column bgColor="grey">
+            <SectionServicesProvided className="contain" data-aos="fade-up">
+              <H2 color="black">
+                Total de servicios{" "}
+                {user?.rol === "Helpers" ? "prestados" : "pedidos"}
+              </H2>
+              <ParagraphTop className="total-services">
+                {aidsRequestId.length}
+              </ParagraphTop>
 
-          <div className="col5">
-            <ItemServicies
-              ImgSrc={icon1}
-              ItemText="Lavandería"
-              NumberServicesProvided={lenghtAidsRequestType("Lavandería")}
-            />
-            <ItemServicies
-              ImgSrc={icon2}
-              ItemText="Supermercado"
-              NumberServicesProvided={lenghtAidsRequestType("Supermercado")}
-            />
-            <ItemServicies
-              ImgSrc={icon3}
-              ItemText="Parafarmacia"
-              NumberServicesProvided={lenghtAidsRequestType("Parafarmacia")}
-            />
-            <ItemServicies
-              ImgSrc={icon4}
-              ItemText="Tareas domésticas"
-              NumberServicesProvided={lenghtAidsRequestType(
-                "Tareas domésticas"
-              )}
-            />
-            <ItemServicies
-              ImgSrc={icon5}
-              ItemText="Animales domésticos"
-              NumberServicesProvided={lenghtAidsRequestType(
-                "Animales domésticos"
-              )}
-            />
-          </div>
-        </SectionServicesProvided>
-      </SectionBox>
+              <div className="col5">
+                <ItemServicies
+                  ImgSrc={icon1}
+                  ItemText="Lavandería"
+                  NumberServicesProvided={lenghtAidsRequestType("Lavandería")}
+                />
+                <ItemServicies
+                  ImgSrc={icon2}
+                  ItemText="Supermercado"
+                  NumberServicesProvided={lenghtAidsRequestType("Supermercado")}
+                />
+                <ItemServicies
+                  ImgSrc={icon3}
+                  ItemText="Parafarmacia"
+                  NumberServicesProvided={lenghtAidsRequestType("Parafarmacia")}
+                />
+                <ItemServicies
+                  ImgSrc={icon4}
+                  ItemText="Tareas domésticas"
+                  NumberServicesProvided={lenghtAidsRequestType(
+                    "Tareas domésticas"
+                  )}
+                />
+                <ItemServicies
+                  ImgSrc={icon5}
+                  ItemText="Animales domésticos"
+                  NumberServicesProvided={lenghtAidsRequestType(
+                    "Animales domésticos"
+                  )}
+                />
+              </div>
+            </SectionServicesProvided>
+          </SectionBox>
 
-      <SectionBox justify="center" column>
-        <SectionAidsRequest className="contain" data-aos="fade-up">
-          <H2 color="black">
-            <span>Peticiones en borrador </span>
-          </H2>
-        </SectionAidsRequest>
-      </SectionBox>
+          {user?.rol == "Helped" && (
+            <>
+              <SectionBox bgColor="grey" column>
+                <SectionCreateAidsRequest
+                  className="contain"
+                  data-aos="fade-up"
+                >
+                  <div
+                    className={
+                      getFormAidRequest ? "content-text active" : "content-text"
+                    }
+                  >
+                    <ParagraphTop blue>
+                      <span>
+                        Maecenas vel rutrum sem. Cras id suscipit lacus, eu
+                        egestas orci. In elit mauris, sollicitudin dignissim mi
+                        id, dignissim suscipit justo.
+                      </span>
+                    </ParagraphTop>
+                    <Button
+                      type="transparent-blue"
+                      big
+                      onClick={(e) => setGetFormAidRequest(!getFormAidRequest)}
+                    >
+                      {getFormAidRequest
+                        ? " Cerrar Formulario"
+                        : "Crear una petición"}
+                    </Button>
+                  </div>
+                  {getFormAidRequest && (
+                    <FormContext {...methods}>
+                      <FormBox
+                        onSubmit={handleSubmit(createNewAidRequest)}
+                        data-aos="fade-down"
+                      >
+                        <H2 color="blue">Escribe tu petición</H2>
+                        <InputBox
+                          label="Pon un título a tu petición (70 max)"
+                          name="title"
+                          ref={register({
+                            required: {
+                              value: true,
+                              message: "El campo es requerido",
+                            },
+                            maxLength: {
+                              value: 70,
+                              message:
+                                "Este campo solo admite un máximo de 70 caracteres",
+                            },
+                          })}
+                        />
+                        <TextAreaBox
+                          label="Haz una descripción"
+                          name="content"
+                          ref={register({
+                            required: {
+                              value: true,
+                              message: "El campo es requerido",
+                            },
+                          })}
+                        />
+                        <SelectBox
+                          label="¿De qué tipo es tu petición?"
+                          name="type"
+                          value={[
+                            "Animales domésticos",
+                            "Lavandería",
+                            "Parafarmacia",
+                            "Supermercado",
+                            "Tareas domésticas",
+                          ]}
+                          ref={register({
+                            required: {
+                              value: true,
+                              message: "El campo es requerido",
+                            },
+                          })}
+                        />
+                        <InputBox
+                          label="¿Cuándo o antes de que día debe realizarse?"
+                          name="time"
+                          type="date"
+                          ref={register({
+                            required: {
+                              value: true,
+                              message: "El campo es requerido",
+                            },
+                          })}
+                        />
+                        <SelectBox
+                          label="¿Cuanto estás dispuesto a pagar?"
+                          name="price"
+                          options={[
+                            "No puedo permitirme pagar nada",
+                            "Puedo permitirme pagar 5€/h",
+                            "Puedo permitirme pagar 6€/h",
+                            "Puedo permitirme pagar 7€/h",
+                            "Puedo permitirme pagar 8€/h",
+                            "Puedo permitirme pagar 9€/h",
+                            "Puedo permitirme pagar 10€/h",
+                          ]}
+                          value={[
+                            "Free",
+                            "5€/h",
+                            "6€/h",
+                            "7€/h",
+                            "8€/h",
+                            "9€/h",
+                            "10€/h",
+                          ]}
+                          ref={register({
+                            required: {
+                              value: true,
+                              message: "El campo es requerido",
+                            },
+                          })}
+                        />
 
-      <SectionBox justify="center" column>
-        <SectionAidsRequest className="contain" data-aos="fade-up">
-          <H2 color="black">
-            <span>Peticiones Publicadas </span>
-          </H2>
-        </SectionAidsRequest>
-      </SectionBox>
+                        <Button type="submit" big>
+                          Crear Petición
+                        </Button>
+                      </FormBox>
+                    </FormContext>
+                  )}
+                </SectionCreateAidsRequest>
+              </SectionBox>
+            </>
+          )}
 
-      <SectionBox justify="center" column>
-        <SectionAidsRequest className="contain" data-aos="fade-up">
-          <H2 color="black">
-            <span>Peticiones en curso </span>
-          </H2>
-        </SectionAidsRequest>
-      </SectionBox>
+          {user?.rol === "Helped" && (
+            <SectionBox justify="center" column>
+              <SectionAidsRequest
+                className={
+                  aidsRequestId.filter((aids) => aids?.status == "En creación")
+                    .length == 0
+                    ? "contain my-request-aids zero-aids"
+                    : "contain my-request-aids"
+                }
+                data-aos="fade-up"
+              >
+                <H2 color="black">
+                  <span>
+                    Peticiones en creación (
+                    {
+                      aidsRequestId.filter(
+                        (aids) => aids?.status == "En creación"
+                      ).length
+                    }
+                    )
+                  </span>
+                </H2>
+                <div className="box-aids">
+                  {aidsRequestId.filter((aids) => aids?.status == "En creación")
+                    .length == 0 ? (
+                    <Paragraphs blue>
+                      <span>
+                        {user?.name} {user?.lastname.slice(0, 1)}. no tienes
+                        ninguna petición en creación o borrador.
+                      </span>
+                    </Paragraphs>
+                  ) : (
+                    <>
+                      {aidsRequestId.filter(
+                        (aids) => aids?.status == "En creación"
+                      ).length >= 3 ? (
+                        <>
+                          <>
+                            {(expandAidsCreacion && (
+                              <>
+                                {aidsRequestId
+                                  .filter(
+                                    (aids) => aids?.status == "En creación"
+                                  )
+                                  .map((aids, i) => {
+                                    return (
+                                      <AidsRequestBox
+                                        aidrequest={aids}
+                                        key={i}
+                                      />
+                                    );
+                                  })}
+                              </>
+                            )) || (
+                              <>
+                                {aidsRequestId
+                                  .filter(
+                                    (aids) => aids?.status == "En creación"
+                                  )
+                                  .map((aids, i) => {
+                                    if (i <= 2) {
+                                      return (
+                                        <AidsRequestBox
+                                          aidrequest={aids}
+                                          key={i}
+                                        />
+                                      );
+                                    }
+                                  })}
+                              </>
+                            )}
+                          </>
+                          <div className="box-button">
+                            <Button
+                              big
+                              onClick={(e) =>
+                                setExpandAidsCreacion(!expandAidsCreacion)
+                              }
+                            >
+                              {(expandAidsCreacion && "Ver menos") || "Ver más"}
+                            </Button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {aidsRequestId
+                            .filter((aids) => aids?.status == "En creación")
+                            .map((aids, i) => {
+                              return (
+                                <AidsRequestBox aidrequest={aids} key={i} />
+                              );
+                            })}
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              </SectionAidsRequest>
+            </SectionBox>
+          )}
 
-      <SectionBox justify="center" column>
-        <SectionAidsRequest className="contain" data-aos="fade-up">
-          <H2 color="black">
-            <span>Peticiones Realizas </span>
-          </H2>
-        </SectionAidsRequest>
-      </SectionBox>
+          {user?.rol === "Helped" && (
+            <SectionBox justify="center" column>
+              <SectionAidsRequest
+                className={
+                  aidsRequestId.filter((aids) => aids?.status == "Publicada")
+                    .length == 0
+                    ? "contain my-request-aids zero-aids"
+                    : "contain my-request-aids"
+                }
+                data-aos="fade-up"
+              >
+                <H2 color="black">
+                  <span>
+                    Peticiones publicadas (
+                    {
+                      aidsRequestId.filter(
+                        (aids) => aids?.status == "Publicada"
+                      ).length
+                    }
+                    )
+                  </span>
+                </H2>
+                <div className="box-aids">
+                  {aidsRequestId.filter((aids) => aids?.status == "Publicada")
+                    .length == 0 ? (
+                    <Paragraphs blue>
+                      <span>
+                        {user?.name} {user?.lastname.slice(0, 1)}. no tienes
+                        ninguna petición publicada en estos momentos.
+                      </span>
+                    </Paragraphs>
+                  ) : (
+                    <>
+                      {aidsRequestId.filter(
+                        (aids) => aids?.status == "Publicada"
+                      ).length >= 3 ? (
+                        <>
+                          <>
+                            {(expandAidsPublicada && (
+                              <>
+                                {aidsRequestId
+                                  .filter((aids) => aids?.status == "Publicada")
+                                  .map((aids, i) => {
+                                    return (
+                                      <AidsRequestBox
+                                        aidrequest={aids}
+                                        key={i}
+                                      />
+                                    );
+                                  })}
+                              </>
+                            )) || (
+                              <>
+                                {aidsRequestId
+                                  .filter((aids) => aids?.status == "Publicada")
+                                  .map((aids, i) => {
+                                    if (i <= 2) {
+                                      return (
+                                        <AidsRequestBox
+                                          aidrequest={aids}
+                                          key={i}
+                                        />
+                                      );
+                                    }
+                                  })}
+                              </>
+                            )}
+                          </>
+                          <div className="box-button">
+                            <Button
+                              big
+                              onClick={(e) =>
+                                setExpandAidsPublicada(!expandAidsPublicada)
+                              }
+                            >
+                              {(expandAidsPublicada && "Ver menos") ||
+                                "Ver más"}
+                            </Button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {aidsRequestId
+                            .filter((aids) => aids?.status == "Publicada")
+                            .map((aids, i) => {
+                              return (
+                                <AidsRequestBox aidrequest={aids} key={i} />
+                              );
+                            })}
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              </SectionAidsRequest>
+            </SectionBox>
+          )}
 
-      <SectionBox bgColor="orange" column>
-        <FaqsBox className="contain" data-aos="fade-up">
-          <H2>
-            ¿Tienes dudas?{" "}
-            <span className="item-block">
-              Consulta nuestras preguntas frecuentes
-            </span>
-          </H2>
-          <AccordionFaqsBox />
-          <ButtonLink whereTo="/faqs" className="button white big">
-            VER TODAS
-          </ButtonLink>
-        </FaqsBox>
-      </SectionBox>
+          <SectionBox justify="center" column>
+            <SectionAidsRequest
+              className={
+                aidsRequestId.filter((aids) => aids?.status == "En curso")
+                  .length == 0
+                  ? "contain my-request-aids zero-aids"
+                  : "contain my-request-aids"
+              }
+              data-aos="fade-up"
+            >
+              <H2 color="black">
+                <span>
+                  Peticiones en curso (
+                  {
+                    aidsRequestId.filter((aids) => aids?.status == "En curso")
+                      .length
+                  }
+                  )
+                </span>
+              </H2>
+              <div className="box-aids">
+                {aidsRequestId.filter((aids) => aids?.status == "En curso")
+                  .length == 0 ? (
+                  <Paragraphs blue>
+                    <span>
+                      {user?.name} {user?.lastname.slice(0, 1)}. no tienes
+                      ninguna petición en curso.
+                    </span>
+                  </Paragraphs>
+                ) : (
+                  <>
+                    {aidsRequestId.filter((aids) => aids?.status == "En curso")
+                      .length >= 3 ? (
+                      <>
+                        <>
+                          {(expandAidsCurso && (
+                            <>
+                              {aidsRequestId
+                                .filter((aids) => aids?.status == "En curso")
+                                .map((aids, i) => {
+                                  return (
+                                    <AidsRequestBox aidrequest={aids} key={i} />
+                                  );
+                                })}
+                            </>
+                          )) || (
+                            <>
+                              {aidsRequestId
+                                .filter((aids) => aids?.status == "En curso")
+                                .map((aids, i) => {
+                                  if (i <= 2) {
+                                    return (
+                                      <AidsRequestBox
+                                        aidrequest={aids}
+                                        key={i}
+                                      />
+                                    );
+                                  }
+                                })}
+                            </>
+                          )}
+                        </>
+                        <div className="box-button">
+                          <Button
+                            big
+                            onClick={(e) =>
+                              setExpandAidsCurso(!expandAidsCurso)
+                            }
+                          >
+                            {(expandAidsCurso && "Ver menos") || "Ver más"}
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {aidsRequestId
+                          .filter((aids) => aids?.status == "En curso")
+                          .map((aids, i) => {
+                            return <AidsRequestBox aidrequest={aids} key={i} />;
+                          })}
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </SectionAidsRequest>
+          </SectionBox>
 
-      <SectionBox column>
-        <ContainDivDefault className="contain" data-aos="fade-up">
-          <Col2Min inverse marginTopNone>
-            <ContentText>
-              <H2 color="blue">¿Quieres contactar con nosotros?</H2>
-              <Paragraphs blue>
-                Si tienes cualquier pregunta que hacernos, no dudes en
-                enviarnoslas. Clicka en contacta, rellena el formulario y te
-                responderemos lo antes posible.
-              </Paragraphs>
-              <ButtonLink whereTo="/contacto" className="button big">
-                Contactar
+          <SectionBox justify="center" column>
+            <SectionAidsRequest
+              className={
+                aidsRequestId.filter((aids) => aids?.status == "Realizada")
+                  .length == 0
+                  ? "contain my-request-aids zero-aids"
+                  : "contain my-request-aids"
+              }
+              data-aos="fade-up"
+            >
+              <H2 color="black">
+                <span>
+                  Peticiones realizadas (
+                  {
+                    aidsRequestId.filter((aids) => aids?.status == "Realizada")
+                      .length
+                  }
+                  )
+                </span>
+              </H2>
+              <div className="box-aids">
+                {aidsRequestId.filter((aids) => aids?.status == "Realizada")
+                  .length == 0 ? (
+                  <Paragraphs blue>
+                    <span>
+                      {user?.name} {user?.lastname.slice(0, 1)}.{" "}
+                      {user?.rol === "Helpers"
+                        ? `aun no has realizado ninguna petición.`
+                        : `aun no te han realizado ninguna petición.`}
+                    </span>
+                  </Paragraphs>
+                ) : (
+                  <>
+                    {aidsRequestId.filter((aids) => aids?.status == "Realizada")
+                      .length >= 3 ? (
+                      <>
+                        <>
+                          {(expandAidsRealizada && (
+                            <>
+                              {aidsRequestId
+                                .filter((aids) => aids?.status == "Realizada")
+                                .map((aids, i) => {
+                                  return (
+                                    <AidsRequestBox aidrequest={aids} key={i} />
+                                  );
+                                })}
+                            </>
+                          )) || (
+                            <>
+                              {aidsRequestId
+                                .filter((aids) => aids?.status == "Realizada")
+                                .map((aids, i) => {
+                                  if (i <= 2) {
+                                    return (
+                                      <AidsRequestBox
+                                        aidrequest={aids}
+                                        key={i}
+                                      />
+                                    );
+                                  }
+                                })}
+                            </>
+                          )}
+                        </>
+                        <div className="box-button">
+                          <Button
+                            big
+                            onClick={(e) =>
+                              setExpandAidsRealizada(!expandAidsRealizada)
+                            }
+                          >
+                            {(expandAidsRealizada && "Ver menos") || "Ver más"}
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {aidsRequestId
+                          .filter((aids) => aids?.status == "Realizada")
+                          .map((aids, i) => {
+                            return <AidsRequestBox aidrequest={aids} key={i} />;
+                          })}
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </SectionAidsRequest>
+          </SectionBox>
+
+          {user?.rol === "Helped" && (
+            <SectionBox justify="center" column>
+              <SectionAidsRequest
+                className={
+                  aidsRequestId.filter((aids) => aids?.status == "Cancelada")
+                    .length == 0
+                    ? "contain my-request-aids zero-aids"
+                    : "contain my-request-aids"
+                }
+                data-aos="fade-up"
+              >
+                <H2 color="black">
+                  <span>
+                    Peticiones canceladas (
+                    {
+                      aidsRequestId.filter(
+                        (aids) => aids?.status == "Cancelada"
+                      ).length
+                    }
+                    )
+                  </span>
+                </H2>
+                <div className="box-aids">
+                  {aidsRequestId.filter((aids) => aids?.status == "Cancelada")
+                    .length == 0 ? (
+                    <Paragraphs blue>
+                      <span>
+                        {user?.name} {user?.lastname.slice(0, 1)}. no has
+                        cancelado ninguna petición.
+                      </span>
+                    </Paragraphs>
+                  ) : (
+                    <>
+                      {aidsRequestId.filter(
+                        (aids) => aids?.status == "Cancelada"
+                      ).length >= 3 ? (
+                        <>
+                          <>
+                            {(expandAidsCancelada && (
+                              <>
+                                {aidsRequestId
+                                  .filter((aids) => aids?.status == "Cancelada")
+                                  .map((aids, i) => {
+                                    return (
+                                      <AidsRequestBox
+                                        aidrequest={aids}
+                                        key={i}
+                                      />
+                                    );
+                                  })}
+                              </>
+                            )) || (
+                              <>
+                                {aidsRequestId
+                                  .filter((aids) => aids?.status == "Cancelada")
+                                  .map((aids, i) => {
+                                    if (i <= 2) {
+                                      return (
+                                        <AidsRequestBox
+                                          aidrequest={aids}
+                                          key={i}
+                                        />
+                                      );
+                                    }
+                                  })}
+                              </>
+                            )}
+                          </>
+                          <div className="box-button">
+                            <Button
+                              big
+                              onClick={(e) =>
+                                setExpandAidsCancelada(!expandAidsCancelada)
+                              }
+                            >
+                              {(expandAidsCancelada && "Ver menos") ||
+                                "Ver más"}
+                            </Button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {aidsRequestId
+                            .filter((aids) => aids?.status == "Cancelada")
+                            .map((aids, i) => {
+                              return (
+                                <AidsRequestBox aidrequest={aids} key={i} />
+                              );
+                            })}
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              </SectionAidsRequest>
+            </SectionBox>
+          )}
+
+          <SectionBox bgColor="orange" column className="myrequest-mt">
+            <FaqsBox className="contain" data-aos="fade-up">
+              <H2>
+                ¿Tienes dudas?{" "}
+                <span className="item-block">
+                  Consulta nuestras preguntas frecuentes
+                </span>
+              </H2>
+              <AccordionFaqsBox />
+              <ButtonLink whereTo="/faqs" className="button white big">
+                VER TODAS
               </ButtonLink>
-            </ContentText>
-            <BoxImg>
-              <img src={contact} alt="Contacto" title="Contacto" />
-            </BoxImg>
-          </Col2Min>
-        </ContainDivDefault>
-      </SectionBox>
+            </FaqsBox>
+          </SectionBox>
+
+          <SectionBox column>
+            <ContainDivDefault className="contain" data-aos="fade-up">
+              <Col2Min inverse marginTopNone>
+                <ContentText>
+                  <H2 color="blue">¿Quieres contactar con nosotros?</H2>
+                  <Paragraphs blue>
+                    Si tienes cualquier pregunta que hacernos, no dudes en
+                    enviarnoslas. Clicka en contacta, rellena el formulario y te
+                    responderemos lo antes posible.
+                  </Paragraphs>
+                  <ButtonLink whereTo="/contacto" className="button big">
+                    Contactar
+                  </ButtonLink>
+                </ContentText>
+                <BoxImg>
+                  <img src={contact} alt="Contacto" title="Contacto" />
+                </BoxImg>
+              </Col2Min>
+            </ContainDivDefault>
+          </SectionBox>
+        </>
+      )}
     </>
   );
 };

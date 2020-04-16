@@ -50,6 +50,7 @@ export const SelectText = styled.select`
   box-shadow: none;
   display: block;
   font-family: "Roboto", sans-serif;
+  color: #3e3874;
   margin: 0px;
   max-width: 100%;
   padding: 1px 5px;
@@ -69,6 +70,9 @@ export const SelectText = styled.select`
     &:focus {
       border: 1px solid #e74128;
     }
+  }
+  option {
+    color: #3e3874;
   }
 `;
 

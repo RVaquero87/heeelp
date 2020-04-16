@@ -5,6 +5,7 @@ import logo from "../../public/images/logo-blanco.svg";
 import logoNegro from "../../public/images/logo-negro.svg";
 import comillas from "../../public/images/comillas.svg";
 import arrowBottomBlue from "../../public/images/arrow-blue.svg";
+import arrowLeftWhite from "../../public/images/arrow-white.svg";
 import logOut from "../../public/images/log-out.svg";
 import logOutBlue from "../../public/images/log-out-blue.svg";
 import message from "../../public/images/mensajes.svg";
@@ -79,6 +80,45 @@ export const GlobalContent = styled.div`
       max-width: 300px;
       width: 100%;
     }
+  }
+  .button-back {
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    justify-content: space-between;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+    &:before {
+      background: url(${arrowLeftWhite}) no-repeat center;
+      content: "";
+      display: block;
+      height: 18px;
+      margin-right: 7px;
+      position: relative;
+      top: -1.5px;
+      width: 11px;
+    }
+    &:hover:before {
+      animation: buttonBack 500ms ease-in-out infinite;
+    }
+    @keyframes buttonBack {
+      0% {
+        left: 0;
+      }
+      50% {
+        left: -3px;
+      }
+      100% {
+        left: 0;
+      }
+    }
+  }
+  .myrequest-mt {
+    margin-top: 80px;
   }
 `;
 
@@ -1809,6 +1849,44 @@ export const Col2HeaderHomeRol = styled(Col2Header)`
   }
 `;
 
+export const SectionHeaderSingleTitle = styled.div`
+  padding: 250px 0 130px;
+  ${H1} {
+    font-size: 40px;
+    line-height: 1.2;
+  }
+  button {
+    position: absolute;
+    top: 110px;
+    left: 0;
+  }
+  @media (max-width: 1200px) {
+    padding: 225px 0 120px;
+    ${H1} {
+      font-size: 36px;
+    }
+  }
+  @media (max-width: 1024px) {
+    ${H1} {
+      font-size: 34px;
+    }
+  }
+  @media (max-width: 960px) {
+    padding: 200px 0 100px;
+    ${H1} {
+      font-size: 32px;
+    }
+  }
+  @media (max-width: 960px) {
+    padding: 200px 0 80px;
+
+    ${H1} {
+      font-size: 30px;
+      text-align: center;
+    }
+  }
+`;
+
 //Sections Specials
 export const Col2Min = styled.div`
   display: flex;
@@ -1886,6 +1964,7 @@ export const Col2Min = styled.div`
     }
   }
 `;
+
 export const FaqsBox = styled.div`
   padding: 100px 0 70px;
   width: 100%;
@@ -3347,9 +3426,84 @@ export const SectionAidsRequest = styled.div`
     margin-bottom: 64px;
   }
   .box-aids {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-flow: row wrap;
     margin-bottom: 60px;
-    > ${Paragraphs} {
+    width: 100%;
+  }
+  &.my-request-aids {
+    padding-bottom: 0;
+    ${H2} {
       text-align: left;
+      display: inline-block;
+      width: 100%;
+    }
+    .box-aids {
+      margin-bottom: 0;
+      > .box-button {
+        width: 100%;
+        display: block;
+        margin-top: 60px;
+      }
+    }
+    &.zero-aids {
+      .box-aids {
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .box-aids {
+      justify-content: center;
+      align-items: center;
+      > div {
+        max-width: 480px;
+        width: 100%;
+      }
+    }
+  }
+`;
+
+export const SectionCreateAidsRequest = styled.div`
+  .content-text {
+    align-items: center;
+    border-top: 1px solid rgba(154, 156, 175, 0.3);
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 0;
+    &.active {
+      border-bottom: 1px solid rgba(154, 156, 175, 0.3);
+    }
+    ${ParagraphTop} {
+      padding-bottom: 0;
+      width: 70%;
+    }
+  }
+  ${FormBox} {
+    margin: 0;
+    padding: 80px 0;
+    ${H2} {
+      padding-bottom: 50px;
+    }
+  }
+  @media (max-width: 960px) {
+    .content-text {
+      flex-direction: column;
+      padding: 60px 0;
+      ${ParagraphTop} {
+        padding-bottom: 24px;
+        width: 100%;
+      }
+    }
+    ${FormBox} {
+      padding: 60px 0;
+      ${H2} {
+        padding-bottom: 40px;
+      }
     }
   }
 `;

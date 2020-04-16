@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const authService = axios.create({
-  baseURL: "http://localhost:3000/auth",
-  withCredentials: true,
-});
+import { serviceApi } from "../lib/commonFunctional";
 
 export const doSignup = async ({
   username,
@@ -24,7 +19,7 @@ export const doSignup = async ({
   country,
   legalCheck,
 }) => {
-  const res = await authService.post("/signup", {
+  const res = await serviceApi.post("/auth/signup", {
     username,
     password,
     rol,
@@ -47,7 +42,7 @@ export const doSignup = async ({
 };
 
 export const doLogin = async ({ username, password }) => {
-  const res = await authService.post("/login", {
+  const res = await serviceApi.post("/auth/login", {
     username,
     password,
   });
@@ -69,7 +64,7 @@ export const doEdit = async ({
   city,
   country,
 }) => {
-  const res = await authService.post("/edit", {
+  const res = await serviceApi.post("/auth/edit", {
     name,
     lastname,
     dniPassport,
@@ -88,30 +83,30 @@ export const doEdit = async ({
 };
 
 export const doLogout = async () => {
-  const res = await authService.post("/logout");
+  const res = await serviceApi.post("/auth/logout");
 };
 
 export const whoUser = async () => {
-  const res = await authService.post("/whoami");
+  const res = await serviceApi.post("/auth/whoami");
   return res.data;
 };
 
 export const uploadPhoto = async (image) => {
-  const res = await authService.post("/upload", image);
+  const res = await serviceApi.post("/auth/upload", image);
   return res.data;
 };
 
 export const getListUsers = async () => {
-  const res = await authService.post("/users-list");
+  const res = await serviceApi.post("/auth/users-list");
   return res.data;
 };
 
 export const doUnsubscribe = async (user) => {
-  const data = await authService.post("/users-delete", user);
+  const data = await serviceApi.post("/auth/users-delete", user);
   return data;
 };
 
 export const doEditUserAdmin = async (user) => {
-  const res = await authService.post("/users-edit", user);
+  const res = await serviceApi.post("/auth/users-edit", user);
   return res.data;
 };
