@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+import { ParagraphTop } from "../../../styles/Index.styles";
+
 export const BoxReviews = styled.div`
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 11px 4px rgba(62, 56, 116, 0.1);
-  padding: 50px 40px 30px;
+  padding: 40px 40px 30px;
   width: 47.5%;
   position: relative;
   .title {
@@ -12,7 +14,7 @@ export const BoxReviews = styled.div`
   }
   .message {
     text-align: left;
-    height: 180px;
+    height: 170px;
   }
   .box-reviews-user {
     align-items: center;
@@ -64,18 +66,90 @@ export const BoxReviews = styled.div`
   @media (max-width: 1200px) {
     padding: 40px 30px 30px;
     width: 47%;
+    .title {
+      font-size: 18px;
+      padding-bottom: 4px;
+    }
+    .message {
+      font-size: 17px;
+      height: 160px;
+      line-height: 26px;
+      padding-bottom: 18px;
+    }
+    .box-reviews-user {
+      .box-user-image {
+        max-width: 70px;
+      }
+      .box-user-item {
+        .box-top-user {
+          ${ParagraphTop} {
+            font-size: 18px;
+            line-height: 24px;
+          }
+        }
+        .starts img {
+          width: 23px;
+          margin-right: 5px;
+        }
+      }
+    }
   }
   @media (max-width: 1024px) {
-    padding: 40px 20px 30px;
     max-width: 370px;
+    margin-bottom: 50px;
+    padding: 32px 25px 25px;
+
+    .message {
+      font-size: 16px;
+      height: 150px;
+      line-height: 24px;
+    }
+    .box-reviews-user {
+      .box-user-image {
+        max-width: 60px;
+      }
+      .box-user-item {
+        width: 70%;
+        .starts img {
+          margin-right: 4px;
+        }
+      }
+    }
   }
   @media (max-width: 960px) {
     max-width: 370px;
     margin-bottom: 50px;
+    padding: 40px 35px 30px;
+    .title {
+      padding-bottom: 12px;
+      font-size: 20px;
+      line-height: 28px;
+    }
+    .message {
+      font-size: 18px;
+      height: 170px;
+      line-height: 28px;
+      padding-bottom: 32px;
+    }
+    .box-reviews-user {
+      .box-user-image {
+        max-width: 70px;
+      }
+      .box-user-item {
+        width: 70%;
+        .starts img {
+          width: 25px;
+          margin-right: 5px;
+        }
+      }
+      .box-top-user {
+        margin-bottom: 4px;
+      }
+    }
   }
   @media (max-width: 768px) {
     padding: 40px 30px 30px;
-    max-width: 370px;
+    max-width: 360px;
     margin-bottom: 50px;
     width: 100%;
     .message {
@@ -90,13 +164,17 @@ export const BoxReviews = styled.div`
     }
     .box-reviews-user {
       margin-top: 0;
+      justify-content: flex-start;
       .box-user-image {
         max-width: 70px;
+        margin-right: 12px;
       }
       .box-user-item {
         width: 65%;
+        justify-content: flex-start;
+
         .starts img {
-          width: 20px;
+          width: 22px;
           margin-right: 5px;
         }
       }

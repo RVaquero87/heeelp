@@ -2312,20 +2312,17 @@ export const SectionReviews = styled(SectionReviewsHome)`
         flex-direction: column;
       }
       .box-reviews {
-        justify-content: space-between;
+        justify-content: space-around;
         margin-top: 0;
         > div {
-          max-width: initial;
           width: 48%;
-          .message {
-            height: 160px;
-          }
         }
       }
     }
   }
   @media (max-width: 768px) {
     &.my-reviews {
+      justify-content: space-around;
       .box-faqs .box-title {
         margin-bottom: 20px;
       }
@@ -2341,8 +2338,8 @@ export const SectionReviews = styled(SectionReviewsHome)`
         justify-content: center;
         align-items: center;
         > div {
-          max-width: 480px;
           margin-bottom: 40px;
+          justify-content: space-between;
           width: 100%;
           .message {
             height: initial;
