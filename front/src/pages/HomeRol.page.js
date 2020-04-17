@@ -152,11 +152,15 @@ export const HomeRolPage = () => {
                     </span>
                   </Paragraphs>
                 ) : (
-                  aidsRequestId.map((aidrequest, i) => {
-                    if (i <= 2) {
-                      return <AidsRequestBox aidrequest={aidrequest} key={i} />;
-                    }
-                  })
+                  aidsRequestId
+                    .filter((aidrequest) => aidrequest.status != "Cancelada")
+                    .map((aidrequest, i) => {
+                      if (i <= 2) {
+                        return (
+                          <AidsRequestBox aidrequest={aidrequest} key={i} />
+                        );
+                      }
+                    })
                 )}
               </div>
               <ButtonLink whereTo="/mis-peticiones" className="button big">

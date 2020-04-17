@@ -1156,7 +1156,7 @@ export const HeaderBox = styled.header`
                 padding: 0;
                 width: 100%;
                 li {
-                  margin-bottom: 4vh;
+                  margin: 0 auto 4vh;
                   font-size: 26px;
                   a {
                     color: #fff;
@@ -1406,7 +1406,7 @@ export const FooterBox = styled.footer`
         flex-direction: column;
         margin-bottom: 0px;
         width:initial;
-        a{
+        a {
           margin-bottom:30px;
         }
       }
@@ -1823,6 +1823,7 @@ export const Col2HeaderHomeRol = styled(Col2Header)`
   @media (max-width: 768px) {
     &.contain {
       ${ContentText} {
+        text-align: center;
         width: 100%;
       }
       ${BoxImg} {
@@ -3447,7 +3448,9 @@ export const SectionAidsRequest = styled.div`
       margin-bottom: 0;
       > .box-button {
         display: block;
-        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
         width: 100%;
       }
     }
@@ -3459,12 +3462,13 @@ export const SectionAidsRequest = styled.div`
       }
     }
   }
+
   @media (max-width: 768px) {
     .box-aids {
       justify-content: center;
       align-items: center;
       > div {
-        max-width: 480px;
+        max-width: 360px;
         width: 100%;
       }
     }
@@ -3473,6 +3477,11 @@ export const SectionAidsRequest = styled.div`
     &.my-request-aids {
       ${H2} .item-block {
         display: block;
+      }
+    }
+    .box-aids {
+      > div {
+        max-width: 330px;
       }
     }
   }

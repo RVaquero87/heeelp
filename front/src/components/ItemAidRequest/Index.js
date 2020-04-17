@@ -1,9 +1,9 @@
 //React
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 //Styles & AOS animation
-import { BoxImg, ParagraphTop, Paragraphs } from "../../styles/Index.styles";
+import { BoxImg, Paragraphs } from "../../styles/Index.styles";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
@@ -22,13 +22,18 @@ import {
   getPublicAidRequest,
   getDuplicateAidRequest,
   getCancelAidRequest,
+  takeOverAidRequest,
+  stopTakeOverAidRequest,
 } from "../../services/aidRequestServices";
 import { getYearsOld } from "../../lib/commonFunctional";
 
-export const AidsRequestBox = ({ aidrequest }) => {
-  const { user, changeAidsRequest, setChangeAidsRequest } = useContext(
-    PrincipalContext
-  );
+export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
+  const {
+    user,
+    changeAidsRequest,
+    setChangeAidsRequest,
+    setMessageError,
+  } = useContext(PrincipalContext);
 
   const {
     _id,
@@ -42,7 +47,6 @@ export const AidsRequestBox = ({ aidrequest }) => {
   } = aidrequest;
 
   //URL PAGE
-
   const [urlPage, seturlPage] = useState();
 
   useEffect(() => {
@@ -51,8 +55,11 @@ export const AidsRequestBox = ({ aidrequest }) => {
     seturlPage(pageurl);
   }, [window.location.href]);
 
+  //Tab buttons options
+  const [optionButtons, setOptionButtons] = useState(false);
+
   //Date SHORT
-  const dateShort = time?.slice(0, 10);
+  let dateShort = time?.slice(0, 10).split("-").reverse().join("-");
 
   //Public Aids Request
   const publicAidRequest = async (e) => {
@@ -60,6 +67,7 @@ export const AidsRequestBox = ({ aidrequest }) => {
     const responseServer = await getPublicAidRequest(_id);
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
+    setOptionButtons(!optionButtons);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -71,9 +79,11 @@ export const AidsRequestBox = ({ aidrequest }) => {
     const responseServer = await getDuplicateAidRequest({ _id, title, time });
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
+    setOptionButtons(!optionButtons);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
+    history.push(`/mi-peticion/${_id}`);
   };
 
   //Cancel Aids Request
@@ -82,6 +92,31 @@ export const AidsRequestBox = ({ aidrequest }) => {
     const responseServer = await getCancelAidRequest(_id);
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
+    setOptionButtons(!optionButtons);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
+  //Add Helper Aids Request
+  const addAidRequest = async (e) => {
+    e.preventDefault();
+    const responseServer = await takeOverAidRequest(_id);
+    setChangeAidsRequest(!changeAidsRequest);
+    setMessageError(responseServer.message);
+    setOptionButtons(!optionButtons);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
+  //Remove Helper Aids Request
+  const removeAidRequest = async (e) => {
+    e.preventDefault();
+    const responseServer = await stopTakeOverAidRequest(_id);
+    setChangeAidsRequest(!changeAidsRequest);
+    setMessageError(responseServer.message);
+    setOptionButtons(!optionButtons);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -140,14 +175,14 @@ export const AidsRequestBox = ({ aidrequest }) => {
                 />
               )}
             </BoxImg>
-            <div>
+            <div className="data-user">
               {user?.rol == "Helped" ? (
                 <>
                   <p className={helperId ? "" : "no-helper"}>
-                    {`${helperId?.name} ${helperId?.lastname}` || ""}
+                    {helperId ? `${helperId.name} ${helperId?.lastname}` : ""}
                   </p>
                   <p className={helperId ? "" : "no-helper"}>
-                    {getYearsOld(helperId?.birthYear) || ""}
+                    {helperId ? `${getYearsOld(helperId?.birthYear)} años` : ""}
                   </p>
                 </>
               ) : (
@@ -155,49 +190,105 @@ export const AidsRequestBox = ({ aidrequest }) => {
                   <p>
                     {creatorUserid?.name} {creatorUserid?.lastname}
                   </p>
-                  <p>{getYearsOld(creatorUserid?.birthYear)}</p>
+                  <p>{getYearsOld(creatorUserid?.birthYear)} años</p>
                 </>
               )}
             </div>
           </div>
-          <div
-            className={(() => {
-              switch (status) {
-                case "Publicada":
-                  return "status blue";
-                case "En curso":
-                  return "status orange";
-                case "Realizada":
-                  return "status green";
-                case "Cancelada":
-                  return "status grey";
-                default:
-                  return "status";
-              }
-            })()}
-          >
-            {status}
-          </div>
-
-          {user.rol == "Helpers" &&
-            status == "Publicada" &&
-            urlPage == "listado-de-peticiones" && <button>opciones</button>}
-          {user.rol == "Helpers" &&
-            status == "En curso" &&
-            urlPage == "listado-de-peticiones" && <button>opacion2</button>}
+          {(user.rol == "Helpers" && urlPage == "listado-de-peticiones") || (
+            <div
+              className={(() => {
+                switch (status) {
+                  case "Publicada":
+                    return "status blue";
+                  case "En curso":
+                    return "status orange";
+                  case "Realizada":
+                    return "status green";
+                  case "Cancelada":
+                    return "status grey";
+                  default:
+                    return "status";
+                }
+              })()}
+            >
+              {status}
+            </div>
+          )}
         </div>
       </Link>
+      {user.rol == "Helpers" &&
+        urlPage == "listado-de-peticiones" &&
+        status == "Publicada" && (
+          <button className="btn-require add" onClick={(e) => addAidRequest(e)}>
+            ME LO PIDO
+          </button>
+        )}
+      {user.rol == "Helpers" &&
+        urlPage == "listado-de-peticiones" &&
+        status == "En curso" && (
+          <button
+            className="btn-require remove"
+            onClick={(e) => removeAidRequest(e)}
+          >
+            PEDIDA
+          </button>
+        )}
       {user?.rol == "Helped" && (
         <>
-          <button>opciones</button>
-          <div className="button-box">
-            <a onClick={(e) => publicAidRequest(e)}>Publicar</a>
-            <Link to={`/mi-peticion/${_id}`}>Ver</Link>
-            <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
-            <a onClick={(e) => cancelAidRequest(e)}>Cancelar</a>
-          </div>
+          <button
+            className="options"
+            onClick={(e) => setOptionButtons(!optionButtons)}
+          >
+            opciones
+          </button>
+          {optionButtons && (
+            <div className="buttons-options">
+              {(() => {
+                switch (status) {
+                  case "Publicada":
+                    return (
+                      <>
+                        <Link to={`/mi-peticion/${_id}`}>Ver</Link>
+                        <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
+                        <a onClick={(e) => cancelAidRequest(e)}>Cancelar</a>
+                      </>
+                    );
+                  case "En curso":
+                    return (
+                      <>
+                        <Link to={`/mi-peticion/${_id}`}>Ver</Link>
+                        <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
+                      </>
+                    );
+                  case "Realizada":
+                    return (
+                      <>
+                        <Link to={`/mi-peticion/${_id}`}>Ver</Link>
+                        <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
+                      </>
+                    );
+                  case "Cancelada":
+                    return (
+                      <>
+                        <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
+                      </>
+                    );
+                  default:
+                    return (
+                      <>
+                        <a onClick={(e) => publicAidRequest(e)}>Publicar</a>
+                        <Link to={`/mi-peticion/${_id}`}>Ver</Link>
+                        <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
+                        <a onClick={(e) => cancelAidRequest(e)}>Cancelar</a>
+                      </>
+                    );
+                }
+              })()}
+            </div>
+          )}
         </>
       )}
     </BoxAidRequest>
   );
-};
+});

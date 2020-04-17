@@ -339,7 +339,7 @@ export const MyRequests = () => {
                       <>
                         {aidsRequestId.filter(
                           (aids) => aids?.status == "En creación"
-                        ).length >= 3 ? (
+                        ).length > 3 ? (
                           <>
                             <>
                               {(expandAidsCreacion && (
@@ -383,8 +383,9 @@ export const MyRequests = () => {
                                   setExpandAidsCreacion(!expandAidsCreacion)
                                 }
                               >
-                                {(expandAidsCreacion && "Ver menos") ||
-                                  "Ver más"}
+                                {(expandAidsCreacion &&
+                                  "Ver menos peticiones") ||
+                                  "Ver más peticiones"}
                               </Button>
                             </div>
                           </>
@@ -442,7 +443,7 @@ export const MyRequests = () => {
                       <>
                         {aidsRequestId.filter(
                           (aids) => aids?.status == "Publicada"
-                        ).length >= 3 ? (
+                        ).length > 3 ? (
                           <>
                             <>
                               {(expandAidsPublicada && (
@@ -486,8 +487,9 @@ export const MyRequests = () => {
                                   setExpandAidsPublicada(!expandAidsPublicada)
                                 }
                               >
-                                {(expandAidsPublicada && "Ver menos") ||
-                                  "Ver más"}
+                                {(expandAidsPublicada &&
+                                  "Ver menos peticiones") ||
+                                  "Ver más peticiones"}
                               </Button>
                             </div>
                           </>
@@ -545,7 +547,7 @@ export const MyRequests = () => {
                 ) : (
                   <>
                     {aidsRequestId.filter((aids) => aids?.status == "En curso")
-                      .length >= 3 ? (
+                      .length > 3 ? (
                       <>
                         <>
                           {(expandAidsCurso && (
@@ -582,7 +584,8 @@ export const MyRequests = () => {
                               setExpandAidsCurso(!expandAidsCurso)
                             }
                           >
-                            {(expandAidsCurso && "Ver menos") || "Ver más"}
+                            {(expandAidsCurso && "Ver menos peticiones") ||
+                              "Ver más peticiones"}
                           </Button>
                         </div>
                       </>
@@ -639,7 +642,7 @@ export const MyRequests = () => {
                 ) : (
                   <>
                     {aidsRequestId.filter((aids) => aids?.status == "Realizada")
-                      .length >= 3 ? (
+                      .length > 3 ? (
                       <>
                         <>
                           {(expandAidsRealizada && (
@@ -676,7 +679,8 @@ export const MyRequests = () => {
                               setExpandAidsRealizada(!expandAidsRealizada)
                             }
                           >
-                            {(expandAidsRealizada && "Ver menos") || "Ver más"}
+                            {(expandAidsRealizada && "Ver menos peticiones") ||
+                              "Ver más peticiones"}
                           </Button>
                         </div>
                       </>
@@ -733,7 +737,7 @@ export const MyRequests = () => {
                     <>
                       {aidsRequestId.filter(
                         (aids) => aids?.status == "Cancelada"
-                      ).length >= 3 ? (
+                      ).length > 3 ? (
                         <>
                           <>
                             {(expandAidsCancelada && (
@@ -773,8 +777,9 @@ export const MyRequests = () => {
                                 setExpandAidsCancelada(!expandAidsCancelada)
                               }
                             >
-                              {(expandAidsCancelada && "Ver menos") ||
-                                "Ver más"}
+                              {(expandAidsCancelada &&
+                                "Ver menos peticiones") ||
+                                "Ver más peticiones"}
                             </Button>
                           </div>
                         </>
