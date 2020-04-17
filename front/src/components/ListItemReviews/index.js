@@ -11,6 +11,7 @@ import { BoxReviews } from "./styles/ItemsReviews.style";
 //Images
 import startOn from "../../../public/images/star-on.svg";
 import startOff from "../../../public/images/star-off.svg";
+import { Trash2 } from "react-feather";
 
 //Functional & Services
 import { deleteReviews } from "../../services/reviewsServices";
@@ -76,7 +77,7 @@ export const ReviewsBoxItem = ({ review }) => {
           value={review._id}
           onClick={(e) => deleteThisReview(e, e.target.value)}
         >
-          <i className="fa fa-trash-alt" aria-hidden="true"></i>
+          <Trash2 color="#3e3874" />
         </button>
       )}
     </BoxReviews>

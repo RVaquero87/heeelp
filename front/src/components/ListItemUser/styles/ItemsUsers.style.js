@@ -64,6 +64,10 @@ export const BoxUser = styled.div`
     button {
       padding: 0;
       cursor: pointer;
+      svg {
+        position: relative;
+        top: 3px;
+      }
     }
   }
 
@@ -101,7 +105,7 @@ export const BoxUser = styled.div`
     &:hover {
       color: rgb(62, 56, 116, 0.85);
     }
-    i {
+    svg {
       position: relative;
       pointer-events: none;
     }

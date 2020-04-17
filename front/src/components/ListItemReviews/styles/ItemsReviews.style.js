@@ -1,5 +1,5 @@
+//Styles & AOS animation
 import styled from "styled-components";
-
 import { ParagraphTop } from "../../../styles/Index.styles";
 
 export const BoxReviews = styled.div`
@@ -59,7 +59,7 @@ export const BoxReviews = styled.div`
     &:hover {
       opacity: 0.85;
     }
-    i {
+    svg {
       pointer-events: none;
     }
   }

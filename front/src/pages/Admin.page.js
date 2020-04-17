@@ -17,6 +17,7 @@ import {
 
 //Images
 import peopleAdmin from "../../public/images/people-admin.svg";
+import { Users, Mail, MessageCircle } from "react-feather";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
@@ -61,7 +62,7 @@ export const AdminPanel = () => {
               className={tabsAdmin === "users" ? "active" : ""}
               onClick={(e) => getComponentAdmin(e, e.target.value)}
             >
-              <i className="fas fa-users" aria-hidden="true"></i>
+              <Users color="#3e3874" />
               <span>Lista de </span>usuarios
             </button>
             <button
@@ -69,7 +70,7 @@ export const AdminPanel = () => {
               className={tabsAdmin === "messages" ? "active" : ""}
               onClick={(e) => getComponentAdmin(e, e.target.value)}
             >
-              <i className="fas fa-envelope-open-text" aria-hidden="true"></i>
+              <Mail color="#3e3874" />
               Mensajes<span> de contacto</span>
             </button>
             <button
@@ -77,7 +78,7 @@ export const AdminPanel = () => {
               className={tabsAdmin === "reviews" ? "active" : ""}
               onClick={(e) => getComponentAdmin(e, e.target.value)}
             >
-              <i className="fas fa-comments" aria-hidden="true"></i>
+              <MessageCircle color="#3e3874" />
               <span>Lista de </span>opiniones
             </button>
           </div>

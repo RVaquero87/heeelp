@@ -6,6 +6,7 @@ import { FormBox, BoxImg, Paragraphs } from "../../styles/Index.styles";
 import { BoxUser } from "./styles/ItemsUsers.style";
 
 //Images
+import { Trash2, Save } from "react-feather";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
@@ -88,7 +89,8 @@ export const UserBoxItem = ({ user }) => {
             })}
           />
           <button type="submit">
-            <i className="fas fa-sync-alt" aria-hidden="true"></i>
+            {" "}
+            <Save color="#3e3874" />
           </button>
         </FormBox>
       </FormContext>
@@ -102,7 +104,7 @@ export const UserBoxItem = ({ user }) => {
         value={user._id}
         onClick={(e) => deleteUser(e, e.target.value)}
       >
-        <i className="fa fa-trash-alt" aria-hidden="true"></i>
+        <Trash2 color="#3e3874" />
       </button>
     </BoxUser>
   );

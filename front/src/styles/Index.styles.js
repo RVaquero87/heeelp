@@ -2551,9 +2551,10 @@ export const AdminPanelBox = styled.div`
         border-color: #e3e4e8;
         border-bottom: 1px solid transparent;
       }
-      i {
+      svg {
         position: relative;
         margin-right: 12px;
+        top: 5px;
       }
     }
   }

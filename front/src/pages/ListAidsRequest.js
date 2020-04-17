@@ -134,7 +134,7 @@ export const ListAidsRequestPage = () => {
           <SectionBox justify="start">
             <SectionFilterAidRequest className="contain" data-aos="fade-up">
               <FilterAidsRequest>
-                <div class="box-filter">
+                <div className="box-filter">
                   <select
                     onChange={(e) =>
                       handleFilterAids(e, e.target.value, "type")
@@ -150,7 +150,7 @@ export const ListAidsRequestPage = () => {
                     <option value="Tareas domésticas">Tareas domésticas</option>
                   </select>
                 </div>
-                <div class="box-filter">
+                <div className="box-filter">
                   <select
                     onChange={(e) =>
                       handleFilterAids(e, e.target.value, "price")

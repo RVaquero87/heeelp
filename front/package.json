@@ -12,6 +12,7 @@
     "react": "^16.13.1",
     "react-accessible-accordion": "^3.0.1",
     "react-dom": "^16.13.1",
+    "react-feather": "^2.0.4",
     "react-hook-form": "^5.2.0",
     "react-router-dom": "^5.1.2",
     "styled-components": "^5.0.1"
