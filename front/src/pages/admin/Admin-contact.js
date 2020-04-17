@@ -27,8 +27,8 @@ import {
 
 //Compoments
 import { MessageBoxItem } from "../../components/ListItemMessageContact/Index";
-import { InputBox } from "../../components/Input/Index";
-import { TextAreaBox } from "../../components/TextArea/Index";
+import { InputBox } from "../../components/Input/index";
+import { TextAreaBox } from "../../components/TextArea/index";
 
 export const AdminContact = () => {
   const {

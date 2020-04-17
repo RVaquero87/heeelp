@@ -32,8 +32,8 @@ import { sendMessageContact } from "../services/contactServices";
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/Index";
 import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
-import { InputBox } from "../components/Input/Index";
-import { TextAreaBox } from "../components/TextArea/Index";
+import { InputBox } from "../components/Input/index";
+import { TextAreaBox } from "../components/TextArea/index";
 
 export const ContactPage = withRouter(({ history }) => {
   const { user, setMessageError } = useContext(PrincipalContext);

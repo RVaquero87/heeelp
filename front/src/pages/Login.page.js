@@ -28,7 +28,7 @@ import { doLogin } from "../services/authServices";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { InputBox } from "../components/Input/Index";
+import { InputBox } from "../components/Input/index";
 
 export const LoginPage = withRouter(({ history }) => {
   const { setUser, setMessageError } = useContext(PrincipalContext);

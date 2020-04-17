@@ -36,7 +36,7 @@ import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
 import { SelectBox } from "../components/Select/index";
-import { InputBox } from "../components/Input/Index";
+import { InputBox } from "../components/Input/index";
 
 export const RegisterPage = withRouter(({ history }) => {
   const {
