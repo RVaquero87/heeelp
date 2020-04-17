@@ -546,6 +546,7 @@ export const FilterStars = styled.div`
     select {
       appearance: none;
       color: #3e3874;
+      cursor: pointer;
       background-color: transparent;
       border: none;
       font-family: "Roboto", sans-serif;
@@ -554,6 +555,7 @@ export const FilterStars = styled.div`
       max-width: 100%;
       padding: 8px 40px 8px 15px;
       margin: 0%;
+      width: 100%;
       &:active,
       &:focus {
         outline: none;
@@ -564,6 +566,7 @@ export const FilterStars = styled.div`
       background: url(${arrowBottomBlue}) center no-repeat;
       content: " ";
       height: 10px;
+      pointer-events: none;
       position: absolute;
       right: 15px;
       top: 53%;
@@ -680,6 +683,35 @@ export const FilterContactMessage = styled(FilterStars)`
           padding-right: 0;
           margin-bottom: 10px;
         }
+      }
+    }
+  }
+`;
+
+export const FilterAidsRequest = styled(FilterStars)`
+  justify-content: flex-start;
+  margin-bottom: 0;
+  width: 100%;
+  .box-filter {
+    width: 260px;
+    &:last-child {
+      margin-left: 36px;
+    }
+    select {
+      padding-left: 24px;
+    }
+  }
+  @media (max-width: 768px) {
+    margin: 10px auto 0;
+  }
+  @media (max-width: 480px) {
+    margin: 10px auto 0;
+    .box-filter {
+      margin: 0 auto;
+      max-width: 260px;
+      width: 100%;
+      &:last-child {
+        margin: 24px auto 0;
       }
     }
   }
@@ -1354,7 +1386,7 @@ export const FooterBox = styled.footer`
         font-weight: 300;
         line-height: 1;
         text-align: center;
-        position:relative;
+        position: relative;
         text-decoration: none;
         &:hover {
           text-decoration: none;
@@ -1401,14 +1433,12 @@ export const FooterBox = styled.footer`
     }
   }
   @media (max-width: 480px) {
-    > div 
-      .button-box {
-        flex-direction: column;
-        margin-bottom: 0px;
-        width:initial;
-        a {
-          margin-bottom:30px;
-        }
+    > div .button-box {
+      flex-direction: column;
+      margin-bottom: 0px;
+      width: initial;
+      a {
+        margin-bottom: 30px;
       }
     }
   }
@@ -2289,6 +2319,7 @@ export const SectionReviews = styled(SectionReviewsHome)`
     .box-reviews {
       width: 100%;
       flex-flow: row wrap;
+      justify-content: flex-start;
       &:before,
       &:after {
         display: none;
@@ -2302,6 +2333,10 @@ export const SectionReviews = styled(SectionReviewsHome)`
       > div {
         width: 31.5%;
         margin-bottom: 30px;
+        margin-right: 2.75%;
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -2316,6 +2351,10 @@ export const SectionReviews = styled(SectionReviewsHome)`
         margin-top: 0;
         > div {
           width: 48%;
+          margin-right: 0;
+          &:nth-child(3n) {
+            margin-right: 0;
+          }
         }
       }
     }
@@ -2551,9 +2590,63 @@ export const AdminPanelBox = styled.div`
 export const SectionUserAdminList = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  > div {
+    margin-right: 3.3%;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+  @media (max-width: 1200px) {
+    > div {
+      margin-right: 2.6%;
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+  }
+  @media (max-width: 1024px) {
+    > div {
+      margin-right: 2%;
+    }
+  }
+  @media (max-width: 960px) {
+    > div {
+      margin-right: 2.6%;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:nth-child(4n) {
+        margin-right: 2.7%;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    justify-content: space-between;
+    > div {
+      margin-right: 0;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    justify-content: space-between;
+    > div {
+      margin-right: auto;
+      &:nth-child(3n) {
+        margin-right: auto;
+      }
+      &:nth-child(4n) {
+        margin-right: auto;
+      }
+    }
+  }
 `;
 
 //Forms Sections Pages
@@ -3420,16 +3513,25 @@ export const SectionAidsRequest = styled.div`
       justify-content: center;
     }
   }
+  &.list-aids {
+    padding-top: 64px;
+  }
   ${H2} {
     margin-bottom: 64px;
   }
   .box-aids {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-flow: row wrap;
     margin-bottom: 60px;
     width: 100%;
+    > div {
+      margin-right: 2.7%;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
   }
   &.my-request-aids {
     padding-bottom: 0;
@@ -3467,6 +3569,10 @@ export const SectionAidsRequest = styled.div`
       > div {
         max-width: 360px;
         width: 100%;
+        margin-right: 0;
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -3476,12 +3582,19 @@ export const SectionAidsRequest = styled.div`
         display: block;
       }
     }
+    &.list-aids {
+      padding-top: 40px;
+    }
     .box-aids {
       > div {
         max-width: 330px;
       }
     }
   }
+`;
+
+export const SectionFilterAidRequest = styled.div`
+  padding-top: 90px;
 `;
 
 export const SectionCreateAidsRequest = styled.div`

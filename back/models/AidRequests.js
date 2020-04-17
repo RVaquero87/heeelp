@@ -35,6 +35,7 @@ const userSchema = new Schema(
       type: String,
       enum: ["Cancelada", "Realizada", "En curso", "Publicada", "En creación"],
     },
+    modifyCard: Date,
   },
   {
     timestamps: true,

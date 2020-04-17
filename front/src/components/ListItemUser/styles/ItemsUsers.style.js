@@ -9,14 +9,15 @@ export const BoxUser = styled.div`
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 11px 4px rgba(62, 56, 116, 0.1);
-  margin-bottom: 36px;
-  padding: 22px 20px;
-  position: relative;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 36px;
+  padding: 22px 20px;
+  position: relative;
   width: 22.5%;
+
   ${BoxImg} {
     border-radius: 100%;
     margin: 0 auto 30px;

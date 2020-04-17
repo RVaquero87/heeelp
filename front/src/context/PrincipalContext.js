@@ -68,6 +68,7 @@ export const PrincipalContextProvider = (props) => {
   const [aidsRequest, setAidsRequest] = useState([]);
   const [aidsRequestId, setAidsRequestid] = useState([]);
   const [changeAidsRequest, setChangeAidsRequest] = useState();
+  const [changeFilterAidsRequest, setchangeFilterAidsRequest] = useState();
 
   useEffect(() => {
     if (user?.rol === "Helpers") {
@@ -76,19 +77,19 @@ export const PrincipalContextProvider = (props) => {
           setAidsRequestid(aidsRequest);
         })
         .catch((e) => {});
-    } else if (user?.rol === "Helped") {
+    }
+    if (user?.rol === "Helped") {
       getAidRequestCreator()
         .then((aidsRequest) => {
           setAidsRequestid(aidsRequest);
         })
         .catch((e) => {});
-    } else {
-      getAidRequest()
-        .then((aidsRequest) => {
-          setAidsRequest(aidsRequest);
-        })
-        .catch((e) => {});
     }
+    getAidRequest()
+      .then((aidsRequest) => {
+        setAidsRequest(aidsRequest);
+      })
+      .catch((e) => {});
   }, [changeAidsRequest, user]);
 
   return (
@@ -144,9 +145,11 @@ export const PrincipalContextProvider = (props) => {
         aidsRequest,
         setAidsRequest,
         aidsRequestId,
-        setAidsRequestid,
         changeAidsRequest,
         setChangeAidsRequest,
+        setAidsRequestid,
+        changeFilterAidsRequest,
+        setchangeFilterAidsRequest,
       }}
     >
       {props.children}

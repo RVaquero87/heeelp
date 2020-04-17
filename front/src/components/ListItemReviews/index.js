@@ -58,7 +58,7 @@ export const ReviewsBoxItem = ({ review }) => {
                 {review.creatorUserid.name}{" "}
                 {review.creatorUserid.lastname.slice(0, 1)}.
               </span>{" "}
-              - {getYearsOld(review.creatorUserid.birthYear)}
+              - {getYearsOld(review.creatorUserid.birthYear)} años
             </ParagraphTop>
           </div>
           <div className="starts">

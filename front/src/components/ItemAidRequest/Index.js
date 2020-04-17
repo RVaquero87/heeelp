@@ -32,6 +32,8 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     user,
     changeAidsRequest,
     setChangeAidsRequest,
+    changeFilterAidsRequest,
+    setchangeFilterAidsRequest,
     setMessageError,
   } = useContext(PrincipalContext);
 
@@ -103,6 +105,7 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     e.preventDefault();
     const responseServer = await takeOverAidRequest(_id);
     setChangeAidsRequest(!changeAidsRequest);
+    setchangeFilterAidsRequest(!changeFilterAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
     setTimeout(() => {
@@ -115,6 +118,7 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     e.preventDefault();
     const responseServer = await stopTakeOverAidRequest(_id);
     setChangeAidsRequest(!changeAidsRequest);
+    setchangeFilterAidsRequest(!changeFilterAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
     setTimeout(() => {

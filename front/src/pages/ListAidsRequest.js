@@ -10,12 +10,13 @@ import { useForm, FormContext } from "react-hook-form";
 //Styles & AOS animation
 import {
   SectionBox,
+  SectionFilterAidRequest,
   ContentText,
   BoxImg,
   H1,
-  H2,
   Col2HeaderHomeRol,
   Paragraphs,
+  FilterAidsRequest,
   SectionAidsRequest,
 } from "../styles/Index.styles";
 
@@ -27,30 +28,95 @@ import { PrincipalContext } from "../context/PrincipalContext";
 
 //Functional & Services
 import { scrollInit } from "../lib/commonFunctional";
+import { getAidRequest } from "../services/aidRequestServices";
 
 //Compoments
 import { AidsRequestBox } from "../components/ItemAidRequest/Index";
+import { Loading } from "../components/Loading/index";
 
 export const ListAidsRequestPage = () => {
-  const {
-    user,
-    aidsRequest,
-    aidsRequestId,
-    changeAidsRequest,
-    setChangeAidsRequest,
-  } = useContext(PrincipalContext);
+  const { user, changeFilterAidsRequest } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
     scrollInit();
   }, []);
 
-  //Tab Form Aid Request
-  const [filterAidsRequest, setFilterAidsRequest] = useState([]);
+  //Aid Request Filter
+  const [allAidsRequest, setAllFilterAidsRequest] = useState([]);
+  const [filterAidsRequest, setFilterAidsRequest] = useState();
+  const [typeSelectValue, setTypeSelectValue] = useState({
+    type: "all",
+    price: "all",
+  });
+
+  useEffect(() => {
+    getAidRequest()
+      .then((aidsRequest) => {
+        const aidAllFilter = aidsRequest.filter((aids) => {
+          const today = new Date().getTime();
+          const modifyAidTime = new Date(aids.modifyCard).getTime();
+          const subtractionDate = today - modifyAidTime;
+
+          if (
+            aids.status == "Publicada" ||
+            (aids.status == "En curso" &&
+              aids.helperId._id == user._id &&
+              subtractionDate <= 3600000)
+          ) {
+            return aids;
+          }
+        });
+        setFilterAidsRequest(aidAllFilter);
+        setAllFilterAidsRequest(aidAllFilter);
+      })
+      .catch((e) => {});
+  }, [changeFilterAidsRequest]);
+
+  //Filter rol
+  const handleFilterAids = async (e, value, filterType) => {
+    e.preventDefault();
+
+    let filterObject = {
+      type: typeSelectValue["type"],
+      price: typeSelectValue["price"],
+    };
+
+    if (filterType == "type") {
+      setTypeSelectValue({ ...typeSelectValue, type: value });
+      filterObject[filterType] = value;
+    } else {
+      setTypeSelectValue({ ...typeSelectValue, price: value });
+      filterObject[filterType] = value;
+    }
+
+    if (filterObject.type === "all" && filterObject.price === "all") {
+      let filter = await allAidsRequest.map((item) => item);
+      setFilterAidsRequest(filter);
+    } else if (filterObject.type === "all") {
+      let filter = await allAidsRequest.filter((item) => {
+        return item["price"] == filterObject["price"];
+      });
+      setFilterAidsRequest(filter);
+    } else if (filterObject.price === "all") {
+      let filter = await allAidsRequest.filter((item) => {
+        return item["type"] == filterObject["type"];
+      });
+      setFilterAidsRequest(filter);
+    } else {
+      let filter = await allAidsRequest.filter((item) => {
+        return (
+          item["type"] == filterObject["type"] &&
+          item["price"] == filterObject["price"]
+        );
+      });
+      setFilterAidsRequest(filter);
+    }
+  };
 
   return (
     <>
-      {!aidsRequest ? (
+      {!filterAidsRequest ? (
         <Loading />
       ) : (
         <>
@@ -65,44 +131,66 @@ export const ListAidsRequestPage = () => {
             </Col2HeaderHomeRol>
           </SectionBox>
 
+          <SectionBox justify="start">
+            <SectionFilterAidRequest className="contain" data-aos="fade-up">
+              <FilterAidsRequest>
+                <div class="box-filter">
+                  <select
+                    onChange={(e) =>
+                      handleFilterAids(e, e.target.value, "type")
+                    }
+                  >
+                    <option value="all">Todos los servicios</option>
+                    <option value="Animales domésticos">
+                      Animales domésticos
+                    </option>
+                    <option value="Lavandería">Lavandería</option>
+                    <option value="Parafarmacia">Parafarmacia</option>
+                    <option value="Supermercado">Supermercado</option>
+                    <option value="Tareas domésticas">Tareas domésticas</option>
+                  </select>
+                </div>
+                <div class="box-filter">
+                  <select
+                    onChange={(e) =>
+                      handleFilterAids(e, e.target.value, "price")
+                    }
+                  >
+                    <option value="all">Todos los precios</option>
+                    <option value="Free">Gratis</option>
+                    <option value="5€/hora">5€/hora</option>
+                    <option value="6€/hora">6€/hora</option>
+                    <option value="7€/hora">7€/hora</option>
+                    <option value="8€/hora">8€/hora</option>
+                    <option value="9€/hora">9€/hora</option>
+                    <option value="10€/hora">10€/hora</option>
+                  </select>
+                </div>
+              </FilterAidsRequest>
+            </SectionFilterAidRequest>
+          </SectionBox>
+
           <SectionBox justify="center" column>
             <SectionAidsRequest
               className={
-                aidsRequest.filter(
-                  (aids) =>
-                    aids.status == "Publicada" ||
-                    (aids.status == "En curso" &&
-                      aids.helperId?._id == user?._id)
-                ).length == 0
-                  ? "contain zero-aids"
-                  : "contain"
+                filterAidsRequest.length == 0
+                  ? "contain list-aids zero-aids"
+                  : "contain list-aids"
               }
               data-aos="fade-up"
             >
               <div className="box-aids">
-                {aidsRequest.filter(
-                  (aids) =>
-                    aids.status == "Publicada" ||
-                    (aids.status == "En curso" &&
-                      aids.helperId?._id == user?._id)
-                ).length == 0 ? (
+                {filterAidsRequest.length == 0 ? (
                   <Paragraphs blue>
                     <span>
-                      No existe ninguna publicada en estos momentos con esos
-                      requisitos.
+                      No existe ninguna petición publicada en estos momentos con
+                      esos requisitos.
                     </span>
                   </Paragraphs>
                 ) : (
-                  aidsRequest
-                    .filter(
-                      (aids) =>
-                        aids.status == "Publicada" ||
-                        (aids.status == "En curso" &&
-                          aids.helperId._id == user._id)
-                    )
-                    .map((aids, i) => {
-                      return <AidsRequestBox aidrequest={aids} key={i} />;
-                    })
+                  filterAidsRequest.map((aids, i) => {
+                    return <AidsRequestBox aidrequest={aids} key={i} />;
+                  })
                 )}
               </div>
             </SectionAidsRequest>

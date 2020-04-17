@@ -333,6 +333,15 @@ export const BoxAidRequest = styled.div`
         }
       }
     }
+    .btn-require {
+      right: -10px;
+      bottom: -10px;
+      &:before {
+        margin-right: 8px;
+        height: 18px;
+        width: 20px;
+      }
+    }
   }
   @media (max-width: 768px) {
     .card {
@@ -393,6 +402,15 @@ export const BoxAidRequest = styled.div`
         }
       }
     }
+    .btn-require {
+      right: -5px;
+      bottom: -5px;
+      &:before {
+        margin-right: 12px;
+        height: 22px;
+        width: 24px;
+      }
+    }
   }
   @media (max-width: 480px) {
     .card {
@@ -446,6 +464,10 @@ export const BoxAidRequest = styled.div`
           }
         }
       }
+    }
+    .btn-require {
+      right: -10px;
+      bottom: -12px;
     }
   }
 `;

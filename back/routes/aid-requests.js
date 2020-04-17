@@ -233,6 +233,7 @@ router.post("/add-helper", isLoggedIn(), async (req, res, next) => {
     await AidRequests.findByIdAndUpdate(_id, {
       helperId: idUser._id,
       status: "En curso",
+      modifyCard: new Date(),
     });
     return res.json({
       status: 200,
@@ -253,6 +254,7 @@ router.post("/delete-helper", isLoggedIn(), async (req, res, next) => {
     await AidRequests.findByIdAndUpdate(_id, {
       helperId: null,
       status: "Publicada",
+      modifyCard: null,
     });
     return res.json({
       status: 200,
