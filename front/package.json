@@ -18,8 +18,7 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel index.html"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
