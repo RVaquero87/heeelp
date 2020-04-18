@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"heeelpProyect.contacts"},{"v":{"$numberInt":"2"},"key":{"username":{"$numberInt":"1"}},"name":"username","ns":"heeelpProyect.contacts"}],"uuid":"17e16c5360bc4002a8ca78df30c79c1d"}

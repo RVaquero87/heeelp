@@ -5,7 +5,7 @@ import React from "react";
 import loading from "../../../public/images/loading.gif";
 
 //Styles
-import { LoadingBox } from "./styles/Loading.styles";
+import LoadingBox from "./styles/Loading.styles";
 
 export const Loading = () => (
   <LoadingBox>
