@@ -35,7 +35,6 @@ const app = express();
 const whitelist = [process.env.FRONT_URL, process.env.BACK_URL];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
