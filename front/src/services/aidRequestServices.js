@@ -77,11 +77,9 @@ export const stopTakeOverAidRequest = async (_id) => {
   return res.data;
 };
 
-export const getDuplicateAidRequest = async ({ _id, title, time }) => {
+export const getDuplicateAidRequest = async (_id) => {
   const res = await serviceApi.post("/aid-requests/duplicate", {
     _id,
-    title,
-    time,
   });
   return res.data;
 };

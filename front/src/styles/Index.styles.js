@@ -120,6 +120,9 @@ export const GlobalContent = styled.div`
   .myrequest-mt {
     margin-top: 80px;
   }
+  p {
+    font-family: "Roboto", verdana, sans-serif;
+  }
 `;
 
 //Main, SextionBox
@@ -3639,3 +3642,5 @@ export const SectionCreateAidsRequest = styled.div`
 `;
 
 export const SectionDetailsContent = styled.div``;
+
+export const SectionDetailsProfile = styled.div``;

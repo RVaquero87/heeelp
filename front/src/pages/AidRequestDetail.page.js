@@ -11,18 +11,16 @@ import { useForm, FormContext } from "react-hook-form";
 //Styles & AOS animation
 import {
   SectionBox,
-  ContainDivDefault,
   ContentText,
   BoxImg,
-  Col2Min,
   H1,
   H2,
   SectionDetailsContent,
   SectionCreateAidsRequest,
+  SectionDetailsProfile,
   Button,
   ParagraphTop,
   Paragraphs,
-  FaqsBox,
   SectionHeaderSingleTitle,
   FormBox,
 } from "../styles/Index.styles";
@@ -33,31 +31,36 @@ import icon2 from "../../public/images/icon-2.svg";
 import icon3 from "../../public/images/icon-3.svg";
 import icon4 from "../../public/images/icon-4.svg";
 import icon5 from "../../public/images/icon-5.svg";
-import contact from "../../public/images/contact.svg";
+import imgProfile from "../../public/images/default-profile.png";
 
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
 
 //Functional & Services
-import { scrollInit } from "../lib/commonFunctional";
+import { scrollInit, getYearsOld } from "../lib/commonFunctional";
 import {
   getOneAidRequest,
   editDataAidRequest,
+  getPublicAidRequest,
+  getCancelAidRequest,
+  takeOverAidRequest,
+  stopTakeOverAidRequest,
 } from "../services/aidRequestServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
 import { InputBox } from "../components/Input/index";
 import { TextAreaBox } from "../components/TextArea/index";
 import { SelectBox } from "../components/Select/index";
 import { Loading } from "../components/Loading/index";
+import { ItemListBox } from "../components/ItemList/index";
 
 export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const {
     user,
     changeAidsRequest,
     setChangeAidsRequest,
+    aidRequestOneChange,
+    setAidRequestOneChange,
     setMessageError,
   } = useContext(PrincipalContext);
   const { id } = useParams();
@@ -69,7 +72,6 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
 
   //Get One ID AID REQUEST
   const [aidRequestOne, setAidRequestOne] = useState();
-  const [aidRequestOneChange, setAidRequestOneChange] = useState();
 
   useEffect(() => {
     getOneAidRequest(id)
@@ -85,6 +87,13 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
 
   //Date SHORT
   const dateAidRequest = aidRequestOne?.time.slice(0, 10);
+
+  //Date Create Short and Reverse
+  const dateCreateAt = aidRequestOne?.createdAt
+    .slice(0, 10)
+    .split("-")
+    .reverse()
+    .join(" ");
 
   //Form EDIT AID REQUEST
   const methods = useForm({
@@ -109,7 +118,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   const editAidRequest = async (data) => {
-    const objectdata = { _id: id, ...data };
+    const objectdata = { _id: aidRequestOne.id, ...data };
     const responseServer = await editDataAidRequest(objectdata);
     setGetEditForm(!getEditForm);
     setAidRequestOneChange(!aidRequestOneChange);
@@ -119,6 +128,56 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
       setMessageError(null);
     }, 5000);
   };
+
+  //Public Aids Request
+  const publicAidRequest = async (e) => {
+    e.preventDefault();
+    const responseServer = await getPublicAidRequest(id);
+    setChangeAidsRequest(!changeAidsRequest);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
+  //Cancel Aids Request
+  const cancelAidRequest = async (e) => {
+    e.preventDefault();
+    const responseServer = await getCancelAidRequest(id);
+    setChangeAidsRequest(!changeAidsRequest);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+    history.goBack();
+  };
+
+  //Add Helper Aids Request
+  const addAidRequest = async (e) => {
+    e.preventDefault();
+    const responseServer = await takeOverAidRequest(id);
+    setChangeAidsRequest(!changeAidsRequest);
+    setchangeFilterAidsRequest(!changeFilterAidsRequest);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
+  //Remove Helper Aids Request
+  const removeAidRequest = async (e) => {
+    e.preventDefault();
+    const responseServer = await stopTakeOverAidRequest(id);
+    setChangeAidsRequest(!changeAidsRequest);
+    setchangeFilterAidsRequest(!changeFilterAidsRequest);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
+
+  //View Form Create List Item
+  const [listItemViewForm, setListItemViewForm] = useState(false);
 
   return (
     <>
@@ -251,54 +310,275 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
 
           <SectionBox justify="between">
             <SectionDetailsContent className="contain" data-aos="fade-up">
-              <H2>
-                ¿Tienes dudas?{" "}
-                <span className="item-block">
-                  Consulta nuestras preguntas frecuentes
-                </span>
-              </H2>
-              <AccordionFaqsBox />
-              <ButtonLink whereTo="/faqs" className="button white big">
-                VER TODAS
-              </ButtonLink>
+              <div className="aids-content">
+                <div className="content">
+                  <H2 color="black">{aidRequestOne.title}</H2>
+                  <ParagraphTop blue>{aidRequestOne.content}</ParagraphTop>
+                </div>
+                <div className="button-box">
+                  {(user?.rol == "Helped" && (
+                    <>
+                      <div className="buttons-options">
+                        {(() => {
+                          switch (aidRequestOne.status) {
+                            case "Publicada":
+                              return (
+                                <>
+                                  <Button
+                                    type="transparent-blue"
+                                    big
+                                    onClick={(e) => cancelAidRequest(e)}
+                                  >
+                                    Cancelar
+                                  </Button>
+                                </>
+                              );
+                            case "En creación":
+                              return (
+                                <>
+                                  <Button
+                                    type="transparent-blue"
+                                    big
+                                    onClick={(e) => publicAidRequest(e)}
+                                  >
+                                    Publicar
+                                  </Button>
+                                  <Button
+                                    type="transparent-blue"
+                                    big
+                                    onClick={(e) => cancelAidRequest(e)}
+                                  >
+                                    Cancelar
+                                  </Button>
+                                </>
+                              );
+                            default:
+                              return (
+                                <Button
+                                  type="transparent-blue"
+                                  big
+                                  onClick={(e) => duplicateAidRequest(e)}
+                                >
+                                  Duplicar
+                                </Button>
+                              );
+                          }
+                        })()}
+                      </div>
+                    </>
+                  )) ||
+                    user?.rol ==
+                      "Helpers"(
+                        <>
+                          {status == "En curso" && (
+                            <button
+                              className="btn-require remove"
+                              onClick={(e) => removeAidRequest(e)}
+                            >
+                              PEDIDA
+                            </button>
+                          )}
+
+                          {status == "Publicada" && (
+                            <button
+                              className="btn-require add"
+                              onClick={(e) => addAidRequest(e)}
+                            >
+                              ME LO PIDO
+                            </button>
+                          )}
+                        </>
+                      )}
+                </div>
+              </div>
+              <div className="aids-details">
+                <p>
+                  Fecha de creación <span>{dateCreateAt}</span>
+                </p>
+                <p>
+                  Precio/tarifa <span>{aidRequestOne.price}</span>
+                </p>
+                <div className="type">
+                  <BoxImg>
+                    <img
+                      src={(() => {
+                        switch (aidRequestOne.type) {
+                          case "Supermercado":
+                            return icon2;
+                          case "Parafarmacia":
+                            return icon3;
+                          case "Tareas domésticas":
+                            return icon4;
+                          case "Animales domésticos":
+                            return icon5;
+                          default:
+                            return icon1;
+                        }
+                      })()}
+                      title={aidRequestOne.type}
+                      alt={aidRequestOne.type}
+                    />
+                  </BoxImg>
+                  <Paragraphs blue>
+                    <span>{aidRequestOne.type}</span>
+                  </Paragraphs>
+                </div>
+              </div>
             </SectionDetailsContent>
           </SectionBox>
 
-          <SectionBox bgColor="orange" column>
-            <FaqsBox className="contain" data-aos="fade-up">
-              <H2>
-                ¿Tienes dudas?{" "}
-                <span className="item-block">
-                  Consulta nuestras preguntas frecuentes
-                </span>
-              </H2>
-              <AccordionFaqsBox />
-              <ButtonLink whereTo="/faqs" className="button white big">
-                VER TODAS
-              </ButtonLink>
-            </FaqsBox>
-          </SectionBox>
+          {user?.rol == "Helpers" && aidRequestOne?.helperId && (
+            <SectionBox justify="between">
+              <SectionDetailsProfile className="contain" data-aos="fade-up">
+                <div className="content">
+                  <H2 color="black">
+                    {user?.rol == "Helped"
+                      ? "¿Quién necesita la ayuda?"
+                      : "¿Quién me ofrece la ayuda?"}
+                  </H2>
+                  <div className="user">
+                    <BoxImg>
+                      {user?.rol == "Helped" ? (
+                        <img
+                          src={aidRequestOne.helperId.image || imgProfile}
+                          title={aidRequestOne.helperId.name || "foto perfil"}
+                          alt={aidRequestOne.helperId.name || "foto perfil"}
+                        />
+                      ) : (
+                        <img
+                          src={aidRequestOne.creatorUserid?.image || imgProfile}
+                          title={aidRequestOne.creatorUserid.name}
+                          alt={aidRequestOne.creatorUserid.name}
+                        />
+                      )}
+                    </BoxImg>
+                    <div className="data-user">
+                      {user?.rol == "Helped" ? (
+                        <>
+                          <ParagraphTop blue>
+                            <span>
+                              {aidRequestOne.helperId.name}{" "}
+                              {aidRequestOne.helperId?.lastname}
+                            </span>
+                          </ParagraphTop>
+                          <ParagraphTop className="special">
+                            {getYearsOld(aidRequestOne.helperId.birthYear)} años
+                          </ParagraphTop>
+                        </>
+                      ) : (
+                        <>
+                          <ParagraphTop blue>
+                            <span>
+                              {aidRequestOne.creatorUserid.name}{" "}
+                              {aidRequestOne.creatorUserid.lastname}
+                            </span>
+                          </ParagraphTop>
+                          <ParagraphTop className="special">
+                            {getYearsOld(aidRequestOne.creatorUserid.birthYear)}{" "}
+                            años
+                          </ParagraphTop>
+                          <ParagraphTop blue>
+                            {aidRequestOne.creatorUserid.street}{" "}
+                            {aidRequestOne.creatorUserid.number &&
+                              `Nº${aidRequestOne.creatorUserid.number}`}{" "}
+                            {user.portal} {user.stairs}{" "}
+                            {aidRequestOne.creatorUserid.floor &&
+                              `${aidRequestOne.creatorUserid.floor}º`}{" "}
+                            {aidRequestOne.creatorUserid.letter}{" "}
+                            {aidRequestOne.creatorUserid.city}
+                          </ParagraphTop>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  {(aidRequestOne.status == "En curso" ||
+                    aidRequestOne.status == "Realizada") && (
+                    <div className="actions">
+                      <Button type="transparent-blue" big>
+                        Enviar Mensaje
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </SectionDetailsProfile>
+            </SectionBox>
+          )}
 
-          <SectionBox column>
-            <ContainDivDefault className="contain" data-aos="fade-up">
-              <Col2Min inverse marginTopNone>
-                <ContentText>
-                  <H2 color="blue">¿Quieres contactar con nosotros?</H2>
-                  <Paragraphs blue>
-                    Si tienes cualquier pregunta que hacernos, no dudes en
-                    enviarnoslas. Clicka en contacta, rellena el formulario y te
-                    responderemos lo antes posible.
-                  </Paragraphs>
-                  <ButtonLink whereTo="/contacto" className="button big">
-                    Contactar
-                  </ButtonLink>
-                </ContentText>
-                <BoxImg>
-                  <img src={contact} alt="Contacto" title="Contacto" />
-                </BoxImg>
-              </Col2Min>
-            </ContainDivDefault>
-          </SectionBox>
+          {aidRequestOne?.shoppinglist && (
+            <SectionBox justify="between">
+              <SectionDetailsProfile className="contain" data-aos="fade-up">
+                <H2 color="black">
+                  {user?.rol == "Helped" ? "¿Qué necesito?" : "¿Qué necesita?"}
+                </H2>
+                <div className="box-list">
+                  {aidRequestOne?.shoppinglist.length == 0 ? (
+                    <Paragraphs blue>
+                      <span>
+                        Aún no tienes{" "}
+                        {(() => {
+                          switch (aidRequestOne.type) {
+                            case "Supermercado":
+                              return "ningún producto en la lista";
+                            case "Parafarmacia":
+                              return "ningún producto en la lista";
+                            case "Lavandería":
+                              return "ninguna lavadora en la lista";
+                            default:
+                              return "ninguna tarea en la lista";
+                          }
+                        })()}
+                      </span>
+                    </Paragraphs>
+                  ) : (
+                    <>
+                      {aidRequestOne?.shoppinglist.map((item, i) => {
+                        const aid = aidRequestOne;
+                        return (
+                          <ItemListBox
+                            aidId={aid}
+                            item={item}
+                            key={i}
+                            index={i}
+                          />
+                        );
+                      })}
+                    </>
+                  )}
+                </div>
+                <div className="buttons-box">
+                  {user?.rol == "Helped" ? (
+                    <>
+                      <Button
+                        onClick={(e) => setListItemViewForm(!listItemViewForm)}
+                        type="transparent-blue"
+                        big
+                      >
+                        Añadir{" "}
+                        {(() => {
+                          switch (aidRequestOne.type) {
+                            case "Supermercado":
+                              return "producto";
+                            case "Parafarmacia":
+                              return "producto";
+                            case "Lavandería":
+                              return "lavadora";
+                            default:
+                              return "tarea";
+                          }
+                        })()}
+                      </Button>
+                      {listItemViewForm && "hola"}
+                      {/* // <BoxItemCreateForm /> */}
+                    </>
+                  ) : (
+                    <Button type="transparent-blue" big>
+                      Descargar PDF{" "}
+                    </Button>
+                  )}
+                </div>
+              </SectionDetailsProfile>
+            </SectionBox>
+          )}
         </>
       )}
     </>

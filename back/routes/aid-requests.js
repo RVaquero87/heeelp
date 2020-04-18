@@ -271,7 +271,7 @@ router.post("/delete-helper", isLoggedIn(), async (req, res, next) => {
 /* DUPLICATE AidRequest */
 router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
   try {
-    const { _id, title, time } = req.body;
+    const { _id } = req.body;
 
     //Find AidRequest
     const oldAidRequest = await (await AidRequests.findById(_id)).populate(
@@ -280,11 +280,11 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
 
     // Create the AidRequest
     const newAidRequest = await AidRequests.create({
-      title,
+      title: oldAidRequest.title,
       content: oldAidRequest.content,
       creatorUserid: oldAidRequest.creatorUserid,
       price: oldAidRequest.price,
-      time,
+      time: oldAidRequest.time,
       type: oldAidRequest.type,
       status: "En creación",
     });

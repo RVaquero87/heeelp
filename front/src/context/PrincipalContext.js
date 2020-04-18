@@ -69,6 +69,7 @@ export const PrincipalContextProvider = (props) => {
   const [aidsRequestId, setAidsRequestid] = useState([]);
   const [changeAidsRequest, setChangeAidsRequest] = useState();
   const [changeFilterAidsRequest, setchangeFilterAidsRequest] = useState();
+  const [aidRequestOneChange, setAidRequestOneChange] = useState();
 
   useEffect(() => {
     if (user?.rol === "Helpers") {
@@ -150,6 +151,8 @@ export const PrincipalContextProvider = (props) => {
         setAidsRequestid,
         changeFilterAidsRequest,
         setchangeFilterAidsRequest,
+        aidRequestOneChange,
+        setAidRequestOneChange,
       }}
     >
       {props.children}

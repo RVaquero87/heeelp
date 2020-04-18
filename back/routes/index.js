@@ -31,7 +31,7 @@ router.use("/contact", contact);
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.json({ status: "Welcome" });
+  res.json({ status: "Bienvenido a heeelp!" });
 });
 
 module.exports = router;

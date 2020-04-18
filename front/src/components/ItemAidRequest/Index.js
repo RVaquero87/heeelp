@@ -4,10 +4,10 @@ import { withRouter, Link } from "react-router-dom";
 
 //Styles & AOS animation
 import { BoxImg, Paragraphs } from "../../styles/Index.styles";
+import { BoxAidRequest } from "./styles/ItemsAidsRequest.style";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
-import { BoxAidRequest } from "./styles/ItemsAidsRequest.style";
 
 //Images
 import icon1 from "../../../public/images/icon-1.svg";
@@ -78,14 +78,14 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   //Duplicate Aids Request
   const duplicateAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await getDuplicateAidRequest({ _id, title, time });
+    const responseServer = await getDuplicateAidRequest(_id);
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
-    history.push(`/mi-peticion/${_id}`);
+    history.push(`/mi-peticion/${responseServer.aidRequest._id}`);
   };
 
   //Cancel Aids Request
@@ -107,7 +107,6 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     setChangeAidsRequest(!changeAidsRequest);
     setchangeFilterAidsRequest(!changeFilterAidsRequest);
     setMessageError(responseServer.message);
-    setOptionButtons(!optionButtons);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -120,7 +119,6 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     setChangeAidsRequest(!changeAidsRequest);
     setchangeFilterAidsRequest(!changeFilterAidsRequest);
     setMessageError(responseServer.message);
-    setOptionButtons(!optionButtons);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
