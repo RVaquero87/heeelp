@@ -12,20 +12,18 @@ import { useForm, FormContext } from "react-hook-form";
 import {
   SectionBox,
   ContainDivDefault,
-  SectionServicesProvided,
   ContentText,
   BoxImg,
   Col2Min,
   H1,
   H2,
-  Col2HeaderHomeRol,
+  SectionDetailsContent,
   SectionCreateAidsRequest,
   Button,
   ParagraphTop,
   Paragraphs,
   FaqsBox,
   SectionHeaderSingleTitle,
-  SectionAidsRequest,
   FormBox,
 } from "../styles/Index.styles";
 
@@ -251,8 +249,20 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
             </>
           )}
 
-          <p>{aidRequestOne.price}</p>
-          <p>{aidRequestOne.status}</p>
+          <SectionBox justify="between">
+            <SectionDetailsContent className="contain" data-aos="fade-up">
+              <H2>
+                ¿Tienes dudas?{" "}
+                <span className="item-block">
+                  Consulta nuestras preguntas frecuentes
+                </span>
+              </H2>
+              <AccordionFaqsBox />
+              <ButtonLink whereTo="/faqs" className="button white big">
+                VER TODAS
+              </ButtonLink>
+            </SectionDetailsContent>
+          </SectionBox>
 
           <SectionBox bgColor="orange" column>
             <FaqsBox className="contain" data-aos="fade-up">

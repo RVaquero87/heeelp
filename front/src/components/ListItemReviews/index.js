@@ -12,6 +12,7 @@ import { BoxReviews } from "./styles/ItemsReviews.style";
 import startOn from "../../../public/images/star-on.svg";
 import startOff from "../../../public/images/star-off.svg";
 import { Trash2 } from "react-feather";
+import imgProfile from "../../../public/images/default-profile.png";
 
 //Functional & Services
 import { deleteReviews } from "../../services/reviewsServices";
@@ -46,7 +47,7 @@ export const ReviewsBoxItem = ({ review }) => {
       <div className="box-reviews-user">
         <BoxImg className="box-user-image">
           <img
-            src={review.creatorUserid.image}
+            src={review.creatorUserid.image || imgProfile}
             title={review.creatorUserid.name}
             alt={review.creatorUserid.name}
           />

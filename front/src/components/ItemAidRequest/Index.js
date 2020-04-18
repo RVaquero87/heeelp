@@ -173,7 +173,7 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
                 />
               ) : (
                 <img
-                  src={creatorUserid?.image}
+                  src={creatorUserid?.image || imgProfile}
                   title={creatorUserid?.name}
                   alt={creatorUserid?.name}
                 />

@@ -3637,3 +3637,5 @@ export const SectionCreateAidsRequest = styled.div`
     }
   }
 `;
+
+export const SectionDetailsContent = styled.div``;

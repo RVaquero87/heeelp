@@ -7,6 +7,7 @@ import { BoxUser } from "./styles/ItemsUsers.style";
 
 //Images
 import { Trash2, Save } from "react-feather";
+import imgProfile from "../../../public/images/default-profile.png";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
@@ -64,7 +65,7 @@ export const UserBoxItem = ({ user }) => {
   return (
     <BoxUser data-aos="fade-up">
       <BoxImg>
-        <img src={user.image} title={user.name} alt={user.name} />
+        <img src={user.image || imgProfile} title={user.name} alt={user.name} />
       </BoxImg>
 
       <Paragraphs blue>
