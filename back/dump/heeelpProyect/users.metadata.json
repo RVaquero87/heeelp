@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"heeelpProyect.users"},{"v":{"$numberInt":"2"},"key":{"username":{"$numberInt":"1"}},"name":"username","ns":"heeelpProyect.users"}],"uuid":"c5a0039593c7470bb70f9a7087e9d3a9"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"heeelpProyect.users"},{"v":{"$numberInt":"2"},"key":{"username":{"$numberInt":"1"}},"name":"username","ns":"heeelpProyect.users"}],"uuid":"aed5e64a2b6e43a0bb05ed332821d74f"}

@@ -14,6 +14,9 @@ import {
 //Contexto
 import { PrincipalContext } from "../context/PrincipalContext";
 
+//IMG
+import imgProfile from "../../public/images/default-profile.png";
+
 //Functional & Services
 import { doLogout } from "../services/authServices";
 
@@ -230,7 +233,11 @@ export const Header = withRouter(({ history }) => {
                 <div className="button-box icons">
                   <NavLink to="/profile" className="nav-link profile">
                     <BoxImg>
-                      <img src={user?.image} alt="" title="" />
+                      <img
+                        src={user?.image || imgProfile}
+                        alt={user?.name}
+                        title={user?.name}
+                      />
                     </BoxImg>
                     <p>
                       {user?.name} {user?.lastname.slice(0, 1)}.
