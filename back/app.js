@@ -35,13 +35,12 @@ const app = express();
 const whitelist = [process.env.FRONT_URL, process.env.BACK_URL];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true,
 };
 
 //Middleware Setup
