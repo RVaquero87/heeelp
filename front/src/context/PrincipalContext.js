@@ -93,6 +93,9 @@ export const PrincipalContextProvider = (props) => {
       .catch((e) => {});
   }, [changeAidsRequest, user]);
 
+  //View Form Create List Item in AidRequest Details
+  const [listItemViewForm, setListItemViewForm] = useState(false);
+
   return (
     <PrincipalContext.Provider
       value={{
@@ -153,6 +156,8 @@ export const PrincipalContextProvider = (props) => {
         setchangeFilterAidsRequest,
         aidRequestOneChange,
         setAidRequestOneChange,
+        listItemViewForm,
+        setListItemViewForm,
       }}
     >
       {props.children}

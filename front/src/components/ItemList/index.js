@@ -46,21 +46,7 @@ export const ItemListBox = ({ aidId, item, index }) => {
     }, 5000);
   };
 
-  //Remove Item
-  const deleteItem = async (e) => {
-    e.preventDefault();
-    const responseServer = await deleteItemList({
-      _id,
-      aidRequestsId: aidId._id,
-    });
-    setAidRequestOneChange(!aidRequestOneChange);
-    setMessageError(responseServer.message);
-    setTimeout(() => {
-      setMessageError(null);
-    }, 5000);
-  };
-
-  //  //FORM
+  //FORM EDIT
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -79,6 +65,20 @@ export const ItemListBox = ({ aidId, item, index }) => {
   }, [aidRequestOneChange]);
 
   const { register, handleSubmit, errors } = methods;
+
+  //Remove Item
+  const deleteItem = async (e) => {
+    e.preventDefault();
+    const responseServer = await deleteItemList({
+      _id,
+      aidRequestsId: aidId._id,
+    });
+    setAidRequestOneChange(!aidRequestOneChange);
+    setMessageError(responseServer.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
 
   return (
     <ItemList data-aos="fade-up">
@@ -189,7 +189,19 @@ export const ItemListBox = ({ aidId, item, index }) => {
                   />
 
                   <button type="submit" className="button transparent-blue">
-                    Enviar
+                    Editar{" "}
+                    {(() => {
+                      switch (aidId.type) {
+                        case "Supermercado":
+                          return `producto`;
+                        case "Parafarmacia":
+                          return `producto`;
+                        case "Lavandería":
+                          return `lavadora`;
+                        default:
+                          return `tarea`;
+                      }
+                    })()}
                   </button>
                 </FormBox>
               </FormContext>

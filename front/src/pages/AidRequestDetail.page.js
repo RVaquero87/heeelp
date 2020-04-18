@@ -1,6 +1,9 @@
 //React
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams, withRouter } from "react-router-dom";
+import { useParams, withRouter } from "react-router-dom";
+
+//Print Pdf
+import Printer, { print } from "react-pdf-print";
 
 //Route Protected
 import { withProtected } from "../lib/protectRoute.hoc";
@@ -53,6 +56,7 @@ import { TextAreaBox } from "../components/TextArea/index";
 import { SelectBox } from "../components/Select/index";
 import { Loading } from "../components/Loading/index";
 import { ItemListBox } from "../components/ItemList/index";
+import { BoxItemCreateForm } from "../components/CreatelistItem/index";
 
 export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const {
@@ -62,7 +66,10 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
     aidRequestOneChange,
     setAidRequestOneChange,
     setMessageError,
+    listItemViewForm,
+    setListItemViewForm,
   } = useContext(PrincipalContext);
+
   const { id } = useParams();
 
   //Reset Scroll
@@ -81,9 +88,8 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
       .catch((e) => {});
   }, [aidRequestOneChange]);
 
-  //Tab Form EDIT Aid Request && Tab Form Create or Edit list
+  //Tab Form EDIT Aid Request
   const [getEditForm, setGetEditForm] = useState(false);
-  const [getCreateEditListForm, setGetCreateEditListForm] = useState(false);
 
   //Date SHORT
   const dateAidRequest = aidRequestOne?.time.slice(0, 10);
@@ -94,6 +100,11 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
     .split("-")
     .reverse()
     .join(" ");
+
+  //Get IF TIME MODIFY STATUS HELPED IS MORE O LESS 1 HOUR
+  const today = new Date().getTime();
+  const modifyAidTime = new Date(aidRequestOne?.modifyCard).getTime();
+  const subtractionDate = today - modifyAidTime;
 
   //Form EDIT AID REQUEST
   const methods = useForm({
@@ -133,6 +144,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const publicAidRequest = async (e) => {
     e.preventDefault();
     const responseServer = await getPublicAidRequest(id);
+    setAidRequestOneChange(!aidRequestOneChange);
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
     setTimeout(() => {
@@ -156,8 +168,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const addAidRequest = async (e) => {
     e.preventDefault();
     const responseServer = await takeOverAidRequest(id);
-    setChangeAidsRequest(!changeAidsRequest);
-    setchangeFilterAidsRequest(!changeFilterAidsRequest);
+    setAidRequestOneChange(!aidRequestOneChange);
     setMessageError(responseServer.message);
     setTimeout(() => {
       setMessageError(null);
@@ -168,16 +179,14 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const removeAidRequest = async (e) => {
     e.preventDefault();
     const responseServer = await stopTakeOverAidRequest(id);
-    setChangeAidsRequest(!changeAidsRequest);
-    setchangeFilterAidsRequest(!changeFilterAidsRequest);
+    setAidRequestOneChange(!aidRequestOneChange);
     setMessageError(responseServer.message);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
   };
 
-  //View Form Create List Item
-  const [listItemViewForm, setListItemViewForm] = useState(false);
+  const ids = ["1"];
 
   return (
     <>
@@ -367,10 +376,10 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                       </div>
                     </>
                   )) ||
-                    user?.rol ==
-                      "Helpers"(
-                        <>
-                          {status == "En curso" && (
+                    (user?.rol == "Helpers" && (
+                      <>
+                        {aidRequestOne.status == "En curso" &&
+                          subtractionDate <= 3600000 && (
                             <button
                               className="btn-require remove"
                               onClick={(e) => removeAidRequest(e)}
@@ -378,17 +387,16 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                               PEDIDA
                             </button>
                           )}
-
-                          {status == "Publicada" && (
-                            <button
-                              className="btn-require add"
-                              onClick={(e) => addAidRequest(e)}
-                            >
-                              ME LO PIDO
-                            </button>
-                          )}
-                        </>
-                      )}
+                        {aidRequestOne.status == "Publicada" && (
+                          <button
+                            className="btn-require add"
+                            onClick={(e) => addAidRequest(e)}
+                          >
+                            ME LO PIDO
+                          </button>
+                        )}
+                      </>
+                    ))}
                 </div>
               </div>
               <div className="aids-details">
@@ -427,14 +435,15 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
             </SectionDetailsContent>
           </SectionBox>
 
-          {user?.rol == "Helpers" && aidRequestOne?.helperId && (
+          {(user?.rol ||
+            (user?.rol == "Helped" && aidRequestOne?.helperId)) && (
             <SectionBox justify="between">
               <SectionDetailsProfile className="contain" data-aos="fade-up">
                 <div className="content">
                   <H2 color="black">
                     {user?.rol == "Helped"
-                      ? "¿Quién necesita la ayuda?"
-                      : "¿Quién me ofrece la ayuda?"}
+                      ? "¿Quién me ofrece la ayuda?"
+                      : "¿Quién necesita la ayuda?"}
                   </H2>
                   <div className="user">
                     <BoxImg>
@@ -477,7 +486,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                             {getYearsOld(aidRequestOne.creatorUserid.birthYear)}{" "}
                             años
                           </ParagraphTop>
-                          <ParagraphTop blue>
+                          <ParagraphTop className="special">
                             {aidRequestOne.creatorUserid.street}{" "}
                             {aidRequestOne.creatorUserid.number &&
                               `Nº${aidRequestOne.creatorUserid.number}`}{" "}
@@ -531,17 +540,37 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                     </Paragraphs>
                   ) : (
                     <>
-                      {aidRequestOne?.shoppinglist.map((item, i) => {
-                        const aid = aidRequestOne;
-                        return (
-                          <ItemListBox
-                            aidId={aid}
-                            item={item}
-                            key={i}
-                            index={i}
-                          />
-                        );
-                      })}
+                      <Printer>
+                        <div
+                          id={ids[0]}
+                          style={{ width: "210mm", height: "297mm" }}
+                        >
+                          {aidRequestOne?.shoppinglist.map((item, i) => {
+                            const aid = aidRequestOne;
+                            return (
+                              <ItemListBox
+                                aidId={aid}
+                                item={item}
+                                key={i}
+                                index={i}
+                              />
+                            );
+                          })}
+                        </div>
+                      </Printer>
+                      {/* <div>
+                        {aidRequestOne?.shoppinglist.map((item, i) => {
+                          const aid = aidRequestOne;
+                          return (
+                            <ItemListBox
+                              aidId={aid}
+                              item={item}
+                              key={i}
+                              index={i}
+                            />
+                          );
+                        })}
+                      </div> */}
                     </>
                   )}
                 </div>
@@ -567,12 +596,22 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                           }
                         })()}
                       </Button>
-                      {listItemViewForm && "hola"}
-                      {/* // <BoxItemCreateForm /> */}
+                      {listItemViewForm && (
+                        <div className="box-create-form">
+                          <BoxItemCreateForm
+                            aidRequestsId={aidRequestOne._id}
+                            aidRequestType={aidRequestOne.type}
+                          />
+                        </div>
+                      )}
                     </>
                   ) : (
-                    <Button type="transparent-blue" big>
-                      Descargar PDF{" "}
+                    <Button
+                      type="transparent-blue"
+                      big
+                      onClick={() => print(ids)}
+                    >
+                      Descargar PDF
                     </Button>
                   )}
                 </div>
