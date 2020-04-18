@@ -5,7 +5,21 @@ import React from "react";
 import loading from "../../../public/images/loading.gif";
 
 //Styles
-import LoadingBox from "./styles/Loading.styles";
+import styled from "styled-components";
+
+const LoadingBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.65);
+  img {
+    width: 80px;
+  }
+`;
 
 export const Loading = () => (
   <LoadingBox>
