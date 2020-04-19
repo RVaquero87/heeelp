@@ -27,7 +27,7 @@ import contact from "../../public/images/contact.svg";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/index";
+import { ButtonLink } from "../components/ButtonLink/";
 import { ItemServicies } from "../components/ItemServices/";
 import { AccordionFaqsBox } from "../components/ItemAccordion/";
 
