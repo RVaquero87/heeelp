@@ -8,6 +8,9 @@ import { useForm, FormContext } from "react-hook-form";
 import { FormBox, ParagraphTop } from "../../styles/Index.styles";
 import { ItemList } from "./styles/ItemsList.style";
 
+//Images
+import { Trash2, Edit2 } from "react-feather";
+
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
 
@@ -81,7 +84,7 @@ export const ItemListBox = ({ aidId, item, index }) => {
   };
 
   return (
-    <ItemList data-aos="fade-up">
+    <ItemList>
       <ParagraphTop className="special" blue>
         {(() => {
           switch (aidId.type) {
@@ -96,117 +99,125 @@ export const ItemListBox = ({ aidId, item, index }) => {
           }
         })()}
       </ParagraphTop>
-      <ParagraphTop blue>
-        <span>{name}</span>
-      </ParagraphTop>
-      <ParagraphTop blue>
-        <span>Cantidad: {quantity}</span>
-      </ParagraphTop>
-      <p>{description}</p>
 
       {user.rol == "Helped" && aidId.status == "En creación" && (
         <>
           <div className="button-box">
-            <button onClick={(e) => setEditButton(!editButton)}>Editar</button>
-            <button onClick={(e) => deleteItem(e)}>Borrar</button>
-            {editButton && (
-              <FormContext {...methods}>
-                <FormBox onSubmit={handleSubmit(editItem)}>
-                  <InputBox
-                    label={`Nombre  ${(() => {
-                      switch (aidId.type) {
-                        case "Supermercado":
-                          return `del producto`;
-                        case "Parafarmacia":
-                          return `del producto`;
-                        case "Lavandería":
-                          return `de la lavadora`;
-                        default:
-                          return `de la tarea`;
-                      }
-                    })()} (40 max)`}
-                    name="name"
-                    ref={register({
-                      required: {
-                        value: true,
-                        message: "El campo es requerido",
-                      },
-                      maxLength: {
-                        value: 40,
-                        message:
-                          "Este campo solo admite un máximo de 40 caracteres",
-                      },
-                    })}
-                  />
-                  <InputBox
-                    label={`Decripcion ${(() => {
-                      switch (aidId.type) {
-                        case "Supermercado":
-                          return `del producto`;
-                        case "Parafarmacia":
-                          return `del producto`;
-                        case "Lavandería":
-                          return `de la lavadora`;
-                        default:
-                          return `de la tarea`;
-                      }
-                    })()} (180 max)`}
-                    name="description"
-                    ref={register({
-                      required: {
-                        value: true,
-                        message: "El campo es requerido",
-                      },
-                      maxLength: {
-                        value: 180,
-                        message:
-                          "Este campo solo admite un máximo de 180 caracteres",
-                      },
-                    })}
-                  />
-
-                  <InputBox
-                    label={`Cantidad ${(() => {
-                      switch (aidId.type) {
-                        case "Supermercado":
-                          return `del producto`;
-                        case "Parafarmacia":
-                          return `del producto`;
-                        case "Lavandería":
-                          return `de la lavadora`;
-                        default:
-                          return `de la tarea`;
-                      }
-                    })()}`}
-                    name="quantity"
-                    type="number"
-                    ref={register({
-                      required: {
-                        value: true,
-                        message: "El campo es requerido",
-                      },
-                    })}
-                  />
-
-                  <button type="submit" className="button transparent-blue">
-                    Editar{" "}
-                    {(() => {
-                      switch (aidId.type) {
-                        case "Supermercado":
-                          return `producto`;
-                        case "Parafarmacia":
-                          return `producto`;
-                        case "Lavandería":
-                          return `lavadora`;
-                        default:
-                          return `tarea`;
-                      }
-                    })()}
-                  </button>
-                </FormBox>
-              </FormContext>
-            )}
+            <button onClick={(e) => setEditButton(!editButton)}>
+              <Edit2 color="#3e3874" />
+            </button>
+            <button onClick={(e) => deleteItem(e)}>
+              <Trash2 color="#3e3874" />
+            </button>
           </div>
+
+          {!editButton ? (
+            <>
+              <ParagraphTop blue>
+                <span>{name}</span>
+              </ParagraphTop>
+              <ParagraphTop blue>
+                <span>Cantidad: {quantity}</span>
+              </ParagraphTop>
+              <ParagraphTop className="special">{description}</ParagraphTop>
+            </>
+          ) : (
+            <FormContext {...methods}>
+              <FormBox onSubmit={handleSubmit(editItem)}>
+                <InputBox
+                  label={`Nombre  ${(() => {
+                    switch (aidId.type) {
+                      case "Supermercado":
+                        return `del producto`;
+                      case "Parafarmacia":
+                        return `del producto`;
+                      case "Lavandería":
+                        return `de la lavadora`;
+                      default:
+                        return `de la tarea`;
+                    }
+                  })()} (40 max)`}
+                  name="name"
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: "El campo es requerido",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message:
+                        "Este campo solo admite un máximo de 40 caracteres",
+                    },
+                  })}
+                />
+                <InputBox
+                  label={`Decripcion ${(() => {
+                    switch (aidId.type) {
+                      case "Supermercado":
+                        return `del producto`;
+                      case "Parafarmacia":
+                        return `del producto`;
+                      case "Lavandería":
+                        return `de la lavadora`;
+                      default:
+                        return `de la tarea`;
+                    }
+                  })()} (180 max)`}
+                  name="description"
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: "El campo es requerido",
+                    },
+                    maxLength: {
+                      value: 180,
+                      message:
+                        "Este campo solo admite un máximo de 180 caracteres",
+                    },
+                  })}
+                />
+
+                <InputBox
+                  label={`Cantidad ${(() => {
+                    switch (aidId.type) {
+                      case "Supermercado":
+                        return `del producto`;
+                      case "Parafarmacia":
+                        return `del producto`;
+                      case "Lavandería":
+                        return `de la lavadora`;
+                      default:
+                        return `de la tarea`;
+                    }
+                  })()}`}
+                  name="quantity"
+                  type="number"
+                  ref={register({
+                    required: {
+                      value: true,
+                      message: "El campo es requerido",
+                    },
+                  })}
+                />
+
+                <button type="submit" className="button transparent-blue">
+                  Editar{" "}
+                  {(() => {
+                    switch (aidId.type) {
+                      case "Supermercado":
+                        return `producto`;
+                      case "Parafarmacia":
+                        return `producto`;
+                      case "Lavandería":
+                        return `lavadora`;
+                      default:
+                        return `tarea`;
+                    }
+                  })()}
+                </button>
+              </FormBox>
+            </FormContext>
+          )}
         </>
       )}
     </ItemList>

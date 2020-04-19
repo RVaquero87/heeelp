@@ -13,6 +13,8 @@ import messageBlue from "../../public/images/mensajes-blue.svg";
 import notifications from "../../public/images/bell.svg";
 import notificationsBlue from "../../public/images/bell-blue.svg";
 import editProfile from "../../public/images/edit.svg";
+import heart1 from "../../public/images/heart-1.svg";
+import heart2 from "../../public/images/heart-2.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -1882,6 +1884,7 @@ export const Col2HeaderHomeRol = styled(Col2Header)`
 
 export const SectionHeaderSingleTitle = styled.div`
   padding: 250px 0 130px;
+  position: relative;
   ${H1} {
     font-size: 40px;
     line-height: 1.2;
@@ -3641,6 +3644,370 @@ export const SectionCreateAidsRequest = styled.div`
   }
 `;
 
-export const SectionDetailsContent = styled.div``;
+export const SectionEditAidsRequest = styled(SectionCreateAidsRequest)`
+  &.contain {
+    max-width: 960px;
+    .content-text {
+      flex-direction: column;
+      ${ParagraphTop} {
+        width: 100%;
+      }
+      .buttons-options {
+        margin-top: 36px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        ${Button} {
+          margin-right: 48px;
+        }
+        .link {
+          color: #3e3874;
+          cursor: pointer;
+          font-family: "Roboto", sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          position: relative;
+          text-transform: uppercase;
+          &:hover:after {
+            background-color: #3e3874;
+            bottom: -2px;
+            content: "";
+            display: block;
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            text-decoration: none;
+            transform: translate(-50%, 0);
+            width: 24px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      .content-text {
+        .buttons-options {
+          flex-direction: column;
+          margin-top: 24px;
 
-export const SectionDetailsProfile = styled.div``;
+          ${Button} {
+            margin: 0 auto 24px;
+            width: 100%;
+            max-width: 320px;
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const SectionDetailsContent = styled.div`
+  &.contain {
+    padding: 96px 0 64px;
+    align-items: flex-start;
+    max-width: 960px;
+    border-bottom: 1px solid rgba(154, 156, 175, 0.3);
+
+    .aids-content {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-start;
+
+      .content {
+        max-width: 700px;
+        padding-right: 50px;
+        width: 100%;
+        ${H2} {
+          font-size: 32px;
+          line-height: 1.2;
+          padding-bottom: 12px;
+        }
+        ${ParagraphTop} {
+          color: #9a9caf;
+        }
+      }
+      .button-box {
+        .btn-require {
+          align-items: center;
+          border-radius: 22px;
+          color: #ffffff;
+          cursor: pointer;
+          display: flex;
+          font-family: "Roboto", sans-serif;
+          font-size: 12px;
+          font-weight: 700;
+          justify-content: center;
+          line-height: 1;
+          padding: 10px 16px;
+          margin-bottom: 24px;
+
+          text-transform: uppercase;
+          z-index: 1;
+          &:before {
+            content: "";
+            display: inline-block;
+            margin-right: 12px;
+            height: 22px;
+            width: 24px;
+          }
+          &.add {
+            background-color: #8290ff;
+            &:before {
+              background: url(${heart1}) center no-repeat;
+            }
+            &:hover:before {
+              background: url(${heart2}) center no-repeat;
+            }
+          }
+          &.remove {
+            background-color: #3e3874;
+            &:before {
+              background: url(${heart2}) center no-repeat;
+            }
+            &:hover:before {
+              background: url(${heart1}) center no-repeat;
+            }
+          }
+        }
+      }
+    }
+    .aids-details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 200px;
+      .text {
+        > p {
+          color: #9a9caf;
+          font-weight: 300;
+          font-size: 16px;
+          text-align: right;
+          padding-bottom: 24px;
+
+          span {
+            display: block;
+            font-weight: 700;
+            color: #393b4f;
+          }
+        }
+      }
+
+      .type {
+        text-align: right;
+        ${BoxImg} {
+          display: inline-block;
+          max-width: 70px;
+          margin-bottom: 7px;
+        }
+        ${Paragraphs} {
+          color: #3e3874;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      padding-top: 70px;
+      .aids-content {
+        .content {
+          ${H2} {
+            font-size: 28px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      flex-direction: column;
+      .aids-content {
+        .content {
+          padding-right: 0;
+          ${H2} {
+            font-size: 24px;
+          }
+        }
+      }
+      .aids-details {
+        align-items: flex-end;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 36px;
+        .text {
+          > p {
+            text-align: left;
+            line-height: 1.2;
+            &:last-child {
+              padding-bottom: 0;
+            }
+            span {
+              padding-top: 4px;
+            }
+          }
+        }
+
+        .type {
+          max-width: 140px;
+          ${Paragraphs} {
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const SectionDetailsProfile = styled.div`
+  &.contain {
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(154, 156, 175, 0.3);
+    flex-flow: wrap row;
+    max-width: 960px;
+    padding: 64px 0;
+    ${H2} {
+      font-size: 32px;
+      line-height: 1.2;
+      padding-bottom: 40px;
+      width: 100%;
+    }
+    .user {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+      max-width: 700px;
+      padding-right: 50px;
+      width: 100%;
+      ${BoxImg} {
+        border-radius: 100%;
+        height: 128px;
+        margin-right: 24px;
+        overflow: hidden;
+        width: 128px;
+        min-width: 128px;
+      }
+      .data-user {
+        ${ParagraphTop} {
+          color: #3e3874;
+          line-height: 1.2;
+          padding-bottom: 10px;
+          &.special {
+            color: #9a9caf;
+          }
+          &:last-child {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+    .actions {
+      margin-bottom: 10px;
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      .user {
+        padding-right: 0;
+        width: 70%;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      ${H2} {
+        font-size: 28px;
+      }
+      .user {
+        width: 100%;
+      }
+      .actions {
+        margin: 36px 0 0;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      ${H2} {
+        font-size: 24px;
+      }
+      .user {
+        ${BoxImg} {
+          height: 100px;
+          margin-right: 15px;
+          width: 100px;
+          min-width: 100px;
+        }
+        .data-user {
+          ${ParagraphTop} {
+            padding-bottom: 7px;
+            &.special {
+            }
+          }
+        }
+      }
+      .actions {
+        width: 100%;
+        margin: 36px 0 0;
+      }
+    }
+  }
+`;
+
+export const SectionDetailsListItem = styled.div`
+  &.contain {
+    max-width: 960px;
+    padding: 64px 0;
+    position: relative;
+    ${H2} {
+      font-size: 32px;
+      line-height: 1.2;
+      padding-bottom: 40px;
+      width: 100%;
+    }
+    .box-list {
+      align-items: flex-start;
+      display: flex;
+      flex-flow: wrap row;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .buttons-box {
+      position: absolute;
+      top: 62px;
+      right: 0;
+    }
+    .box-create-form {
+      width: 100%;
+      margin-bottom: 60px;
+      ${FormBox} {
+        margin-top: 0;
+        max-width: initial;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    &.contain {
+      ${H2} {
+        font-size: 28px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      ${H2} {
+        font-size: 24px;
+      }
+      ${H2} {
+        padding-bottom: 24px;
+      }
+      .buttons-box {
+        position: static;
+        width: 100%;
+        margin: 0 auto 24px;
+      }
+    }
+  }
+`;

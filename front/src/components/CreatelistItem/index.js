@@ -121,7 +121,7 @@ export const BoxItemCreateForm = ({ aidRequestsId, aidRequestType }) => {
           })}
         />
 
-        <Button type="submit" type=" transparent-blue" big>
+        <Button type="submit" type=" transparent-blue">
           Crear{" "}
           {(() => {
             switch (aidRequestType) {
