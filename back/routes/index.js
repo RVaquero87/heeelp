@@ -14,8 +14,8 @@ const listItems = require("./list-items");
 router.use("/list-items", listItems);
 
 // routes Message
-const message = require("./message");
-router.use("/message", message);
+const messages = require("./messages");
+router.use("/messages", messages);
 
 // routes Notifications
 const notifications = require("./notifications");

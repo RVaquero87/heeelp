@@ -5,7 +5,11 @@ const userSchema = new Schema(
   {
     title: String,
     message: String,
-    status: { type: String, enum: ["Visto", "Nuevo"], default: "Nuevo" },
+    status: {
+      type: String,
+      enum: ["Visto", "Nuevo"],
+      default: "Nuevo",
+    },
     creatorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
     receptorUserId: { type: Schema.Types.ObjectId, ref: "Users" },
     aidRequestId: { type: Schema.Types.ObjectId, ref: "AidRequests" },

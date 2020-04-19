@@ -10,50 +10,21 @@ const Messages = require("../models/Messages");
 router.post("/create", isLoggedIn(), async (req, res, next) => {
   const { title, message, aidRequestId, receptorUserId } = req.body;
   const idUser = req.user;
+  console.log(idUser._id);
 
   // Create the Messages
   await Messages.create({
     title,
     message,
     creatorUserId: idUser._id,
-    aidRequestId,
     receptorUserId,
+    aidRequestId,
   });
 
   return res.json({
     status: 200,
     message: "Mensaje enviado",
   });
-});
-
-//CHANGE MESSAGES STATUS
-router.post("/change-status", async (req, res) => {
-  try {
-    const idUser = req.user;
-    const messagesList = await Messages.find({
-      creatorUserId: { _id: idUser._id },
-    });
-
-    await Promise.all(
-      messagesList.map(async (message) => {
-        if (message.status === "Nuevo") {
-          await Messages.findByIdAndUpdate(message._id, {
-            status: "Visto",
-          }).then((message) => message);
-        }
-      })
-    );
-
-    return res.json({
-      status: 200,
-      message: "Status cambiado",
-    });
-  } catch (err) {
-    return res.json({
-      status: 400,
-      message: "Fallo al cambiar status",
-    });
-  }
 });
 
 //GET MESSAGES BY ID USER CREATOR
@@ -108,17 +79,74 @@ router.post("/alls", async (req, res) => {
   }
 });
 
-//DELETE MESSAGES BY ID
-router.post("/delete", isLoggedIn(), async (req, res) => {
+//CHANGE MESSAGES STATUS
+router.post("/change-status", async (req, res) => {
   try {
-    const { _id } = req.body;
-    await Messages.findByIdAndRemove(_id);
+    const idUser = req.user;
+
+    const messagesList = await Messages.find({
+      receptorUserId: { _id: idUser._id },
+    });
+
+    await Promise.all(
+      messagesList.map(async (message) => {
+        if (message.statusReceptor === "Nuevo") {
+          await Messages.findByIdAndUpdate(message._id, {
+            statusReceptor: "Visto",
+          }).then((message) => message);
+        }
+      })
+    );
+
     return res.json({
       status: 200,
-      message: "Mensaje eliminado satisfactoriamente",
+      message: "Status cambiado",
     });
   } catch (err) {
-    return res.json({ status: 400, message: "No encontrado" });
+    return res.json({
+      status: 400,
+      message: "Fallo al cambiar status",
+    });
+  }
+});
+
+//DELETE MESSAGES STATUS
+router.post("/delete", async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const idUser = req.user;
+
+    const ReceptorFind = await Messages.find({
+      $and: [{ _id: _id }, { receptorUserId: { _id: idUser._id } }],
+    });
+
+    const creatorFind = await Messages.find({
+      $and: [{ _id: _id }, { creatorUserId: { _id: idUser._id } }],
+    });
+
+    if (creatorFind.length) {
+      console.log("soy el amo");
+      console.log(creatorFind);
+      await Messages.findByIdAndUpdate(creatorFind[0]._id, {
+        statusCreator: "Borrado",
+      });
+    } else {
+      console.log("caca");
+      console.log(ReceptorFind);
+      await Messages.findByIdAndUpdate(ReceptorFind[0]._id, {
+        statusReceptor: "Borrado",
+      });
+    }
+
+    return res.json({
+      status: 200,
+      message: "Mensaje eliminado de tu listado",
+    });
+  } catch (err) {
+    return res.json({
+      status: 400,
+      message: "Fallo al cambiar status",
+    });
   }
 });
 
