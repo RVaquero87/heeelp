@@ -24,7 +24,7 @@ import contact from "../../../public/images/contact.svg";
 import { scrollInit } from "../../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../../components/ButtonLink/index";
+import { ButtonLink } from "../../components/ButtonLink/";
 
 export const PrivacyPolicyPage = () => {
   //Reset Scroll

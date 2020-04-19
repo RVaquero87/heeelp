@@ -31,8 +31,8 @@ import { scrollInit } from "../lib/commonFunctional";
 import { getAidRequest } from "../services/aidRequestServices";
 
 //Compoments
-import { AidsRequestBox } from "../components/ItemAidRequest/index";
-import { Loading } from "../components/Loading/index";
+import { AidsRequestBox } from "../components/ItemAidRequest/";
+import { Loading } from "../components/Loading/";
 
 export const ListAidsRequestPage = () => {
   const { user, changeFilterAidsRequest } = useContext(PrincipalContext);

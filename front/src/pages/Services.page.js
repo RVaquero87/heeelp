@@ -27,9 +27,9 @@ import contact from "../../public/images/contact.svg";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/index";
-import { ItemServicies } from "../components/ItemServices/index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/index";
+import { ButtonLink } from "../components/ButtonLink/";
+import { ItemServicies } from "../components/ItemServices/";
+import { AccordionFaqsBox } from "../components/ItemAccordion/";
 
 export const ServicesPage = () => {
   //Reset Scroll

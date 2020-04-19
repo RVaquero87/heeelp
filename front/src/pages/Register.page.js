@@ -35,8 +35,8 @@ import { doSignup, uploadPhoto } from "../services/authServices";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { SelectBox } from "../components/Select/index";
-import { InputBox } from "../components/Input/index";
+import { SelectBox } from "../components/Select/";
+import { InputBox } from "../components/Input/";
 
 export const RegisterPage = withRouter(({ history }) => {
   const {

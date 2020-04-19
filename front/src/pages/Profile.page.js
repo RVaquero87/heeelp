@@ -38,9 +38,9 @@ import { doEdit, doUnsubscribe, uploadPhoto } from "../services/authServices";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { InputBox } from "../components/Input/index";
-import { SelectBox } from "../components/Select/index";
-import { ItemServicies } from "../components/ItemServices/index";
+import { InputBox } from "../components/Input/";
+import { SelectBox } from "../components/Select/";
+import { ItemServicies } from "../components/ItemServices/";
 
 export const Profile = withRouter(({ history }) => {
   const { user, setUser, setMessageError, aidsRequestId } = useContext(

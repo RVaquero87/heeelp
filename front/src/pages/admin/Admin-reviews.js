@@ -16,8 +16,7 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 //Functional & Services
 
 //Compoments
-import { ReviewsBoxItem } from "../../components/ListItemReviews/index";
-import { Loading } from "../../components/Loading/index";
+import { ReviewsBoxItem } from "../../components/ListItemReviews/";
 
 export const AdminReviews = () => {
   const {

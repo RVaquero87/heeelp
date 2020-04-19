@@ -36,10 +36,10 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { getAverage, scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/index";
-import { ItemServicies } from "../components/ItemServices/index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/index";
-import { ReviewsBoxItem } from "../components/ListItemReviews/index";
+import { ButtonLink } from "../components/ButtonLink/";
+import { ItemServicies } from "../components/ItemServices/";
+import { AccordionFaqsBox } from "../components/ItemAccordion/";
+import { ReviewsBoxItem } from "../components/ListItemReviews/";
 
 export const HomePage = () => {
   const { listReviews } = useContext(PrincipalContext);
