@@ -7,7 +7,7 @@ import { BoxUser } from "./styles/ItemsUsers.style";
 
 //Images
 import { Trash2, Save } from "react-feather";
-import imgProfile from "../../../public/images/default-profile.png";
+import preventDefault from "../../../public/images/default-profile.png";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
@@ -20,7 +20,7 @@ import { doUnsubscribe, doEditUserAdmin } from "../../services/authServices";
 import { useForm, FormContext } from "react-hook-form";
 
 //Components
-import { SelectBox } from "../Select";
+import { SelectBox } from "../Select/Index";
 
 export const UserBoxItem = ({ user }) => {
   const { setMessageError, changeLisUsers, setchangeLisUsers } = useContext(
@@ -65,7 +65,11 @@ export const UserBoxItem = ({ user }) => {
   return (
     <BoxUser data-aos="fade-up">
       <BoxImg>
-        <img src={user.image || imgProfile} title={user.name} alt={user.name} />
+        <img
+          src={user?.image || preventDefault}
+          title={user.name}
+          alt={user.name}
+        />
       </BoxImg>
 
       <Paragraphs blue>
