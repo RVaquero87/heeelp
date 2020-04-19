@@ -30,8 +30,8 @@ import { scrollInit } from "../lib/commonFunctional";
 import { sendMessageContact } from "../services/contactServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
+import { ButtonLink } from "../components/ButtonLink/index";
+import { AccordionFaqsBox } from "../components/ItemAccordion/index";
 import { InputBox } from "../components/Input/index";
 import { TextAreaBox } from "../components/TextArea/index";
 

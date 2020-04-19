@@ -36,9 +36,9 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { getAverage, scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
-import { ItemServicies } from "../components/ItemServices/Index";
-import { AccordionFaqsBox } from "../components/ItemAccordion/Index";
+import { ButtonLink } from "../components/ButtonLink/index";
+import { ItemServicies } from "../components/ItemServices/index";
+import { AccordionFaqsBox } from "../components/ItemAccordion/index";
 import { ReviewsBoxItem } from "../components/ListItemReviews/index";
 
 export const HomePage = () => {

@@ -40,7 +40,7 @@ import { scrollInit } from "../lib/commonFunctional";
 //Compoments
 import { InputBox } from "../components/Input/index";
 import { SelectBox } from "../components/Select/index";
-import { ItemServicies } from "../components/ItemServices/Index";
+import { ItemServicies } from "../components/ItemServices/index";
 
 export const Profile = withRouter(({ history }) => {
   const { user, setUser, setMessageError, aidsRequestId } = useContext(

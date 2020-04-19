@@ -21,8 +21,8 @@ import contact from "../../public/images/contact.svg";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
-import { AccordionFaqsBoxAll } from "../components/ItemAccordion/Index";
+import { ButtonLink } from "../components/ButtonLink/index";
+import { AccordionFaqsBoxAll } from "../components/ItemAccordion/index";
 
 export const FaqsPage = () => {
   //Reset Scroll

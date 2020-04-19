@@ -26,7 +26,7 @@ import {
 } from "../../services/contactServices";
 
 //Compoments
-import { MessageBoxItem } from "../../components/ListItemMessageContact/Index";
+import { MessageBoxItem } from "../../components/ListItemMessageContact/index";
 import { InputBox } from "../../components/Input/index";
 import { TextAreaBox } from "../../components/TextArea/index";
 

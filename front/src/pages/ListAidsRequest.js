@@ -31,7 +31,7 @@ import { scrollInit } from "../lib/commonFunctional";
 import { getAidRequest } from "../services/aidRequestServices";
 
 //Compoments
-import { AidsRequestBox } from "../components/ItemAidRequest/Index";
+import { AidsRequestBox } from "../components/ItemAidRequest/index";
 import { Loading } from "../components/Loading/index";
 
 export const ListAidsRequestPage = () => {

@@ -53,8 +53,8 @@ import { InputBox } from "../components/Input/index";
 import { TextAreaBox } from "../components/TextArea/index";
 import { SelectBox } from "../components/Select/index";
 import { Loading } from "../components/Loading/index";
-import { ItemListBox } from "../components/ItemList/index";
 import { BoxItemCreateForm } from "../components/CreatelistItem/index";
+import { ItemListBox } from "../components/ItemList/index";
 
 export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const {

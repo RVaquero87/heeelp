@@ -21,7 +21,7 @@ import imgProfile from "../../public/images/default-profile.png";
 import { doLogout } from "../services/authServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/Index";
+import { ButtonLink } from "../components/ButtonLink/index";
 
 export const Header = withRouter(({ history }) => {
   const { Body, user, setUser, messageError, setLightboxRegister } = useContext(
