@@ -39,7 +39,7 @@ import { getAverage, scrollInit } from "../lib/commonFunctional";
 import ButtonLink from "../components/ButtonLink";
 import ReviewsBoxItem from "../components/ListItemReviews";
 import ItemServicies from "../components/ItemServices";
-import AccordionFaqsBox from "../components/ItemAccordion";
+import AccordionFaqsBox from "../components/ItemAccordionHome";
 
 export const HomePage = () => {
   const { listReviews } = useContext(PrincipalContext);
