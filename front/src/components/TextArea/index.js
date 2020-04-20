@@ -14,7 +14,7 @@ const hasError = (errors, name) => {
   return;
 };
 
-export const TextAreaBox = React.forwardRef(
+const TextAreaBox = React.forwardRef(
   ({ className, classNameDiv, label, name }, ref) => {
     const { errors } = useFormContext();
     return (
@@ -28,3 +28,4 @@ export const TextAreaBox = React.forwardRef(
     );
   }
 );
+export default TextAreaBox;

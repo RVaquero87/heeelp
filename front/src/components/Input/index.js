@@ -14,7 +14,7 @@ const hasError = (errors, name) => {
   return;
 };
 
-export const InputBox = React.forwardRef(
+const InputBox = React.forwardRef(
   (
     { className, classNameDiv, label, name, type = "text", textCheckbox },
     ref
@@ -43,3 +43,4 @@ export const InputBox = React.forwardRef(
     );
   }
 );
+export default InputBox;

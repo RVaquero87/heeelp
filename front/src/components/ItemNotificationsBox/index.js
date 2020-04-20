@@ -4,7 +4,7 @@ import React from "react";
 //Styles & AOS animation
 import { BoxNotification } from "./styles/Notifications.style";
 
-export const ItemNotification = ({ notification }) => {
+const ItemNotification = ({ notification }) => {
   const { message, creatorUserId, createdAt } = notification;
 
   //Time modify
@@ -28,3 +28,4 @@ export const ItemNotification = ({ notification }) => {
     </BoxNotification>
   );
 };
+export default ItemNotification;

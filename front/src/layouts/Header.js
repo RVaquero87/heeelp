@@ -23,9 +23,9 @@ import { changeStatusNotification } from "../services/notificationsServices";
 import { changeToViewsMessages } from "../services/messagesServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink";
-import { ItemNotification } from "../components/ItemNotificationsBox";
-import { ItemMessages } from "../components/ItemMessagesBox";
+import ButtonLink from "../components/ButtonLink";
+import ItemNotification from "../components/ItemNotificationsBox";
+import ItemMessages from "../components/ItemMessagesBox";
 
 export const Header = withRouter(({ history }) => {
   const {

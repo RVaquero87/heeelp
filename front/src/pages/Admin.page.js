@@ -23,9 +23,9 @@ import { Users, Mail, MessageCircle } from "react-feather";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { AdminUsers } from "./admin/Admin-users";
-import { AdminReviews } from "./admin/Admin-reviews";
-import { AdminContact } from "./admin/Admin-contact";
+import AdminUsers from "./admin/Admin-users";
+import AdminReviews from "./admin/Admin-reviews";
+import AdminContact from "./admin/Admin-contact";
 
 export const AdminPanel = () => {
   //Reset Scroll

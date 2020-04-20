@@ -21,8 +21,8 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { Loading } from "../components/Loading";
-import { ItemNotificationsPage } from "../components/ItemNotificationsPage";
+import Loading from "../components/Loading";
+import ItemNotificationsPage from "../components/ItemNotificationsPage";
 
 export const ListNotificationsPage = () => {
   const { notifications } = useContext(PrincipalContext);

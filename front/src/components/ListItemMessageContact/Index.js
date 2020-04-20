@@ -14,7 +14,7 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 //Functional & Services
 import { deleteMessageContact } from "../../services/contactServices";
 
-export const MessageBoxItem = ({ messageContact }) => {
+const MessageBoxItem = ({ messageContact }) => {
   const {
     setMessageError,
     setResponseMessageContact,
@@ -89,3 +89,4 @@ export const MessageBoxItem = ({ messageContact }) => {
     </BoxMessageContact>
   );
 };
+export default MessageBoxItem;

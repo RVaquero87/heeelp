@@ -13,7 +13,7 @@ const hasError = (errors, name) => {
   return;
 };
 
-export const SelectBox = React.forwardRef(
+const SelectBox = React.forwardRef(
   ({ className, classNameDiv, label, name, value, options = value }, ref) => {
     const { errors } = useFormContext();
 
@@ -38,3 +38,4 @@ export const SelectBox = React.forwardRef(
     );
   }
 );
+export default SelectBox;

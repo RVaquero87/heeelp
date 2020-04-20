@@ -30,10 +30,10 @@ import { scrollInit } from "../lib/commonFunctional";
 import { sendMessageContact } from "../services/contactServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink";
-import { AccordionFaqsBox } from "../components/ItemAccordion";
-import { InputBox } from "../components/Input";
-import { TextAreaBox } from "../components/TextArea";
+import ButtonLink from "../components/ButtonLink";
+import AccordionFaqsBox from "../components/ItemAccordion";
+import InputBox from "../components/Input";
+import TextAreaBox from "../components/TextArea";
 
 export const ContactPage = withRouter(({ history }) => {
   const { user, setMessageError } = useContext(PrincipalContext);

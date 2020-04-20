@@ -17,7 +17,7 @@ import imgProfile from "../../../public/images/default-profile.png";
 import { deleteReviews } from "../../services/reviewsServices";
 import { getYearsOld } from "../../lib/commonFunctional";
 
-export const ReviewsBoxItem = ({ review }) => {
+const ReviewsBoxItem = ({ review }) => {
   const {
     user,
     setMessageError,
@@ -83,3 +83,4 @@ export const ReviewsBoxItem = ({ review }) => {
     </BoxReviews>
   );
 };
+export default ReviewsBoxItem;

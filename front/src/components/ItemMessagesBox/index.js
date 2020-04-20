@@ -7,7 +7,7 @@ import { BoxMessages } from "./styles/Messages.style";
 //Functional & Services
 import { getYearsOld } from "../../lib/commonFunctional";
 
-export const ItemMessages = ({ messageItem }) => {
+const ItemMessages = ({ messageItem }) => {
   const { message, creatorUserId, createdAt } = messageItem;
 
   //Time modify
@@ -36,3 +36,4 @@ export const ItemMessages = ({ messageItem }) => {
     </BoxMessages>
   );
 };
+export default ItemMessages;

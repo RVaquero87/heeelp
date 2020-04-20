@@ -21,8 +21,10 @@ const LoadingBox = styled.div`
   }
 `;
 
-export const Loading = () => (
+const Loading = () => (
   <LoadingBox>
     <img src={loading} />
   </LoadingBox>
 );
+
+export default Loading;

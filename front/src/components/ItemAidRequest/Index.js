@@ -28,7 +28,7 @@ import {
 import { getYearsOld } from "../../lib/commonFunctional";
 import { sendNotification } from "../../services/notificationsServices";
 
-export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
+const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   const {
     user,
     changeAidsRequest,
@@ -311,3 +311,5 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     </BoxAidRequest>
   );
 });
+
+export default AidsRequestBox;

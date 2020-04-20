@@ -14,7 +14,7 @@ import preventDefault from "../../../public/images/default-profile.png";
 //Functional & Services
 import { deleteNotifications } from "../../services/notificationsServices";
 
-export const ItemNotificationsPage = ({ notification }) => {
+const ItemNotificationsPage = ({ notification }) => {
   const {
     setMessageError,
     changeNotifications,
@@ -72,3 +72,4 @@ export const ItemNotificationsPage = ({ notification }) => {
     </BoxNotificationPage>
   );
 };
+export default ItemNotificationsPage;

@@ -5,7 +5,7 @@ import React from "react";
 import { BoxImg, Paragraphs, ParagraphTop } from "../../styles/Index.styles";
 import { ItemServiceRate } from "./styles/ItemServices.styles";
 
-export const ItemServicies = ({
+const ItemServicies = ({
   ImgSrc,
   ItemText,
   ItemContent = false,
@@ -32,3 +32,4 @@ export const ItemServicies = ({
     </ItemServiceRate>
   );
 };
+export default ItemServicies;

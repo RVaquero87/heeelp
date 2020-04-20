@@ -14,9 +14,9 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 import { sendMessage } from "../../services/messagesServices";
 
 //Compoments
-import { TextAreaBox } from "../TextArea";
+import TextAreaBox from "../TextArea";
 
-export const BoxCreateMessage = ({ receptorUserId, aidRequestId }) => {
+const BoxCreateMessage = ({ receptorUserId, aidRequestId }) => {
   const {
     setMessageError,
     changeMessages,
@@ -65,3 +65,4 @@ export const BoxCreateMessage = ({ receptorUserId, aidRequestId }) => {
     </FormContext>
   );
 };
+export default BoxCreateMessage;

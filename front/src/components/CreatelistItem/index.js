@@ -14,9 +14,9 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 import { createItemList } from "../../services/listItemServices";
 
 //Compoments
-import { InputBox } from "../Input";
+import InputBox from "../Input";
 
-export const BoxItemCreateForm = ({ aidRequestsId, aidRequestType }) => {
+const BoxItemCreateForm = ({ aidRequestsId, aidRequestType }) => {
   const {
     listItemViewForm,
     setListItemViewForm,
@@ -140,3 +140,4 @@ export const BoxItemCreateForm = ({ aidRequestsId, aidRequestType }) => {
     </FormContext>
   );
 };
+export default BoxItemCreateForm;

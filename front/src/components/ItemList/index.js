@@ -18,9 +18,9 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 import { deleteItemList, editItemList } from "../../services/listItemServices";
 
 //Compoments
-import { InputBox } from "../Input";
+import InputBox from "../Input";
 
-export const ItemListBox = ({ aidId, item, index }) => {
+const ItemListBox = ({ aidId, item, index }) => {
   const {
     user,
     aidRequestOneChange,
@@ -223,3 +223,4 @@ export const ItemListBox = ({ aidId, item, index }) => {
     </ItemList>
   );
 };
+export default ItemListBox;
