@@ -6,7 +6,7 @@ import { BoxMessages } from "./styles/Messages.style";
 
 export const ItemMessages = ({ message }) => {
   // const { message, creatorUserId, createdAt } = message;
-  consolelog(message);
+  console.log(message);
   //Time modify
   // const today = new Date().getTime();
   // const time = new Date(createdAt).getTime();
