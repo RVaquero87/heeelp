@@ -14,8 +14,6 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 //Functional & Services
 import { deleteMessageContact } from "../../services/contactServices";
 
-//Components
-
 export const MessageBoxItem = ({ messageContact }) => {
   const {
     setMessageError,

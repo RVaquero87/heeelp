@@ -19,7 +19,7 @@ import { PrincipalContext } from "../../context/PrincipalContext";
 import { getListUsers } from "../../services/authServices";
 
 //Compoments
-import { UserBoxItem } from "../../components/ListItemUser/";
+import { UserBoxItem } from "../../components/ListItemUser";
 
 export const AdminUsers = () => {
   const { changeLisUsers, setchangeLisUsers } = useContext(PrincipalContext);

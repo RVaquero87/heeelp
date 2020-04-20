@@ -45,13 +45,13 @@ import { scrollInit } from "../lib/commonFunctional";
 import { createAidRequest } from "../services/aidRequestServices";
 
 //Compoments
-import { ItemServicies } from "../components/ItemServices/";
-import { ButtonLink } from "../components/ButtonLink/";
-import { AccordionFaqsBox } from "../components/ItemAccordion/";
-import { InputBox } from "../components/Input/";
-import { TextAreaBox } from "../components/TextArea/";
-import { SelectBox } from "../components/Select/";
-import { AidsRequestBox } from "../components/ItemAidRequest/";
+import { ItemServicies } from "../components/ItemServices";
+import { ButtonLink } from "../components/ButtonLink";
+import { AccordionFaqsBox } from "../components/ItemAccordion";
+import { InputBox } from "../components/Input";
+import { TextAreaBox } from "../components/TextArea";
+import { SelectBox } from "../components/Select";
+import { AidsRequestBox } from "../components/ItemAidRequest";
 
 export const MyRequests = () => {
   const {

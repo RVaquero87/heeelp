@@ -979,6 +979,7 @@ export const HeaderBox = styled.header`
               &.messages {
                 background: url(${message}) no-repeat center;
                 background-size: contain;
+                border-radius: initial;
                 width: 24px;
               }
               &.notifications {
@@ -1030,6 +1031,19 @@ export const HeaderBox = styled.header`
               }
               &.l-messages:before {
                 right: 118px;
+              }
+              > button.active {
+                position: relative;
+
+                &:before {
+                  content: "";
+                  display: inline-block;
+                  background-color: #ffa500;
+                  border-radius: 100%;
+                  height: 10px;
+                  width: 10px;
+                  margin-right: 4px;
+                }
               }
             }
           }

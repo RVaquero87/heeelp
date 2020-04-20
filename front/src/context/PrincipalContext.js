@@ -13,6 +13,10 @@ import {
 } from "../services/aidRequestServices";
 import { getAverage } from "../lib/commonFunctional";
 import { getMyReceivedNotifications } from "../services/notificationsServices";
+import {
+  getReceivedMessages,
+  getSendMessages,
+} from "../services/messagesServices";
 
 export const PrincipalContextProvider = (props) => {
   //Loading State
@@ -112,6 +116,29 @@ export const PrincipalContextProvider = (props) => {
       .catch((e) => {});
   }, [changeNotifications, user]);
 
+  //Messages
+  const [messagesNews, setMessagesNews] = useState([]);
+  const [messagesReceived, setMessageReceived] = useState([]);
+  const [messagesSend, setMessageSend] = useState([]);
+  const [changeMessages, setChangeMessages] = useState();
+
+  useEffect(() => {
+    getReceivedMessages()
+      .then((message) => {
+        setMessageReceived(message);
+        const filterNew = message.filter(
+          (item) => item.statusReceptor == "Nuevo"
+        );
+        setMessagesNews(filterNew);
+      })
+      .catch((e) => {});
+    getSendMessages()
+      .then((message) => {
+        setMessageSend(message);
+      })
+      .catch((e) => {});
+  }, [changeMessages, user]);
+
   return (
     <PrincipalContext.Provider
       value={{
@@ -182,6 +209,16 @@ export const PrincipalContextProvider = (props) => {
         setNotificationsNews,
         changeNotifications,
         setChangeNotifications,
+
+        //Messages
+        messagesNews,
+        setMessagesNews,
+        messagesReceived,
+        setMessageReceived,
+        messagesSend,
+        setMessageSend,
+        changeMessages,
+        setChangeMessages,
       }}
     >
       {props.children}

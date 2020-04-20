@@ -22,8 +22,9 @@ import { doLogout } from "../services/authServices";
 import { changeStatusNotification } from "../services/notificationsServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/";
-import { ItemNotification } from "../components/ItemNotificationsBox/";
+import { ButtonLink } from "../components/ButtonLink";
+import { ItemNotification } from "../components/ItemNotificationsBox";
+import { ItemMessages } from "../components/ItemMessagesBox";
 
 export const Header = withRouter(({ history }) => {
   const {
@@ -35,6 +36,9 @@ export const Header = withRouter(({ history }) => {
     notificationsNews,
     changeNotifications,
     setChangeNotifications,
+    messagesNews,
+    changeMessages,
+    setChangeMessages,
   } = useContext(PrincipalContext);
 
   const onClickLogout = async (e) => {
@@ -95,6 +99,17 @@ export const Header = withRouter(({ history }) => {
     setChangeNotifications(!changeNotifications);
     history.push("/mis-notificaciones");
   };
+
+  //Messages
+  const [changeViewsMessages, setChangeViewsMessages] = useState(false);
+
+  const changeStatusAndViewMessages = async (e) => {
+    e.preventDefault();
+    await changeToViewsMessages();
+    setChangeMessages(!changeMessages);
+    history.push("/mis-mensajes");
+  };
+
   return (
     <HeaderBox id="navbar">
       <div className="contain">
@@ -262,53 +277,93 @@ export const Header = withRouter(({ history }) => {
                       {user?.name} {user?.lastname.slice(0, 1)}.
                     </p>
                   </NavLink>
-                  <ButtonLink
-                    whereTo="/profile"
-                    className="nav-link messages active"
-                  >
-                    Mensajes
-                  </ButtonLink>
-                  {notificationsNews.length > 0 ? (
+                  {user?.rol === "Admin" || (
                     <>
-                      <Button
-                        onClick={(e) =>
-                          setChangeViewsNotifications(!changeViewsNotifications)
-                        }
-                        className="notifications active"
-                      >
-                        Notificaciones
-                      </Button>
-                      {changeViewsNotifications && (
-                        <div className="lightbox-nav l-notifications">
-                          {notificationsNews.map((notification, i) => {
-                            if (i < 3) {
-                              return (
-                                <ItemNotification
-                                  key={i}
-                                  notification={notification}
-                                />
-                              );
+                      {messagesNews.length > 0 ? (
+                        <>
+                          <Button
+                            onClick={(e) =>
+                              setChangeViewsMessages(!changeViewsMessages)
                             }
-                          })}
-
-                          <button
-                            onClick={(e) => changeStatusAndView(e)}
-                            className={
-                              notificationsNews.length >= 3 ? "active" : ""
-                            }
+                            className="messages active"
                           >
-                            Ver todas
-                          </button>
-                        </div>
+                            Mensajes
+                          </Button>
+                          {changeViewsMessages && (
+                            <div className="lightbox-nav l-messages">
+                              {messagesNews.map((message, i) => {
+                                if (i < 3) {
+                                  return (
+                                    <ItemMessages key={i} message={message} />
+                                  );
+                                }
+                              })}
+
+                              <button
+                                onClick={(e) => changeStatusAndView(e)}
+                                className={
+                                  messagesNews.length >= 3 ? "active" : ""
+                                }
+                              >
+                                Ver todos
+                              </button>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <ButtonLink
+                          whereTo="/mis-mensajes"
+                          className="nav-link messages"
+                        >
+                          Mensajes
+                        </ButtonLink>
+                      )}
+
+                      {notificationsNews.length > 0 ? (
+                        <>
+                          <Button
+                            onClick={(e) =>
+                              setChangeViewsNotifications(
+                                !changeViewsNotifications
+                              )
+                            }
+                            className="notifications active"
+                          >
+                            Notificaciones
+                          </Button>
+                          {changeViewsNotifications && (
+                            <div className="lightbox-nav l-notifications">
+                              {notificationsNews.map((notification, i) => {
+                                if (i < 3) {
+                                  return (
+                                    <ItemNotification
+                                      key={i}
+                                      notification={notification}
+                                    />
+                                  );
+                                }
+                              })}
+
+                              <button
+                                onClick={(e) => changeStatusAndView(e)}
+                                className={
+                                  notificationsNews.length >= 3 ? "active" : ""
+                                }
+                              >
+                                Ver todas
+                              </button>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <ButtonLink
+                          whereTo="/mis-notificaciones"
+                          className="nav-link notifications"
+                        >
+                          Notificaciones
+                        </ButtonLink>
                       )}
                     </>
-                  ) : (
-                    <ButtonLink
-                      whereTo="/mis-notificaciones"
-                      className="nav-link notifications"
-                    >
-                      Notificaciones
-                    </ButtonLink>
                   )}
 
                   <button
@@ -332,7 +387,8 @@ export const Header = withRouter(({ history }) => {
             id="hamburger"
             className={
               (hamburguerNav && "hamburger active") ||
-              (notificationsNews && "hamburger active-notice") ||
+              ((notificationsNews || messagesNews) &&
+                "hamburger active-notice") ||
               "hamburger"
             }
             onClick={(e) => buttonAdd(e)}

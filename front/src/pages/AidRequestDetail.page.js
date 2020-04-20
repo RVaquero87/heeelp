@@ -50,12 +50,12 @@ import {
 import { sendNotification } from "../services/notificationsServices";
 
 //Compoments
-import { InputBox } from "../components/Input/";
-import { TextAreaBox } from "../components/TextArea/";
-import { SelectBox } from "../components/Select/";
-import { Loading } from "../components/Loading/";
-import { BoxItemCreateForm } from "../components/CreatelistItem/";
-import { ItemListBox } from "../components/ItemList/";
+import { InputBox } from "../components/Input";
+import { TextAreaBox } from "../components/TextArea";
+import { SelectBox } from "../components/Select";
+import { Loading } from "../components/Loading";
+import { BoxItemCreateForm } from "../components/CreatelistItem";
+import { ItemListBox } from "../components/ItemList";
 
 export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const {

@@ -35,13 +35,13 @@ import { scrollInit } from "../lib/commonFunctional";
 import { createReview } from "../services/reviewsServices";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/";
-import { AccordionFaqsBox } from "../components/ItemAccordion/";
-import { ReviewsBoxItem } from "../components/ListItemReviews/";
-import { Loading } from "../components/Loading/";
-import { InputBox } from "../components/Input/";
-import { TextAreaBox } from "../components/TextArea/";
-import { SelectBox } from "../components/Select/";
+import { ButtonLink } from "../components/ButtonLink";
+import { AccordionFaqsBox } from "../components/ItemAccordion";
+import { ReviewsBoxItem } from "../components/ListItemReviews";
+import { Loading } from "../components/Loading";
+import { InputBox } from "../components/Input";
+import { TextAreaBox } from "../components/TextArea";
+import { SelectBox } from "../components/Select";
 
 export const ReviewsPage = () => {
   const {

@@ -21,7 +21,7 @@ import img404 from "../../public/images/img-404.svg";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ButtonLink } from "../components/ButtonLink/";
+import { ButtonLink } from "../components/ButtonLink";
 
 export const NotFoundPage = () => {
   //Reset Scroll

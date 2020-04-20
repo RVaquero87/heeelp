@@ -38,10 +38,10 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import { ItemServicies } from "../components/ItemServices/";
-import { ButtonLink } from "../components/ButtonLink/";
-import { AccordionFaqsBox } from "../components/ItemAccordion/";
-import { AidsRequestBox } from "../components/ItemAidRequest/";
+import { ItemServicies } from "../components/ItemServices";
+import { ButtonLink } from "../components/ButtonLink";
+import { AccordionFaqsBox } from "../components/ItemAccordion";
+import { AidsRequestBox } from "../components/ItemAidRequest";
 
 export const HomeRolPage = () => {
   const { user, aidsRequestId } = useContext(PrincipalContext);

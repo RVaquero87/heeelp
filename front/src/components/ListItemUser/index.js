@@ -20,7 +20,7 @@ import { doUnsubscribe, doEditUserAdmin } from "../../services/authServices";
 import { useForm, FormContext } from "react-hook-form";
 
 //Components
-import { SelectBox } from "../Select/";
+import { SelectBox } from "../Select";
 
 export const UserBoxItem = ({ user }) => {
   const { setMessageError, changeLisUsers, setchangeLisUsers } = useContext(

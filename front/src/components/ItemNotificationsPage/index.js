@@ -15,8 +15,6 @@ import preventDefault from "../../../public/images/default-profile.png";
 //Functional & Services
 import { deleteNotifications } from "../../services/notificationsServices";
 
-//Components
-
 export const ItemNotificationsPage = ({ notification }) => {
   const {
     setMessageError,

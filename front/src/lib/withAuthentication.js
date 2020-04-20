@@ -8,7 +8,7 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { whoUser } from "../services/authServices";
 
 //Compoments
-import { Loading } from "../components/Loading/";
+import { Loading } from "../components/Loading";
 
 // THIS is a HOC
 export const withAuthentication = (Component) => () => {
