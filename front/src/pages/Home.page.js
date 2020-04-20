@@ -36,8 +36,8 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { getAverage, scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import ReviewsBoxItem from "../components/ListItemReviews";
 import ButtonLink from "../components/ButtonLink";
+import ReviewsBoxItem from "../components/ListItemReviews";
 import ItemServicies from "../components/ItemServices";
 import AccordionFaqsBox from "../components/ItemAccordion";
 
