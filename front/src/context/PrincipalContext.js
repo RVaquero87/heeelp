@@ -12,6 +12,7 @@ import {
   getAidRequestHelper,
 } from "../services/aidRequestServices";
 import { getAverage } from "../lib/commonFunctional";
+import { getMyReceivedNotifications } from "../services/notificationsServices";
 
 export const PrincipalContextProvider = (props) => {
   //Loading State
@@ -96,6 +97,21 @@ export const PrincipalContextProvider = (props) => {
   //View Form Create List Item in AidRequest Details
   const [listItemViewForm, setListItemViewForm] = useState(false);
 
+  //Notifications
+  const [notifications, setNotifications] = useState([]);
+  const [notificationsNews, setNotificationsNews] = useState([]);
+  const [changeNotifications, setChangeNotifications] = useState();
+
+  useEffect(() => {
+    getMyReceivedNotifications()
+      .then((notification) => {
+        setNotifications(notification);
+        const filterNew = notification.filter((item) => item.status == "Nuevo");
+        setNotificationsNews(filterNew);
+      })
+      .catch((e) => {});
+  }, [changeNotifications, user]);
+
   return (
     <PrincipalContext.Provider
       value={{
@@ -158,6 +174,14 @@ export const PrincipalContextProvider = (props) => {
         setAidRequestOneChange,
         listItemViewForm,
         setListItemViewForm,
+
+        //Notifications
+        notifications,
+        setNotifications,
+        notificationsNews,
+        setNotificationsNews,
+        changeNotifications,
+        setChangeNotifications,
       }}
     >
       {props.children}

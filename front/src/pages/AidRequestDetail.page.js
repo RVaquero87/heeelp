@@ -47,6 +47,7 @@ import {
   takeOverAidRequest,
   stopTakeOverAidRequest,
 } from "../services/aidRequestServices";
+import { sendNotification } from "../services/notificationsServices";
 
 //Compoments
 import { InputBox } from "../components/Input/";
@@ -156,6 +157,11 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
     const responseServer = await getCancelAidRequest(id);
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
+    sendNotification({
+      message: `Ha cancelado la petición que hizo`,
+      aidRequestId: aidRequestOne._id,
+      receptorUserId: aidRequestOne.helperId._id,
+    });
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -168,6 +174,11 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
     const responseServer = await takeOverAidRequest(id);
     setAidRequestOneChange(!aidRequestOneChange);
     setMessageError(responseServer.message);
+    sendNotification({
+      message: `Ha aceptado hacer su petición de ${aidRequestOne.type}`,
+      aidRequestId: aidRequestOne._id,
+      receptorUserId: aidRequestOne.creatorUserid._id,
+    });
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -179,6 +190,11 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
     const responseServer = await stopTakeOverAidRequest(id);
     setAidRequestOneChange(!aidRequestOneChange);
     setMessageError(responseServer.message);
+    sendNotification({
+      message: `Ha eliminado de su lista la petición de ${aidRequestOne.type}`,
+      aidRequestId: aidRequestOne._id,
+      receptorUserId: aidRequestOne.creatorUserid._id,
+    });
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -205,7 +221,8 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
           </SectionBox>
           {user?.rol == "Helped" &&
             (aidRequestOne.status == "Publicada" ||
-              aidRequestOne.status == "En creación") && (
+              aidRequestOne.status == "En creación" ||
+              aidRequestOne.status == "En curso") && (
               <>
                 <SectionBox bgColor="grey" column>
                   <SectionEditAidsRequest
@@ -228,6 +245,18 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                         {(() => {
                           switch (aidRequestOne.status) {
                             case "Publicada":
+                              return (
+                                <>
+                                  <Button
+                                    type="transparent-blue"
+                                    big
+                                    onClick={(e) => cancelAidRequest(e)}
+                                  >
+                                    Cancelar
+                                  </Button>
+                                </>
+                              );
+                            case "En curso":
                               return (
                                 <>
                                   <Button

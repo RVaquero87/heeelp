@@ -903,7 +903,9 @@ export const HeaderBox = styled.header`
             }
           }
           &.icons {
+            position: relative;
             align-items: center;
+            overflow: initial;
             > a,
             button {
               color: #fff;
@@ -952,6 +954,8 @@ export const HeaderBox = styled.header`
               &.messages,
               &.notifications,
               &.log-out {
+                border: none;
+                padding: 0;
                 height: 24px;
                 position: relative;
                 line-height: 0;
@@ -986,6 +990,46 @@ export const HeaderBox = styled.header`
                 background: url(${logOut}) no-repeat center;
                 background-size: contain;
                 width: 22px;
+              }
+            }
+            .lightbox-nav {
+              background-color: #ffffff;
+              border-radius: 4px;
+              padding: 20px 24px 10px;
+              box-shadow: 0 2px 11px 4px rgba(62, 56, 116, 0.1);
+              position: absolute;
+              right: 0;
+              top: 57px;
+              width: 440px;
+              > button {
+                display: block;
+                color: #3e3874;
+                cursor: pointer;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.88px;
+                line-height: 1;
+                margin: 0 auto;
+                padding: 7px 10px 10px;
+                text-transform: uppercase;
+                width: 130px;
+              }
+              &:before {
+                content: "";
+                border-color: transparent transparent #ffffff transparent;
+                border-style: solid;
+                border-width: 0 6px 7px 6px;
+                height: 0;
+                position: absolute;
+                top: -7px;
+                width: 0;
+              }
+              &.l-notifications:before {
+                right: 62px;
+              }
+              &.l-messages:before {
+                right: 118px;
               }
             }
           }
@@ -1307,6 +1351,25 @@ export const HeaderBox = styled.header`
                   background: url(${logOut}) no-repeat center;
                   background-size: contain;
                   width: 29.3px;
+                }
+                .lightbox-nav {
+                  width: 100%;
+                  &:before {
+                    top: initial;
+                    bottom: -7px;
+                    border-width: 7px 6px 0 6px;
+                    border-color: #ffffff transparent transparent transparent;
+                    left: 47.8%;
+                    transform: (translate(-50%, 0));
+                  }
+                  &.l-notifications {
+                    top: initial;
+                    bottom: 17vh;
+                  }
+                  &.l-messages {
+                    top: 16.5vh;
+                    bottom: 100vh;
+                  }
                 }
               }
             }
@@ -4011,3 +4074,6 @@ export const SectionDetailsListItem = styled.div`
     }
   }
 `;
+
+//Notifications
+export const SectionNotificationsList = styled.div``;

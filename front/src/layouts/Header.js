@@ -19,14 +19,23 @@ import imgProfile from "../../public/images/default-profile.png";
 
 //Functional & Services
 import { doLogout } from "../services/authServices";
+import { changeStatusNotification } from "../services/notificationsServices";
 
 //Compoments
 import { ButtonLink } from "../components/ButtonLink/";
+import { ItemNotification } from "../components/ItemNotificationsBox/";
 
 export const Header = withRouter(({ history }) => {
-  const { Body, user, setUser, messageError, setLightboxRegister } = useContext(
-    PrincipalContext
-  );
+  const {
+    Body,
+    user,
+    setUser,
+    messageError,
+    setLightboxRegister,
+    notificationsNews,
+    changeNotifications,
+    setChangeNotifications,
+  } = useContext(PrincipalContext);
 
   const onClickLogout = async (e) => {
     e.preventDefault();
@@ -75,7 +84,17 @@ export const Header = withRouter(({ history }) => {
       setHamburguerNav(false);
     };
   }
+  //Notifications
+  const [changeViewsNotifications, setChangeViewsNotifications] = useState(
+    false
+  );
 
+  const changeStatusAndView = async (e) => {
+    e.preventDefault();
+    await changeStatusNotification();
+    setChangeNotifications(!changeNotifications);
+    history.push("/mis-notificaciones");
+  };
   return (
     <HeaderBox id="navbar">
       <div className="contain">
@@ -249,12 +268,49 @@ export const Header = withRouter(({ history }) => {
                   >
                     Mensajes
                   </ButtonLink>
-                  <ButtonLink
-                    whereTo="/profile"
-                    className="nav-link notifications active"
-                  >
-                    Notificaciones
-                  </ButtonLink>
+                  {notificationsNews.length > 0 ? (
+                    <>
+                      <Button
+                        onClick={(e) =>
+                          setChangeViewsNotifications(!changeViewsNotifications)
+                        }
+                        className="notifications active"
+                      >
+                        Notificaciones
+                      </Button>
+                      {changeViewsNotifications && (
+                        <div className="lightbox-nav l-notifications">
+                          {notificationsNews.map((notification, i) => {
+                            if (i < 3) {
+                              return (
+                                <ItemNotification
+                                  key={i}
+                                  notification={notification}
+                                />
+                              );
+                            }
+                          })}
+
+                          <button
+                            onClick={(e) => changeStatusAndView(e)}
+                            className={
+                              notificationsNews.length >= 3 ? "active" : ""
+                            }
+                          >
+                            Ver todas
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <ButtonLink
+                      whereTo="/mis-notificaciones"
+                      className="nav-link notifications"
+                    >
+                      Notificaciones
+                    </ButtonLink>
+                  )}
+
                   <button
                     onClick={(e) => onClickLogout(e)}
                     className="nav-link log-out"
@@ -275,7 +331,9 @@ export const Header = withRouter(({ history }) => {
           <button
             id="hamburger"
             className={
-              hamburguerNav ? "hamburger active" : "hamburger active-notice"
+              (hamburguerNav && "hamburger active") ||
+              (notificationsNews && "hamburger active-notice") ||
+              "hamburger"
             }
             onClick={(e) => buttonAdd(e)}
           >

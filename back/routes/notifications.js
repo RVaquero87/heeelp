@@ -8,12 +8,11 @@ const Notifications = require("../models/Notifications");
 
 // CREATE NOTIFICATIONS
 router.post("/create", isLoggedIn(), async (req, res, next) => {
-  const { title, message, aidRequestId, receptorUserId } = req.body;
+  const { message, aidRequestId, receptorUserId } = req.body;
   const idUser = req.user;
 
   // Create the Notifications
   await Notifications.create({
-    title,
     message,
     creatorUserId: idUser._id,
     aidRequestId,

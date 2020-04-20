@@ -1,13 +1,11 @@
 import { serviceApi } from "../lib/commonFunctional";
 
 export const sendMessage = async ({
-  title,
   message,
   aidRequestId,
   receptorUserId,
 }) => {
   const res = await serviceApi.post("/messages/create", {
-    title,
     message,
     aidRequestId,
     receptorUserId,

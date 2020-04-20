@@ -1,13 +1,11 @@
 import { serviceApi } from "../lib/commonFunctional";
 
 export const sendNotification = async ({
-  title,
   message,
   aidRequestId,
   receptorUserId,
 }) => {
   const res = await serviceApi.post("/notifications/create", {
-    title,
     message,
     aidRequestId,
     receptorUserId,

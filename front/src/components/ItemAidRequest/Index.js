@@ -26,6 +26,7 @@ import {
   stopTakeOverAidRequest,
 } from "../../services/aidRequestServices";
 import { getYearsOld } from "../../lib/commonFunctional";
+import { sendNotification } from "../../services/notificationsServices";
 
 export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   const {
@@ -95,6 +96,11 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
+    sendNotification({
+      message: `Ha cancelado la petición que hizo`,
+      aidRequestId: _id,
+      receptorUserId: helperId._id,
+    });
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -107,6 +113,11 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     setChangeAidsRequest(!changeAidsRequest);
     setchangeFilterAidsRequest(!changeFilterAidsRequest);
     setMessageError(responseServer.message);
+    sendNotification({
+      message: `Ha aceptado hacer su petición de ${type}`,
+      aidRequestId: _id,
+      receptorUserId: creatorUserid._id,
+    });
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -118,6 +129,11 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
     const responseServer = await stopTakeOverAidRequest(_id);
     setChangeAidsRequest(!changeAidsRequest);
     setchangeFilterAidsRequest(!changeFilterAidsRequest);
+    sendNotification({
+      message: `Ha eliminado de su lista la petición de ${type}`,
+      aidRequestId: _id,
+      receptorUserId: creatorUserid._id,
+    });
     setMessageError(responseServer.message);
     setTimeout(() => {
       setMessageError(null);
@@ -261,6 +277,7 @@ export const AidsRequestBox = withRouter(({ history, aidrequest }) => {
                       <>
                         <Link to={`/mi-peticion/${_id}`}>Ver</Link>
                         <a onClick={(e) => duplicateAidRequest(e)}>Duplicar</a>
+                        <a onClick={(e) => cancelAidRequest(e)}>Cancelar</a>
                       </>
                     );
                   case "Realizada":

@@ -8,13 +8,11 @@ const Messages = require("../models/Messages");
 
 // CREATE MESSAGES
 router.post("/create", isLoggedIn(), async (req, res, next) => {
-  const { title, message, aidRequestId, receptorUserId } = req.body;
+  const { message, aidRequestId, receptorUserId } = req.body;
   const idUser = req.user;
-  console.log(idUser._id);
 
   // Create the Messages
   await Messages.create({
-    title,
     message,
     creatorUserId: idUser._id,
     receptorUserId,
@@ -125,14 +123,10 @@ router.post("/delete", async (req, res) => {
     });
 
     if (creatorFind.length) {
-      console.log("soy el amo");
-      console.log(creatorFind);
       await Messages.findByIdAndUpdate(creatorFind[0]._id, {
         statusCreator: "Borrado",
       });
     } else {
-      console.log("caca");
-      console.log(ReceptorFind);
       await Messages.findByIdAndUpdate(ReceptorFind[0]._id, {
         statusReceptor: "Borrado",
       });

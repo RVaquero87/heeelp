@@ -33,6 +33,7 @@ import { ProfilePage } from "./pages/Profile.page";
 import { MyRequestsPrivate } from "./pages/MyRequest.page";
 import { MyRequestDetailsRolPagePrivate } from "./pages/AidRequestDetail.page";
 import { ListAidsRequestPagePrivate } from "./pages/ListAidsRequest";
+import { ListNotificationsPagePrivate } from "./pages/ListNotifications";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -68,6 +69,10 @@ export const App = withAuthentication(() => {
             <Route
               path="/listado-de-peticiones"
               component={ListAidsRequestPagePrivate}
+            />
+            <Route
+              path="/mis-notificaciones"
+              component={ListNotificationsPagePrivate}
             />
             <Route path="*" component={NotFoundPage} />
           </Switch>
