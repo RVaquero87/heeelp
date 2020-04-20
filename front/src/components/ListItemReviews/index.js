@@ -11,7 +11,6 @@ import { BoxReviews } from "./styles/ItemsReviews.style";
 //Images
 import startOn from "../../../public/images/star-on.svg";
 import startOff from "../../../public/images/star-off.svg";
-import { Trash2 } from "react-feather";
 import imgProfile from "../../../public/images/default-profile.png";
 
 //Functional & Services
@@ -78,7 +77,7 @@ export const ReviewsBoxItem = ({ review }) => {
           value={review._id}
           onClick={(e) => deleteThisReview(e, e.target.value)}
         >
-          <Trash2 color="#3e3874" />
+          Borrar
         </button>
       )}
     </BoxReviews>

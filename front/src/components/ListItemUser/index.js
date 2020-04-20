@@ -6,7 +6,7 @@ import { FormBox, BoxImg, Paragraphs } from "../../styles/Index.styles";
 import { BoxUser } from "./styles/ItemsUsers.style";
 
 //Images
-import { Trash2, Save } from "react-feather";
+import { Save } from "react-feather";
 import preventDefault from "../../../public/images/default-profile.png";
 
 //Contexto
@@ -109,7 +109,7 @@ export const UserBoxItem = ({ user }) => {
         value={user._id}
         onClick={(e) => deleteUser(e, e.target.value)}
       >
-        <Trash2 color="#3e3874" />
+        Borrar
       </button>
     </BoxUser>
   );

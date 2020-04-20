@@ -2,6 +2,10 @@
 import styled from "styled-components";
 import { ParagraphTop } from "../../../styles/Index.styles";
 
+//Images
+import trash from "../../../../public/images/trash.svg";
+import trash2 from "../../../../public/images/trash2.svg";
+
 export const BoxReviews = styled.div`
   background: #fff;
   border-radius: 4px;
@@ -43,21 +47,28 @@ export const BoxReviews = styled.div`
       }
     }
   }
+
   .delete {
+    background: url(${trash2}) center no-repeat;
+    background-size: contain;
     color: #3e3874;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-weight: 500;
+    height: 24px;
     line-height: 1;
     outline: none;
     padding: 0;
     position: absolute;
     right: 14px;
     text-decoration: none;
+    text-indent: -999999px;
     top: 14px;
+    width: 24px;
     &:hover {
-      opacity: 0.85;
+      background: url(${trash}) center no-repeat;
+      background-size: contain;
     }
     svg {
       pointer-events: none;

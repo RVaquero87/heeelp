@@ -731,6 +731,9 @@ export const FormBox = styled.form`
     margin-bottom: 40px;
     font-family: "Roboto", sans-serif;
     width: 100%;
+    &.border input {
+      border: 1px solid #e3e4e8;
+    }
   }
 `;
 
@@ -1221,7 +1224,7 @@ export const HeaderBox = styled.header`
           margin: 0;
           max-height: 100vh;
           max-width: 100vw;
-          overflow: hidden;
+          overflow: auto;
           padding: 0;
           opacity: 0;
           position: fixed;
@@ -1368,21 +1371,19 @@ export const HeaderBox = styled.header`
                 }
                 .lightbox-nav {
                   width: 100%;
+                  margin-top: 15px;
+                  position: relative;
                   &:before {
-                    top: initial;
-                    bottom: -7px;
-                    border-width: 7px 6px 0 6px;
-                    border-color: #ffffff transparent transparent transparent;
                     left: 47.8%;
                     transform: (translate(-50%, 0));
                   }
                   &.l-notifications {
-                    top: initial;
-                    bottom: 17vh;
+                    top: 0;
+                    left: 0;
                   }
                   &.l-messages {
-                    top: 16.5vh;
-                    bottom: 100vh;
+                    top: 0;
+                    left: 0;
                   }
                 }
               }
@@ -3983,6 +3984,9 @@ export const SectionDetailsProfile = styled.div`
     .actions {
       margin-bottom: 10px;
     }
+    ${FormBox} {
+      margin: 60px auto 0;
+    }
   }
   @media (max-width: 960px) {
     &.contain {
@@ -4091,6 +4095,28 @@ export const SectionDetailsListItem = styled.div`
 
 //Notifications
 export const SectionNotificationsList = styled.div`
+  &.contain {
+    padding: 64px 0 80px;
+    justify-content: flex-start;
+    max-width: 960px;
+    min-height: 49vh;
+    .box-notifications {
+      width: 100%;
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      min-height: 50vh;
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      min-height: 39vh;
+    }
+  }
+`;
+
+export const SectionMessagesList = styled.div`
   &.contain {
     padding: 64px 0 80px;
     justify-content: flex-start;

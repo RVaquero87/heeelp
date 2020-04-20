@@ -4,6 +4,8 @@ import { BoxImg, Paragraphs, FormBox } from "../../../styles/Index.styles";
 
 //Img
 import arrowBottom from "../../../../public/images/arrow.svg";
+import trash from "../../../../public/images/trash.svg";
+import trash2 from "../../../../public/images/trash2.svg";
 
 export const BoxUser = styled.div`
   background: #fff;
@@ -89,25 +91,28 @@ export const BoxUser = styled.div`
   }
 
   .delete {
+    background: url(${trash2}) center no-repeat;
+    background-size: contain;
     border-radius: 0;
     color: #3e3874;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-weight: 500;
+    height: 24px;
     line-height: 1;
     outline: none;
+    overflow: hidden;
     padding: 0;
     position: absolute;
+    top: 12px;
     right: 14px;
     text-decoration: none;
-    top: 14px;
+    text-indent: -999999px;
+    width: 24px;
     &:hover {
-      color: rgb(62, 56, 116, 0.85);
-    }
-    svg {
-      position: relative;
-      pointer-events: none;
+      background: url(${trash}) center no-repeat;
+      background-size: contain;
     }
   }
   @media (max-width: 1200px) {

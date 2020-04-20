@@ -9,7 +9,7 @@ import { FormBox, ParagraphTop } from "../../styles/Index.styles";
 import { ItemList } from "./styles/ItemsList.style";
 
 //Images
-import { Trash2, Edit2 } from "react-feather";
+import { Edit2 } from "react-feather";
 
 //Contexto
 import { PrincipalContext } from "../../context/PrincipalContext";
@@ -106,8 +106,8 @@ export const ItemListBox = ({ aidId, item, index }) => {
             <button onClick={(e) => setEditButton(!editButton)}>
               <Edit2 color="#3e3874" />
             </button>
-            <button onClick={(e) => deleteItem(e)}>
-              <Trash2 color="#3e3874" />
+            <button className="delete" onClick={(e) => deleteItem(e)}>
+              Borrar
             </button>
           </div>
 

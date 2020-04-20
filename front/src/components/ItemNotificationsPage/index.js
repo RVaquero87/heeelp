@@ -9,7 +9,6 @@ import { BoxNotificationPage } from "./styles/Notifications.style";
 import { PrincipalContext } from "../../context/PrincipalContext";
 
 //Images
-import { Trash2 } from "react-feather";
 import preventDefault from "../../../public/images/default-profile.png";
 
 //Functional & Services
@@ -68,7 +67,7 @@ export const ItemNotificationsPage = ({ notification }) => {
         value={_id}
         onClick={(e) => deleteNotification(e, e.target.value)}
       >
-        <Trash2 color="#3e3874" />
+        borrar
       </button>
     </BoxNotificationPage>
   );

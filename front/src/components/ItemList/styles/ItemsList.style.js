@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { FormBox, ParagraphTop } from "../../../styles/Index.styles";
 
 //Images
-import dotPoints from "../../../../public/images/dots.svg";
-import heart1 from "../../../../public/images/heart-1.svg";
+import trash from "../../../../public/images/trash.svg";
+import trash2 from "../../../../public/images/trash2.svg";
 
 export const ItemList = styled.div`
   margin-top: 44px;
@@ -33,6 +33,8 @@ export const ItemList = styled.div`
     position: absolute;
     right: 0;
     top: 0;
+    display: flex;
+    align-items: center;
     button {
       cursor: pointer;
       height: 25px;
@@ -44,6 +46,14 @@ export const ItemList = styled.div`
       }
       &:last-child {
         margin-right: 0;
+      }
+      &.delete {
+        background: url(${trash2}) center no-repeat;
+        background-size: contain;
+        height: 24px;
+        overflow: hidden;
+        text-indent: -99999px;
+        width: 24px;
       }
     }
   }

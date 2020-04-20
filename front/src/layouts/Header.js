@@ -20,6 +20,7 @@ import imgProfile from "../../public/images/default-profile.png";
 //Functional & Services
 import { doLogout } from "../services/authServices";
 import { changeStatusNotification } from "../services/notificationsServices";
+import { changeToViewsMessages } from "../services/messagesServices";
 
 //Compoments
 import { ButtonLink } from "../components/ButtonLink";
@@ -108,6 +109,17 @@ export const Header = withRouter(({ history }) => {
     await changeToViewsMessages();
     setChangeMessages(!changeMessages);
     history.push("/mis-mensajes");
+  };
+
+  //No two lighbox at once
+  const changeViewsMessagesBox = (e) => {
+    setChangeViewsMessages(true);
+    setChangeViewsNotifications(false);
+  };
+
+  const changeViewsNotificationsBox = (e) => {
+    setChangeViewsNotifications(true);
+    setChangeViewsMessages(false);
   };
 
   return (
@@ -282,9 +294,7 @@ export const Header = withRouter(({ history }) => {
                       {messagesNews.length > 0 ? (
                         <>
                           <Button
-                            onClick={(e) =>
-                              setChangeViewsMessages(!changeViewsMessages)
-                            }
+                            onClick={(e) => changeViewsMessagesBox(e)}
                             className="messages active"
                           >
                             Mensajes
@@ -294,13 +304,16 @@ export const Header = withRouter(({ history }) => {
                               {messagesNews.map((message, i) => {
                                 if (i < 3) {
                                   return (
-                                    <ItemMessages key={i} message={message} />
+                                    <ItemMessages
+                                      key={i}
+                                      messageItem={message}
+                                    />
                                   );
                                 }
                               })}
 
                               <button
-                                onClick={(e) => changeStatusAndView(e)}
+                                onClick={(e) => changeStatusAndViewMessages(e)}
                                 className={
                                   messagesNews.length >= 3 ? "active" : ""
                                 }
@@ -322,11 +335,7 @@ export const Header = withRouter(({ history }) => {
                       {notificationsNews.length > 0 ? (
                         <>
                           <Button
-                            onClick={(e) =>
-                              setChangeViewsNotifications(
-                                !changeViewsNotifications
-                              )
-                            }
+                            onClick={(e) => changeViewsNotificationsBox(e)}
                             className="notifications active"
                           >
                             Notificaciones

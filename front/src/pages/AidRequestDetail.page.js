@@ -46,6 +46,8 @@ import {
   getCancelAidRequest,
   takeOverAidRequest,
   stopTakeOverAidRequest,
+  messageViewForm,
+  setMessageViewForm,
 } from "../services/aidRequestServices";
 import { sendNotification } from "../services/notificationsServices";
 
@@ -56,6 +58,7 @@ import { SelectBox } from "../components/Select";
 import { Loading } from "../components/Loading";
 import { BoxItemCreateForm } from "../components/CreatelistItem";
 import { ItemListBox } from "../components/ItemList";
+import { BoxCreateMessage } from "../components/CreateMessages";
 
 export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const {
@@ -67,6 +70,8 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
     setMessageError,
     listItemViewForm,
     setListItemViewForm,
+    setMessageViewForm,
+    messageViewForm,
   } = useContext(PrincipalContext);
 
   const { id } = useParams();
@@ -522,8 +527,23 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                 {(aidRequestOne.status == "En curso" ||
                   aidRequestOne.status == "Realizada") && (
                   <div className="actions">
-                    <Button type="transparent-blue">Enviar Mensaje</Button>
+                    <Button
+                      type="transparent-blue"
+                      onClick={(e) => setMessageViewForm(!messageViewForm)}
+                    >
+                      {messageViewForm ? "Cerrar" : "Enviar Mensaje"}
+                    </Button>
                   </div>
+                )}
+                {messageViewForm && (
+                  <BoxCreateMessage
+                    receptorUserId={
+                      user?.rol == "Helpers"
+                        ? aidRequestOne.creatorUserid
+                        : aidRequestOne.helperId
+                    }
+                    aidRequestId={aidRequestOne}
+                  />
                 )}
               </SectionDetailsProfile>
             </SectionBox>
@@ -531,7 +551,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
 
           {aidRequestOne?.shoppinglist && (
             <SectionBox justify="between" column>
-              <SectionDetailsListItem className="contain" data-aos="fade-up">
+              <SectionDetailsListItem className="contain">
                 <H2 color="black">
                   {user?.rol == "Helped" ? "¿Qué necesito?" : "¿Qué necesita?"}
                 </H2>

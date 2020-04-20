@@ -2,6 +2,10 @@
 import styled from "styled-components";
 import { BoxImg } from "../../../styles/Index.styles";
 
+//Images
+import trash from "../../../../public/images/trash.svg";
+import trash2 from "../../../../public/images/trash2.svg";
+
 export const BoxNotificationPage = styled.div`
   align-items: center;
   border-bottom: 1px solid #ccc;
@@ -41,26 +45,27 @@ export const BoxNotificationPage = styled.div`
   }
 
   .delete {
+    background: url(${trash2}) center no-repeat;
+    background-size: contain;
     border-radius: 0;
     color: #3e3874;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-weight: 500;
+    height: 24px;
     line-height: 1;
     outline: none;
+    overflow: hidden;
     padding: 0;
     position: absolute;
     right: 0;
     text-decoration: none;
-    top: 50%;
-    transform: translate(0, -50%);
+    text-indent: -999999px;
+    width: 24px;
     &:hover {
-      color: rgb(62, 56, 116, 0.85);
-    }
-    svg {
-      position: relative;
-      pointer-events: none;
+      background: url(${trash}) center no-repeat;
+      background-size: contain;
     }
   }
 
@@ -86,7 +91,7 @@ export const BoxNotificationPage = styled.div`
     .delete {
       translate: none;
       top: initial;
-      bottom: 0;
+      bottom: 20px;
     }
   }
 `;
