@@ -23,7 +23,7 @@ export const getMyReceivedNotifications = async () => {
   return res.data;
 };
 
-export const deleteNotifications = async ({ id }) => {
+export const deleteNotifications = async ({ _id }) => {
   const res = await serviceApi.post("/notifications/delete", { _id });
   return res.data;
 };

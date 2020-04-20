@@ -25,12 +25,7 @@ import { Loading } from "../components/Loading/";
 import { ItemNotificationsPage } from "../components/ItemNotificationsPage/";
 
 export const ListNotificationsPage = () => {
-  const {
-    notifications,
-    changeNotifications,
-    setMessageError,
-    setChangeNotifications,
-  } = useContext(PrincipalContext);
+  const { notifications } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {

@@ -4076,4 +4076,24 @@ export const SectionDetailsListItem = styled.div`
 `;
 
 //Notifications
-export const SectionNotificationsList = styled.div``;
+export const SectionNotificationsList = styled.div`
+  &.contain {
+    padding: 64px 0 80px;
+    justify-content: flex-start;
+    max-width: 960px;
+    min-height: 49vh;
+    .box-notifications {
+      width: 100%;
+    }
+  }
+  @media (max-width: 960px) {
+    &.contain {
+      min-height: 50vh;
+    }
+  }
+  @media (max-width: 480px) {
+    &.contain {
+      min-height: 39vh;
+    }
+  }
+`;

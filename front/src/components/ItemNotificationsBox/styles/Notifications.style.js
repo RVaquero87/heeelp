@@ -27,11 +27,11 @@ export const BoxNotification = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
     p {
-      line-height:1.3
+      line-height: 1.3;
       width: 100%;
-      &.special{
-    padding-top: 2px;
-    width: 100%;
+      &.special {
+        padding-top: 2px;
+        width: 100%;
       }
     }
   }

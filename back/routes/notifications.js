@@ -114,7 +114,7 @@ router.post("/delete", isLoggedIn(), async (req, res) => {
     await Notifications.findByIdAndRemove(_id);
     return res.json({
       status: 200,
-      message: "Mensaje eliminado satisfactoriamente",
+      message: "Notificación eliminada satisfactoriamente",
     });
   } catch (err) {
     return res.json({ status: 400, message: "No encontrado" });

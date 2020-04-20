@@ -2,62 +2,76 @@
 import React, { useContext, useEffect, useState } from "react";
 
 //Styles & AOS animation
-import { FormBox, BoxImg, Paragraphs } from "../../styles/Index.styles";
+import { BoxImg } from "../../styles/Index.styles";
 import { BoxNotificationPage } from "./styles/Notifications.style";
 
+//Contexto
+import { PrincipalContext } from "../../context/PrincipalContext";
+
 //Images
-import { Trash2, Save } from "react-feather";
+import { Trash2 } from "react-feather";
 import preventDefault from "../../../public/images/default-profile.png";
 
 //Functional & Services
-import { getYearsOld } from "../../lib/commonFunctional";
-import { doUnsubscribe, doEditUserAdmin } from "../../services/authServices";
+import { deleteNotifications } from "../../services/notificationsServices";
 
 //Components
 
-export const ItemNotificationsPage = ({ itemNotification }) => {
-  //URL PAGE
-  const [urlPage, seturlPage] = useState();
+export const ItemNotificationsPage = ({ notification }) => {
+  const {
+    setMessageError,
+    changeNotifications,
+    setChangeNotifications,
+  } = useContext(PrincipalContext);
 
-  // useEffect(() => {
-  //   let url = window.location.href.split("/");
-  //   let pageurl = url[url.length - 1];
-  //   seturlPage(pageurl);
-  // }, [window.location.href]);
+  const { _id, message, creatorUserId, createdAt } = notification;
 
-  // const {} = itemNotification;
-  // const deleteUser = async (e, value) => {
-  //   e.preventDefault();
-  //   const responseServerDelete = await doUnsubscribe({ _id: value });
-  //   setchangeLisUsers(!changeLisUsers);
-  //   setMessageError(responseServerDelete.message);
-  //   setTimeout(() => {
-  //     setMessageError(null);
-  //   }, 5000);
-  // };
+  //Time modify
+  const today = new Date().getTime();
+  const time = new Date(createdAt).getTime();
+  const subtractionDate = (today - time) / 86400000;
+  const timeHour = createdAt.slice(11, 16);
+  const reverseTime = createdAt.slice(0, 10).split("-").reverse().join("/");
 
-  // //Change rol
-  // const changeRol = async (data) => {
-  //   const userChange = { ...data, _id: user._id };
-  //   const responseServer = await doEditUserAdmin(userChange);
-  //   setMessageError(responseServer.message);
-  //   setTimeout(() => {
-  //     setMessageError(null);
-  //   }, 5000);
-  // };
+  const deleteNotification = async (e, value) => {
+    e.preventDefault();
+    const responseServerDelete = await deleteNotifications({ _id: value });
+    setChangeNotifications(!changeNotifications);
+    setMessageError(responseServerDelete.message);
+    setTimeout(() => {
+      setMessageError(null);
+    }, 5000);
+  };
 
   return (
     <BoxNotificationPage>
-      <p>hola</p>
-      {urlPage == "mis-notificaciones" && (
-        <button
-          className="delete"
-          value={notification._id}
-          onClick={(e) => delete (e, e.target.value)}
-        >
-          <Trash2 color="#3e3874" />
-        </button>
-      )}
+      <p className="special">
+        {subtractionDate >= 1 ? `${reverseTime}` : `${timeHour}`}
+      </p>
+      <div className="user">
+        <BoxImg>
+          <img
+            src={
+              (creatorUserId?.image && creatorUserId?.image) || preventDefault
+            }
+            alt={creatorUserId?.name}
+            title={creatorUserId?.name}
+          />
+        </BoxImg>
+        <p>
+          <span>
+            {creatorUserId?.name} {creatorUserId?.lastname.slice(0, 1)}.
+          </span>{" "}
+          <span className="line">-</span> {message}
+        </p>
+      </div>
+      <button
+        className="delete"
+        value={_id}
+        onClick={(e) => deleteNotification(e, e.target.value)}
+      >
+        <Trash2 color="#3e3874" />
+      </button>
     </BoxNotificationPage>
   );
 };
