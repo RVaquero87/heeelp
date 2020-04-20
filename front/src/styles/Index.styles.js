@@ -4116,11 +4116,40 @@ export const SectionNotificationsList = styled.div`
   }
 `;
 
+export const SectionTabsMessages = styled.div`
+  padding: 64px 0 16px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid #e3e4e8;
+  button {
+    color: #3e3874;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    position: relative;
+    text-transform: uppercase;
+    &:first-child {
+      margin-right: 40px;
+    }
+    &:hover:after,
+    &.active:after {
+      background: #3e3874;
+      bottom: -16px;
+      content: "";
+      height: 3px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+  }
+`;
+
 export const SectionMessagesList = styled.div`
   &.contain {
     padding: 64px 0 80px;
     justify-content: flex-start;
-    max-width: 960px;
     min-height: 49vh;
     .box-notifications {
       width: 100%;

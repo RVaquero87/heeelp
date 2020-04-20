@@ -8,6 +8,7 @@ import { withProtected } from "../lib/protectRoute.hoc";
 import {
   SectionBox,
   SectionMessagesList,
+  SectionTabsMessages,
   ContentText,
   H1,
   SectionHeaderSingleTitle,
@@ -21,11 +22,16 @@ import { PrincipalContext } from "../context/PrincipalContext";
 import { scrollInit } from "../lib/commonFunctional";
 
 //Compoments
-import Loading  from "../components/Loading";
-import ItemNotificationsPage  from "../components/ItemNotificationsPage";
+import Loading from "../components/Loading";
+import ItemMessagesPage from "../components/ItemMessagesPage";
 
-export const ListNotificationsPage = () => {
-  const { messagesReceived, messagesSend } = useContext(PrincipalContext);
+export const ListMessagesPage = () => {
+  const {
+    messagesReceived,
+    messagesSend,
+    changeViewMessagesTab,
+    setChangeViewMessagesTab,
+  } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
@@ -34,54 +40,92 @@ export const ListNotificationsPage = () => {
 
   return (
     <>
-      {!messagesSend && !messagesReceived ! ? (
+      {!messagesSend && !messagesReceived ? (
         <Loading />
       ) : (
         <>
           <SectionBox bgColor="blueLight">
             <SectionHeaderSingleTitle className="contain" data-aos="fade-up">
               <ContentText>
-                <H1>Notificaciones</H1>
+                <H1>Mensajes</H1>
               </ContentText>
             </SectionHeaderSingleTitle>
           </SectionBox>
 
-          {/* <SectionBox justify="center" column>
-            <SectionMessagesList
-              className={
-                notifications.length == 0
-                  ? "contain list-notifications zero-notifications"
-                  : "contain list-notifications"
-              }
-              data-aos="fade-up"
-            >
-              <div className="box-notifications">
-                {notifications.length == 0 ? (
-                  <Paragraphs blue>
-                    <span>No tiene ninguna notificación en este momento.</span>
-                  </Paragraphs>
-                ) : (
-                  notifications.map((itemNotification, i) => {
-                    return (
-                      <ItemNotificationsPage
-                        notification={itemNotification}
-                        key={i}
-                      />
-                    );
-                  })
-                )}
-              </div>
-            </SectionMessagesList>
-          </SectionBox> */}
+          <SectionBox justify="start">
+            <SectionTabsMessages className="contain">
+              <button
+                className={changeViewMessagesTab ? "active" : ""}
+                onClick={(e) => setChangeViewMessagesTab(true)}
+              >
+                Recibidos
+              </button>
+              <button
+                className={!changeViewMessagesTab ? "active" : ""}
+                onClick={(e) => setChangeViewMessagesTab(false)}
+              >
+                Enviados
+              </button>
+            </SectionTabsMessages>
+          </SectionBox>
+
+          {changeViewMessagesTab ? (
+            <SectionBox justify="center" column>
+              <SectionMessagesList
+                className={
+                  messagesReceived.length == 0
+                    ? "contain list-messages zero-messages"
+                    : "contain list-messages"
+                }
+              >
+                <div className="box-messages">
+                  {messagesReceived.length == 0 ? (
+                    <Paragraphs blue>
+                      <span>No ha recibido ningún mensaje por el momento.</span>
+                    </Paragraphs>
+                  ) : (
+                    messagesReceived
+                      .filter(
+                        (messages) => messages.statusReceptor != "Borrado"
+                      )
+                      .map((messages, i) => {
+                        return <ItemMessagesPage item={messages} key={i} />;
+                      })
+                  )}
+                </div>
+              </SectionMessagesList>
+            </SectionBox>
+          ) : (
+            <SectionBox justify="center" column>
+              <SectionMessagesList
+                className={
+                  messagesSend.length == 0
+                    ? "contain list-messages zero-messages"
+                    : "contain list-messages"
+                }
+              >
+                <div className="box-messages">
+                  {messagesSend.length == 0 ? (
+                    <Paragraphs blue>
+                      <span>No has enviado ningún mensaje por el momento.</span>
+                    </Paragraphs>
+                  ) : (
+                    messagesSend
+                      .filter((messages) => messages.statusCreator != "Borrado")
+                      .map((messages, i) => {
+                        return <ItemMessagesPage item={messages} key={i} />;
+                      })
+                  )}
+                </div>
+              </SectionMessagesList>
+            </SectionBox>
+          )}
         </>
       )}
     </>
   );
 };
 
-export const ListNotificationsPagePrivate = withProtected(
-  ListNotificationsPage,
-  {
-    redirect: false,
-  }
-);
+export const ListMessagesPagePrivate = withProtected(ListMessagesPage, {
+  redirect: false,
+});

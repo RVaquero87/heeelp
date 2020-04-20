@@ -31,7 +31,7 @@ const BoxCreateMessage = ({ receptorUserId, aidRequestId }) => {
     const responseServer = await sendMessage(createData);
     setChangeMessages(!changeMessages);
     setMessageError(responseServer.message);
-    setMessageViewForm(!messageViewForm);
+    setMessageViewForm(false);
     setTimeout(() => {
       setMessageError(null);
     }, 5000);

@@ -122,6 +122,7 @@ export const PrincipalContextProvider = (props) => {
   const [messagesSend, setMessageSend] = useState([]);
   const [changeMessages, setChangeMessages] = useState();
   const [messageViewForm, setMessageViewForm] = useState(false);
+  const [changeViewMessagesTab, setChangeViewMessagesTab] = useState(true);
 
   useEffect(() => {
     getReceivedMessages()
@@ -222,6 +223,8 @@ export const PrincipalContextProvider = (props) => {
         setChangeMessages,
         messageViewForm,
         setMessageViewForm,
+        changeViewMessagesTab,
+        setChangeViewMessagesTab,
       }}
     >
       {props.children}

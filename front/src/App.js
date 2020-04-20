@@ -34,6 +34,7 @@ import { MyRequestsPrivate } from "./pages/MyRequest.page";
 import { MyRequestDetailsRolPagePrivate } from "./pages/AidRequestDetail.page";
 import { ListAidsRequestPagePrivate } from "./pages/ListAidsRequest";
 import { ListNotificationsPagePrivate } from "./pages/ListNotifications";
+import { ListMessagesPagePrivate } from "./pages/ListMessages";
 
 export const App = withAuthentication(() => {
   AOS.init();
@@ -74,6 +75,7 @@ export const App = withAuthentication(() => {
               path="/mis-notificaciones"
               component={ListNotificationsPagePrivate}
             />
+            <Route path="/mis-mensajes" component={ListMessagesPagePrivate} />
             <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>

@@ -53,7 +53,6 @@ export const ListNotificationsPage = () => {
                   ? "contain list-notifications zero-notifications"
                   : "contain list-notifications"
               }
-              data-aos="fade-up"
             >
               <div className="box-notifications">
                 {notifications.length == 0 ? (

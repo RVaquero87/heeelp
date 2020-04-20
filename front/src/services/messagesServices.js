@@ -28,7 +28,7 @@ export const changeToViewsMessages = async () => {
   return res.data;
 };
 
-export const deleteMessages = async ({ id }) => {
+export const deleteMessages = async ({ _id }) => {
   const res = await serviceApi.post("/messages/delete", { _id });
   return res.data;
 };
