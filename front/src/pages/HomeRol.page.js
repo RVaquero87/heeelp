@@ -40,7 +40,7 @@ import { scrollInit } from "../lib/commonFunctional";
 //Compoments
 import ItemServicies from "../components/ItemServices";
 import ButtonLink from "../components/ButtonLink";
-import AccordionFaqsBox from "../components/ItemAccordion";
+import AccordionFaqs from "../components/ItemsAccordion";
 import AidsRequestBox from "../components/ItemAidRequest";
 
 export const HomeRolPage = () => {
@@ -180,7 +180,7 @@ export const HomeRolPage = () => {
                   Consulta nuestras preguntas frecuentes
                 </span>
               </H2>
-              <AccordionFaqsBox />
+              <AccordionFaqs />
               <ButtonLink whereTo="/faqs" className="button white big">
                 VER TODAS
               </ButtonLink>

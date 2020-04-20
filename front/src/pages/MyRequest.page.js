@@ -47,7 +47,7 @@ import { createAidRequest } from "../services/aidRequestServices";
 //Compoments
 import ItemServicies from "../components/ItemServices";
 import ButtonLink from "../components/ButtonLink";
-import AccordionFaqsBox from "../components/ItemAccordion";
+import AccordionFaqs from "../components/ItemsAccordion";
 import InputBox from "../components/Input";
 import TextAreaBox from "../components/TextArea";
 import SelectBox from "../components/Select";
@@ -809,7 +809,7 @@ export const MyRequests = () => {
                   Consulta nuestras preguntas frecuentes
                 </span>
               </H2>
-              <AccordionFaqsBox />
+              <AccordionFaqs />
               <ButtonLink whereTo="/faqs" className="button white big">
                 VER TODAS
               </ButtonLink>

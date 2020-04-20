@@ -36,7 +36,7 @@ import { createReview } from "../services/reviewsServices";
 
 //Compoments
 import ButtonLink from "../components/ButtonLink";
-import AccordionFaqsBox from "../components/ItemAccordion";
+import AccordionFaqs from "../components/ItemsAccordion";
 import ReviewsBoxItem from "../components/ListItemReviews";
 import Loading from "../components/Loading";
 import InputBox from "../components/Input";
@@ -327,7 +327,7 @@ export const ReviewsPage = () => {
                   Consulta nuestras preguntas frecuentes
                 </span>
               </H2>
-              <AccordionFaqsBox />
+              <AccordionFaqs />
               <ButtonLink whereTo="/faqs" className="button white big">
                 VER TODAS
               </ButtonLink>

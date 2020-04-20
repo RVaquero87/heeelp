@@ -39,7 +39,7 @@ import { getAverage, scrollInit } from "../lib/commonFunctional";
 import ButtonLink from "../components/ButtonLink";
 import ReviewsBoxItem from "../components/ListItemReviews";
 import ItemServicies from "../components/ItemServices";
-import AccordionFaqsBox from "../components/ItemAccordionHome";
+import AccordionFaqs from "../components/ItemsAccordion";
 
 export const HomePage = () => {
   const { listReviews } = useContext(PrincipalContext);
@@ -206,7 +206,7 @@ export const HomePage = () => {
               Consulta nuestras preguntas frecuentes
             </span>
           </H2>
-          <AccordionFaqsBox />
+          <AccordionFaqs />
           <ButtonLink whereTo="/faqs" className="button white big">
             VER TODAS
           </ButtonLink>

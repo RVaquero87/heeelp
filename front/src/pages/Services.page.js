@@ -29,7 +29,7 @@ import { scrollInit } from "../lib/commonFunctional";
 //Compoments
 import ButtonLink from "../components/ButtonLink";
 import ItemServicies from "../components/ItemServices";
-import AccordionFaqsBox from "../components/ItemAccordion";
+import AccordionFaqs from "../components/ItemsAccordion";
 
 export const ServicesPage = () => {
   //Reset Scroll
@@ -96,7 +96,7 @@ export const ServicesPage = () => {
               Consulta nuestras preguntas frecuentes
             </span>
           </H2>
-          <AccordionFaqsBox />
+          <AccordionFaqs />
           <ButtonLink whereTo="/faqs" className="button white big">
             VER TODAS
           </ButtonLink>
