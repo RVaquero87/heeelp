@@ -14,7 +14,7 @@ import { ParagraphTop, Paragraphs } from "../../styles/Index.styles";
 //Images
 import iconLess from "../../../public/images/icon-less.svg";
 
-const AccordionFaqsBox = () => {
+export const AccordionFaqsBox = () => {
   return (
     <Accordion preExpanded="0">
       <AccordionItem className="accordion-item">
@@ -195,4 +195,3 @@ const AccordionFaqsBox = () => {
     </Accordion>
   );
 };
-export default AccordionFaqsBox;
