@@ -562,8 +562,9 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                         onClick={(e) => setListItemViewForm(!listItemViewForm)}
                         type="transparent-blue"
                       >
-                        Añadir{" "}
-                        {(() => {
+                        {!listItemViewForm
+                          ? `Añadir 
+                        ${(() => {
                           switch (aidRequestOne.type) {
                             case "Supermercado":
                               return "producto";
@@ -574,7 +575,8 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
                             default:
                               return "tarea";
                           }
-                        })()}
+                        })()}`
+                          : "Cerrar"}
                       </Button>
                     </div>
                   )}

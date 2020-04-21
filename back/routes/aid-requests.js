@@ -161,7 +161,7 @@ router.post("/alls", async (req, res) => {
       })
     );
     const aidRequestsModify = await AidRequests.find()
-      .sort({ createdAt: -1 })
+      .sort({ time: 1 })
       .populate("creatorUserid")
       .populate("helperId")
       .populate("shoppinglist");
