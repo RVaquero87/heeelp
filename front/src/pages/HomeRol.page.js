@@ -126,11 +126,14 @@ export const HomeRolPage = () => {
               </div>
             </SectionServicesProvided>
           </SectionBox>
-
           <SectionBox justify="center" column>
+            {console.log(aidsRequestId)}
             <SectionAidsRequest
               className={
-                aidsRequestId.length == 0 ? "contain zero-aids" : "contain"
+                aidsRequestId.filter((aid) => aid.status != "Cancelada")
+                  .length == 0
+                  ? "contain zero-aids"
+                  : "contain"
               }
               data-aos="fade-up"
             >
@@ -141,7 +144,8 @@ export const HomeRolPage = () => {
                 </span>
               </H2>
               <div className="box-aids">
-                {aidsRequestId.length == 0 ? (
+                {aidsRequestId.filter((aid) => aid.status != "Cancelada")
+                  .length == 0 ? (
                   <Paragraphs blue>
                     <span>
                       {user?.name} {user?.lastname.slice(0, 1)}.{" "}
