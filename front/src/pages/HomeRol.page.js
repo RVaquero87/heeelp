@@ -127,7 +127,6 @@ export const HomeRolPage = () => {
             </SectionServicesProvided>
           </SectionBox>
           <SectionBox justify="center" column>
-            {console.log(aidsRequestId)}
             <SectionAidsRequest
               className={
                 aidsRequestId.filter((aid) => aid.status != "Cancelada")
