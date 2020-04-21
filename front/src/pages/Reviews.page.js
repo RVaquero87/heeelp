@@ -75,23 +75,30 @@ export const ReviewsPage = () => {
     }
   };
 
+  //Starts
+  const [starsValue, setStarsValue] = useState("0");
+
+  const getValueStar = (e, value) => {
+    e.preventDefault();
+    setStarsValue(value);
+  };
+
   //Form
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
       title: "",
       message: "",
-      stars: "",
     },
   });
-
   const { register, handleSubmit, errors } = methods;
 
   const getReviewsNew = async (data) => {
-    const responseServer = await createReview(data);
+    const responseServer = await createReview({ stars: starsValue, ...data });
     setGetFormReviews(!getFormReviews);
     setchangeListReviews(!changeListReviews);
     setMessageError(responseServer.message);
+    setStarsValue("0");
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -197,17 +204,44 @@ export const ReviewsPage = () => {
                             },
                           })}
                         />
-                        <SelectBox
-                          label="Da una valoración"
-                          name="stars"
-                          value={[0, 1, 2, 3, 4, 5]}
-                          ref={register({
-                            required: {
-                              value: true,
-                              message: "El campo es requerido",
-                            },
-                          })}
-                        />
+                        <div className="box-input rating">
+                          <p>Da una valoración:</p>
+                          <button
+                            className={starsValue == "5" ? "active" : ""}
+                            value="5"
+                            onClick={(e) => getValueStar(e, e.target.value)}
+                          >
+                            Valoración 5
+                          </button>
+                          <button
+                            className={starsValue == "4" ? "active" : ""}
+                            value="4"
+                            onClick={(e) => getValueStar(e, e.target.value)}
+                          >
+                            Valoración 4
+                          </button>
+                          <button
+                            className={starsValue == "3" ? "active" : ""}
+                            value="3"
+                            onClick={(e) => getValueStar(e, e.target.value)}
+                          >
+                            Valoración 3
+                          </button>
+                          <button
+                            className={starsValue == "2" ? "active" : ""}
+                            value="2"
+                            onClick={(e) => getValueStar(e, e.target.value)}
+                          >
+                            Valoración 2
+                          </button>
+                          <button
+                            className={starsValue == "1" ? "active" : ""}
+                            value="1"
+                            onClick={(e) => getValueStar(e, e.target.value)}
+                          >
+                            Valoración 1
+                          </button>
+                        </div>
 
                         <button type="submit" className="button">
                           Aceptar

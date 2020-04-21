@@ -15,6 +15,8 @@ import notificationsBlue from "../../public/images/bell-blue.svg";
 import editProfile from "../../public/images/edit.svg";
 import heart1 from "../../public/images/heart-1.svg";
 import heart2 from "../../public/images/heart-2.svg";
+import startOn from "../../public/images/star-on.svg";
+import startOff from "../../public/images/star-off.svg";
 
 //Global Class
 export const GlobalContent = styled.div`
@@ -2493,6 +2495,42 @@ export const SectionCreateReview = styled.div`
     ${H2} {
       padding-bottom: 50px;
     }
+    .rating {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-end;
+      p {
+        order: 1;
+        color: #9a9caf;
+        display: block;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1;
+        margin-right: 10px;
+      }
+      button {
+        background: url(${startOff}) no-repeat center;
+        background-size: contain;
+        cursor: pointer;
+        height: 25px;
+        margin-right: 7px;
+        overflow: hidden;
+        text-indent: -999999px;
+        width: 25px;
+        display: inline-block;
+        &.active,
+        &.active ~ button,
+        &:hover,
+        &:hover ~ button,
+        &:focus,
+        &:focus ~ button {
+          background: url(${startOn}) no-repeat center;
+          background-size: contain;
+          cursor: pointer;
+        }
+      }
+    }
   }
   @media (max-width: 960px) {
     .content-text {
@@ -2507,6 +2545,23 @@ export const SectionCreateReview = styled.div`
       padding: 60px 0;
       ${H2} {
         padding-bottom: 40px;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    ${FormBox} {
+      .rating {
+        flex-flow: wrap row-reverse;
+        p {
+          order: -1;
+          margin-bottom: 10px;
+          width: 100%;
+        }
+        button {
+          height: 30px;
+          margin-right: 12px;
+          width: 30px;
+        }
       }
     }
   }
