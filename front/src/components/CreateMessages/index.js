@@ -21,7 +21,6 @@ const BoxCreateMessage = ({ receptorUserId, aidRequestId }) => {
     setMessageError,
     changeMessages,
     setChangeMessages,
-    messageViewForm,
     setMessageViewForm,
   } = useContext(PrincipalContext);
 

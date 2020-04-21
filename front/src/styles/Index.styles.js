@@ -4151,7 +4151,7 @@ export const SectionMessagesList = styled.div`
     padding: 64px 0 80px;
     justify-content: flex-start;
     min-height: 49vh;
-    .box-notifications {
+    .box-messages {
       width: 100%;
     }
   }

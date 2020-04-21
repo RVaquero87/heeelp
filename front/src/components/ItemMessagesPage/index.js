@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 //Styles & AOS animation
-import { BoxImg, ParagraphTop } from "../../styles/Index.styles";
+import { BoxImg } from "../../styles/Index.styles";
 import { BoxMessagesPage } from "./styles/Messages.style";
 
 //Contexto
@@ -14,6 +14,7 @@ import closeX from "../../../public/images/close.svg";
 
 //Functional & Services
 import { deleteMessages } from "../../services/messagesServices";
+import { getYearsOld } from "../../lib/commonFunctional";
 
 //Compoments
 import BoxCreateMessage from "../../components/CreateMessages";
@@ -54,70 +55,91 @@ const ItemMessagesPage = ({ item }) => {
     }, 5000);
   };
 
+  const [viewSendMessage, setViewSendMessage] = useState(false);
+
+  useEffect(() => {
+    setViewSendMessage(false);
+  }, [changeViewMessagesTab]);
+
+  const getOpenForm = (e) => {
+    e.preventDefault();
+    setViewSendMessage(true);
+    setMessageViewForm(true);
+  };
+
+  const getCloseForm = (e) => {
+    e.preventDefault();
+    setViewSendMessage(false);
+  };
+
   return (
     <BoxMessagesPage>
-      <p className="special">
+      <p className="time special">
         {subtractionDate >= 1 ? `${reverseTime}` : `${timeHour}`}
       </p>
-      <div className="user">
-        <BoxImg>
+      <div className="content">
+        <div className="user">
+          <BoxImg>
+            {changeViewMessagesTab == true ? (
+              <img
+                src={
+                  (creatorUserId?.image && creatorUserId?.image) ||
+                  preventDefault
+                }
+                alt={creatorUserId?.name}
+                title={creatorUserId?.name}
+              />
+            ) : (
+              <img
+                src={
+                  (receptorUserId?.image && receptorUserId?.image) ||
+                  preventDefault
+                }
+                alt={receptorUserId?.name}
+                title={receptorUserId?.name}
+              />
+            )}
+          </BoxImg>
           {changeViewMessagesTab == true ? (
-            <img
-              src={
-                (creatorUserId?.image && creatorUserId?.image) || preventDefault
-              }
-              alt={creatorUserId?.name}
-              title={creatorUserId?.name}
-            />
+            <p>
+              <span>
+                {creatorUserId?.name} {creatorUserId?.lastname.slice(0, 1)}.
+              </span>{" "}
+              {getYearsOld(creatorUserId?.birthYear)} años
+            </p>
           ) : (
-            <img
-              src={
-                (receptorUserId?.image && receptorUserId?.image) ||
-                preventDefault
-              }
-              alt={receptorUserId?.name}
-              title={receptorUserId?.name}
-            />
+            <p>
+              <span>
+                {receptorUserId?.name} {receptorUserId?.lastname.slice(0, 1)}.{" "}
+              </span>
+              {getYearsOld(receptorUserId?.birthYear)} años
+            </p>
           )}
-        </BoxImg>
-        {changeViewMessagesTab == true ? (
-          <p>
-            <span>
-              {creatorUserId?.name} {creatorUserId?.lastname.slice(0, 1)}.
-            </span>{" "}
-          </p>
-        ) : (
-          <p>
-            <span>
-              {receptorUserId?.name} {receptorUserId?.lastname.slice(0, 1)}.
-            </span>
-          </p>
-        )}
-      </div>
-      <div className="message">
-        <p>{message}</p>
+        </div>
+        <div className="message">
+          <p>{message}</p>
+        </div>
       </div>
 
-      <button
-        className="response"
-        onClick={(e) => setMessageViewForm(!messageViewForm)}
-      >
-        Responder
-      </button>
+      <div className="button-box">
+        <button className="response" onClick={(e) => getOpenForm(e)}>
+          Responder
+        </button>
 
-      <button
-        className="delete"
-        value={_id}
-        onClick={(e) => handleDeleteMessage(e, e.target.value)}
-      >
-        borrar
-      </button>
+        <button
+          className="delete"
+          value={_id}
+          onClick={(e) => handleDeleteMessage(e, e.target.value)}
+        >
+          borrar
+        </button>
+      </div>
 
-      {messageViewForm && (
+      {viewSendMessage && messageViewForm && (
         <div className="box-form">
-          <ParagraphTop>
+          <p className="title">
             {changeViewMessagesTab == true ? "Responder a" : "Escribir a"}
-          </ParagraphTop>
+          </p>
           <div className="user">
             <BoxImg>
               {changeViewMessagesTab == true ? (
@@ -145,14 +167,19 @@ const ItemMessagesPage = ({ item }) => {
                 <span>
                   {creatorUserId?.name} {creatorUserId?.lastname.slice(0, 1)}.
                 </span>{" "}
+                - {getYearsOld(creatorUserId?.birthYear)} años
               </p>
             ) : (
               <p>
                 <span>
                   {receptorUserId?.name} {receptorUserId?.lastname.slice(0, 1)}.
-                </span>
+                </span>{" "}
+                - {getYearsOld(receptorUserId?.birthYear)} años
               </p>
             )}
+            <button onClick={(e) => getCloseForm(e)}>
+              <img src={closeX} alt="cerrar" title="cerrar" />
+            </button>
           </div>
 
           <BoxCreateMessage
@@ -161,9 +188,6 @@ const ItemMessagesPage = ({ item }) => {
             }
             aidRequestId={aidRequestId}
           />
-          <button onClick={(e) => setMessageViewForm(!messageViewForm)}>
-            <img src={closeX} alt="cerrar" title="cerrar" />
-          </button>
         </div>
       )}
     </BoxMessagesPage>

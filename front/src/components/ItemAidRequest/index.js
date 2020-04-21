@@ -67,7 +67,7 @@ const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   //Public Aids Request
   const publicAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await getPublicAidRequest(_id);
+    const responseServer = await getPublicAidRequest({ _id });
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
@@ -79,7 +79,7 @@ const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   //Duplicate Aids Request
   const duplicateAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await getDuplicateAidRequest(_id);
+    const responseServer = await getDuplicateAidRequest({ _id });
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
@@ -92,15 +92,17 @@ const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   //Cancel Aids Request
   const cancelAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await getCancelAidRequest(_id);
+    const responseServer = await getCancelAidRequest({ _id });
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
     setOptionButtons(!optionButtons);
-    sendNotification({
-      message: `Ha cancelado la petición que hizo`,
-      aidRequestId: _id,
-      receptorUserId: helperId._id,
-    });
+    if (helperId) {
+      sendNotification({
+        message: `Ha cancelado la petición que hizo`,
+        aidRequestId: _id,
+        receptorUserId: helperId._id,
+      });
+    }
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -109,7 +111,7 @@ const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   //Add Helper Aids Request
   const addAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await takeOverAidRequest(_id);
+    const responseServer = await takeOverAidRequest({ _id });
     setChangeAidsRequest(!changeAidsRequest);
     setchangeFilterAidsRequest(!changeFilterAidsRequest);
     setMessageError(responseServer.message);
@@ -126,7 +128,7 @@ const AidsRequestBox = withRouter(({ history, aidrequest }) => {
   //Remove Helper Aids Request
   const removeAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await stopTakeOverAidRequest(_id);
+    const responseServer = await stopTakeOverAidRequest({ _id });
     setChangeAidsRequest(!changeAidsRequest);
     setchangeFilterAidsRequest(!changeFilterAidsRequest);
     sendNotification({

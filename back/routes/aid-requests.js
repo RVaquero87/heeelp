@@ -211,7 +211,6 @@ router.post("/public", isLoggedIn(), async (req, res, next) => {
 router.post("/id-one", async (req, res) => {
   try {
     const { _id } = req.body;
-
     const aidRequests = await AidRequests.find({
       _id,
     })
@@ -286,6 +285,7 @@ router.post("/duplicate", isLoggedIn(), async (req, res, next) => {
       price: oldAidRequest.price,
       time: oldAidRequest.time,
       type: oldAidRequest.type,
+      shoppinglist: oldAidRequest.shoppinglist || [],
       status: "En creación",
     });
 

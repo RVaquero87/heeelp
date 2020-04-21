@@ -62,8 +62,6 @@ router.post("/delete", isLoggedIn(), async (req, res) => {
   try {
     const { _id, aidRequestsId } = req.body;
 
-    await ShoppingLists.findByIdAndRemove(_id);
-
     await AidRequests.findById(aidRequestsId).then(async (aidRequest) => {
       const arrayShoppingList = aidRequest.shoppinglist;
       const arrayIdsList = await Promise.all(

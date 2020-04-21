@@ -46,8 +46,6 @@ import {
   getCancelAidRequest,
   takeOverAidRequest,
   stopTakeOverAidRequest,
-  messageViewForm,
-  setMessageViewForm,
 } from "../services/aidRequestServices";
 import { sendNotification } from "../services/notificationsServices";
 
@@ -85,7 +83,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const [aidRequestOne, setAidRequestOne] = useState();
 
   useEffect(() => {
-    getOneAidRequest(id)
+    getOneAidRequest({ _id: id })
       .then((aidRequest) => {
         setAidRequestOne(aidRequest[0]);
       })
@@ -133,7 +131,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   const { register, handleSubmit, errors } = methods;
 
   const editAidRequest = async (data) => {
-    const objectdata = { _id: aidRequestOne.id, ...data };
+    const objectdata = { _id: aidRequestOne._id, ...data };
     const responseServer = await editDataAidRequest(objectdata);
     setGetEditForm(!getEditForm);
     setAidRequestOneChange(!aidRequestOneChange);
@@ -147,7 +145,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   //Public Aids Request
   const publicAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await getPublicAidRequest(id);
+    const responseServer = await getPublicAidRequest({ _id: id });
     setAidRequestOneChange(!aidRequestOneChange);
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
@@ -159,14 +157,16 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   //Cancel Aids Request
   const cancelAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await getCancelAidRequest(id);
+    const responseServer = await getCancelAidRequest({ _id: id });
     setChangeAidsRequest(!changeAidsRequest);
     setMessageError(responseServer.message);
-    sendNotification({
-      message: `Ha cancelado la petición que hizo`,
-      aidRequestId: aidRequestOne._id,
-      receptorUserId: aidRequestOne.helperId._id,
-    });
+    if (aidRequestOne?.helperId) {
+      sendNotification({
+        message: `Ha cancelado la petición que hizo`,
+        aidRequestId: aidRequestOne._id,
+        receptorUserId: aidRequestOne.helperId._id,
+      });
+    }
     setTimeout(() => {
       setMessageError(null);
     }, 5000);
@@ -176,7 +176,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   //Add Helper Aids Request
   const addAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await takeOverAidRequest(id);
+    const responseServer = await takeOverAidRequest({ _id: id });
     setAidRequestOneChange(!aidRequestOneChange);
     setMessageError(responseServer.message);
     sendNotification({
@@ -192,7 +192,7 @@ export const MyRequestDetailsRolPage = withRouter(({ history }) => {
   //Remove Helper Aids Request
   const removeAidRequest = async (e) => {
     e.preventDefault();
-    const responseServer = await stopTakeOverAidRequest(id);
+    const responseServer = await stopTakeOverAidRequest({ _id: id });
     setAidRequestOneChange(!aidRequestOneChange);
     setMessageError(responseServer.message);
     sendNotification({

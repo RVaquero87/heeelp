@@ -31,12 +31,26 @@ export const ListMessagesPage = () => {
     messagesSend,
     changeViewMessagesTab,
     setChangeViewMessagesTab,
+    messageViewForm,
+    setMessageViewForm,
   } = useContext(PrincipalContext);
 
   //Reset Scroll
   useEffect(() => {
     scrollInit();
   }, []);
+
+  const getMessageRecives = (e) => {
+    e.preventDefault();
+    setChangeViewMessagesTab(true);
+    setMessageViewForm(false);
+  };
+
+  const getMessageSend = (e) => {
+    e.preventDefault();
+    setChangeViewMessagesTab(false);
+    setMessageViewForm(false);
+  };
 
   return (
     <>
@@ -56,13 +70,13 @@ export const ListMessagesPage = () => {
             <SectionTabsMessages className="contain">
               <button
                 className={changeViewMessagesTab ? "active" : ""}
-                onClick={(e) => setChangeViewMessagesTab(true)}
+                onClick={(e) => getMessageRecives(e)}
               >
                 Recibidos
               </button>
               <button
                 className={!changeViewMessagesTab ? "active" : ""}
-                onClick={(e) => setChangeViewMessagesTab(false)}
+                onClick={(e) => getMessageSend(e)}
               >
                 Enviados
               </button>

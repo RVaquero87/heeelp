@@ -49,42 +49,42 @@ export const getAidRequest = async () => {
   return res.data;
 };
 
-export const getOneAidRequest = async (_id) => {
+export const getOneAidRequest = async ({ _id }) => {
   const res = await serviceApi.post("/aid-requests/id-one", {
     _id,
   });
   return res.data;
 };
 
-export const getPublicAidRequest = async (_id) => {
+export const getPublicAidRequest = async ({ _id }) => {
   const res = await serviceApi.post("/aid-requests/public", {
     _id,
   });
   return res.data;
 };
 
-export const takeOverAidRequest = async (_id) => {
+export const takeOverAidRequest = async ({ _id }) => {
   const res = await serviceApi.post("/aid-requests/add-helper", {
     _id,
   });
   return res.data;
 };
 
-export const stopTakeOverAidRequest = async (_id) => {
+export const stopTakeOverAidRequest = async ({ _id }) => {
   const res = await serviceApi.post("/aid-requests/delete-helper", {
     _id,
   });
   return res.data;
 };
 
-export const getDuplicateAidRequest = async (_id) => {
+export const getDuplicateAidRequest = async ({ _id }) => {
   const res = await serviceApi.post("/aid-requests/duplicate", {
     _id,
   });
   return res.data;
 };
 
-export const getCancelAidRequest = async (_id) => {
+export const getCancelAidRequest = async ({ _id }) => {
   const res = await serviceApi.post("/aid-requests/cancel", {
     _id,
   });
