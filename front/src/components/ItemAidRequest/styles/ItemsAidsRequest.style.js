@@ -210,6 +210,7 @@ export const BoxAidRequest = styled.div`
     letter-spacing: 0.88px;
     font-weight: 500;
     line-height: 1;
+    padding-top: 3px;
     text-transform: uppercase;
     width: 100%;
     &:before {
@@ -231,6 +232,7 @@ export const BoxAidRequest = styled.div`
     a {
       display: block;
       cursor: pointer;
+      font-family: "Roboto", sans-serif;
       text-decoration: none;
       color: #3e3874;
       font-size: 18px;

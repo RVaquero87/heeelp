@@ -13,7 +13,6 @@ const LoadingBox = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   position: absolute;
   z-index: 10000;
   background: rgba(0, 0, 0, 0.65);

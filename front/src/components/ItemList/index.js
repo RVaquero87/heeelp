@@ -109,116 +109,114 @@ const ItemListBox = ({ aidId, item, index }) => {
             <button className="delete" onClick={(e) => deleteItem(e)}>
               Borrar
             </button>
-          </div>
-
-          {!editButton ? (
-            <>
-              <ParagraphTop blue>
-                <span>{name}</span>
-              </ParagraphTop>
-              <ParagraphTop blue>
-                <span>Cantidad: {quantity}</span>
-              </ParagraphTop>
-              <ParagraphTop className="special">{description}</ParagraphTop>
-            </>
-          ) : (
-            <FormContext {...methods}>
-              <FormBox onSubmit={handleSubmit(editItem)}>
-                <InputBox
-                  label={`Nombre  ${(() => {
-                    switch (aidId.type) {
-                      case "Supermercado":
-                        return `del producto`;
-                      case "Parafarmacia":
-                        return `del producto`;
-                      case "Lavandería":
-                        return `de la lavadora`;
-                      default:
-                        return `de la tarea`;
-                    }
-                  })()} (40 max)`}
-                  name="name"
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: "El campo es requerido",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message:
-                        "Este campo solo admite un máximo de 40 caracteres",
-                    },
-                  })}
-                />
-                <InputBox
-                  label={`Decripcion ${(() => {
-                    switch (aidId.type) {
-                      case "Supermercado":
-                        return `del producto`;
-                      case "Parafarmacia":
-                        return `del producto`;
-                      case "Lavandería":
-                        return `de la lavadora`;
-                      default:
-                        return `de la tarea`;
-                    }
-                  })()} (180 max)`}
-                  name="description"
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: "El campo es requerido",
-                    },
-                    maxLength: {
-                      value: 180,
-                      message:
-                        "Este campo solo admite un máximo de 180 caracteres",
-                    },
-                  })}
-                />
-
-                <InputBox
-                  label={`Cantidad ${(() => {
-                    switch (aidId.type) {
-                      case "Supermercado":
-                        return `del producto`;
-                      case "Parafarmacia":
-                        return `del producto`;
-                      case "Lavandería":
-                        return `de la lavadora`;
-                      default:
-                        return `de la tarea`;
-                    }
-                  })()}`}
-                  name="quantity"
-                  type="number"
-                  ref={register({
-                    required: {
-                      value: true,
-                      message: "El campo es requerido",
-                    },
-                  })}
-                />
-
-                <button type="submit" className="button transparent-blue">
-                  Editar{" "}
-                  {(() => {
-                    switch (aidId.type) {
-                      case "Supermercado":
-                        return `producto`;
-                      case "Parafarmacia":
-                        return `producto`;
-                      case "Lavandería":
-                        return `lavadora`;
-                      default:
-                        return `tarea`;
-                    }
-                  })()}
-                </button>
-              </FormBox>
-            </FormContext>
-          )}
+          </div>{" "}
         </>
+      )}
+
+      {!editButton ? (
+        <>
+          <ParagraphTop blue>
+            <span>{name}</span>
+          </ParagraphTop>
+          <ParagraphTop blue>
+            <span>Cantidad: {quantity}</span>
+          </ParagraphTop>
+          <ParagraphTop className="special">{description}</ParagraphTop>
+        </>
+      ) : (
+        <FormContext {...methods}>
+          <FormBox onSubmit={handleSubmit(editItem)}>
+            <InputBox
+              label={`Nombre  ${(() => {
+                switch (aidId.type) {
+                  case "Supermercado":
+                    return `del producto`;
+                  case "Parafarmacia":
+                    return `del producto`;
+                  case "Lavandería":
+                    return `de la lavadora`;
+                  default:
+                    return `de la tarea`;
+                }
+              })()} (40 max)`}
+              name="name"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "El campo es requerido",
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Este campo solo admite un máximo de 40 caracteres",
+                },
+              })}
+            />
+            <InputBox
+              label={`Decripcion ${(() => {
+                switch (aidId.type) {
+                  case "Supermercado":
+                    return `del producto`;
+                  case "Parafarmacia":
+                    return `del producto`;
+                  case "Lavandería":
+                    return `de la lavadora`;
+                  default:
+                    return `de la tarea`;
+                }
+              })()} (180 max)`}
+              name="description"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "El campo es requerido",
+                },
+                maxLength: {
+                  value: 180,
+                  message: "Este campo solo admite un máximo de 180 caracteres",
+                },
+              })}
+            />
+
+            <InputBox
+              label={`Cantidad ${(() => {
+                switch (aidId.type) {
+                  case "Supermercado":
+                    return `del producto`;
+                  case "Parafarmacia":
+                    return `del producto`;
+                  case "Lavandería":
+                    return `de la lavadora`;
+                  default:
+                    return `de la tarea`;
+                }
+              })()}`}
+              name="quantity"
+              type="number"
+              ref={register({
+                required: {
+                  value: true,
+                  message: "El campo es requerido",
+                },
+              })}
+            />
+
+            <button type="submit" className="button transparent-blue">
+              Editar{" "}
+              {(() => {
+                switch (aidId.type) {
+                  case "Supermercado":
+                    return `producto`;
+                  case "Parafarmacia":
+                    return `producto`;
+                  case "Lavandería":
+                    return `lavadora`;
+                  default:
+                    return `tarea`;
+                }
+              })()}
+            </button>
+          </FormBox>
+        </FormContext>
       )}
     </ItemList>
   );

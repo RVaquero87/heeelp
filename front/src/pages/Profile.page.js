@@ -233,19 +233,19 @@ export const Profile = withRouter(({ history }) => {
                   <span>Datos personales</span>
                 </H2>
                 <Paragraphs blue>
-                  <span>Nombre </span> <span>{user?.name}</span>
+                  <span>Nombre</span> <span>{user?.name}</span>
                 </Paragraphs>
                 <Paragraphs blue>
-                  <span>Apellidos </span> <span>{user?.lastname}</span>
+                  <span>Apellidos</span> <span>{user?.lastname}</span>
                 </Paragraphs>
                 <Paragraphs blue>
-                  <span>DNI/Pasaporte </span> <span>{user?.dniPassport}</span>
+                  <span>DNI/Pasaporte</span> <span>{user?.dniPassport}</span>
                 </Paragraphs>
                 <Paragraphs blue>
-                  <span>Año de Nacimiento </span> <span>{birthYearEdit}</span>
+                  <span>Año de Nacimiento</span> <span>{birthYearEdit}</span>
                 </Paragraphs>
                 <Paragraphs blue>
-                  <span>Dirección </span>
+                  <span>Dirección</span>{" "}
                   <span>
                     {user?.street} {user?.number && `Nº${user?.number}`}{" "}
                     {user.portal} {user.stairs}{" "}
@@ -253,10 +253,10 @@ export const Profile = withRouter(({ history }) => {
                   </span>
                 </Paragraphs>
                 <Paragraphs blue>
-                  <span>Ciudad </span> <span>{user?.city}</span>
+                  <span>Ciudad</span> <span>{user?.city}</span>
                 </Paragraphs>
                 <Paragraphs blue>
-                  <span>País </span> <span>{user?.country}</span>
+                  <span>País</span> <span>{user?.country}</span>
                 </Paragraphs>
               </div>
             </>

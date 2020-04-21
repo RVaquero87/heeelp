@@ -3792,7 +3792,7 @@ export const SectionEditAidsRequest = styled(SectionCreateAidsRequest)`
         align-items: center;
         width: 100%;
         ${Button} {
-          margin-right: 48px;
+          margin-right: 24px;
         }
         .link {
           color: #3e3874;

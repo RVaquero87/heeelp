@@ -38,7 +38,7 @@ export const BoxMessagesPage = styled.div`
     width: 83%;
     .message {
       padding: 0 2.5%;
-      max-width: 80%;
+      max-width: 85%;
       p {
         line-height: 1.5;
         color: #393b4f;
@@ -48,6 +48,8 @@ export const BoxMessagesPage = styled.div`
   .user {
     display: flex;
     align-items: flex-start;
+    max-width: 140px;
+    width: 140px;
     justify-content: flex-start;
     ${BoxImg} {
       border-radius: 100%;
@@ -138,20 +140,20 @@ export const BoxMessagesPage = styled.div`
       max-width: 768px;
       position: relative;
       width: 100%;
-      > button {
-        display: block;
-        cursor: pointer;
-        height: 32px;
-        position: absolute;
-        right: 0;
-        top: -49px;
-        width: 32px;
-        img {
-          pointer-events: none;
-        }
-      }
       span {
         display: inline-block;
+      }
+    }
+    > button {
+      display: block;
+      cursor: pointer;
+      height: 32px;
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      width: 32px;
+      img {
+        pointer-events: none;
       }
     }
   }
@@ -160,14 +162,7 @@ export const BoxMessagesPage = styled.div`
       width: 79%;
 
       .message {
-        max-width: 75%;
-      }
-    }
-  }
-  @media (max-width: 1024px) {
-    .content {
-      .message {
-        max-width: 76%;
+        max-width: 80%;
       }
     }
   }

@@ -12,7 +12,7 @@ import Loading from "../components/Loading";
 
 // THIS is a HOC
 export const withAuthentication = (Component) => () => {
-  const { setUser, loading, setLoading } = useContext(PrincipalContext);
+  const { setUser, loading, setLoading, Body } = useContext(PrincipalContext);
 
   useEffect(() => {
     whoUser()
@@ -22,6 +22,14 @@ export const withAuthentication = (Component) => () => {
       .catch((e) => {})
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    {
+      loading
+        ? Body[0].classList.add("active")
+        : Body[0].classList.remove("active");
+    }
+  }, [loading]);
 
   return (
     <>

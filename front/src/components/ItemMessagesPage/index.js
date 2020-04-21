@@ -177,9 +177,6 @@ const ItemMessagesPage = ({ item }) => {
                 - {getYearsOld(receptorUserId?.birthYear)} años
               </p>
             )}
-            <button onClick={(e) => getCloseForm(e)}>
-              <img src={closeX} alt="cerrar" title="cerrar" />
-            </button>
           </div>
 
           <BoxCreateMessage
@@ -188,6 +185,10 @@ const ItemMessagesPage = ({ item }) => {
             }
             aidRequestId={aidRequestId}
           />
+
+          <button onClick={(e) => getCloseForm(e)}>
+            <img src={closeX} alt="cerrar" title="cerrar" />
+          </button>
         </div>
       )}
     </BoxMessagesPage>

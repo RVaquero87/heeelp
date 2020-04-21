@@ -74,7 +74,7 @@ export const HomePage = () => {
         <ContainDivDefault className="contain special-padding">
           <H2 color="blue-light" data-aos="fade-up">
             Así funciona <span className="item-light">h</span>eee
-            <span className="item-light">lp!</span>!
+            <span className="item-light">lp!</span>
           </H2>
           <Col2Min inverse justify="start" data-aos="fade-up">
             <ContentText>
