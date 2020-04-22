@@ -31,7 +31,8 @@ Fuente: https://www.iteramos.com/pregunta/16559/como-incrustar-un-video-en-githu
 
 Se debe diferenciar ente la parte del client o front realizada en **REACT** y la parte de la api o back donde usamos **express**.
 
-**API**
+#### API
+
 Este proyecto consta de 7 colecciones creadas en MongoDB, que están relacionadas de la siguiente manera:
 
  <img src="./front/public/images/schema.jpg" width="100%">
@@ -58,7 +59,8 @@ Los package usados de Node son los siguientes:
 - **passport**: "^0.4.1",
 - **passport-local**: "^1.0.0"
 
-**Client**
+#### Client
+
 La parte front esta realizada en **REACT**, donde hemos creado la siguiente estructura:
 
 - **components**: Econtramos los disintos componentes que se reutilizan en la web.
