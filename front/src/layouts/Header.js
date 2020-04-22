@@ -396,7 +396,7 @@ export const Header = withRouter(({ history }) => {
             id="hamburger"
             className={
               (hamburguerNav && "hamburger active") ||
-              ((notificationsNews || messagesNews) &&
+              ((notificationsNews.length > 0 || messagesNews.length > 0) &&
                 "hamburger active-notice") ||
               "hamburger"
             }
