@@ -1,6 +1,4 @@
-![heeelp!](relative/front/public/images/logo-negro.svg(images?raw=true "Title")
-
- <img src="./front/public/images/logo-negro.svg" width="100" height="100">
+ <img src="./front/public/images/logo-negro.svg" width="300">
 
 ### Descripción
 
