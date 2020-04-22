@@ -4,9 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 //Route Protected
 import { withProtected } from "../lib/protectRoute.hoc";
 
-//Form
-import { useForm, FormContext } from "react-hook-form";
-
 //Styles & AOS animation
 import {
   SectionBox,
@@ -33,9 +30,12 @@ import { getAidRequest } from "../services/aidRequestServices";
 //Compoments
 import AidsRequestBox from "../components/ItemAidRequest";
 import Loading from "../components/Loading";
+import MapGoogleBox from "../components/GoogleMap";
 
 export const ListAidsRequestPage = () => {
-  const { user, changeFilterAidsRequest } = useContext(PrincipalContext);
+  const { user, changeFilterAidsRequest, setMessageError } = useContext(
+    PrincipalContext
+  );
 
   //Reset Scroll
   useEffect(() => {
@@ -114,6 +114,55 @@ export const ListAidsRequestPage = () => {
     }
   };
 
+  //Maps Google
+  const [mapsViews, setMapsViews] = useState(false);
+  const [geoCalization, setGeoCalization] = useState({
+    lat: "",
+    lng: "",
+  });
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setMessageError("La geolocalización no es compatible con su navegador.");
+      setTimeout(() => {
+        setMessageError(null);
+      }, 5000);
+      return;
+    }
+    const success = (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      if (lat == "") {
+        setMessageError("No se puede obtener tu ubicación.");
+        setTimeout(() => {
+          setMessageError(null);
+        }, 5000);
+        return;
+      }
+
+      setGeoCalization({
+        lat: lat,
+        lng: lng,
+      });
+    };
+
+    const error = () => {
+      setMessageError("No se puede obtener tu ubicación.");
+      setTimeout(() => {
+        setMessageError(null);
+      }, 5000);
+      return;
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  }, []);
+
+  const getMapsAndGeocalitation = (e) => {
+    e.preventDefault();
+    setMapsViews(!mapsViews);
+  };
+
   return (
     <>
       {!filterAidsRequest ? (
@@ -166,11 +215,19 @@ export const ListAidsRequestPage = () => {
                     <option value="10€/hora">10€/hora</option>
                   </select>
                 </div>
+                <div className="box-maps maps">
+                  <button
+                    value={mapsViews}
+                    onClick={(e) => getMapsAndGeocalitation(e, e.target.value)}
+                  >
+                    {mapsViews ? "Cerrar mapa" : "Mostrar mapa"}
+                  </button>
+                </div>
               </FilterAidsRequest>
             </SectionFilterAidRequest>
           </SectionBox>
 
-          <SectionBox justify="center" column>
+          <SectionBox justify="center" column className="special-map">
             <SectionAidsRequest
               className={
                 filterAidsRequest.length == 0
@@ -179,7 +236,7 @@ export const ListAidsRequestPage = () => {
               }
               data-aos="fade-up"
             >
-              <div className="box-aids">
+              <div className={mapsViews ? "box-aids map-active" : "box-aids"}>
                 {filterAidsRequest.length == 0 ? (
                   <Paragraphs blue>
                     <span>
@@ -194,6 +251,14 @@ export const ListAidsRequestPage = () => {
                 )}
               </div>
             </SectionAidsRequest>
+            {mapsViews && (
+              <div className="box-map">
+                <MapGoogleBox
+                  personGeo={geoCalization}
+                  aidsMarket={filterAidsRequest}
+                />
+              </div>
+            )}
           </SectionBox>
         </>
       )}

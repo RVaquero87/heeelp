@@ -216,6 +216,16 @@ export const SectionBox = styled.section`
       padding-bottom: 100px;
     }
   }
+  &.special-map {
+    position: relative;
+    .box-map {
+      position: absolute;
+      right: 0;
+      height: 90vh;
+      top: 0%;
+      width: 50%;
+    }
+  }
   @media (max-width: 1200px) {
     .contain.first-section {
       padding-top: 160px;
