@@ -1,6 +1,6 @@
-![Alt text](relative/public/logo-negro.svg(images?raw=true "Title")
+![Alt text](relative/public/images/logo-negro.svg(images?raw=true "Title")
 
- <img src="./public/logo-negro.svg" width="100" height="100">
+ <img src="./public/images/logo-negro.svg" width="100" height="100">
 
 ### Descripción
 
