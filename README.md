@@ -4,21 +4,26 @@
 
 ---
 
-Web de recetas en la que puedes consultar de forma actualizada las nuevas publicaciones a través de la pagina de blog. Además el usuario puede crear su lista de recetas personalizada una vez que ha completado el registro, así como crear una lista de la compra con los igredientes necesarios. Existen dos perfiles de usuario, administrador y suscriptor. El administrador además de lo anteior podrá gestiniar los usuarios existentes en la plataforma, crear y editar las propias recetas.
+Descubre el servicio que pone en contacto a personas que **necesitan ayuda** en tareas del día a día con personas que **están dispuestas a ayudar**.
 
 ### Guía de usuario
 
 ---
 
-Cualquier usuario puede convertirse en suscriptor realizando un registro de manera sencilla. Una vez finalizado podrá disfrutar de las opcines de la plataforma personalizadas para cada usuario.
+Existen 3 perfiles, **el usuario no registrado**, que puede informarse sobre el objetivo, servicios y cualquier información adyacente que necesite, los **Helped** que pueden crear las peticiones de ayuda sobre **lavanderia**, **supermercado**, **parafarmacia**, **Tareas domésticas** y **Animales domésticos** y los **Helpers** que pueden elegir a quien ayudar a través de distintos filtros.
 
-Para convertirte en administrador deberás solicitar permisos a los creadores de la web. Así podrás crear nuevas recetas, editar información y administrar los propios usuarios.
+Además existe un perfil **Admin** con el que se puede controlar las reviews, los usuarios y los mensajes de contacto a través de un control de adminsitrador.
 
 ### Guía de instalación
 
 ---
 
-Web realizada con NODE.JS, EXPRESS, NPM PACKAGES, MONGODB, HTML, SASS y JAVASCRIPT.
+Se debe diferenciar ente la parte front realizada en **REACT** y la parte back donde usamos **express**.
+
+**API**
+Este proyecto consta de 7 colecciones creadas en la base de datos MongoDB, que están relacionadas de la siguiente manera:
+
+ <img src="./front/public/images/schema.jpg" width="100%">
 
 **Al estar hecho con Node.js** la estructura de archivos es la siguiente:
 
