@@ -1,4 +1,4 @@
- <img src="./front/public/images/logo-negro.svg" width="300">
+ <img src="./front/public/images/logo-negro.svg" width="130">
 
 ### Descripción
 
