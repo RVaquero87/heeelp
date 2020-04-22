@@ -17,10 +17,13 @@
     "react-geocode": "^0.2.1",
     "react-hook-form": "^5.2.0",
     "react-router-dom": "^5.1.2",
+    "serve": "^11.3.0",
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "parcel index.html"
+    "start": "serve dist",
+    "build": "parcel build index.html",
+    "dev": "parcel index.html"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
