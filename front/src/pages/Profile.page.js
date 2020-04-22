@@ -54,8 +54,12 @@ export const Profile = withRouter(({ history }) => {
 
   //Function AidsRequestId Type Lenght
   const lenghtAidsRequestType = (typeAidRequest) => {
-    const result = aidsRequestId.filter((item) => item.type == typeAidRequest)
-      .length;
+    const result = aidsRequestId.filter(
+      (item) =>
+        item.type == typeAidRequest &&
+        item.status != "Cancelada" &&
+        item.status != "En creación"
+    ).length;
     return result;
   };
 
@@ -495,7 +499,14 @@ export const Profile = withRouter(({ history }) => {
           <Paragraphs blue>
             {" "}
             <span>Total de servicios prestados </span>{" "}
-            <span>{aidsRequestId.length}</span>
+            <span>
+              {
+                aidsRequestId.filter(
+                  (aids) =>
+                    aids.status != "Cancelada" && aids.status != "En creación"
+                ).length
+              }
+            </span>
           </Paragraphs>
 
           <div className="col5">
