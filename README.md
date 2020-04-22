@@ -109,7 +109,7 @@ Existen muchas **líneas de mejora**, algunas de ellas son:
 - **Pasarela Pago:** Incluir pasarela de pago.
 - **Mapa - Geocalización - Filtro:** Actualmente trabajando en ello, el diseño sería el siguiente:
 
- <img src="./front/public/images/mapa.jpg" width="100%">
+ <img src="./front/public/images/mapa.png" width="100%">
 
 ### Código de conducta
 
