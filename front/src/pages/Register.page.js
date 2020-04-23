@@ -143,7 +143,6 @@ export const RegisterPage = withRouter(({ history }) => {
 
   const onSubmit = async (data) => {
     const responseServer = await doSignup(data);
-
     if (changeOneFile === true) {
       const uploadData = new FormData();
       uploadData.append("imageUrl", image.imageUrl);
