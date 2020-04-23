@@ -154,6 +154,9 @@ export const RegisterPage = withRouter(({ history }) => {
       } else {
         setUser({ ...responseServer.user, image: imageURL.secure_url });
         setMessageError(responseServer.message);
+        setTimeout(() => {
+          setMessageError(null);
+        }, 5000);
         history.push("/home");
       }
     } else {
@@ -162,6 +165,9 @@ export const RegisterPage = withRouter(({ history }) => {
       } else {
         setUser(responseServer.user);
         setMessageError(responseServer.message);
+        setTimeout(() => {
+          setMessageError(null);
+        }, 5000);
         history.push("/home");
       }
     }
