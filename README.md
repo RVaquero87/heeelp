@@ -1,4 +1,4 @@
- <img src="./front/public/images/logo-negro.svg" width="130">
+ <img src="http://elpublicamaleon.com/images/logo-negro.svg" width="130">
 
 ### Descripción
 
@@ -19,7 +19,7 @@ Existen disintos perfiles:
 
 Además los usuarios podrán ponerse en contacto a través de mensajes, que les facilitará la realización de la petición en caso de haber algún problema.
 
- <img src="./front/public/images/web.jpg" width="100%">
+ <img src="http://elpublicamaleon.com/images/web.jpg" width="100%">
 
  <!-- [![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://youtu.be/vt5fpE0bzSY)
 
@@ -35,7 +35,7 @@ Se debe diferenciar ente la parte del client o front realizada en **REACT** y la
 
 Este proyecto consta de 7 colecciones creadas en MongoDB, que están relacionadas de la siguiente manera:
 
- <img src="./front/public/images/schema.jpg" width="100%">
+ <img src="http://elpublicamaleon.com/images/schema.jpg" width="100%">
 
 Los package usados de Node son los siguientes:
 
@@ -109,7 +109,7 @@ Existen muchas **líneas de mejora**, algunas de ellas son:
 - **Pasarela Pago:** Incluir pasarela de pago.
 - **Mapa - Geocalización - Filtro:** Actualmente trabajando en ello, el diseño sería el siguiente:
 
- <img src="./front/public/images/mapa.png" width="100%">
+ <img src="http://elpublicamaleon.com/images/mapa.png" width="100%">
 
 ### Código de conducta
 
