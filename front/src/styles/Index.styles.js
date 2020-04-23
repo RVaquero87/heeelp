@@ -2707,7 +2707,7 @@ export const AdminPanelBox = styled.div`
         text-transform: capitalize;
         padding: 14px 16px 12px;
 
-        span {
+        svg {
           display: none;
         }
       }
