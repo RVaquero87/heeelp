@@ -157,10 +157,10 @@ export const Profile = withRouter(({ history }) => {
       const imageURL = await uploadPhoto(uploadData);
 
       messageRedirect(responseServer.message);
-      setUser({ ...data, image: imageURL.secure_url });
+      setUser({ ...data, image: imageURL.secure_url, country: "España" });
     } else {
       messageRedirect(responseServer.message);
-      setUser(data);
+      setUser({ country: "España", ...data });
     }
 
     setbuttonProfileView(!buttonProfileView);
