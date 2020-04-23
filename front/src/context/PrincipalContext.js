@@ -31,9 +31,11 @@ export const PrincipalContextProvider = (props) => {
   const [changeUser, setChangeUser] = useState(false);
 
   useEffect(() => {
-    whoUser().then((user) => {
-      setUser(user);
-    });
+    if (user) {
+      whoUser().then((user) => {
+        setUser(user);
+      });
+    }
   }, [changeUser]);
 
   //Users List CHange

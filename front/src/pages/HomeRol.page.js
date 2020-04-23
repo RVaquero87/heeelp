@@ -19,6 +19,8 @@ import {
   Paragraphs,
   FaqsBox,
   SectionAidsRequest,
+  changeUser,
+  setChangeUser,
 } from "../styles/Index.styles";
 
 //Images
@@ -49,6 +51,7 @@ export const HomeRolPage = () => {
   //Reset Scroll
   useEffect(() => {
     scrollInit();
+    setChangeUser(!changeUser);
   }, []);
 
   //Function AidsRequestId Type Lenght
