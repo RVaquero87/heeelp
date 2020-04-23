@@ -80,8 +80,8 @@ router.post("/signup", async (req, res, next) => {
     req.logIn(newUser, (err) => {
       req.user.visits += 1;
       req.user.save();
-      return res.json(
-        _.pick(req.user, [
+      return res.json({
+        user: _.pick(req.user, [
           "_id",
           "username",
           "rol",
@@ -99,10 +99,14 @@ router.post("/signup", async (req, res, next) => {
           "postalCode",
           "city",
           "country",
+          "lat",
+          "lng",
           "createdAt",
           "updatedAt",
-        ])
-      );
+        ]),
+        status: 200,
+        message: "Usuario registrado satisfactoriamente",
+      });
     });
   } else {
     return res.json({ status: 400, message: "Usuario ya existente" });

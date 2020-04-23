@@ -3055,11 +3055,13 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
           }
         }
       }
-      .button-box {
-        flex-direction: column-reverse;
+      ${FormBox} {
+        .button-box {
+          flex-direction: column-reverse;
 
-        button:first-child {
-          margin: 24px 0 0;
+          button:first-child {
+            margin: 24px auto 0;
+          }
         }
       }
     }

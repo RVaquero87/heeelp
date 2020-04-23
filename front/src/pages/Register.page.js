@@ -143,22 +143,31 @@ export const RegisterPage = withRouter(({ history }) => {
 
   const onSubmit = async (data) => {
     const responseServer = await doSignup(data);
+
     if (changeOneFile === true) {
       const uploadData = new FormData();
       uploadData.append("imageUrl", image.imageUrl);
       const imageURL = await uploadPhoto(uploadData);
 
-      if (responseServer.status) {
+      if (responseServer.status != 200) {
         messageRedirect(responseServer.message);
       } else {
-        setUser({ ...data, image: imageURL.secure_url, country: "España" });
+        setUser({ ...responseServer.user, image: imageURL.secure_url });
+        setMessageError(responseServer.message);
+        setTimeout(() => {
+          setMessageError(null);
+        }, 5000);
         history.push("/home");
       }
     } else {
-      if (responseServer.status) {
+      if (responseServer.status != 200) {
         messageRedirect(responseServer.message);
       } else {
-        setUser({ country: "España", ...data });
+        setUser(responseServer.user);
+        setMessageError(responseServer.message);
+        setTimeout(() => {
+          setMessageError(null);
+        }, 5000);
         history.push("/home");
       }
     }
