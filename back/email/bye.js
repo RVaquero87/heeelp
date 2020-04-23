@@ -209,7 +209,7 @@ const bye = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://ww
                                                                   </tr>
                                                                   <tr>
                                                                      <td style="font-family: Helvetica, arial, sans-serif; font-size: 18px; color: #333333; line-height:24px;text-align:center;" st-title="2coltitle1">
-                                                                        2 Columns Heading
+                                                                        Helped
                                                                      </td>
                                                                   </tr>
                                                                   <tr>
@@ -256,7 +256,7 @@ const bye = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://ww
                                                                   </tr>
                                                                   <tr>
                                                                      <td style="font-family: Helvetica, arial, sans-serif; font-size: 18px; color: #333333;line-height:24px; text-align:center;" st-title="2coltitle2">
-                                                                        2 Columns Heading
+                                                                     Helpers
                                                                      </td>
                                                                   </tr>
                                                                   <tr>
