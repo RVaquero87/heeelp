@@ -43,9 +43,14 @@ import SelectBox from "../components/Select";
 import ItemServicies from "../components/ItemServices";
 
 export const Profile = withRouter(({ history }) => {
-  const { user, setUser, setMessageError, aidsRequestId } = useContext(
-    PrincipalContext
-  );
+  const {
+    user,
+    setUser,
+    setMessageError,
+    aidsRequestId,
+    setChangeUser,
+    changeUser,
+  } = useContext(PrincipalContext);
 
   //Reset Scroll & Include Active Body
   useEffect(() => {
@@ -155,10 +160,10 @@ export const Profile = withRouter(({ history }) => {
       uploadData.append("imageUrl", image.imageUrl);
       const imageURL = await uploadPhoto(uploadData);
       messageRedirect(responseServer.message);
-      setUser({ ...data, image: imageURL.secure_url, country: "España" });
+      setChangeUser(!changeUser);
     } else {
       messageRedirect(responseServer.message);
-      setUser({ ...data, image: imagePreview, country: "España" });
+      setChangeUser(!changeUser);
     }
     setbuttonProfileView(!buttonProfileView);
   };

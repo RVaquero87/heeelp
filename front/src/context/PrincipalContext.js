@@ -5,6 +5,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const PrincipalContext = createContext();
 
 //Functional & Services
+import { whoUser } from "../services/authServices";
 import { getAllReviews, getIDReview } from "../services/reviewsServices";
 import {
   getAidRequest,
@@ -27,6 +28,13 @@ export const PrincipalContextProvider = (props) => {
 
   //Users Active
   const [user, setUser] = useState();
+  const [changeUser, setChangeUser] = useState(false);
+
+  useEffect(() => {
+    whoUser().then((user) => {
+      setUser(user);
+    });
+  }, [changeUser]);
 
   //Users List CHange
   const [changeLisUsers, setchangeLisUsers] = useState(false);
@@ -154,6 +162,8 @@ export const PrincipalContextProvider = (props) => {
         //Users Active
         user,
         setUser,
+        changeUser,
+        setChangeUser,
 
         //Users List CHange
         changeLisUsers,
