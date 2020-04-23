@@ -3047,9 +3047,10 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
       }
       .button-box {
         flex-direction: column-reverse;
-
-        button:first-child {
-          margin: 24px 0 0;
+        ${FormBox} {
+          button:first-child {
+            margin: 24px auto 0;
+          }
         }
       }
     }
