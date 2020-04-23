@@ -39,6 +39,7 @@ export const BoxMessagesPage = styled.div`
     .message {
       padding: 0 2.5%;
       max-width: 85%;
+      width: 100%;
       p {
         line-height: 1.5;
         color: #393b4f;
