@@ -283,6 +283,7 @@ router.post("/users-list", isLoggedIn(), async (req, res) => {
 router.post("/users-delete", isLoggedIn(), async (req, res) => {
   try {
     const { _id } = req.body;
+    const userDelete = await Users.findByIdAndRemove(_id);
 
     let mailOptions2 = {
       from: '"heeelp!"  <heeelp.web@gmail.com>',
@@ -295,8 +296,6 @@ router.post("/users-delete", isLoggedIn(), async (req, res) => {
       .sendMail(mailOptions2)
       .then((info) => console.log("enviado"))
       .catch((error) => console.log("error"));
-
-    const userDelete = await Users.findByIdAndRemove(_id);
 
     return res.json({
       status: 200,
