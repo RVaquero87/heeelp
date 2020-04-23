@@ -81,6 +81,29 @@ router.post("/signup", async (req, res, next) => {
       req.user.visits += 1;
       req.user.save();
       return res.json({
+        user: _.pick(req.user, [
+          "_id",
+          "username",
+          "rol",
+          "image",
+          "name",
+          "lastname",
+          "dniPassport",
+          "birthYear",
+          "street",
+          "number",
+          "portal",
+          "stairs",
+          "floor",
+          "letter",
+          "postalCode",
+          "city",
+          "country",
+          "lat",
+          "lng",
+          "createdAt",
+          "updatedAt",
+        ]),
         status: 200,
         message: "Usuario registrado satisfactoriamente",
       });
