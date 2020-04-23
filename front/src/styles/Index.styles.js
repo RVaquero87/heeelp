@@ -3045,9 +3045,10 @@ export const SectionFormBoxProfile = styled(SectionFormBoxRegister)`
           }
         }
       }
-      .button-box {
-        flex-direction: column-reverse;
-        ${FormBox} {
+      ${FormBox} {
+        .button-box {
+          flex-direction: column-reverse;
+
           button:first-child {
             margin: 24px auto 0;
           }
