@@ -151,6 +151,7 @@ export const RegisterPage = withRouter(({ history }) => {
       if (responseServer.status != 200) {
         messageRedirect(responseServer.message);
       } else {
+        console.log("hola");
         setUser({ ...data, image: imageURL.secure_url, country: "España" });
         messageRedirect(responseServer.message);
         history.push("/home");
@@ -159,6 +160,7 @@ export const RegisterPage = withRouter(({ history }) => {
       if (responseServer.status != 200) {
         messageRedirect(responseServer.message);
       } else {
+        console.log("hola");
         setUser({ country: "España", ...data });
         messageRedirect(responseServer.message);
         history.push("/home");

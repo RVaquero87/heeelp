@@ -46,7 +46,9 @@ import AccordionFaqs from "../components/ItemsAccordion";
 import AidsRequestBox from "../components/ItemAidRequest";
 
 export const HomeRolPage = () => {
-  const { user, aidsRequestId } = useContext(PrincipalContext);
+  const { user, aidsRequestId, setChangeUser, changeUser } = useContext(
+    PrincipalContext
+  );
 
   //Reset Scroll
   useEffect(() => {
