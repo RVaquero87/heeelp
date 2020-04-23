@@ -148,17 +148,19 @@ export const RegisterPage = withRouter(({ history }) => {
       uploadData.append("imageUrl", image.imageUrl);
       const imageURL = await uploadPhoto(uploadData);
 
-      if (responseServer.status) {
+      if (responseServer.status != 200) {
         messageRedirect(responseServer.message);
       } else {
         setUser({ ...data, image: imageURL.secure_url, country: "España" });
+        messageRedirect(responseServer.message);
         history.push("/home");
       }
     } else {
-      if (responseServer.status) {
+      if (responseServer.status != 200) {
         messageRedirect(responseServer.message);
       } else {
         setUser({ country: "España", ...data });
+        messageRedirect(responseServer.message);
         history.push("/home");
       }
     }
