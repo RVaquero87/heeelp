@@ -150,7 +150,6 @@ export const Profile = withRouter(({ history }) => {
 
   const onEdit = async (data) => {
     const responseServer = await doEdit(data);
-
     if (changeOneFile === true) {
       const uploadData = new FormData();
       uploadData.append("imageUrl", image.imageUrl);
@@ -159,9 +158,8 @@ export const Profile = withRouter(({ history }) => {
       setUser({ ...data, image: imageURL.secure_url, country: "España" });
     } else {
       messageRedirect(responseServer.message);
-      setUser({ country: "España", ...data });
+      setUser({ ...data, image: imagePreview, country: "España" });
     }
-
     setbuttonProfileView(!buttonProfileView);
   };
 
