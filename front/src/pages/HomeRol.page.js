@@ -46,7 +46,7 @@ import AccordionFaqs from "../components/ItemsAccordion";
 import AidsRequestBox from "../components/ItemAidRequest";
 
 export const HomeRolPage = () => {
-  const { user, aidsRequestId, setChangeUser, changeUser } = useContext(
+  const { user, aidsRequestId, changeUser, setChangeUser } = useContext(
     PrincipalContext
   );
 
