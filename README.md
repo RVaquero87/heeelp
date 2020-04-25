@@ -21,8 +21,6 @@ Además los usuarios podrán ponerse en contacto a través de mensajes, que les 
 
  <img src="http://elpublicamaleon.com/images/web.jpg" width="100%">
 
-[![ScreenShot](http://elpublicamaleon.com/images/intro-1.png)](https://youtu.be/0fbk8PHyA3s)
-
 ### Guía de instalación
 
 ---
@@ -126,3 +124,7 @@ En el siguiente enlace se muestra el [Código de Conducta](https://github.com/RV
 ---
 
 Aquí se puede consultar la [Licencia](https://github.com/RVaquero87/heeelp/blob/master/LICENSE.md) para este repositorio.
+
+### Video Explicativo
+
+[![ScreenShot](http://elpublicamaleon.com/images/intro-1.png)](https://youtu.be/0fbk8PHyA3s)
