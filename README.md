@@ -21,7 +21,7 @@ Además los usuarios podrán ponerse en contacto a través de mensajes, que les 
 
  <img src="http://elpublicamaleon.com/images/web.jpg" width="100%">
 
-[![ScreenShot](http://elpublicamaleon.com/images/intro.png)](https://youtu.be/0fbk8PHyA3s)
+[![ScreenShot](http://elpublicamaleon.com/images/intro-1.png)](https://youtu.be/0fbk8PHyA3s)
 
 ### Guía de instalación
 
